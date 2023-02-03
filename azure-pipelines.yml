@@ -8,8 +8,6 @@ pool:
 
 steps:
 - script: |
-    - checkout: self
-      persistCredentials: true
     ant -noinput -buildfile build-extension.xml
     echo $(Agent.BuildDirectory)
     echo $(Agent.HomeDirectory)
@@ -19,5 +17,5 @@ steps:
     echo $(Build.SourcesDirectory)
     echo $(System.DefaultWorkingDirectory)
     git add $(Build.SourcesDirectory)\build\distributions\KBGlobalsmartKPI.zip
-    git push https://nitin-sriv:Neutral@06@github.com/DevOpsOrgPlayground1/KBGlobalSmartKPI
+    git push https://nitin-sriv:Neutral@06@github.com/DevOpsOrgPlayground1/KBGlobalSmartKPI HEAD KBGlobalSmartKPI
   displayName: 'Creating a TWX Extension and checkin'
