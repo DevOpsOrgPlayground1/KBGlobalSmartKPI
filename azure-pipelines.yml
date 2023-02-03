@@ -1,0 +1,16 @@
+# Starter pipeline
+
+trigger:
+- main
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- script: |
+    ant -noinput -buildfile build-extension.xml
+    git config --global user.email "$(Build.RequestedForEmail)"
+    git config --global user.name "nitin-sriv"
+    git add ./build/distributions/KBGlobalsmartKPI.zip
+    git push origin HEAD
+  displayName: 'Creating a TWX Extension and checkin'
