@@ -8,9 +8,9 @@ pool:
 
 steps:
 - script: |
-    ant -noinput -buildfile build-extension.xml
     - checkout: self
       persistCredentials: true
+    ant -noinput -buildfile build-extension.xml
     echo $(Agent.BuildDirectory)
     echo $(Agent.HomeDirectory)
     echo $(Build.ArtifactStagingDirectory)
