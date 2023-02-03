@@ -9,6 +9,11 @@ pool:
 steps:
 - script: |
     ant -noinput -buildfile build-extension.xml
-    git add .\build\distributions\KBGlobalsmartKPI.zip'
-    git push origin HEAD
+    echo $(Agent.BuildDirectory)
+    echo $(Agent.HomeDirectory)
+    echo $(Build.ArtifactStagingDirectory)
+    echo $(Build.BinariesDirectory)
+    echo $(Build.Repository.LocalPath)
+    echo $(Build.SourcesDirectory)
+    echo $(System.DefaultWorkingDirectory)
   displayName: 'Creating a TWX Extension and checkin'
