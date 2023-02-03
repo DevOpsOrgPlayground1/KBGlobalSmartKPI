@@ -7,16 +7,18 @@ pool:
   vmImage: windows-latest
 
 steps:
+- checkout: self
+  persistCredentials: true
+
 - script: |
-    git status
+    git config --global user.email nitin.srivastava@knorr-bremse.com 
+    git config --global user.name "nitin-sriv"
+  workingDirectory: $(System.DefaultWorkingDirectory)
+
+- script: |
+    git checkout -b master
     ant -noinput -buildfile build-extension.xml
-    echo $(Agent.BuildDirectory)
-    echo $(Agent.HomeDirectory)
-    echo $(Build.ArtifactStagingDirectory)
-    echo $(Build.BinariesDirectory)
-    echo $(Build.Repository.LocalPath)
-    echo $(Build.SourcesDirectory)
-    echo $(System.DefaultWorkingDirectory)
     git add $(Build.SourcesDirectory)\build\distributions\KBGlobalsmartKPI.zip
-    git push https://nitin-sriv:Neutral06@github.com/DevOpsOrgPlayground1/KBGlobalSmartKPI.git
+    git commit -m "deployment $(Build.BuildNumber)"
+    git push --set-upstream origin master
   displayName: 'Creating a TWX Extension and checkin'
