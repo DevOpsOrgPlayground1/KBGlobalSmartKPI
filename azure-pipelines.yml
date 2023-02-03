@@ -19,8 +19,8 @@ steps:
     git checkout -b temp
     git status
     ant -noinput -buildfile build-extension.xml
-    git add $(Build.SourcesDirectory)\build\distributions\KBGlobalsmartKPI.zip
-    git commit -a "deployment $(Build.BuildNumber)"
+    git add -A
+    git commit -m "deployment $(Build.BuildNumber)"
     git status
     git push --set-upstream origin temp
     git status
