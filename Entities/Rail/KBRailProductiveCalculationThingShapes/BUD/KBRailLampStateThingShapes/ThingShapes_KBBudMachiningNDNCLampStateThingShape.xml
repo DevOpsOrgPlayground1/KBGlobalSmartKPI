@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b628"
+ majorVersion="9"
+ minorVersion="0"
+ modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+ revision="10"
+ schemaVersion="1109"
+ universal="password">
+    <ThingShapes>
+        <ThingShape
+         className=""
+         description=""
+         documentationContent=""
+         homeMashup=""
+         lastModifiedDate="2022-07-14T07:32:24.573Z"
+         name="KBBudMachiningNDNCLampStateThingShape"
+         projectName="KBsmartKPI"
+         tags="KBThingWorxAdministrationVocabulary:Administrated">
+            <PropertyDefinitions>
+                <PropertyDefinition
+                 aspect.cacheTime="0.0"
+                 aspect.dataChangeType="VALUE"
+                 aspect.isLogged="true"
+                 aspect.isPersistent="true"
+                 aspect.isReadOnly="false"
+                 baseType="BOOLEAN"
+                 category=""
+                 description=""
+                 isLocalOnly="false"
+                 name="Productive"
+                 ordinal="35"></PropertyDefinition>
+            </PropertyDefinitions>
+            <ServiceDefinitions>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category=""
+                 description=""
+                 isAllowOverride="false"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="LampState">
+                    <ResultType
+                     baseType="NOTHING"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         baseType="BOOLEAN"
+                         description=""
+                         name="CycleActive"
+                         ordinal="1"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="BOOLEAN"
+                         description=""
+                         name="NcStarted"
+                         ordinal="3"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="DATETIME"
+                         description=""
+                         name="ProductionDate"
+                         ordinal="2"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+            </ServiceDefinitions>
+            <EventDefinitions></EventDefinitions>
+            <ServiceMappings></ServiceMappings>
+            <ServiceImplementations>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="LampState">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    try {
+                                    	var dateValue = ProductionDate;
+                                    	var cycle_active = CycleActive;
+                                    	var nc_start = NcStarted;
+                                    	var writeTime = new Date();
+                                    	var result;
+                                    	if (cycle_active == null) {
+                                    		cycle_active = false;
+                                    	}
+                                    	if (nc_start == null) {
+                                    		nc_start = false;
+                                    	}
+                                    	var productiveState = me.Productive;
+                                    //	var machineExist = false;
+                                    	var machineName = me.name;
+                                    	var machine = machineName.substring(5, 10);
+                                    	var data = Things["BUD.MACHINE_DATA.MSSQL_NDNC"].QueryLampStateMachine({
+                                    		Machine: machine /* STRING */
+                                    	});
+                                    	if (data !== undefined && data !== null) {
+                                    		if (data.rows.length > 0) {
+                                    			if (cycle_active && nc_start && !productiveState) {
+                                    				// result: NUMBER	
+                                    				result = Things["BUD.MACHINE_DATA.MSSQL_NDNC"].LampStateUpdate({
+                                    					Working: true /* BOOLEAN */ ,
+                                    					StartTime: dateValue /* DATETIME */ ,
+                                    					Date: writeTime /* DATETIME */ ,
+                                    					Machine: machine /* STRING */
+                                    				});
+                                    			} else if (!(cycle_active && nc_start) && productiveState) {
+                                    				result = Things["BUD.MACHINE_DATA.MSSQL_NDNC"].LampStateUpdate({
+                                    					Working: false /* BOOLEAN */ ,
+                                    					StartTime: dateValue /* DATETIME */ ,
+                                    					Date: writeTime /* DATETIME */ ,
+                                    					Machine: machine /* STRING */
+                                    				});
+                                    			}
+                                    		}
+                                    	}
+                                    	me.Productive = cycle_active && nc_start;
+                                    } catch (e) {
+                                    	logger.error('error in ' + me.name + ' LampState Service: ' + e);
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+            </ServiceImplementations>
+            <Subscriptions></Subscriptions>
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions></RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility></Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables></ConfigurationTables>
+            <PropertyBindings></PropertyBindings>
+            <RemotePropertyBindings></RemotePropertyBindings>
+            <RemoteServiceBindings></RemoteServiceBindings>
+            <RemoteEventBindings></RemoteEventBindings>
+            <AlertConfigurations></AlertConfigurations>
+            <InstanceRunTimePermissions></InstanceRunTimePermissions>
+        </ThingShape>
+    </ThingShapes>
+</Entities>

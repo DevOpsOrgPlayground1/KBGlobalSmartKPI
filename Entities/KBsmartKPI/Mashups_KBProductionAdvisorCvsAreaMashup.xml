@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b97" majorVersion="8" minorVersion="4"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="11" schemaVersion="1044" universal="">
+	<Mashups>
+		<Mashup aspect.isResponsive="true" aspect.mashupType="mashup"
+			columns="0.0" description="***DEPRECATED***" documentationContent=""
+			homeMashup="" lastModifiedDate="2020-11-25T07:04:05.887+01:00"
+			name="DEPRECATED-KBProductionAdvisorCvsAreaMashup" projectName="KBsmartKPI"
+			rows="0.0" tags="">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</PropertyRead>
+					<PropertyWrite />
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true" name="KBOrganization"
+						type="Organization" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables />
+			<ParameterDefinitions>
+				<FieldDefinition aspect.bindingDirection="IN"
+					aspect.isMandatory="false" aspect.ordinal="0" baseType="THINGNAME"
+					description="" name="AreaThing" ordinal="0" />
+			</ParameterDefinitions>
+			<Things>
+				<Thing>KBSmartKPIHelperThing</Thing>
+			</Things>
+			<ThingShapes />
+			<ThingTemplates />
+			<mashupContent><![CDATA[{
+  "CustomMashupCss" : "",
+  "Data" : {
+    "Session" : {
+      "DataName" : "Session",
+      "EntityName" : "",
+      "EntityType" : "Session",
+      "Id" : "session",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "SessionInterface",
+        "Name" : "GetGlobalSessionValues",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetGlobalSessionValues"
+      } ]
+    },
+    "Things_KBSmartKPIHelperThing" : {
+      "DataName" : "Things_KBSmartKPIHelperThing",
+      "EntityName" : "KBSmartKPIHelperThing",
+      "EntityType" : "Things",
+      "Id" : "d74efa9a-3205-41b0-8304-7c07e682f01a",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "38698d9f-37b3-4eec-806c-6adcbdbca064",
+        "Name" : "GetCVSGlobalKpiCalculationBaseForMenue",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetCVSGlobalKpiCalculationBaseForMenue"
+      }, {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "36f281c2-5ea6-4eab-a3ec-b75279fe514a",
+        "Name" : "GetAreaMachinesForProductionAdvisor",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetAreaMachinesForProductionAdvisor"
+      } ]
+    },
+    "UserExtensions" : {
+      "DataName" : "UserExtensions",
+      "EntityName" : "",
+      "EntityType" : "UserExtensions",
+      "Id" : "UserExtensions",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "UserExtensionInterface",
+        "Name" : "GetCurrentUserExtensionProperties",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetCurrentUserExtensionProperties"
+      } ]
+    }
+  },
+  "DataBindings" : [ {
+    "Id" : "969506e5-547a-4dcf-833a-21da1142d79d",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "DisplayName",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "KPICalculationBase",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "SelectedRows",
+    "SourceId" : "GetCVSGlobalKpiCalculationBaseForMenue",
+    "SourceSection" : "Things_KBSmartKPIHelperThing",
+    "TargetArea" : "Data",
+    "TargetId" : "GetAreaMachinesForProductionAdvisor",
+    "TargetSection" : "Things_KBSmartKPIHelperThing"
+  }, {
+    "Id" : "d923f025-0876-4864-9cd4-e2c79fd5baf8",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "AreaThing",
+      "SourcePropertyBaseType" : "THINGNAME",
+      "TargetProperty" : "Area",
+      "TargetPropertyBaseType" : "THINGNAME",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetAreaMachinesForProductionAdvisor",
+    "TargetSection" : "Things_KBSmartKPIHelperThing"
+  }, {
+    "Id" : "7f1cd642-2dc0-402a-81ea-b7e8292de903",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "AreaThing",
+      "SourcePropertyBaseType" : "THINGNAME",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "DefaultArea",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "mashupcontainer-24",
+    "TargetSection" : ""
+  } ],
+  "DesignTimePermissions" : {
+    "Create" : [ ],
+    "Delete" : [ ],
+    "Metadata" : [ ],
+    "Read" : [ ],
+    "Update" : [ ]
+  },
+  "Events" : [ {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBSmartKPIHelperThing",
+    "EventHandlerService" : "GetCVSGlobalKpiCalculationBaseForMenue",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "ad01d617-3d97-4983-99d9-9646578c3647"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "expression-14",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "fa4d95b9-f5c9-499d-b7fc-794b4936587c"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBSmartKPIHelperThing",
+    "EventHandlerService" : "GetAreaMachinesForProductionAdvisor",
+    "EventTriggerArea" : "Data",
+    "EventTriggerEvent" : "SelectedRowsChanged",
+    "EventTriggerId" : "GetCVSGlobalKpiCalculationBaseForMenue",
+    "EventTriggerSection" : "Things_KBSmartKPIHelperThing",
+    "Id" : "108289e9-1e8c-4f10-ac70-dacc96762770"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBSmartKPIHelperThing",
+    "EventHandlerService" : "GetAreaMachinesForProductionAdvisor",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "AreaThingChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "9bca20c9-8480-46d2-a570-4b22e4f624f6"
+  } ],
+  "RunTimePermissions" : {
+    "permissions" : [ {
+      "EventInvoke" : [ ],
+      "EventSubscribe" : [ ],
+      "PropertyRead" : [ {
+        "isPermitted" : true,
+        "name" : "KBUserGroup",
+        "type" : "Group"
+      } ],
+      "PropertyWrite" : [ ],
+      "ServiceInvoke" : [ {
+        "isPermitted" : true,
+        "name" : "KBUserGroup",
+        "type" : "Group"
+      } ],
+      "resourceName" : "*"
+    } ]
+  },
+  "UI" : {
+    "Properties" : {
+      "AddToDashboardButton" : "SimplePlus",
+      "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+      "Area" : "Mashup",
+      "BGImage" : "",
+      "BGImageRepeat" : "no-repeat",
+      "BGImageSize" : "auto",
+      "Columns" : 0,
+      "ConfigureGadgetButton" : "SimpleGear",
+      "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+      "DisplayName" : "Mashup",
+      "EnableParameterEditing" : false,
+      "Height" : 618,
+      "Id" : "mashup-root",
+      "IgnoreWarningsInViewMashup" : false,
+      "IsPrintLayout" : false,
+      "Left" : 0,
+      "MashupToEditGadget" : "DefaultMashupToEditGadget",
+      "Master" : "KBSmartProductionMaster1Mashup",
+      "MinHeight" : 0,
+      "MinWidth" : 0,
+      "ResponsiveLayout" : true,
+      "Rows" : 0,
+      "ShowDataLoading" : true,
+      "Style" : "DefaultMashupStyle",
+      "StyleTheme" : "Base Theme",
+      "Title" : "",
+      "TitleBar" : false,
+      "TitleBarStyle" : "DefaultTitleBarStyle",
+      "TitleBarText" : "Gadget Title Here",
+      "Top" : 0,
+      "Type" : "mashup",
+      "UseTheme" : false,
+      "UseThemeForHybrids" : false,
+      "Visible" : true,
+      "Width" : 1024,
+      "Z-index" : 10,
+      "__TypeDisplayName" : "Mashup",
+      "_currentParameterDefs" : [ {
+        "Aspects" : {
+          "bindingDirection" : "IN",
+          "isMandatory" : false
+        },
+        "BaseType" : "THINGNAME",
+        "Description" : "",
+        "ParameterName" : "AreaThing"
+      } ],
+      "id_index" : 24,
+      "supportsAutoResize" : true
+    },
+    "Widgets" : [ {
+      "Properties" : {
+        "Area" : "UI",
+        "DisplayName" : "mashupcontainer-24",
+        "Height" : 300,
+        "Id" : "mashupcontainer-24",
+        "Left" : 220,
+        "MashupParameters" : [ {
+          "BaseType" : "STRING",
+          "Description" : "",
+          "ParameterName" : "DefaultArea",
+          "ParmDef" : {
+            "aspects" : {
+              "bindingDirection" : "IN",
+              "isMandatory" : "false",
+              "ordinal" : "0"
+            },
+            "baseType" : "STRING",
+            "description" : "",
+            "name" : "DefaultArea",
+            "ordinal" : 0
+          }
+        } ],
+        "Name" : "KBProductionAdvisorCvsMashup",
+        "ResponsiveLayout" : true,
+        "ShowDataLoading" : true,
+        "TabSequenceGroup" : 0,
+        "Top" : 70,
+        "Type" : "mashupcontainer",
+        "Visible" : true,
+        "Width" : 400,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Enthaltenes Mashup"
+      },
+      "Widgets" : [ ]
+    } ]
+  },
+  "mashupType" : "mashup"
+}]]></mashupContent>
+			<preview />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="" timestamp="2020-11-25T07:01:59.950+01:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2020-11-25T07:04:05.887+01:00" user="adm-flassakm" />
+			</ConfigurationChanges>
+		</Mashup>
+	</Mashups>
+</Entities>

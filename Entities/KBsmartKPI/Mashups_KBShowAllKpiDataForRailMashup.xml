@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b97" majorVersion="8" minorVersion="4"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="11" schemaVersion="1044" universal="">
+	<Mashups>
+		<Mashup aspect.isResponsive="true" aspect.mashupType="mashup"
+			columns="0.0" description="" documentationContent="" homeMashup=""
+			lastModifiedDate="2020-10-27T09:55:30.308+01:00"
+			name="KBShowAllKpiDataForRailMashup" projectName="KBsmartKPI"
+			rows="0.0" tags="">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</PropertyRead>
+					<PropertyWrite />
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true" name="KBOrganization"
+						type="Organization" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables />
+			<ParameterDefinitions>
+				<FieldDefinition aspect.bindingDirection="IN"
+					aspect.dataShape="KBKpiSummaryShape" aspect.isDataTableEntry="true"
+					aspect.isMandatory="false" aspect.ordinal="0" baseType="INFOTABLE"
+					description="" name="KBKpiSummary" ordinal="0" />
+			</ParameterDefinitions>
+			<Things>
+				<Thing>KBSmartKPIHelperThing</Thing>
+			</Things>
+			<ThingShapes />
+			<ThingTemplates />
+			<mashupContent><![CDATA[{
+  "CustomMashupCss" : "",
+  "Data" : {
+    "Session" : {
+      "DataName" : "Session",
+      "EntityName" : "",
+      "EntityType" : "Session",
+      "Id" : "session",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "SessionInterface",
+        "Name" : "GetGlobalSessionValues",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetGlobalSessionValues"
+      } ]
+    },
+    "Things_KBSmartKPIHelperThing" : {
+      "DataName" : "Things_KBSmartKPIHelperThing",
+      "EntityName" : "KBSmartKPIHelperThing",
+      "EntityType" : "Things",
+      "Id" : "a4494318-ce4e-40a6-8ba6-e5e76ee3509e",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "3fa58c5a-edbf-43df-b417-cadaf1cc4581",
+        "Name" : "GetAllKpiDataForRailForVisualization",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetAllKpiDataForRailForVisualization"
+      } ]
+    },
+    "UserExtensions" : {
+      "DataName" : "UserExtensions",
+      "EntityName" : "",
+      "EntityType" : "UserExtensions",
+      "Id" : "UserExtensions",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "UserExtensionInterface",
+        "Name" : "GetCurrentUserExtensionProperties",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetCurrentUserExtensionProperties"
+      } ]
+    }
+  },
+  "DataBindings" : [ {
+    "Id" : "2e930710-d1a8-446a-b8e7-1c3892417584",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "KBKpiSummary",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "TargetProperty" : "KBKpiSummary",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceDetails" : "AllData",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetAllKpiDataForRailForVisualization",
+    "TargetSection" : "Things_KBSmartKPIHelperThing"
+  }, {
+    "Id" : "50a59e86-37ca-4007-813d-ae8f09cb8bab",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "InfoTable",
+      "TargetProperty" : "Data",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetAllKpiDataForRailForVisualization",
+    "SourceSection" : "Things_KBSmartKPIHelperThing",
+    "TargetArea" : "UI",
+    "TargetId" : "dhxgrid-2",
+    "TargetSection" : ""
+  } ],
+  "DesignTimePermissions" : {
+    "Create" : [ ],
+    "Delete" : [ ],
+    "Metadata" : [ ],
+    "Read" : [ ],
+    "Update" : [ ]
+  },
+  "Events" : [ {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBSmartKPIHelperThing",
+    "EventHandlerService" : "GetAllKpiDataForRailForVisualization",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "KBKpiSummaryChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "237e514f-12fd-4a22-bff3-d774ae4ed9bc"
+  } ],
+  "RunTimePermissions" : {
+    "permissions" : [ ]
+  },
+  "UI" : {
+    "Properties" : {
+      "AddToDashboardButton" : "SimplePlus",
+      "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+      "Area" : "Mashup",
+      "BGImage" : "",
+      "BGImageRepeat" : "no-repeat",
+      "BGImageSize" : "auto",
+      "Columns" : 0,
+      "ConfigureGadgetButton" : "SimpleGear",
+      "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+      "DisplayName" : "Mashup",
+      "EnableParameterEditing" : false,
+      "Height" : 618,
+      "Id" : "mashup-root",
+      "IgnoreWarningsInViewMashup" : false,
+      "IsPrintLayout" : false,
+      "Left" : 0,
+      "MashupToEditGadget" : "DefaultMashupToEditGadget",
+      "MinHeight" : 0,
+      "MinWidth" : 0,
+      "ResponsiveLayout" : true,
+      "Rows" : 0,
+      "ShowDataLoading" : true,
+      "Style" : "DefaultMashupStyle",
+      "StyleTheme" : "Base Theme",
+      "Title" : "",
+      "TitleBar" : false,
+      "TitleBarStyle" : "DefaultTitleBarStyle",
+      "TitleBarText" : "Gadget Title Here",
+      "Top" : 0,
+      "Type" : "mashup",
+      "UseTheme" : false,
+      "UseThemeForHybrids" : false,
+      "Visible" : true,
+      "Width" : 1024,
+      "Z-index" : 10,
+      "__TypeDisplayName" : "Mashup",
+      "_currentParameterDefs" : [ {
+        "Aspects" : {
+          "bindingDirection" : "IN",
+          "dataShape" : "KBKpiSummaryShape",
+          "isDataTableEntry" : true,
+          "isMandatory" : false
+        },
+        "BaseType" : "INFOTABLE",
+        "Description" : "",
+        "ParameterName" : "KBKpiSummary"
+      } ],
+      "id_index" : 2,
+      "supportsAutoResize" : true
+    },
+    "Widgets" : [ {
+      "Properties" : {
+        "AlignHeader" : false,
+        "Area" : "UI",
+        "AutoSelectFirstRow" : false,
+        "CellTextWrapping" : false,
+        "ColumnFormat" : {
+          "formatInfo" : [ {
+            "Align" : "left",
+            "AllowEdit" : false,
+            "FieldName" : "KPI4Visualization",
+            "FormatOptions" : {
+              "FormatString" : "full",
+              "formatInfo" : {
+                "FieldName" : "",
+                "StateDefinition" : "",
+                "StateDefinitionType" : "fixed",
+                "StateFormats" : [ {
+                  "state" : "",
+                  "stateName" : "fixed"
+                } ]
+              },
+              "renderer" : "STRING",
+              "roundingEnabled" : true
+            },
+            "Title" : "Name",
+            "ValidationExpression" : "",
+            "ValidationMessage" : "",
+            "Width" : "auto"
+          }, {
+            "Align" : "left",
+            "AllowEdit" : false,
+            "FieldName" : "Value4Visualization",
+            "FormatOptions" : {
+              "FormatString" : "full",
+              "formatInfo" : {
+                "FieldName" : "",
+                "StateDefinition" : "",
+                "StateDefinitionType" : "fixed",
+                "StateFormats" : [ {
+                  "state" : "",
+                  "stateName" : "fixed"
+                } ]
+              },
+              "renderer" : "STRING",
+              "roundingEnabled" : true
+            },
+            "Title" : "Value",
+            "ValidationExpression" : "",
+            "ValidationMessage" : "",
+            "Width" : "auto"
+          } ]
+        },
+        "CurrentScrollTop" : 0,
+        "DisplayName" : "dhxgrid-2",
+        "FocusStyle" : "DefaultFocusStyle",
+        "GridBackgroundStyle" : "DefaultGridBackgroundStyle",
+        "GridEditableFieldStyle" : "DefaultGridEditableFieldStyle",
+        "GridHeaderStyle" : "DefaultGridHeaderStyle",
+        "GridHeaderTextCase" : "capitalize",
+        "GridInvalidFieldStyle" : "DefaultGridInvalidFieldStyle",
+        "Height" : 200,
+        "Id" : "dhxgrid-2",
+        "IsEditable" : false,
+        "IsPrintLayout" : false,
+        "Left" : 255,
+        "MultiSelect" : false,
+        "ResponsiveLayout" : true,
+        "RowAlternateBackgroundStyle" : "DefaultRowAlternateBackgroundStyle",
+        "RowBackgroundStyle" : "DefaultRowBackgroundStyle",
+        "RowFormat_StateParameters" : [ ],
+        "RowHeight" : 30,
+        "RowHoverStyle" : "DefaultRowHoverStyle",
+        "RowSelectedStyle" : "DefaultRowSelectedStyle",
+        "ScrollTop" : 0,
+        "ShowAllColumns" : false,
+        "ShowDataLoading" : true,
+        "TabSequence" : 0,
+        "Top" : 120,
+        "Type" : "dhxgrid",
+        "Visible" : true,
+        "Width" : 400,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Raster"
+      },
+      "Widgets" : [ ]
+    } ]
+  },
+  "mashupType" : "mashup"
+}]]></mashupContent>
+			<preview />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="" timestamp="2020-10-27T07:37:58.322+01:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2020-10-27T07:40:08.440+01:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2020-10-27T09:55:30.308+01:00" user="adm-flassakm" />
+			</ConfigurationChanges>
+		</Mashup>
+	</Mashups>
+</Entities>

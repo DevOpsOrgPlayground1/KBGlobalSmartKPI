@@ -1,0 +1,2044 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Entities build="b706" majorVersion="9" minorVersion="0" modelPersistenceProviderPackage="MssqlPersistenceProviderPackage" revision="12" schemaVersion="1109" universal=""><Mashups><Mashup aspect.isFlex="true" aspect.isResponsive="true" aspect.mashupType="mashup" columns="0.0" description="original used in KBSmartHelperThing" documentationContent="" homeMashup="" lastModifiedDate="2022-10-17T04:40:27.062Z" name="KBKpiDbLocalMashup" projectName="KBsmartKPI" rows="0.0" tags="KBThingWorxInstallationVocabulary:ExtensionSmartKPI"><Owner name="adm-srivastn" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions><Permissions resourceName="*"><PropertyRead><Principal isPermitted="true" name="KBUserGroup" type="Group"/></PropertyRead><PropertyWrite/><ServiceInvoke><Principal isPermitted="true" name="KBUserGroup" type="Group"/></ServiceInvoke><EventInvoke/><EventSubscribe/></Permissions></RunTimePermissions><VisibilityPermissions><Visibility><Principal isPermitted="true" name="KBOrganization" type="Organization"/></Visibility></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables><ConfigurationTable dataShapeName="" description="Mashup Mobile Settings" isHidden="true" isMultiRow="false" name="MobileSettings" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition aspect.defaultValue="false" baseType="BOOLEAN" description="" name="disableZoom" ordinal="0"/><FieldDefinition aspect.defaultValue="true" baseType="BOOLEAN" description="" name="fullScreenMode" ordinal="0"/><FieldDefinition baseType="STRING" description="" name="height" ordinal="0"/><FieldDefinition aspect.defaultValue="device-height" baseType="STRING" description="" name="heightType" ordinal="0"/><FieldDefinition aspect.defaultValue="1.0" baseType="NUMBER" description="" name="initialScale" ordinal="0"/><FieldDefinition baseType="STRING" description="" name="iosShortcutIconTitle" ordinal="0"/><FieldDefinition aspect.defaultValue="black-translucent" baseType="STRING" description="" name="iosStatusBarAppearance" ordinal="0"/><FieldDefinition aspect.defaultValue="10.0" baseType="NUMBER" description="" name="maximumScale" ordinal="0"/><FieldDefinition aspect.defaultValue="0.1" baseType="NUMBER" description="" name="minimumScale" ordinal="0"/><FieldDefinition baseType="STRING" description="" name="width" ordinal="0"/><FieldDefinition aspect.defaultValue="device-width" baseType="STRING" description="" name="widthType" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><disableZoom>false</disableZoom><fullScreenMode>true</fullScreenMode><height/><heightType><![CDATA[device-height]]></heightType><initialScale>1.0</initialScale><iosShortcutIconTitle/><iosStatusBarAppearance><![CDATA[black-translucent]]></iosStatusBarAppearance><maximumScale>10.0</maximumScale><minimumScale>0.1</minimumScale><width/><widthType><![CDATA[device-width]]></widthType></Row></Rows></ConfigurationTable></ConfigurationTables><ParameterDefinitions><FieldDefinition aspect.bindingDirection="BOTH" aspect.isMandatory="false" baseType="STRING" description="" name="MachineThingName" ordinal="0"/><FieldDefinition aspect.bindingDirection="IN" aspect.dataShape="KBNameForMenuDataShape" aspect.isDataTableEntry="true" aspect.isMandatory="false" baseType="INFOTABLE" description="" name="SelectedKPI" ordinal="0"/></ParameterDefinitions><Things/><ThingShapes/><ThingTemplates/><mashupContent><![CDATA[{
+  "CustomMashupCss" : ".legendGridCSS #root_pagemashupcontainer-7_mashupcontainer-165_gridadvanced-104-grid-advanced .objbox table tbody tr:nth-child(2) td{\n  background-color: #b5e189\n}\n.legendGridCSS #root_pagemashupcontainer-7_mashupcontainer-165_gridadvanced-104-grid-advanced .objbox table tbody tr:nth-child(3) td {\n   background-color: #ffb199\n}\n.legendGridCSS #root_pagemashupcontainer-7_mashupcontainer-165_gridadvanced-104-grid-advanced .objbox table tbody tr:nth-child(4) td {\n   background-color: #dcb0e3\n}\n.legendGridCSS #root_pagemashupcontainer-7_mashupcontainer-165_gridadvanced-104-grid-advanced .objbox table tbody tr:nth-child(5) td {\n   background-color: #ffdb70\n}\n.legendGridCSS #root_pagemashupcontainer-7_mashupcontainer-165_gridadvanced-104-grid-advanced .objbox table tbody tr:nth-child(6) td {\n   background-color: #95f4ea\n}\n.legendGridCSS #root_pagemashupcontainer-7_mashupcontainer-165_gridadvanced-104-grid-advanced .objbox table tbody tr:nth-child(7) td {\n   background-color: #cda8bd\n}\n.legendGridCSS #root_pagemashupcontainer-7_mashupcontainer-165_gridadvanced-104-grid-advanced .objbox table tbody tr.ev_material td {\n   text-transform: uppercase;\n   font-weight:900\n}\n.legendGridCSS #root_pagemashupcontainer-7_mashupcontainer-165_gridadvanced-104-grid-advanced .objbox table tbody tr.odd_material td {\n   text-transform: uppercase;\n   font-weight:900\n}",
+  "Data" : {
+    "Session" : {
+      "DataName" : "Session",
+      "EntityName" : "",
+      "EntityType" : "Session",
+      "Id" : "session",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "SessionInterface",
+        "Name" : "GetGlobalSessionValues",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetGlobalSessionValues"
+      } ]
+    },
+    "Things_KBSmartKPIHelperThing" : {
+      "DataName" : "Things_KBSmartKPIHelperThing",
+      "EntityName" : "KBSmartKPIHelperThing",
+      "EntityType" : "Things",
+      "Id" : "dd8cfb99-7982-41f1-8a30-c32a2c47540e",
+      "RefreshInterval" : 0,
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "d774418e-bcd7-421a-b277-acd7c5c229d5",
+        "Name" : "GetMultiselctTop3KpiTruckDataDay",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetMultiselctTop3KpiTruckDataDay"
+      }, {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "319e9d4e-a078-43fe-bdf4-e46422d0204e",
+        "Name" : "GetMultiselctTop3KpiTruckWeek",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetMultiselctTop3KpiTruckWeek"
+      }, {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "dd79ba12-fa3e-4394-8aa1-0951e132b4a2",
+        "Name" : "GetMultiselctTop3KpiTruckYear",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetMultiselctTop3KpiTruckYear"
+      }, {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "ff076984-b92e-4b0f-9e5c-9b534f377d32",
+        "Name" : "GetMultiselctTop3KpiTruckMonth",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetMultiselctTop3KpiTruckMonth"
+      } ]
+    },
+    "Things_KBTimeHelperThing" : {
+      "DataName" : "Things_KBTimeHelperThing",
+      "EntityName" : "KBTimeHelperThing",
+      "EntityType" : "Things",
+      "Id" : "1e67f3d9-7e55-40a5-a1ae-8e8d7d34063d",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "299d0d2e-819f-4d33-af50-78e2e214082a",
+        "Name" : "GetNow",
+        "Parameters" : {
+          "RoundToNextHour" : true
+        },
+        "RefreshInterval" : 0,
+        "Target" : "GetNow"
+      }, {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "98abea4a-b9bd-48e2-8e71-5d7a58c0f8ba",
+        "Name" : "GetNow1",
+        "Parameters" : {
+          "RoundToNextQuarter" : true
+        },
+        "RefreshInterval" : 0,
+        "Target" : "GetNow"
+      }, {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "1dfed1be-f141-44e8-95c9-48153344d9ba",
+        "Name" : "GetLast30dStart",
+        "Parameters" : {
+          "RoundToNextHour" : true
+        },
+        "RefreshInterval" : 0,
+        "Target" : "GetLast30dStart"
+      }, {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "f4760f85-5f93-4d86-9ab3-07e52845dc30",
+        "Name" : "GetLast7dStart",
+        "Parameters" : {
+          "RoundToNextHour" : true
+        },
+        "RefreshInterval" : 0,
+        "Target" : "GetLast7dStart"
+      }, {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "93784ab5-50cc-4eb8-b146-e2168c543906",
+        "Name" : "GetLast24hStart",
+        "Parameters" : {
+          "RoundToNextQuarter" : true
+        },
+        "RefreshInterval" : 0,
+        "Target" : "GetLast24hStart"
+      } ]
+    },
+    "UserExtensions" : {
+      "DataName" : "UserExtensions",
+      "EntityName" : "",
+      "EntityType" : "UserExtensions",
+      "Id" : "UserExtensions",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "UserExtensionInterface",
+        "Name" : "GetCurrentUserExtensionProperties",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetCurrentUserExtensionProperties"
+      } ]
+    }
+  },
+  "DataBindings" : [ {
+    "Id" : "c037505c-b573-4f75-bab9-9c365d54cb53",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "result",
+      "SourcePropertyBaseType" : "DATETIME",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "EndDate",
+      "TargetPropertyBaseType" : "DATETIME",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetNow",
+    "SourceSection" : "Things_KBTimeHelperThing",
+    "TargetArea" : "UI",
+    "TargetId" : "mashupcontainer-23",
+    "TargetSection" : ""
+  }, {
+    "Id" : "3bc182fe-6364-43a4-832b-d8299631703e",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "result",
+      "SourcePropertyBaseType" : "DATETIME",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "StartDate",
+      "TargetPropertyBaseType" : "DATETIME",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetLast30dStart",
+    "SourceSection" : "Things_KBTimeHelperThing",
+    "TargetArea" : "UI",
+    "TargetId" : "mashupcontainer-23",
+    "TargetSection" : ""
+  }, {
+    "Id" : "1b114ea5-1d58-48b9-952f-e3f4a27f94c4",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "InfoTable",
+      "TargetProperty" : "Data",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetMultiselctTop3KpiTruckWeek",
+    "SourceSection" : "Things_KBSmartKPIHelperThing",
+    "TargetArea" : "UI",
+    "TargetId" : "ptcschartbar-88",
+    "TargetSection" : ""
+  }, {
+    "Id" : "54ab23f2-9f0b-4b81-8faf-62a611649d58",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "InfoTable",
+      "TargetProperty" : "Data",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetMultiselctTop3KpiTruckMonth",
+    "SourceSection" : "Things_KBSmartKPIHelperThing",
+    "TargetArea" : "UI",
+    "TargetId" : "ptcschartbar-89",
+    "TargetSection" : ""
+  }, {
+    "Id" : "abe4f847-7a6a-4401-aaf8-950e938c90c4",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "MachineThingName",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "property",
+      "TargetProperty" : "MachineThingName",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "clickablecontainermashup-79",
+    "TargetSection" : ""
+  }, {
+    "Id" : "ef43d1cc-a98d-46c8-84ea-c4e0d5ddf01b",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "MachineThingName",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "property",
+      "TargetProperty" : "Machine",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetMultiselctTop3KpiTruckDataDay",
+    "TargetSection" : "Things_KBSmartKPIHelperThing"
+  }, {
+    "Id" : "5bd2f4b6-c343-403c-96bc-9e8141755e15",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "MachineThingName",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "property",
+      "TargetProperty" : "Machine",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetMultiselctTop3KpiTruckWeek",
+    "TargetSection" : "Things_KBSmartKPIHelperThing"
+  }, {
+    "Id" : "8df3fb3b-969a-4b11-a5e3-6ac11aa83509",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "MachineThingName",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "property",
+      "TargetProperty" : "Machine",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetMultiselctTop3KpiTruckYear",
+    "TargetSection" : "Things_KBSmartKPIHelperThing"
+  }, {
+    "Id" : "3e94e8eb-9f7f-40ee-809a-1ace919b3505",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "MachineThingName",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "property",
+      "TargetProperty" : "Machine",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetMultiselctTop3KpiTruckMonth",
+    "TargetSection" : "Things_KBSmartKPIHelperThing"
+  }, {
+    "Id" : "60a66c25-edbf-4f8d-8152-1c37db6555a2",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "MachineThingName",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "property",
+      "TargetProperty" : "MachineThingName",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "mashupcontainer-23",
+    "TargetSection" : ""
+  }, {
+    "Id" : "6d8ebf77-6af6-4f1e-a9c9-08092b87279e",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "InfoTable",
+      "TargetProperty" : "Data",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetMultiselctTop3KpiTruckYear",
+    "SourceSection" : "Things_KBSmartKPIHelperThing",
+    "TargetArea" : "UI",
+    "TargetId" : "ptcschartbar-94",
+    "TargetSection" : ""
+  }, {
+    "Id" : "b631c0b3-7304-4915-8fe4-42b85afbabbd",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "SelectedKPI",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "property",
+      "TargetProperty" : "Data",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "gridadvanced-104",
+    "TargetSection" : ""
+  }, {
+    "Id" : "ddc8e88c-ea59-4228-9666-f5bd3aebc1c9",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "SelectedKPI",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "property",
+      "TargetProperty" : "SelectedKPIList",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetMultiselctTop3KpiTruckDataDay",
+    "TargetSection" : "Things_KBSmartKPIHelperThing"
+  }, {
+    "Id" : "3aecd6d8-2411-4cc0-b711-5a441d679030",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "SelectedKPI",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "property",
+      "TargetProperty" : "SelectedKPIList",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetMultiselctTop3KpiTruckWeek",
+    "TargetSection" : "Things_KBSmartKPIHelperThing"
+  }, {
+    "Id" : "c9a292a1-6e2e-4de8-af04-b6074c8aa017",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "SelectedKPI",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "property",
+      "TargetProperty" : "SelectedKPIList",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetMultiselctTop3KpiTruckYear",
+    "TargetSection" : "Things_KBSmartKPIHelperThing"
+  }, {
+    "Id" : "1a652231-588a-4210-a0b2-b95fd8778711",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "SelectedKPI",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "property",
+      "TargetProperty" : "SelectedKPIList",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetMultiselctTop3KpiTruckMonth",
+    "TargetSection" : "Things_KBSmartKPIHelperThing"
+  }, {
+    "Id" : "2dd0d19d-cd02-4d0c-9afa-dabb2ba1caf4",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "SelectedKPI",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "property",
+      "TargetProperty" : "SelectedKPI",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "clickablecontainermashup-79",
+    "TargetSection" : ""
+  }, {
+    "Id" : "82eb974f-9cd1-426c-b815-f9406c160625",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "InfoTable",
+      "TargetProperty" : "Data",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetMultiselctTop3KpiTruckDataDay",
+    "SourceSection" : "Things_KBSmartKPIHelperThing",
+    "TargetArea" : "UI",
+    "TargetId" : "ptcschartbar-105",
+    "TargetSection" : ""
+  } ],
+  "DesignTimePermissions" : {
+    "Create" : [ ],
+    "Delete" : [ ],
+    "Metadata" : [ ],
+    "Read" : [ ],
+    "Update" : [ ]
+  },
+  "Events" : [ {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBTimeHelperThing",
+    "EventHandlerService" : "GetNow",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "8136483d-4926-4fa8-ae63-4b768149e8a7"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBTimeHelperThing",
+    "EventHandlerService" : "GetNow1",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "61182de5-e8df-4e80-ae7e-a575d70d7ff5"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBTimeHelperThing",
+    "EventHandlerService" : "GetLast30dStart",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "7e5db8c8-d791-4a88-ac10-830457bc568e"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBTimeHelperThing",
+    "EventHandlerService" : "GetLast7dStart",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "7378b02f-1731-47eb-b943-76de3d50e0b0"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBTimeHelperThing",
+    "EventHandlerService" : "GetLast24hStart",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "5366ac02-e736-4d38-ac9e-b53e23e7a592"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "mashupcontainer-23",
+    "EventHandlerService" : "Refresh",
+    "EventTriggerArea" : "Data",
+    "EventTriggerEvent" : "ServiceInvokeCompleted",
+    "EventTriggerId" : "GetLast30dStart",
+    "EventTriggerSection" : "Things_KBTimeHelperThing",
+    "Id" : "f91e3671-8bb7-489d-bcd5-270e3ec136e1"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "mashupcontainer-23",
+    "EventHandlerService" : "Refresh",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "RefreshRequested",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "84b99aba-6e06-4d02-83ea-375849a6fcd7"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "mashupcontainer-23",
+    "EventHandlerService" : "Refresh",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "MachineThingNameChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "c3d2caf2-8a00-4a97-8d66-a0f22552247a"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "clickablecontainermashup-79",
+    "EventHandlerService" : "Refresh",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "b316bfd4-ff70-46fc-aa90-768a75f1b744"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "clickablecontainermashup-79",
+    "EventHandlerService" : "Refresh",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "RefreshRequested",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "86040742-1036-40bb-aa8f-a7b13f966a9a"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "clickablecontainermashup-79",
+    "EventHandlerService" : "Refresh",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "MachineThingNameChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "5657e50f-9f49-48de-b959-96dc0b001293"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "mashupcontainer-23",
+    "EventHandlerService" : "Refresh",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "b14fed3e-7d97-44d0-948d-cf8d2b8cec56"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBSmartKPIHelperThing",
+    "EventHandlerService" : "GetMultiselctTop3KpiTruckDataDay",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "MachineThingNameChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "df00bd4a-3f8c-42f5-a981-047a6eec1711"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBSmartKPIHelperThing",
+    "EventHandlerService" : "GetMultiselctTop3KpiTruckWeek",
+    "EventTriggerArea" : "Data",
+    "EventTriggerEvent" : "ServiceInvokeCompleted",
+    "EventTriggerId" : "GetMultiselctTop3KpiTruckDataDay",
+    "EventTriggerSection" : "Things_KBSmartKPIHelperThing",
+    "Id" : "3c5411fa-8428-40f1-8480-d4f73b4a7f4c"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBSmartKPIHelperThing",
+    "EventHandlerService" : "GetMultiselctTop3KpiTruckMonth",
+    "EventTriggerArea" : "Data",
+    "EventTriggerEvent" : "ServiceInvokeCompleted",
+    "EventTriggerId" : "GetMultiselctTop3KpiTruckWeek",
+    "EventTriggerSection" : "Things_KBSmartKPIHelperThing",
+    "Id" : "abf6d024-f704-4cc7-8c0a-b4eb9dd2aee7"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBSmartKPIHelperThing",
+    "EventHandlerService" : "GetMultiselctTop3KpiTruckYear",
+    "EventTriggerArea" : "Data",
+    "EventTriggerEvent" : "ServiceInvokeCompleted",
+    "EventTriggerId" : "GetMultiselctTop3KpiTruckMonth",
+    "EventTriggerSection" : "Things_KBSmartKPIHelperThing",
+    "Id" : "e696a761-d12f-44ba-bd92-ad004f8cbc1a"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBSmartKPIHelperThing",
+    "EventHandlerService" : "GetMultiselctTop3KpiTruckDataDay",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "SelectedKPIChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "2f4006d4-7b83-4522-9e04-cf45b66434b6"
+  } ],
+  "RunTimePermissions" : {
+    "permissions" : [ {
+      "EventInvoke" : [ ],
+      "EventSubscribe" : [ ],
+      "PropertyRead" : [ {
+        "isPermitted" : true,
+        "name" : "KBUserGroup",
+        "type" : "Group"
+      } ],
+      "PropertyWrite" : [ ],
+      "ServiceInvoke" : [ {
+        "isPermitted" : true,
+        "name" : "KBUserGroup",
+        "type" : "Group"
+      } ],
+      "resourceName" : "*"
+    } ]
+  },
+  "UI" : {
+    "Properties" : {
+      "AddToDashboardButton" : "SimplePlus",
+      "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+      "Area" : "Mashup",
+      "BGImage" : "",
+      "BGImageRepeat" : "no-repeat",
+      "BGImageSize" : "auto",
+      "Columns" : 0,
+      "ConfigureGadgetButton" : "SimpleGear",
+      "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+      "DisplayName" : "Mashup",
+      "EnableParameterEditing" : false,
+      "Height" : 618,
+      "Id" : "mashup-root",
+      "IgnoreWarningsInViewMashup" : false,
+      "IsPrintLayout" : false,
+      "Left" : 0,
+      "MachineThingName" : "-nothing-",
+      "MashupResolution" : "1366x768",
+      "MashupToEditGadget" : "DefaultMashupToEditGadget",
+      "MigratedOn" : "2022-10-06T09:13:45.000Z",
+      "MinHeight" : 0,
+      "MinWidth" : 0,
+      "ResponsiveLayout" : true,
+      "Rows" : 0,
+      "ShowDataLoading" : true,
+      "Style" : "DefaultMashupStyle",
+      "StyleProperties" : {
+        "data" : {
+          "ptcschartbar-105" : {
+            "parts" : {
+              "bar" : {
+                "serie1" : {
+                  "background" : "#b5e189"
+                },
+                "serie2" : {
+                  "background" : "#ffb199"
+                },
+                "serie3" : {
+                  "background" : "#dcb0e3"
+                },
+                "serie4" : {
+                  "background" : "#ffdb70"
+                },
+                "serie5" : {
+                  "background" : "#95f4ea"
+                },
+                "serie6" : {
+                  "background" : "#cda8bd"
+                }
+              }
+            },
+            "widget" : "ptcs-chart-bar"
+          },
+          "ptcschartbar-88" : {
+            "parts" : {
+              "bar" : {
+                "serie1" : {
+                  "background" : "#b5e189"
+                },
+                "serie2" : {
+                  "background" : "#ffb199"
+                },
+                "serie3" : {
+                  "background" : "#dcb0e3"
+                },
+                "serie4" : {
+                  "background" : "#ffdb70"
+                },
+                "serie5" : {
+                  "background" : "#95f4ea"
+                },
+                "serie6" : {
+                  "background" : "#cda8bd"
+                }
+              },
+              "legend-marker" : {
+                "serie1" : {
+                  "background" : "#e6b400"
+                },
+                "serie2" : {
+                  "background" : "#EB6D00"
+                },
+                "serie4" : {
+                  "background" : "#66cc33"
+                },
+                "serie5" : {
+                  "background" : "#d91737"
+                }
+              }
+            },
+            "widget" : "ptcs-chart-bar"
+          },
+          "ptcschartbar-89" : {
+            "parts" : {
+              "$" : {
+                "$" : {
+                  "min-height" : "160px",
+                  "min-width" : "160px"
+                }
+              },
+              "bar" : {
+                "serie1" : {
+                  "background" : "#b5e189"
+                },
+                "serie2" : {
+                  "background" : "#ffb199"
+                },
+                "serie3" : {
+                  "background" : "#dcb0e3"
+                },
+                "serie4" : {
+                  "background" : "#ffdb70"
+                },
+                "serie5" : {
+                  "background" : "#95f4ea"
+                },
+                "serie6" : {
+                  "background" : "#cda8bd"
+                }
+              },
+              "legend-marker" : {
+                "serie1" : {
+                  "background" : "#e6b400"
+                },
+                "serie2" : {
+                  "background" : "#EB6D00"
+                },
+                "serie4" : {
+                  "background" : "#66cc33"
+                },
+                "serie5" : {
+                  "background" : "#d91737"
+                }
+              }
+            },
+            "widget" : "ptcs-chart-bar"
+          },
+          "ptcschartbar-94" : {
+            "parts" : {
+              "bar" : {
+                "serie1" : {
+                  "background" : "#b5e189"
+                },
+                "serie2" : {
+                  "background" : "#ffb199"
+                },
+                "serie3" : {
+                  "background" : "#dcb0e3"
+                },
+                "serie4" : {
+                  "background" : "#ffdb70"
+                },
+                "serie5" : {
+                  "background" : "#95f4ea"
+                },
+                "serie6" : {
+                  "background" : "#cda8bd"
+                }
+              },
+              "legend-marker" : {
+                "serie1" : {
+                  "background" : "#e6b400"
+                },
+                "serie2" : {
+                  "background" : "#EB6D00"
+                },
+                "serie4" : {
+                  "background" : "#66cc33"
+                }
+              }
+            },
+            "widget" : "ptcs-chart-bar"
+          }
+        },
+        "meta" : {
+          "type" : "WidgetStyler",
+          "version" : "1.0"
+        }
+      },
+      "StyleTheme" : "Base Theme",
+      "Title" : "",
+      "TitleBar" : false,
+      "TitleBarStyle" : "DefaultTitleBarStyle",
+      "TitleBarText" : "Gadget Title Here",
+      "Top" : 0,
+      "Type" : "mashup",
+      "UseMasterTheme" : false,
+      "UseTheme" : false,
+      "UseThemeForHybrids" : false,
+      "Visible" : true,
+      "Width" : 1024,
+      "Z-index" : 10,
+      "__TypeDisplayName" : "Mashup",
+      "_currentParameterDefs" : [ {
+        "Aspects" : {
+          "bindingDirection" : "BOTH",
+          "isMandatory" : false
+        },
+        "BaseType" : "STRING",
+        "DefaultValue" : "-nothing-",
+        "Description" : "",
+        "ParameterName" : "MachineThingName"
+      }, {
+        "Aspects" : {
+          "bindingDirection" : "IN",
+          "dataShape" : "KBNameForMenuDataShape",
+          "isDataTableEntry" : true,
+          "isMandatory" : false
+        },
+        "BaseType" : "INFOTABLE",
+        "Description" : "",
+        "ParameterName" : "SelectedKPI"
+      } ],
+      "id_index" : 105,
+      "supportsAutoResize" : true
+    },
+    "Widgets" : [ {
+      "Properties" : {
+        "Area" : "UI",
+        "DisplayName" : "container-1",
+        "EnableExpandCollapse" : false,
+        "Expanded" : true,
+        "Id" : "flexcontainer-1",
+        "LastContainer" : true,
+        "Overlay" : false,
+        "ResponsiveLayout" : true,
+        "ShowDataLoading" : true,
+        "ShowExpandCollapseTab" : false,
+        "SourceURL" : "",
+        "Style" : "DefaultContainerStyle",
+        "StyleProperties" : { },
+        "Type" : "flexcontainer",
+        "UseTheme" : true,
+        "Visible" : true,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Flex Container",
+        "align-content" : "flex-start",
+        "align-items" : "flex-start",
+        "flex-basis" : "auto",
+        "flex-direction" : "column",
+        "flex-grow" : 1,
+        "flex-max-height" : "",
+        "flex-max-width" : "",
+        "flex-min-height" : "",
+        "flex-min-width" : "",
+        "flex-shrink" : "0",
+        "flex-size" : "default",
+        "flex-wrap" : "nowrap",
+        "iconClass" : "widgets-flexcontainer",
+        "justify-content" : "flex-start",
+        "positioning" : "responsive",
+        "userCannotRemove" : true
+      },
+      "Widgets" : [ {
+        "Properties" : {
+          "Area" : "UI",
+          "DisplayName" : "container-6",
+          "EnableExpandCollapse" : false,
+          "Expanded" : true,
+          "Id" : "flexcontainer-6",
+          "LastContainer" : false,
+          "Overlay" : false,
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "ShowExpandCollapseTab" : false,
+          "SourceURL" : "",
+          "Style" : "DefaultContainerStyle",
+          "StyleProperties" : { },
+          "Type" : "flexcontainer",
+          "UseTheme" : true,
+          "Visible" : true,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Flex Container",
+          "align-content" : "flex-start",
+          "align-items" : "stretch",
+          "flex-basis" : "0",
+          "flex-direction" : "row",
+          "flex-grow" : 50,
+          "flex-max-height" : "432px",
+          "flex-max-width" : "",
+          "flex-min-height" : "432px",
+          "flex-min-width" : "",
+          "flex-shrink" : "0",
+          "flex-size" : "fixed",
+          "flex-wrap" : "nowrap",
+          "iconClass" : "widgets-flexcontainer-fixed",
+          "isLocked" : false,
+          "justify-content" : "flex-start",
+          "positioning" : "responsive",
+          "prev-align" : "flex-start",
+          "userCannotRemove" : false
+        },
+        "Widgets" : [ {
+          "Properties" : {
+            "Area" : "UI",
+            "DisplayName" : "container-101",
+            "EnableExpandCollapse" : false,
+            "Expanded" : true,
+            "Id" : "flexcontainer-101",
+            "LastContainer" : true,
+            "Overlay" : false,
+            "ResponsiveLayout" : false,
+            "ShowDataLoading" : true,
+            "ShowExpandCollapseTab" : false,
+            "SourceURL" : "",
+            "Style" : "DefaultContainerStyle",
+            "StyleProperties" : { },
+            "Type" : "flexcontainer",
+            "UseTheme" : true,
+            "Visible" : true,
+            "Z-index" : 10,
+            "__TypeDisplayName" : "Flex Container",
+            "align-content" : "flex-start",
+            "align-items" : "stretch",
+            "flex-basis" : "0",
+            "flex-direction" : "row",
+            "flex-grow" : 50,
+            "flex-max-height" : "",
+            "flex-max-width" : "",
+            "flex-min-height" : "",
+            "flex-min-width" : "",
+            "flex-shrink" : "0",
+            "flex-size" : "default",
+            "flex-wrap" : "nowrap",
+            "iconClass" : "widgets-flexcontainer",
+            "isLocked" : true,
+            "justify-content" : "flex-start",
+            "positioning" : "responsive",
+            "prev-align" : "flex-start",
+            "userCannotRemove" : false
+          },
+          "Widgets" : [ {
+            "Properties" : {
+              "Area" : "UI",
+              "DisplayName" : "container-7",
+              "EnableExpandCollapse" : false,
+              "Expanded" : true,
+              "Id" : "flexcontainer-7",
+              "LastContainer" : false,
+              "Overlay" : false,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "ShowExpandCollapseTab" : false,
+              "SourceURL" : "",
+              "Style" : "DefaultContainerStyle",
+              "StyleProperties" : { },
+              "Type" : "flexcontainer",
+              "UseTheme" : true,
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Flex Container",
+              "align-content" : "flex-start",
+              "align-items" : "stretch",
+              "flex-basis" : "0",
+              "flex-direction" : "row",
+              "flex-grow" : 25,
+              "flex-max-height" : "",
+              "flex-max-width" : "",
+              "flex-min-height" : "",
+              "flex-min-width" : "",
+              "flex-shrink" : "0",
+              "flex-size" : "default",
+              "flex-wrap" : "nowrap",
+              "iconClass" : "widgets-flexcontainer",
+              "isLocked" : false,
+              "justify-content" : "flex-start",
+              "positioning" : "responsive",
+              "prev-align" : "flex-start",
+              "userCannotRemove" : false
+            },
+            "Widgets" : [ {
+              "Properties" : {
+                "Area" : "UI",
+                "ChartType" : "column",
+                "DataField1" : "KPI",
+                "DataField2" : "SKPI",
+                "DirectSelectionZoom" : "none",
+                "Disabled" : false,
+                "DisplayName" : "ptcs-chartbar-94",
+                "DragSelectionZoom" : "none",
+                "ExternalPadding" : 25,
+                "GroupPadding" : 25,
+                "Height" : 476,
+                "HideLegend" : true,
+                "HideNotes" : false,
+                "HideValues" : false,
+                "HideXAxis" : false,
+                "HideYAxis" : false,
+                "HorizontalAxisMaxHeight" : 85,
+                "HorizontalEndZoomLabel" : "",
+                "HorizontalIntervalAnchorPoint" : "start",
+                "HorizontalIntervalAnchorPointLabel" : "",
+                "HorizontalIntervalControl" : "none",
+                "HorizontalIntervalControlLabel" : "",
+                "HorizontalRangeZoom" : false,
+                "HorizontalSliderZoom" : false,
+                "HorizontalSliderZoomMaxLabel" : "",
+                "HorizontalSliderZoomMinLabel" : "",
+                "HorizontalStartZoomLabel" : "",
+                "HorizontalZoom" : false,
+                "Id" : "ptcschartbar-94",
+                "InternalPadding" : 25,
+                "Label" : "Short/Long Term per Year",
+                "LabelAlignment" : "left",
+                "LabelPosition" : "top",
+                "LabelReset" : "Reset",
+                "LabelType" : "sub-header",
+                "LastContainer" : false,
+                "Left" : 94,
+                "LegendAlignment" : "start",
+                "LegendFilter" : false,
+                "LegendMarkerShapes" : "square",
+                "LegendMaxWidth" : 736,
+                "LegendPosition" : "right",
+                "Margin" : "5",
+                "MultipleDataSources" : false,
+                "Notes" : "",
+                "NotesAlignment" : "left",
+                "NotesPosition" : "bottom",
+                "ResponsiveLayout" : true,
+                "ReverseXAxis" : false,
+                "ReverseYAxis" : false,
+                "RulersInFront" : false,
+                "SeriesDisplay" : "grouped",
+                "ShowDataLoading" : true,
+                "ShowHorizontalAnchorPointControl" : false,
+                "ShowXAxisRuler" : false,
+                "ShowYAxisRuler" : false,
+                "ShowZeroValueRuler" : false,
+                "SparkView" : false,
+                "StringEnd" : "[[endRange]]",
+                "StringStart" : "[[startRange]]",
+                "TabSequence" : 0,
+                "Top" : 131,
+                "Type" : "ptcschartbar",
+                "UseTheme" : true,
+                "ValuesAlignment" : "end",
+                "ValuesPosition" : "inside",
+                "VerticalAxisMaxWidth" : 85,
+                "VerticalSliderZoom" : false,
+                "VerticalSliderZoomMaxLabel" : "",
+                "VerticalSliderZoomMinLabel" : "",
+                "VerticalZoom" : false,
+                "Visible" : true,
+                "Width" : 471,
+                "XAxisField" : "Label",
+                "XAxisLabel" : "",
+                "XAxisLabelAlignment" : "start",
+                "YAxisFormat" : "0000.0",
+                "YAxisLabel" : "",
+                "YAxisLabelAlignment" : "center",
+                "Z-index" : 10,
+                "__TypeDisplayName" : "Bar Chart"
+              },
+              "Widgets" : [ ]
+            } ]
+          }, {
+            "Properties" : {
+              "Area" : "UI",
+              "DisplayName" : "container-8",
+              "EnableExpandCollapse" : false,
+              "Expanded" : true,
+              "Id" : "flexcontainer-8",
+              "LastContainer" : false,
+              "Overlay" : false,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "ShowExpandCollapseTab" : false,
+              "SourceURL" : "",
+              "Style" : "DefaultContainerStyle",
+              "StyleProperties" : { },
+              "Type" : "flexcontainer",
+              "UseTheme" : true,
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Flex Container",
+              "align-content" : "flex-start",
+              "align-items" : "stretch",
+              "flex-basis" : "0",
+              "flex-direction" : "row",
+              "flex-grow" : 25,
+              "flex-max-height" : "",
+              "flex-max-width" : "",
+              "flex-min-height" : "",
+              "flex-min-width" : "",
+              "flex-shrink" : "0",
+              "flex-size" : "default",
+              "flex-wrap" : "nowrap",
+              "iconClass" : "widgets-flexcontainer",
+              "isLocked" : false,
+              "justify-content" : "flex-start",
+              "positioning" : "responsive",
+              "prev-align" : "flex-start",
+              "userCannotRemove" : false
+            },
+            "Widgets" : [ {
+              "Properties" : {
+                "Area" : "UI",
+                "ChartType" : "column",
+                "DataField1" : "KPI",
+                "DataField2" : "SKPI",
+                "DirectSelectionZoom" : "none",
+                "Disabled" : false,
+                "DisplayName" : "ptcs-chartbar-89",
+                "DragSelectionZoom" : "none",
+                "ExternalPadding" : 25,
+                "GroupPadding" : 25,
+                "Height" : 476,
+                "HideLegend" : true,
+                "HideNotes" : false,
+                "HideValues" : false,
+                "HideXAxis" : false,
+                "HideYAxis" : false,
+                "HorizontalAxisMaxHeight" : 85,
+                "HorizontalEndZoomLabel" : "",
+                "HorizontalIntervalAnchorPoint" : "start",
+                "HorizontalIntervalAnchorPointLabel" : "",
+                "HorizontalIntervalControl" : "none",
+                "HorizontalIntervalControlLabel" : "",
+                "HorizontalRangeZoom" : false,
+                "HorizontalSliderZoom" : false,
+                "HorizontalSliderZoomMaxLabel" : "",
+                "HorizontalSliderZoomMinLabel" : "",
+                "HorizontalStartZoomLabel" : "",
+                "HorizontalZoom" : false,
+                "Id" : "ptcschartbar-89",
+                "InternalPadding" : 25,
+                "Label" : "Short/Long Term per Month",
+                "LabelAlignment" : "left",
+                "LabelPosition" : "top",
+                "LabelReset" : "Reset",
+                "LabelType" : "sub-header",
+                "LastContainer" : false,
+                "Left" : 89,
+                "LegendAlignment" : "start",
+                "LegendFilter" : false,
+                "LegendMarkerShapes" : "square",
+                "LegendMaxWidth" : 736,
+                "LegendPosition" : "right",
+                "MultipleDataSources" : false,
+                "Notes" : "",
+                "NotesAlignment" : "left",
+                "NotesPosition" : "bottom",
+                "ResponsiveLayout" : true,
+                "ReverseXAxis" : false,
+                "ReverseYAxis" : false,
+                "RulersInFront" : false,
+                "SeriesDisplay" : "grouped",
+                "ShowDataLoading" : true,
+                "ShowHorizontalAnchorPointControl" : false,
+                "ShowXAxisRuler" : false,
+                "ShowYAxisRuler" : false,
+                "ShowZeroValueRuler" : false,
+                "SparkView" : false,
+                "StringEnd" : "[[endRange]]",
+                "StringStart" : "[[startRange]]",
+                "TabSequence" : 0,
+                "Top" : 181,
+                "Type" : "ptcschartbar",
+                "UseTheme" : true,
+                "ValuesAlignment" : "end",
+                "ValuesPosition" : "inside",
+                "VerticalAxisMaxWidth" : 85,
+                "VerticalSliderZoom" : false,
+                "VerticalSliderZoomMaxLabel" : "",
+                "VerticalSliderZoomMinLabel" : "",
+                "VerticalZoom" : false,
+                "Visible" : true,
+                "Width" : 471,
+                "XAxisField" : "Label",
+                "XAxisLabel" : "",
+                "XAxisLabelAlignment" : "start",
+                "YAxisFormat" : "0000.0",
+                "YAxisLabel" : "",
+                "YAxisLabelAlignment" : "center",
+                "Z-index" : 10,
+                "__TypeDisplayName" : "Bar Chart"
+              },
+              "Widgets" : [ ]
+            } ]
+          }, {
+            "Properties" : {
+              "Area" : "UI",
+              "DisplayName" : "container-9",
+              "EnableExpandCollapse" : false,
+              "Expanded" : true,
+              "Id" : "flexcontainer-9",
+              "LastContainer" : false,
+              "Overlay" : false,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "ShowExpandCollapseTab" : false,
+              "SourceURL" : "",
+              "Style" : "DefaultContainerStyle",
+              "StyleProperties" : { },
+              "Type" : "flexcontainer",
+              "UseTheme" : true,
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Flex Container",
+              "align-content" : "flex-start",
+              "align-items" : "stretch",
+              "flex-basis" : "0",
+              "flex-direction" : "row",
+              "flex-grow" : 25,
+              "flex-max-height" : "",
+              "flex-max-width" : "",
+              "flex-min-height" : "",
+              "flex-min-width" : "",
+              "flex-shrink" : "0",
+              "flex-size" : "default",
+              "flex-wrap" : "nowrap",
+              "iconClass" : "widgets-flexcontainer",
+              "isLocked" : false,
+              "justify-content" : "flex-start",
+              "positioning" : "responsive",
+              "prev-align" : "flex-start",
+              "userCannotRemove" : false
+            },
+            "Widgets" : [ {
+              "Properties" : {
+                "Area" : "UI",
+                "ChartType" : "column",
+                "DataField1" : "KPI",
+                "DataField2" : "SKPI",
+                "DirectSelectionZoom" : "none",
+                "Disabled" : false,
+                "DisplayName" : "ptcs-chartbar-88",
+                "DragSelectionZoom" : "none",
+                "ExternalPadding" : 25,
+                "GroupPadding" : 25,
+                "Height" : 476,
+                "HideLegend" : true,
+                "HideNotes" : false,
+                "HideValues" : false,
+                "HideXAxis" : false,
+                "HideYAxis" : false,
+                "HorizontalAxisMaxHeight" : 85,
+                "HorizontalEndZoomLabel" : "",
+                "HorizontalIntervalAnchorPoint" : "start",
+                "HorizontalIntervalAnchorPointLabel" : "",
+                "HorizontalIntervalControl" : "none",
+                "HorizontalIntervalControlLabel" : "",
+                "HorizontalRangeZoom" : false,
+                "HorizontalSliderZoom" : false,
+                "HorizontalSliderZoomMaxLabel" : "",
+                "HorizontalSliderZoomMinLabel" : "",
+                "HorizontalStartZoomLabel" : "",
+                "HorizontalZoom" : false,
+                "Id" : "ptcschartbar-88",
+                "InternalPadding" : 25,
+                "Label" : "Short/Long Term per Week",
+                "LabelAlignment" : "left",
+                "LabelPosition" : "top",
+                "LabelReset" : "Reset",
+                "LabelType" : "sub-header",
+                "LastContainer" : false,
+                "Left" : 99,
+                "LegendAlignment" : "start",
+                "LegendFilter" : false,
+                "LegendMarkerShapes" : "square",
+                "LegendMaxWidth" : 736,
+                "LegendPosition" : "right",
+                "Margin" : "5",
+                "MultipleDataSources" : false,
+                "Notes" : "",
+                "NotesAlignment" : "left",
+                "NotesPosition" : "bottom",
+                "ResponsiveLayout" : true,
+                "ReverseXAxis" : false,
+                "ReverseYAxis" : false,
+                "RulersInFront" : false,
+                "SeriesDisplay" : "grouped",
+                "ShowDataLoading" : true,
+                "ShowHorizontalAnchorPointControl" : false,
+                "ShowXAxisRuler" : false,
+                "ShowYAxisRuler" : false,
+                "ShowZeroValueRuler" : false,
+                "SparkView" : false,
+                "StringEnd" : "[[endRange]]",
+                "StringStart" : "[[startRange]]",
+                "TabSequence" : 0,
+                "Top" : 121,
+                "Type" : "ptcschartbar",
+                "UseTheme" : true,
+                "ValuesAlignment" : "end",
+                "ValuesPosition" : "inside",
+                "VerticalAxisMaxWidth" : 85,
+                "VerticalSliderZoom" : false,
+                "VerticalSliderZoomMaxLabel" : "",
+                "VerticalSliderZoomMinLabel" : "",
+                "VerticalZoom" : false,
+                "Visible" : true,
+                "Width" : 471,
+                "XAxisField" : "Label",
+                "XAxisLabel" : "",
+                "XAxisLabelAlignment" : "start",
+                "YAxisFormat" : "0000.0",
+                "YAxisLabel" : "",
+                "YAxisLabelAlignment" : "center",
+                "Z-index" : 10,
+                "__TypeDisplayName" : "Bar Chart"
+              },
+              "Widgets" : [ ]
+            } ]
+          }, {
+            "Properties" : {
+              "Area" : "UI",
+              "DisplayName" : "container-10",
+              "EnableExpandCollapse" : false,
+              "Expanded" : true,
+              "Id" : "flexcontainer-10",
+              "LastContainer" : false,
+              "Overlay" : false,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "ShowExpandCollapseTab" : false,
+              "SourceURL" : "",
+              "Style" : "DefaultContainerStyle",
+              "StyleProperties" : { },
+              "Type" : "flexcontainer",
+              "UseTheme" : true,
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Flex Container",
+              "align-content" : "flex-start",
+              "align-items" : "stretch",
+              "flex-basis" : "0",
+              "flex-direction" : "row",
+              "flex-grow" : 25,
+              "flex-max-height" : "",
+              "flex-max-width" : "",
+              "flex-min-height" : "",
+              "flex-min-width" : "",
+              "flex-shrink" : "0",
+              "flex-size" : "default",
+              "flex-wrap" : "nowrap",
+              "iconClass" : "widgets-flexcontainer",
+              "isLocked" : false,
+              "justify-content" : "flex-start",
+              "positioning" : "responsive",
+              "prev-align" : "flex-start",
+              "userCannotRemove" : false
+            },
+            "Widgets" : [ {
+              "Properties" : {
+                "Area" : "UI",
+                "ChartType" : "column",
+                "DirectSelectionZoom" : "none",
+                "Disabled" : false,
+                "DisplayName" : "ptcs-chartbar-105",
+                "DragSelectionZoom" : "none",
+                "ExternalPadding" : 25,
+                "GroupPadding" : 25,
+                "Height" : 476,
+                "HideLegend" : true,
+                "HideNotes" : false,
+                "HideValues" : false,
+                "HideXAxis" : false,
+                "HideYAxis" : false,
+                "HorizontalAxisMaxHeight" : 85,
+                "HorizontalEndZoomLabel" : "",
+                "HorizontalIntervalAnchorPoint" : "start",
+                "HorizontalIntervalAnchorPointLabel" : "",
+                "HorizontalIntervalControl" : "none",
+                "HorizontalIntervalControlLabel" : "",
+                "HorizontalRangeZoom" : false,
+                "HorizontalSliderZoom" : false,
+                "HorizontalSliderZoomMaxLabel" : "",
+                "HorizontalSliderZoomMinLabel" : "",
+                "HorizontalStartZoomLabel" : "",
+                "HorizontalZoom" : true,
+                "Id" : "ptcschartbar-105",
+                "InternalPadding" : 25,
+                "Label" : "Short/Long Term Per Day",
+                "LabelAlignment" : "left",
+                "LabelPosition" : "top",
+                "LabelReset" : "Reset",
+                "LabelType" : "sub-header",
+                "LastContainer" : false,
+                "Left" : 84,
+                "LegendAlignment" : "start",
+                "LegendFilter" : false,
+                "LegendMarkerShapes" : "square",
+                "LegendMaxWidth" : 736,
+                "LegendPosition" : "right",
+                "MultipleDataSources" : false,
+                "Notes" : "",
+                "NotesAlignment" : "left",
+                "NotesPosition" : "bottom",
+                "ResponsiveLayout" : true,
+                "ReverseXAxis" : false,
+                "ReverseYAxis" : false,
+                "RulersInFront" : false,
+                "SeriesDisplay" : "grouped",
+                "ShowDataLoading" : true,
+                "ShowHorizontalAnchorPointControl" : false,
+                "ShowXAxisRuler" : false,
+                "ShowYAxisRuler" : false,
+                "ShowZeroValueRuler" : false,
+                "SparkView" : false,
+                "StringEnd" : "[[endRange]]",
+                "StringStart" : "[[startRange]]",
+                "TabSequence" : 0,
+                "Top" : 306,
+                "Type" : "ptcschartbar",
+                "UseTheme" : true,
+                "ValuesAlignment" : "end",
+                "ValuesPosition" : "inside",
+                "VerticalAxisMaxWidth" : 85,
+                "VerticalSliderZoom" : false,
+                "VerticalSliderZoomMaxLabel" : "",
+                "VerticalSliderZoomMinLabel" : "",
+                "VerticalZoom" : true,
+                "Visible" : true,
+                "Width" : 471,
+                "XAxisField" : "Label",
+                "XAxisLabel" : "",
+                "XAxisLabelAlignment" : "start",
+                "YAxisFormat" : "0000.0",
+                "YAxisLabel" : "",
+                "YAxisLabelAlignment" : "center",
+                "Z-index" : 10,
+                "__TypeDisplayName" : "Bar Chart"
+              },
+              "Widgets" : [ ]
+            } ]
+          } ]
+        }, {
+          "Properties" : {
+            "Area" : "UI",
+            "DisplayName" : "container-102",
+            "EnableExpandCollapse" : false,
+            "Expanded" : true,
+            "Id" : "flexcontainer-102",
+            "LastContainer" : false,
+            "Overlay" : false,
+            "ResponsiveLayout" : false,
+            "ShowDataLoading" : true,
+            "ShowExpandCollapseTab" : false,
+            "SourceURL" : "",
+            "Style" : "DefaultContainerStyle",
+            "StyleProperties" : { },
+            "Type" : "flexcontainer",
+            "UseTheme" : true,
+            "Visible" : true,
+            "Z-index" : 10,
+            "__TypeDisplayName" : "Responsive Container",
+            "align-content" : "flex-start",
+            "align-items" : "stretch",
+            "flex-basis" : "auto",
+            "flex-direction" : "row",
+            "flex-grow" : 1,
+            "flex-max-height" : "",
+            "flex-max-width" : "192px",
+            "flex-min-height" : "",
+            "flex-min-width" : "192px",
+            "flex-shrink" : 1,
+            "flex-size" : "fixed",
+            "flex-wrap" : "nowrap",
+            "iconClass" : "widgets-flexcontainer-fixed",
+            "isLocked" : false,
+            "justify-content" : "flex-start",
+            "positioning" : "responsive",
+            "prev-align" : "flex-start",
+            "userCannotRemove" : false
+          },
+          "Widgets" : [ {
+            "Properties" : {
+              "Area" : "UI",
+              "AutoScroll" : true,
+              "CellBorderStyle" : "DefaultGridAdvancedCellBorderStyle",
+              "CellValidationErrorStyle" : "DefaultGridAdvancedCellValidationErrorStyle",
+              "CellValidationErrorTooltipStyle" : "DefaultGridAdvancedCellValidationErrorTooltipStyle",
+              "ColumnFormat" : {
+                "formatInfo" : [ {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "DisplayName",
+                  "FormatOptions" : {
+                    "FormatString" : "full",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "STRING",
+                    "roundingEnabled" : true,
+                    "showDependentField" : false
+                  },
+                  "Title" : "Selected KPI",
+                  "Width" : "auto",
+                  "headerTextAlignment" : "center",
+                  "hidden" : false,
+                  "inLayout" : true
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "EditorOptions" : {
+                    "Type" : "string",
+                    "Validators" : [ "None", "NotEmpty", "Empty", "Custom", "ValidAlphaNumeric", "ValidEmail", "ValidIPv4", "ValidSIN", "ValidSSN" ]
+                  },
+                  "FieldName" : "ThingName",
+                  "FormatOptions" : {
+                    "FormatString" : "full",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "STRING",
+                    "roundingEnabled" : true,
+                    "showDependentField" : true
+                  },
+                  "Title" : "ThingName",
+                  "Width" : "auto",
+                  "headerTextAlignment" : "left",
+                  "hidden" : true,
+                  "inLayout" : false
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "EditorOptions" : {
+                    "Type" : "string",
+                    "Validators" : [ "None", "NotEmpty", "Empty", "Custom", "ValidAlphaNumeric", "ValidEmail", "ValidIPv4", "ValidSIN", "ValidSSN" ]
+                  },
+                  "FieldName" : "DBKpiName",
+                  "FormatOptions" : {
+                    "FormatString" : "full",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "STRING",
+                    "roundingEnabled" : true,
+                    "showDependentField" : true
+                  },
+                  "Title" : "DBKpiName",
+                  "Width" : "auto",
+                  "headerTextAlignment" : "left",
+                  "hidden" : true,
+                  "inLayout" : false
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "EditorOptions" : {
+                    "Type" : "string",
+                    "Validators" : [ "None", "NotEmpty", "Empty", "Custom", "ValidAlphaNumeric", "ValidEmail", "ValidIPv4", "ValidSIN", "ValidSSN" ]
+                  },
+                  "FieldName" : "ProcesDataType",
+                  "FormatOptions" : {
+                    "FormatString" : "full",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "STRING",
+                    "roundingEnabled" : true,
+                    "showDependentField" : true
+                  },
+                  "Title" : "ProcesDataType",
+                  "Width" : "auto",
+                  "headerTextAlignment" : "left",
+                  "hidden" : true,
+                  "inLayout" : false
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "EditorOptions" : {
+                    "Type" : "string",
+                    "Validators" : [ "None", "NotEmpty", "Empty", "Custom", "ValidAlphaNumeric", "ValidEmail", "ValidIPv4", "ValidSIN", "ValidSSN" ]
+                  },
+                  "FieldName" : "ProcesDataType2",
+                  "FormatOptions" : {
+                    "FormatString" : "full",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "STRING",
+                    "roundingEnabled" : true,
+                    "showDependentField" : true
+                  },
+                  "Title" : "ProcesDataType2",
+                  "Width" : "auto",
+                  "headerTextAlignment" : "left",
+                  "hidden" : true,
+                  "inLayout" : false
+                } ]
+              },
+              "Configuration" : "",
+              "ConfigurationId" : 4,
+              "CookiePersistence" : true,
+              "CustomClass" : "legendGridCSS",
+              "DataOverflow" : "wrapped",
+              "DefaultSelectedRows" : "",
+              "DisplayName" : "Selected KPIs",
+              "DisplayOnlyMode" : true,
+              "EditButtonsLocation" : "top-right",
+              "EnableAddDeleteButtons" : false,
+              "EnableCallbackOnSelectedRowsChange" : true,
+              "EnableContextMenu" : true,
+              "EnableEditButtons" : false,
+              "EnableFilterEventOnConfigChange" : true,
+              "EnableFooter" : false,
+              "EnableGridReset" : false,
+              "EnableGridSearch" : false,
+              "EnableKeyboardNavigation" : true,
+              "EnableSorting" : false,
+              "FocusStyle" : "DefaultFocusStyle",
+              "GridResetButtonLocation" : "top-right",
+              "GridSearchLocation" : "top-left",
+              "HeaderOverflow" : "tooltip",
+              "Height" : 200,
+              "IDFieldName" : "id",
+              "Id" : "gridadvanced-104",
+              "IsEditable" : false,
+              "LastContainer" : false,
+              "Left" : 49,
+              "MaxHeaderHeight" : 100,
+              "MinRowHeight" : 30,
+              "ResponsiveLayout" : true,
+              "RowAlternateBackgroundStyle" : "DefaultGridAdvancedRowAlternateBackgroundStyle",
+              "RowBackgroundStyle" : "DefaultGridAdvancedRowBackgroundStyle",
+              "RowBorderStyle" : "DefaultGridAdvancedRowBorderStyle",
+              "RowFormat_StateParameters" : [ ],
+              "RowHoverStyle" : "DefaultGridAdvancedRowHoverStyle",
+              "RowSelectedStyle" : "DefaultGridAdvancedRowSelectedStyle",
+              "RowSelection" : "none",
+              "SelectedRows" : "",
+              "ShowDataLoading" : true,
+              "SortAscendingStyle" : "DefaultSortAscendingStyle",
+              "SortDescendingStyle" : "DefaultSortDescendingStyle",
+              "TableFooterStyle" : "DefaultGridAdvancedFooterStyle",
+              "TableHeaderStyle" : "DefaultGridAdvancedHeaderStyle",
+              "TableWrapperStyle" : "DefaultGridAdvancedWrapperStyle",
+              "ToolbarStyle" : "DefaultToolbarStyle",
+              "TooltipStyle" : "DefaultTooltipStyle",
+              "Top" : 136,
+              "Type" : "gridadvanced",
+              "UseTheme" : false,
+              "Visible" : true,
+              "Width" : 400,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Grid Advanced"
+            },
+            "Widgets" : [ ]
+          } ]
+        } ]
+      }, {
+        "Properties" : {
+          "Area" : "UI",
+          "DisplayName" : "container-43",
+          "EnableExpandCollapse" : false,
+          "Expanded" : true,
+          "Id" : "flexcontainer-43",
+          "LastContainer" : true,
+          "Overlay" : false,
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "ShowExpandCollapseTab" : false,
+          "SourceURL" : "",
+          "Style" : "DefaultContainerStyle",
+          "StyleProperties" : { },
+          "Type" : "flexcontainer",
+          "UseTheme" : true,
+          "Visible" : true,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Flex Container",
+          "align-content" : "flex-start",
+          "align-items" : "flex-start",
+          "flex-basis" : "0",
+          "flex-direction" : "column",
+          "flex-grow" : 99.33333333333334,
+          "flex-max-height" : "",
+          "flex-max-width" : "",
+          "flex-min-height" : "",
+          "flex-min-width" : "",
+          "flex-shrink" : "0",
+          "flex-size" : "default",
+          "flex-wrap" : "nowrap",
+          "iconClass" : "widgets-flexcontainer",
+          "isLocked" : true,
+          "justify-content" : "flex-start",
+          "positioning" : "responsive",
+          "userCannotRemove" : false
+        },
+        "Widgets" : [ {
+          "Properties" : {
+            "Area" : "UI",
+            "DisplayName" : "container-44",
+            "EnableExpandCollapse" : false,
+            "Expanded" : true,
+            "Id" : "flexcontainer-44",
+            "LastContainer" : false,
+            "Overlay" : false,
+            "ResponsiveLayout" : false,
+            "ShowDataLoading" : true,
+            "ShowExpandCollapseTab" : false,
+            "SourceURL" : "",
+            "Style" : "DefaultContainerStyle",
+            "StyleProperties" : { },
+            "Type" : "flexcontainer",
+            "UseTheme" : true,
+            "Visible" : true,
+            "Z-index" : 10,
+            "__TypeDisplayName" : "Flex Container",
+            "align-content" : "flex-start",
+            "align-items" : "flex-start",
+            "flex-basis" : "0",
+            "flex-direction" : "row",
+            "flex-grow" : 75,
+            "flex-max-height" : "",
+            "flex-max-width" : "",
+            "flex-min-height" : "",
+            "flex-min-width" : "",
+            "flex-shrink" : "0",
+            "flex-size" : "default",
+            "flex-wrap" : "nowrap",
+            "iconClass" : "widgets-flexcontainer",
+            "isLocked" : false,
+            "justify-content" : "flex-start",
+            "positioning" : "responsive",
+            "userCannotRemove" : false
+          },
+          "Widgets" : [ {
+            "Properties" : {
+              "Area" : "UI",
+              "ButtonHeight" : 30,
+              "ButtonLabel" : "",
+              "ButtonRightMargin" : 15,
+              "ButtonTopMargin" : 15,
+              "ButtonWidth" : 30,
+              "ClickOutsideToClose" : true,
+              "DisplayName" : "clickablecontainermashup-79",
+              "FixedPopupHeight" : 0,
+              "FixedPopupWidth" : 0,
+              "Height" : 300,
+              "Id" : "clickablecontainermashup-79",
+              "LastContainer" : false,
+              "Left" : 0,
+              "MashupParameters" : [ {
+                "BaseType" : "STRING",
+                "Description" : "",
+                "ParameterName" : "MachineThingName",
+                "ParmDef" : {
+                  "aspects" : {
+                    "bindingDirection" : "BOTH",
+                    "isMandatory" : "false"
+                  },
+                  "baseType" : "STRING",
+                  "description" : "",
+                  "name" : "MachineThingName",
+                  "ordinal" : 0
+                }
+              }, {
+                "BaseType" : "INFOTABLE",
+                "Description" : "",
+                "ParameterName" : "SelectedKPI",
+                "ParmDef" : {
+                  "aspects" : {
+                    "bindingDirection" : "BOTH",
+                    "dataShape" : "KBNameForMenuDataShape",
+                    "isDataTableEntry" : true,
+                    "isMandatory" : "false"
+                  },
+                  "baseType" : "INFOTABLE",
+                  "description" : "",
+                  "name" : "SelectedKPI",
+                  "ordinal" : 0
+                }
+              } ],
+              "MessageToShow" : "Mashup must be selected",
+              "ModalPopupOpacity" : 0.5,
+              "Name" : "KBKpiDbLocalDailyTimeSeriesMashup",
+              "NavigateButtonStyle" : "KBDefaultNavigateButtonStyle",
+              "PopupScrolling" : "auto",
+              "PopupTitle" : "",
+              "PopupTitleStyle" : "DefaultPopupTitleStyle",
+              "ReloadOnReplace" : false,
+              "ResponsiveLayout" : true,
+              "ShowCloseButton" : true,
+              "ShowDataLoading" : false,
+              "ShowMessageIfNoMashup" : false,
+              "TabSequenceGroup" : 0,
+              "TargetWindow" : "modal-popup",
+              "Top" : 0,
+              "Type" : "clickable_container_mashup",
+              "Visible" : true,
+              "Width" : 400,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Clickable Contained Mashup with Navigation"
+            },
+            "Widgets" : [ ]
+          } ]
+        }, {
+          "Properties" : {
+            "Area" : "UI",
+            "DisplayName" : "container-52",
+            "EnableExpandCollapse" : false,
+            "Expanded" : true,
+            "Id" : "flexcontainer-52",
+            "LastContainer" : false,
+            "Overlay" : false,
+            "ResponsiveLayout" : false,
+            "ShowDataLoading" : true,
+            "ShowExpandCollapseTab" : false,
+            "SourceURL" : "",
+            "Style" : "DefaultContainerStyle",
+            "StyleProperties" : { },
+            "Type" : "flexcontainer",
+            "UseTheme" : true,
+            "Visible" : true,
+            "Z-index" : 10,
+            "__TypeDisplayName" : "Flex Container",
+            "align-content" : "flex-start",
+            "align-items" : "flex-start",
+            "flex-basis" : "0",
+            "flex-direction" : "row",
+            "flex-grow" : 25,
+            "flex-max-height" : "",
+            "flex-max-width" : "",
+            "flex-min-height" : "",
+            "flex-min-width" : "",
+            "flex-shrink" : "0",
+            "flex-size" : "default",
+            "flex-wrap" : "nowrap",
+            "iconClass" : "widgets-flexcontainer",
+            "isLocked" : false,
+            "justify-content" : "flex-start",
+            "positioning" : "responsive",
+            "userCannotRemove" : false
+          },
+          "Widgets" : [ {
+            "Properties" : {
+              "Area" : "UI",
+              "DisplayName" : "container-92",
+              "EnableExpandCollapse" : false,
+              "Expanded" : true,
+              "Id" : "flexcontainer-92",
+              "LastContainer" : false,
+              "Overlay" : false,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "ShowExpandCollapseTab" : false,
+              "SourceURL" : "",
+              "Style" : "DefaultContainerStyle",
+              "StyleProperties" : { },
+              "Type" : "flexcontainer",
+              "UseTheme" : true,
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Flex Container",
+              "align-content" : "flex-start",
+              "align-items" : "flex-start",
+              "flex-basis" : "auto",
+              "flex-direction" : "row",
+              "flex-grow" : 1,
+              "flex-max-height" : "",
+              "flex-max-width" : "91px",
+              "flex-min-height" : "",
+              "flex-min-width" : "91px",
+              "flex-shrink" : "0",
+              "flex-size" : "fixed",
+              "flex-wrap" : "nowrap",
+              "iconClass" : "widgets-flexcontainer-fixed",
+              "isLocked" : false,
+              "justify-content" : "flex-start",
+              "positioning" : "responsive",
+              "userCannotRemove" : false
+            },
+            "Widgets" : [ ]
+          }, {
+            "Properties" : {
+              "Area" : "UI",
+              "DisplayName" : "container-54",
+              "EnableExpandCollapse" : false,
+              "Expanded" : true,
+              "Id" : "flexcontainer-54",
+              "LastContainer" : true,
+              "Overlay" : false,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "ShowExpandCollapseTab" : false,
+              "SourceURL" : "",
+              "Style" : "DefaultContainerStyle",
+              "StyleProperties" : { },
+              "Type" : "flexcontainer",
+              "UseTheme" : true,
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Flex Container",
+              "align-content" : "flex-start",
+              "align-items" : "flex-start",
+              "flex-basis" : "auto",
+              "flex-direction" : "row",
+              "flex-grow" : 1,
+              "flex-max-height" : "",
+              "flex-max-width" : "",
+              "flex-min-height" : "",
+              "flex-min-width" : "",
+              "flex-shrink" : "0",
+              "flex-size" : "default",
+              "flex-wrap" : "nowrap",
+              "iconClass" : "widgets-flexcontainer",
+              "isLocked" : true,
+              "justify-content" : "flex-start",
+              "positioning" : "responsive",
+              "userCannotRemove" : false
+            },
+            "Widgets" : [ {
+              "Properties" : {
+                "Area" : "UI",
+                "DisplayName" : "mashupcontainer-23",
+                "Height" : 300,
+                "Id" : "mashupcontainer-23",
+                "LastContainer" : false,
+                "Left" : 100,
+                "MachineThingName" : "",
+                "MashupParameters" : [ {
+                  "BaseType" : "DATETIME",
+                  "Description" : "",
+                  "ParameterName" : "StartDate",
+                  "ParmDef" : {
+                    "aspects" : { },
+                    "baseType" : "DATETIME",
+                    "description" : "",
+                    "name" : "StartDate",
+                    "ordinal" : 0
+                  }
+                }, {
+                  "BaseType" : "STRING",
+                  "DefaultValue" : "",
+                  "Description" : "",
+                  "ParameterName" : "MachineThingName",
+                  "ParmDef" : {
+                    "aspects" : { },
+                    "baseType" : "STRING",
+                    "description" : "",
+                    "name" : "MachineThingName",
+                    "ordinal" : 0
+                  }
+                }, {
+                  "BaseType" : "DATETIME",
+                  "Description" : "",
+                  "ParameterName" : "EndDate",
+                  "ParmDef" : {
+                    "aspects" : { },
+                    "baseType" : "DATETIME",
+                    "description" : "",
+                    "name" : "EndDate",
+                    "ordinal" : 0
+                  }
+                } ],
+                "Name" : "KBLocalSmartKPIMachineLevelShiftChartMashup",
+                "ResizeToContent" : false,
+                "ResponsiveLayout" : true,
+                "ShowDataLoading" : false,
+                "TabSequenceGroup" : 0,
+                "Top" : 10,
+                "Type" : "mashupcontainer",
+                "Visible" : true,
+                "Width" : 400,
+                "Z-index" : 10,
+                "__TypeDisplayName" : "Contained Mashup"
+              },
+              "Widgets" : [ ]
+            } ]
+          }, {
+            "Properties" : {
+              "Area" : "UI",
+              "DisplayName" : "container-93",
+              "EnableExpandCollapse" : false,
+              "Expanded" : true,
+              "Id" : "flexcontainer-93",
+              "LastContainer" : false,
+              "Overlay" : false,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "ShowExpandCollapseTab" : false,
+              "SourceURL" : "",
+              "Style" : "DefaultContainerStyle",
+              "StyleProperties" : { },
+              "Type" : "flexcontainer",
+              "UseTheme" : true,
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Flex Container",
+              "align-content" : "flex-start",
+              "align-items" : "flex-start",
+              "flex-basis" : "auto",
+              "flex-direction" : "row",
+              "flex-grow" : 1,
+              "flex-max-height" : "",
+              "flex-max-width" : "103px",
+              "flex-min-height" : "",
+              "flex-min-width" : "103px",
+              "flex-shrink" : "0",
+              "flex-size" : "fixed",
+              "flex-wrap" : "nowrap",
+              "iconClass" : "widgets-flexcontainer-fixed",
+              "isLocked" : false,
+              "justify-content" : "flex-start",
+              "positioning" : "responsive",
+              "userCannotRemove" : false
+            },
+            "Widgets" : [ ]
+          } ]
+        } ]
+      } ]
+    } ]
+  },
+  "mashupType" : "mashup"
+}]]></mashupContent><preview/><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : name : updated&#10;" timestamp="2022-10-06T16:49:53.797Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-10T16:09:20.957Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-10T16:10:08.238Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-11T05:04:44.767Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-11T05:06:18.708Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-11T05:06:55.487Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-11T05:08:18.851Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-11T05:09:04.911Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-11T05:09:38.972Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-11T05:10:56.486Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-11T05:11:45.412Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-11T05:25:34.294Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-11T05:25:41.794Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-11T05:25:47.365Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-11T05:27:09.418Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T08:39:40.569Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T08:42:36.225Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T08:44:25.246Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T08:50:34.283Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T08:52:39.138Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T09:05:11.285Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T09:29:06.960Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T09:30:00.491Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T09:30:22.648Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T09:30:48.537Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T09:32:55.474Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T09:35:10.832Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T09:51:21.857Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T10:03:19.530Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T10:04:06.451Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T10:05:16.369Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T10:08:58.445Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T10:09:41.364Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T10:14:27.007Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T10:16:18.746Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T10:17:37.520Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T10:18:43.110Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T10:35:46.833Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T10:37:50.765Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T11:20:58.292Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T11:21:41.651Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T11:22:27.513Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T11:31:11.722Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T12:18:12.701Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T12:26:45.512Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T12:27:46.057Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T12:28:36.595Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T12:29:03.797Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T12:30:28.990Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T12:36:03.779Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T12:37:20.001Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T12:37:30.887Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T12:47:05.350Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T12:48:40.275Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;Mashup : design : updated&#10;" timestamp="2022-10-12T12:49:38.626Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T12:59:19.558Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T13:02:05.044Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T13:04:13.230Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T13:05:56.091Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T13:10:37.148Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;custom-css : value : updated&#10;" timestamp="2022-10-12T13:33:41.567Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T13:36:19.983Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T13:42:56.996Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T13:54:02.800Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T13:55:23.622Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T13:56:54.241Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;custom-css : value : updated&#10;" timestamp="2022-10-12T13:59:41.264Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;custom-css : value : updated&#10;" timestamp="2022-10-12T14:02:15.316Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;custom-css : value : updated&#10;" timestamp="2022-10-12T14:04:23.567Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T14:09:50.533Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T14:17:52.770Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T14:29:06.901Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T14:31:48.157Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T14:32:02.445Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T14:32:09.119Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T14:37:21.160Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T14:39:28.741Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T14:41:41.978Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T14:43:13.516Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T14:44:02.789Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="custom-css : value : updated&#10;" timestamp="2022-10-12T14:44:37.110Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T15:11:19.319Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T16:04:44.294Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T16:05:32.790Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T16:06:17.018Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T16:07:29.799Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-12T16:08:30.179Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-13T14:55:59.510Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-13T15:09:38.814Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2022-10-13T15:23:38.357Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-13T15:25:59.483Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-13T15:26:38.151Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T04:52:23.690Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T04:53:36.382Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T04:54:17.725Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T05:05:50.863Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T05:11:36.237Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T05:17:30.876Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T05:19:25.667Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T05:35:02.700Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T05:43:40.686Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T05:44:58.233Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T05:46:07.783Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T05:49:27.958Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T06:22:27.017Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T06:25:41.001Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T06:27:24.966Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T06:29:00.047Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T06:29:40.417Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T06:31:46.375Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T06:36:47.889Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T06:38:00.350Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T06:39:09.936Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T06:39:47.226Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T06:56:11.944Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T06:57:59.434Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T06:59:19.749Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T08:43:40.211Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T08:44:53.374Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-14T08:45:31.212Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-17T04:38:47.971Z" user="adm-srivastn"/><ConfigurationChange changeAction="FORCEEDIT" changeReason="ForceEdit" timestamp="2022-10-17T04:38:54.748Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-17T04:39:33.207Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-17T04:40:00.069Z" user="adm-srivastn"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2022-10-17T04:40:27.062Z" user="adm-srivastn"/></ConfigurationChanges></Mashup></Mashups></Entities>

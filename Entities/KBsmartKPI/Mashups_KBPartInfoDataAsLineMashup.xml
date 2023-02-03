@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b527"
+ majorVersion="9"
+ minorVersion="0"
+ modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+ revision="8"
+ schemaVersion="1107"
+ universal="password">
+    <Mashups>
+        <Mashup
+         aspect.isResponsive="true"
+         aspect.mashupType="mashup"
+         columns="0.0"
+         description=""
+         documentationContent=""
+         homeMashup=""
+         lastModifiedDate="2021-09-13T09:36:59.636Z"
+         name="KBPartInfoDataAsLineMashup"
+         projectName="KBsmartKPI"
+         rows="0.0"
+         tags="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions>
+                <Permissions
+                 resourceName="*">
+                    <PropertyRead>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                    </PropertyRead>
+                    <PropertyWrite>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                    </PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+            </RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility>
+                    <Principal
+                     isPermitted="true"
+                     name="KBOrganization"
+                     type="Organization"></Principal>
+                </Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables>
+                <ConfigurationTable
+                 description="Mashup Mobile Settings"
+                 isHidden="true"
+                 isMultiRow="false"
+                 name="MobileSettings"
+                 ordinal="0">
+                    <DataShape>
+                        <FieldDefinitions>
+                            <FieldDefinition
+                             aspect.defaultValue="false"
+                             baseType="BOOLEAN"
+                             description=""
+                             name="disableZoom"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="true"
+                             baseType="BOOLEAN"
+                             description=""
+                             name="fullScreenMode"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="height"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="device-height"
+                             baseType="STRING"
+                             description=""
+                             name="heightType"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="1.0"
+                             baseType="NUMBER"
+                             description=""
+                             name="initialScale"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="iosShortcutIconTitle"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="black-translucent"
+                             baseType="STRING"
+                             description=""
+                             name="iosStatusBarAppearance"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="10.0"
+                             baseType="NUMBER"
+                             description=""
+                             name="maximumScale"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="0.1"
+                             baseType="NUMBER"
+                             description=""
+                             name="minimumScale"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="width"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="device-width"
+                             baseType="STRING"
+                             description=""
+                             name="widthType"
+                             ordinal="0"></FieldDefinition>
+                        </FieldDefinitions>
+                    </DataShape>
+                    <Rows>
+                        <Row>
+                            <disableZoom>false</disableZoom>
+                            <fullScreenMode>true</fullScreenMode>
+                            <height></height>
+                            <heightType>
+                            <![CDATA[
+                            device-height
+                            ]]>
+                            </heightType>
+                            <initialScale>1.0</initialScale>
+                            <iosShortcutIconTitle></iosShortcutIconTitle>
+                            <iosStatusBarAppearance>
+                            <![CDATA[
+                            black-translucent
+                            ]]>
+                            </iosStatusBarAppearance>
+                            <maximumScale>10.0</maximumScale>
+                            <minimumScale>0.1</minimumScale>
+                            <width></width>
+                            <widthType>
+                            <![CDATA[
+                            device-width
+                            ]]>
+                            </widthType>
+                        </Row>
+                    </Rows>
+                </ConfigurationTable>
+            </ConfigurationTables>
+            <ParameterDefinitions>
+                <FieldDefinition
+                 aspect.bindingDirection="BOTH"
+                 aspect.isMandatory="false"
+                 baseType="STRING"
+                 description=""
+                 name="Machine"
+                 ordinal="0"></FieldDefinition>
+                <FieldDefinition
+                 aspect.bindingDirection="BOTH"
+                 aspect.isMandatory="false"
+                 baseType="STRING"
+                 description=""
+                 name="PartNumber"
+                 ordinal="0"></FieldDefinition>
+                <FieldDefinition
+                 aspect.bindingDirection="BOTH"
+                 aspect.isMandatory="false"
+                 baseType="STRING"
+                 description=""
+                 name="ProcessDataActual"
+                 ordinal="0"></FieldDefinition>
+                <FieldDefinition
+                 aspect.bindingDirection="BOTH"
+                 aspect.isMandatory="false"
+                 baseType="STRING"
+                 description=""
+                 name="SerialNumber"
+                 ordinal="0"></FieldDefinition>
+            </ParameterDefinitions>
+            <Things></Things>
+            <ThingShapes></ThingShapes>
+            <ThingTemplates></ThingTemplates>
+            <mashupContent>
+            <![CDATA[
+            {
+              "CustomMashupCss" : "",
+              "Data" : {
+                "Session" : {
+                  "DataName" : "Session",
+                  "EntityName" : "",
+                  "EntityType" : "Session",
+                  "Id" : "session",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "SessionInterface",
+                    "Name" : "GetGlobalSessionValues",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetGlobalSessionValues"
+                  } ]
+                },
+                "Things_KBKPILocalThingWorxDatabaseThing" : {
+                  "DataName" : "Things_KBKPILocalThingWorxDatabaseThing",
+                  "EntityName" : "KBKPILocalThingWorxDatabaseThing",
+                  "EntityType" : "Things",
+                  "Id" : "250cb76e-4781-4716-8c34-d6009bab640f",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "f62da048-acde-441f-b797-bfdd1487fdc6",
+                    "Name" : "GetprocessDataAsLineForTraceability",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetprocessDataAsLineForTraceability"
+                  } ]
+                },
+                "UserExtensions" : {
+                  "DataName" : "UserExtensions",
+                  "EntityName" : "",
+                  "EntityType" : "UserExtensions",
+                  "Id" : "UserExtensions",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "UserExtensionInterface",
+                    "Name" : "GetCurrentUserExtensionProperties",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetCurrentUserExtensionProperties"
+                  } ]
+                }
+              },
+              "DataBindings" : [ {
+                "Id" : "339f2c86-34dd-4250-946f-ebf92cb3dbf2",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "PartNumber",
+                  "SourcePropertyBaseType" : "STRING",
+                  "TargetProperty" : "PartNumber",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetprocessDataAsLineForTraceability",
+                "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+              }, {
+                "Id" : "e0c841c9-fa3c-4830-8c69-ca29682c9dfe",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "SerialNumber",
+                  "SourcePropertyBaseType" : "STRING",
+                  "TargetProperty" : "SerialNumber",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetprocessDataAsLineForTraceability",
+                "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+              }, {
+                "Id" : "b2f4e751-1411-4ccc-b017-a9ae337665fb",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "ProcessDataActual",
+                  "SourcePropertyBaseType" : "STRING",
+                  "TargetProperty" : "ProceeDataActual",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetprocessDataAsLineForTraceability",
+                "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+              }, {
+                "Id" : "94b29112-aad8-4665-a76e-7b2d087f378c",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Machine",
+                  "SourcePropertyBaseType" : "STRING",
+                  "TargetProperty" : "Machine",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetprocessDataAsLineForTraceability",
+                "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+              }, {
+                "Id" : "e044faa2-a1e3-4649-96db-3f3a4eb26d8a",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "",
+                  "SourcePropertyBaseType" : "INFOTABLE",
+                  "SourcePropertyType" : "InfoTable",
+                  "TargetProperty" : "Data",
+                  "TargetPropertyBaseType" : "INFOTABLE",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "GetprocessDataAsLineForTraceability",
+                "SourceSection" : "Things_KBKPILocalThingWorxDatabaseThing",
+                "TargetArea" : "UI",
+                "TargetId" : "gridadvanced-3",
+                "TargetSection" : ""
+              } ],
+              "DesignTimePermissions" : {
+                "Create" : [ ],
+                "Delete" : [ ],
+                "Metadata" : [ ],
+                "Read" : [ ],
+                "Update" : [ ]
+              },
+              "Events" : [ {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+                "EventHandlerService" : "GetprocessDataAsLineForTraceability",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "Loaded",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "b57a3163-22aa-4755-a88d-02c41649cf2a"
+              } ],
+              "RunTimePermissions" : {
+                "permissions" : [ ]
+              },
+              "UI" : {
+                "Properties" : {
+                  "AddToDashboardButton" : "SimplePlus",
+                  "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+                  "Area" : "Mashup",
+                  "BGImage" : "",
+                  "BGImageRepeat" : "no-repeat",
+                  "BGImageSize" : "auto",
+                  "Columns" : 0,
+                  "ConfigureGadgetButton" : "SimpleGear",
+                  "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+                  "DisplayName" : "Mashup",
+                  "EnableParameterEditing" : false,
+                  "Height" : 618,
+                  "Id" : "mashup-root",
+                  "IgnoreWarningsInViewMashup" : false,
+                  "IsPrintLayout" : false,
+                  "Left" : 0,
+                  "MashupToEditGadget" : "DefaultMashupToEditGadget",
+                  "MinHeight" : 0,
+                  "MinWidth" : 0,
+                  "ResponsiveLayout" : true,
+                  "Rows" : 0,
+                  "ShowDataLoading" : true,
+                  "Style" : "DefaultMashupStyle",
+                  "StyleTheme" : "Base Theme",
+                  "Title" : "",
+                  "TitleBar" : false,
+                  "TitleBarStyle" : "DefaultTitleBarStyle",
+                  "TitleBarText" : "Gadget Title Here",
+                  "Top" : 0,
+                  "Type" : "mashup",
+                  "UseMasterTheme" : false,
+                  "UseTheme" : false,
+                  "UseThemeForHybrids" : false,
+                  "Visible" : true,
+                  "Width" : 1024,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Mashup",
+                  "_currentParameterDefs" : [ {
+                    "Aspects" : {
+                      "bindingDirection" : "BOTH",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "PartNumber"
+                  }, {
+                    "Aspects" : {
+                      "bindingDirection" : "BOTH",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "SerialNumber"
+                  }, {
+                    "Aspects" : {
+                      "bindingDirection" : "BOTH",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "ProcessDataActual"
+                  }, {
+                    "Aspects" : {
+                      "bindingDirection" : "BOTH",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "Machine"
+                  } ],
+                  "id_index" : 4,
+                  "supportsAutoResize" : true
+                },
+                "Widgets" : [ {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "AutoScroll" : true,
+                    "CellBorderStyle" : "DefaultGridAdvancedCellBorderStyle",
+                    "CellValidationErrorStyle" : "DefaultGridAdvancedCellValidationErrorStyle",
+                    "CellValidationErrorTooltipStyle" : "DefaultGridAdvancedCellValidationErrorTooltipStyle",
+                    "ColumnFormat" : {
+                      "formatInfo" : [ ]
+                    },
+                    "Configuration" : "",
+                    "ConfigurationId" : 9,
+                    "CookiePersistence" : true,
+                    "DataOverflow" : "clipped",
+                    "DataServiceBindingDef" : {
+                      "entityName" : "KBKPILocalThingWorxDatabaseThing",
+                      "entityType" : "Things",
+                      "target" : "GetprocessDataAsLineForTraceability"
+                    },
+                    "DefaultSelectedRows" : "",
+                    "DisplayName" : "gridadvanced-3",
+                    "DisplayOnlyMode" : false,
+                    "EditButtonsLocation" : "top-right",
+                    "EnableAddDeleteButtons" : false,
+                    "EnableCallbackOnSelectedRowsChange" : true,
+                    "EnableContextMenu" : true,
+                    "EnableEditButtons" : false,
+                    "EnableFilterEventOnConfigChange" : true,
+                    "EnableFooter" : false,
+                    "EnableGridReset" : false,
+                    "EnableGridSearch" : false,
+                    "EnableKeyboardNavigation" : true,
+                    "EnableSorting" : false,
+                    "FocusStyle" : "DefaultFocusStyle",
+                    "GridResetButtonLocation" : "top-right",
+                    "GridSearchLocation" : "top-left",
+                    "HeaderOverflow" : "tooltip",
+                    "Height" : 400,
+                    "IDFieldName" : "id",
+                    "Id" : "gridadvanced-3",
+                    "IsEditable" : false,
+                    "LastContainer" : false,
+                    "Left" : 130,
+                    "MaxHeaderHeight" : 100,
+                    "MinRowHeight" : 30,
+                    "ResponsiveLayout" : true,
+                    "RowAlternateBackgroundStyle" : "DefaultGridAdvancedRowAlternateBackgroundStyle",
+                    "RowBackgroundStyle" : "DefaultGridAdvancedRowBackgroundStyle",
+                    "RowBorderStyle" : "DefaultGridAdvancedRowBorderStyle",
+                    "RowFormat_StateParameters" : [ ],
+                    "RowHoverStyle" : "DefaultGridAdvancedRowHoverStyle",
+                    "RowSelectedStyle" : "DefaultGridAdvancedRowSelectedStyle",
+                    "RowSelection" : "list",
+                    "SelectedRows" : "",
+                    "ShowDataLoading" : true,
+                    "SortAscendingStyle" : "DefaultSortAscendingStyle",
+                    "SortDescendingStyle" : "DefaultSortDescendingStyle",
+                    "TableFooterStyle" : "DefaultGridAdvancedFooterStyle",
+                    "TableHeaderStyle" : "DefaultGridAdvancedHeaderStyle",
+                    "TableWrapperStyle" : "DefaultGridAdvancedWrapperStyle",
+                    "ToolbarStyle" : "DefaultToolbarStyle",
+                    "TooltipStyle" : "DefaultTooltipStyle",
+                    "Top" : 10,
+                    "Type" : "gridadvanced",
+                    "UseTheme" : false,
+                    "Visible" : true,
+                    "Width" : 500,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Grid Advanced"
+                  },
+                  "Widgets" : [ ]
+                } ]
+              },
+              "mashupType" : "mashup"
+            }
+            ]]>
+            </mashupContent>
+            <preview></preview>
+        </Mashup>
+    </Mashups>
+</Entities>

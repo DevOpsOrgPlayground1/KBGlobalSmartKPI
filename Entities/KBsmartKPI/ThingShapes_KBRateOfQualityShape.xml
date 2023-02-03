@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b52" majorVersion="8" minorVersion="0"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="3" schemaVersion="1000">
+	<ThingShapes>
+		<ThingShape className="" description="***DEPRECATED***"
+			documentationContent="" homeMashup=""
+			lastModifiedDate="2018-03-01T08:32:02.923+01:00"
+			name="KBRateOfQualityShape" projectName="KBsmartKPI"
+			tags="KBThingWorxInstallationVocabulary:ExtensionSmartKPI">
+			<PropertyDefinitions>
+			</PropertyDefinitions>
+			<ServiceDefinitions>
+				<ServiceDefinition aspect.isAsync="false"
+					category="RQ" description="Adds a new dataset to data storage"
+					isAllowOverride="false" isLocalOnly="false" isOpen="false"
+					isPrivate="false" name="AddQualityResults">
+					<ResultType baseType="BOOLEAN"
+						description="Returns true if data can be stored successfully"
+						name="result" ordinal="0" />
+					<ParameterDefinitions>
+						<FieldDefinition baseType="DATETIME"
+							description="Date and Time when Testresult was created"
+							name="DateTime" ordinal="1" />
+						<FieldDefinition baseType="BOOLEAN" description=""
+							name="isPartOK" ordinal="2" />
+						<FieldDefinition baseType="STRING" description=""
+							name="OrderNumber" ordinal="5" />
+						<FieldDefinition baseType="STRING" description=""
+							name="PartNumber" ordinal="3" />
+						<FieldDefinition baseType="STRING" description=""
+							name="SerialNumber" ordinal="4" />
+						<FieldDefinition aspect.defaultValue="1"
+							baseType="INTEGER" description="" name="NumberOfParts"
+							ordinal="7" />
+					</ParameterDefinitions>
+				</ServiceDefinition>
+			</ServiceDefinitions>
+			<EventDefinitions />
+			<ServiceMappings />
+			<ServiceImplementations>
+				<ServiceImplementation description=""
+					handlerName="Script" name="AddQualityResults">
+					<ConfigurationTables>
+						<ConfigurationTable description="Script"
+							isMultiRow="false" name="Script" ordinal="0">
+							<DataShape>
+								<FieldDefinitions>
+									<FieldDefinition baseType="STRING"
+										description="code" name="code" ordinal="0" />
+								</FieldDefinitions>
+							</DataShape>
+							<Rows>
+								<Row>
+									<code><![CDATA[logger.debug("KBRateOfQualityShape/addQualityResults: Entering Service");
+
+if (isPartOK == null) {
+    isPartOK = false;
+}
+
+//DateTime.setMilliseconds(0);
+
+logger.debug("KBRateOfQualityShape/addQualityResults: Exiting Service isPartOK:     "+isPartOK);
+logger.debug("KBRateOfQualityShape/addQualityResults: Exiting Service PartNumber:   "+PartNumber);
+logger.debug("KBRateOfQualityShape/addQualityResults: Exiting Service SerialNumber: "+SerialNumber);
+logger.debug("KBRateOfQualityShape/addQualityResults: Exiting Service OrderNumber:  "+OrderNumber);
+logger.debug("KBRateOfQualityShape/addQualityResults: Exiting Service DateTime:     "+DateTime);
+logger.debug("KBRateOfQualityShape/addQualityResults: Exiting Service me.name:      "+me.name);
+
+var params = {
+	isPartOK: isPartOK /* BOOLEAN */,
+	PartNumber: PartNumber /* STRING */,
+	SerialNumber: SerialNumber /* STRING */,
+	OrderNumber: OrderNumber /* STRING */,
+	DateTime: DateTime /* DATETIME */,
+	Machine: me.name /* STRING */,
+	NumberOfParts: NumberOfParts
+};
+
+var DBConnection = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+// result: NUMBER
+Things[DBConnection].AddQualityResultToDataTable(params);
+
+var result = true;
+
+logger.debug("KBRateOfQualityShape/addQualityResults: Exiting Service");
+]]></code>
+								</Row>
+							</Rows>
+						</ConfigurationTable>
+					</ConfigurationTables>
+				</ServiceImplementation>
+			</ServiceImplementations>
+			<Subscriptions />
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</PropertyRead>
+					<PropertyWrite />
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true" name="KBOrganization"
+						type="Organization" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTables />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="header : name : updated&#10;"
+					timestamp="2018-03-01T08:20:29.495+01:00" user="adm-flassakm" />
+			</ConfigurationChanges>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations>
+			</AlertConfigurations>
+			<InstanceRunTimePermissions />
+		</ThingShape>
+	</ThingShapes>
+</Entities>

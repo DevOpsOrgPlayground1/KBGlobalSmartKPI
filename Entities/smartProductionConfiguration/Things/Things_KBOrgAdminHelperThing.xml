@@ -1,0 +1,1413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b2319"
+ majorVersion="8"
+ minorVersion="4"
+ modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+ revision="4"
+ schemaVersion="1041"
+ universal="password">
+    <Things>
+        <Thing
+         description=""
+         documentationContent=""
+         effectiveThingPackage="ConfiguredThing"
+         enabled="true"
+         homeMashup=""
+         identifier=""
+         lastModifiedDate="2021-09-23T08:54:13.988+02:00"
+         name="KBOrgAdminHelperThing"
+         projectName="KBOrgAdmin"
+         published="false"
+         tags=""
+         thingTemplate="GenericThing"
+         valueStream="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions>
+                <Permissions
+                 resourceName="*">
+                    <PropertyRead>
+                        <Principal
+                         isPermitted="true"
+                         name="KBLocalAdministrators"
+                         type="Group"></Principal>
+                    </PropertyRead>
+                    <PropertyWrite>
+                        <Principal
+                         isPermitted="true"
+                         name="KBLocalAdministrators"
+                         type="Group"></Principal>
+                    </PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="KBLocalAdministrators"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+            </RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility>
+                    <Principal
+                     isPermitted="true"
+                     name="KBDevelopment"
+                     type="Organization"></Principal>
+                    <Principal
+                     isPermitted="true"
+                     name="KBOrganization"
+                     type="Organization"></Principal>
+                </Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables></ConfigurationTables>
+            <ThingShape>
+                <PropertyDefinitions></PropertyDefinitions>
+                <ServiceDefinitions>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="addQuickButtonsInfoTable">
+                        <ResultType
+                         baseType="NOTHING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="Category"
+                             ordinal="4"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="InternalText"
+                             ordinal="3"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="Label"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="Recipient"
+                             ordinal="5"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="stationThing"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="copyMultiQuickButtonSettings">
+                        <ResultType
+                         baseType="STRING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="INFOTABLE"
+                             description=""
+                             name="sourceQuickButtonSettings"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="INFOTABLE"
+                             description=""
+                             name="targetStations"
+                             ordinal="2"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="copyQuickButtonSetting">
+                        <ResultType
+                         baseType="NOTHING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="INFOTABLE"
+                             description=""
+                             name="sourceQuickButtonSettings"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="targetStation"
+                             ordinal="2"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="delQuickButtonsInfoTable">
+                        <ResultType
+                         baseType="NOTHING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="NUMBER"
+                             description=""
+                             name="SortIndex"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="stationThing"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="getCategoryList">
+                        <ResultType
+                         aspect.dataShape="KBSapPMCategoryDS"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="getDivisionFromPlant">
+                        <ResultType
+                         baseType="STRING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="plantThing"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="getLevel1SapPmStatusOrMsgsByStation">
+                        <ResultType
+                         aspect.dataShape="KBSapPMStatusWithTokenDS"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="machineThing"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="stationThing"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="type"
+                             ordinal="3"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="getLevel2SapPmStatusOrMsgsByStation">
+                        <ResultType
+                         aspect.dataShape="KBSapPMStatusWithTokenDS"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="machineThing"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="stationThing"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="subStatus"
+                             ordinal="4"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="type"
+                             ordinal="3"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="getMachineListFromPlant">
+                        <ResultType
+                         aspect.dataShape="KBThingNameDS"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="plantThing"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="getPlantFromStation">
+                        <ResultType
+                         baseType="STRING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="stationThing"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="getQuickButtonsInfoTable">
+                        <ResultType
+                         aspect.dataShape="KBQuickButtonsWithTokenDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="stationThing"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="getSapPmStatusOrMsgsByStation">
+                        <ResultType
+                         aspect.dataShape="KBSapPMStatusWithTokenDS"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="machineThing"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="stationThing"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="type"
+                             ordinal="3"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="getStatonListFromMachine">
+                        <ResultType
+                         aspect.dataShape="KBThingNameDS"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="machineThing"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="showTextToken">
+                        <ResultType
+                         baseType="NOTHING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="internalText"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="type"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="tempService">
+                        <ResultType
+                         baseType="STRING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                </ServiceDefinitions>
+                <EventDefinitions></EventDefinitions>
+                <ServiceMappings></ServiceMappings>
+                <ServiceImplementations>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="addQuickButtonsInfoTable">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var outputTable = Things[stationThing].QuickButtonsInfotable;
+                                        //var result = outputTable;
+                                        
+                                        var maxIndex = 0;
+                                        var sort = new Object();
+                                        sort.name = "SortIndex";
+                                        sort.ascending = true;
+                                        outputTable.Sort(sort);
+                                        var rowCount = outputTable.getRowCount();
+                                        if(rowCount > 0) {
+                                        	 maxIndex = outputTable.rows[rowCount-1].SortIndex;
+                                        }
+                                        
+                                        outputTable.AddRow({
+                                        	SortIndex: maxIndex + 1,
+                                            Category: Category,
+                                            Label: Label,
+                                            InternalText: InternalText,
+                                            Recipient: Recipient
+                                        });
+                                        
+                                        Things[stationThing].QuickButtonsInfotable = outputTable;
+                                        //var result = outputTable;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                   <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="copyMultiQuickButtonSettings">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        //KBOrgAdminHelperThing.copyMultiQuickButtonSettings
+                                        //logger.debug("KBOrgAdminHelperThing.copyMultiQuickButtonSettings");
+                                        try {
+                                        	var warnMsg = ""; //warning message for output
+                                        
+                                        	var params = {
+                                        		infoTableName: "InfoTable",
+                                        		dataShapeName: "KBQuickButtonsDataShape"
+                                        	};
+                                        	var tempTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        	//var tempTable0 = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        	//loop of target stations
+                                        	var stationQty = targetStations.rows.length;
+                                        	for (var x0 = 0; x0 < stationQty; x0++) {
+                                        		var row0 = targetStations.rows[x0];
+                                        		var tempStation = row0.thingName;
+                                        		//logger.debug("target station = " + tempStation);
+                                        		var tempMachine = Things[tempStation].KBLocalLineThing;
+                                        		//logger.debug("temp Machine = " + tempMachine);
+                                        		//tempTable = tempTable0;
+                                        		//    tempTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        
+                                        		tempTable = Things[tempStation].QuickButtonsInfotable;
+                                        
+                                        
+                                        		var Length = tempTable.rows.length;
+                                        
+                                        
+                                        
+                                        		if (Length > 0) {
+                                        			var dtMaxParams = {
+                                        				t: tempTable, // INFOTABLE
+                                        				columns: "SortIndex", // STRING
+                                        				aggregates: "MAX", // STRING
+                                        				groupByColumns: undefined // STRING
+                                        			};
+                                        			var dtMaxParams2 = Resources["InfoTableFunctions"].Aggregate(dtMaxParams); //INFOTABLE
+                                        			//INFOTABLE
+                                        			var y = parseInt(dtMaxParams2.MAX_SortIndex);
+                                        
+                                        
+                                        			//loop of source quick button settings
+                                        			var tableLength = sourceQuickButtonSettings.rows.length;
+                                        			for (var x = 0; x < tableLength; x++) {
+                                        				var row = sourceQuickButtonSettings.rows[x];
+                                        				//validate InternalText
+                                        				var InternalText = row.InternalText;
+                                        				// result: INTEGER
+                                        				//logger.debug(" Validate of " + InternalText + " on " + tempStation);
+                                        
+                                        				var Category = row.Category;
+                                        				var Qty = 0;
+                                        				if ((Category !== "Message") && (Category !== "State")) {
+                                        					Qty = 1;
+                                        				}
+                                        
+                                        				if ((Category === "Message") || (Category === "State")) {
+                                        					var qtyTable = Things["KBKPILocalThingWorxDatabaseThing"].valLevel2SapPmStatusOnStation({
+                                        						stationThing: tempStation /* STRING */ ,
+                                        						machineThing: tempMachine /* STRING */ ,
+                                        						status: InternalText /* STRING */
+                                        					});
+                                        					Qty = qtyTable.rows[0].Qty;
+                                        					//logger.debug("Qty = " + Qty);					
+                                        				}
+                                        
+                                        				if (Qty === 0) { //warning for validate failure
+                                        					warnMsg = warnMsg + "\nSkipped " + InternalText + " on " + tempStation + ";";
+                                        				}
+                                        				if (Qty > 0) { //validate pass
+                                        					//logger.debug("Add row of " + InternalText + " on " + tempStation);
+                                        					tempTable.AddRow({
+                                        						SortIndex: x + y + 1,
+                                        						Label: row.Label,
+                                        						InternalText: InternalText,
+                                        						Category: row.Category,
+                                        						Recipient: row.Recipient
+                                        					});
+                                        				}
+                                        			}
+                                        		} else {
+                                        			
+                                        			var tableLength = sourceQuickButtonSettings.rows.length;
+                                                    
+                                                    
+                                        			for (var x = 0; x < tableLength; x++) {
+                                        				var row = sourceQuickButtonSettings.rows[x];
+                                                        var y = tableLength;
+                                        				//validate InternalText
+                                        				var InternalText = row.InternalText;
+                                        				// result: INTEGER
+                                        				//logger.debug(" Validate of " + InternalText + " on " + tempStation);
+                                        
+                                        				var Category = row.Category;
+                                        				var Qty = 0;
+                                        				if ((Category !== "Message") && (Category !== "State")) {
+                                        					Qty = 1;
+                                        				}
+                                        
+                                        				if ((Category === "Message") || (Category === "State")) {
+                                        					var qtyTable = Things["KBKPILocalThingWorxDatabaseThing"].valLevel2SapPmStatusOnStation({
+                                        						stationThing: tempStation /* STRING */ ,
+                                        						machineThing: tempMachine /* STRING */ ,
+                                        						status: InternalText /* STRING */
+                                        					});
+                                        					Qty = qtyTable.rows[0].Qty;
+                                        					//logger.debug("Qty = " + Qty);					
+                                        				}
+                                        
+                                        				if (Qty === 0) { //warning for validate failure
+                                        					warnMsg = warnMsg + "\nSkipped " + InternalText + " on " + tempStation + ";";
+                                        				}
+                                        				if (Qty > 0) { //validate pass
+                                        					//logger.debug("Add row of " + InternalText + " on " + tempStation);
+                                        					tempTable.AddRow({
+                                        						SortIndex: x + y + 1,
+                                        						Label: row.Label,
+                                        						InternalText: InternalText,
+                                        						Category: row.Category,
+                                        						Recipient: row.Recipient
+                                        					});
+                                        				}
+                                        			}
+                                        		}
+                                        
+                                        		Things[tempStation].QuickButtonsInfotable = tempTable;
+                                        		//logger.debug("setting QuickButtonsInfotable on " + tempStation);
+                                        	}
+                                        
+                                        	var result = "Done Copy.\n" + warnMsg;
+                                        
+                                        
+                                        } catch (err) {
+                                        	logger.error("Error on service copyMultiQuickButtonSettingsCopy: " + err + " on thing:" + me.name + " at:" + err.lineNumber);
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="copyQuickButtonSetting">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var params = {
+                                            infoTableName : "InfoTable",
+                                            dataShapeName : "KBQuickButtonsDataShape"
+                                        };
+                                        var tempTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        var tableLength = sourceQuickButtonSettings.rows.length;
+                                        for (var x=0; x < tableLength; x++) {
+                                            var row = sourceQuickButtonSettings.rows[x];
+                                            tempTable.AddRow({
+                                            	SortIndex: x+1,
+                                                Label: row.Label,
+                                                InternalText: row.InternalText,
+                                                Category: row.Category,
+                                                Recipient: row.Recipient
+                                            });
+                                            //Your code here
+                                        }
+                                        
+                                        Things[targetStation].QuickButtonsInfotable = tempTable;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="delQuickButtonsInfoTable">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var outputTable = Things[stationThing].QuickButtonsInfotable;
+                                        
+                                        outputTable.Delete({SortIndex: SortIndex});
+                                        Things[stationThing].QuickButtonsInfotable = outputTable;
+                                        
+                                        //var result = outputTable;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="getCategoryList">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        // for sap pm quick buttons
+                                        var params = {
+                                            infoTableName : "InfoTable",
+                                            dataShapeName : "KBSapPMCategoryDS"
+                                        };
+                                        var outputTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        outputTable.AddRow({"Category": "Mail"});
+                                        outputTable.AddRow({"Category": "Message"});
+                                        outputTable.AddRow({"Category": "PM"});
+                                        outputTable.AddRow({"Category": "Safety"});
+                                        outputTable.AddRow({"Category": "State"});
+                                        outputTable.AddRow({"Category": "URL"});
+                                        
+                                        var result = outputTable;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="getDivisionFromPlant">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var result;
+                                        var params = {
+                                        	thingName: plantThing /* STRING */
+                                        };
+                                        
+                                        // result: BOOLEAN
+                                        if(Resources["PTC.Factory.CommonUtilities"].DoesThingExists(params)){
+                                        	result=Things[plantThing].KBDivisionThing;
+                                        }else{result="";}
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="getLevel1SapPmStatusOrMsgsByStation">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var params = {
+                                            infoTableName : "InfoTable",
+                                            dataShapeName : "KBSapPMStatusDS"
+                                        };
+                                        // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBSapPMStatusDS)
+                                        var tempTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        var params2 = {
+                                            infoTableName : "InfoTable",
+                                            dataShapeName : "KBSapPMStatusWithTokenDS"
+                                        };
+                                        // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBSapPMStatusDS)
+                                        var outputTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params2);
+                                        
+                                        if(type === "State") {
+                                            // result: INFOTABLE dataShape: "KBSapPMStatusDS"
+                                            	tempTable = Things["KBKPILocalThingWorxDatabaseThing"].getLevel1SapPmStatusByStation({
+                                               	stationThing: stationThing /* STRING */,
+                                                machineThing: machineThing /* STRING */
+                                            	});
+                                        }
+                                        
+                                        if(type === "Message") {
+                                            // result: INFOTABLE dataShape: "KBSapPMStatusDS"
+                                            	tempTable = Things["KBKPILocalThingWorxDatabaseThing"].getLevel1SapPmMsgsByStation({
+                                                stationThing: stationThing /* STRING */,
+                                                machineThing: machineThing /* STRING */
+                                            	});   
+                                        }
+                                        
+                                        var tableLength = tempTable.rows.length;
+                                        for (var x=0; x < tableLength; x++) {
+                                            var row = tempTable.rows[x];
+                                            var params3 = {
+                                                token: row.SubStatus /* STRING */
+                                            };
+                                            token = Resources["RuntimeLocalizationFunctions"].GetEffectiveToken(params3);    
+                                            outputTable.AddRow({
+                                            	Status: row.SubStatus,
+                                                token: token
+                                            });
+                                        }
+                                        
+                                        var sort = new Object();
+                                        sort.name = "token";
+                                        sort.ascending = true;
+                                        outputTable.Sort(sort);
+                                        
+                                        var result = outputTable;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="getLevel2SapPmStatusOrMsgsByStation">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var params = {
+                                            infoTableName : "InfoTable",
+                                            dataShapeName : "KBSapPMStatusDS"
+                                        };
+                                        // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBSapPMStatusDS)
+                                        var tempTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        var params2 = {
+                                            infoTableName : "InfoTable",
+                                            dataShapeName : "KBSapPMStatusWithTokenDS"
+                                        };
+                                        // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBSapPMStatusDS)
+                                        var outputTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params2);
+                                        
+                                        if(type === "State") {
+                                            // result: INFOTABLE dataShape: "KBSapPMStatusDS"
+                                         	tempTable =  Things["KBKPILocalThingWorxDatabaseThing"].getLevel2SapPmStatusByStation({
+                                                stationThing: stationThing /* STRING */,
+                                                machineThing: machineThing /* STRING */,
+                                                subStatus: subStatus /* STRING */
+                                        	});
+                                        }
+                                        
+                                        if(type === "Message") {
+                                            // result: INFOTABLE dataShape: "KBSapPMStatusDS"
+                                         	tempTable =  Things["KBKPILocalThingWorxDatabaseThing"].getLevel2SapPmMsgsByStation({
+                                                stationThing: stationThing /* STRING */,
+                                                machineThing: machineThing /* STRING */,
+                                                subStatus: subStatus /* STRING */
+                                        	});   
+                                        }
+                                        
+                                        //var result = tempTable;
+                                        
+                                        var tableLength = tempTable.rows.length;
+                                        for (var x=0; x < tableLength; x++) {
+                                            var row = tempTable.rows[x];
+                                            var params3 = {
+                                                token: row.Status /* STRING */
+                                            };
+                                            token = Resources["RuntimeLocalizationFunctions"].GetEffectiveToken(params3);    
+                                            outputTable.AddRow({
+                                            	Status: row.Status,
+                                                token: token
+                                            });
+                                        }
+                                        
+                                        var sort = new Object();
+                                        sort.name = "token";
+                                        sort.ascending = true;
+                                        outputTable.Sort(sort);
+                                        
+                                        var result = outputTable;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="getMachineListFromPlant">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        // create outputTable
+                                        var params = {
+                                            infoTableName : "InfoTable",
+                                            dataShapeName : "KBThingNameDS"
+                                        };
+                                        var outputTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        //get machine list
+                                        // result: INFOTABLE dataShape: "RootEntityList"
+                                        var machineList =  ThingTemplates["KBLocalMachineThingTemplate"].GetImplementingThings();
+                                        var tableLength = machineList.rows.length;
+                                        for (var x=0; x < tableLength; x++) {
+                                            var row = machineList.rows[x];
+                                            var machineThing = row.name;
+                                            var tempPlant = Things[machineThing].KBPlantThing;
+                                            if(tempPlant === plantThing) {
+                                                outputTable.AddRow({
+                                                    thingName: machineThing
+                                                });       
+                                            }    
+                                        }
+                                        
+                                        var sort = new Object();
+                                        sort.name = "thingName";
+                                        sort.ascending = true;
+                                        outputTable.Sort(sort);
+                                        
+                                        var result = outputTable;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="getPlantFromStation">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        // get Machine from station
+                                        var machineThing = Things[stationThing].KBLocalLineThing;
+                                        //var result = machineThing;
+                                        
+                                        var result = Things[machineThing].KBPlantThing;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="getQuickButtonsInfoTable">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var params = {
+                                            infoTableName : "InfoTable",
+                                            dataShapeName : "KBQuickButtonsWithTokenDataShape"
+                                        };
+                                        // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBQuickButtonsWithTokenDataShape)
+                                        var outputTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        var tempTable = Things[stationThing].QuickButtonsInfotable;
+                                        var tableLength = tempTable.rows.length;
+                                        for (var x=0; x < tableLength; x++) {
+                                            var row = tempTable.rows[x];
+                                            var internalText = row.InternalText;
+                                            var token = internalText;
+                                            var Category = row.Category;
+                                            if((Category === "Message") || (Category === "State")) {
+                                                var params2 = {
+                                                    token: internalText /* STRING */
+                                                };
+                                                token = Resources["RuntimeLocalizationFunctions"].GetEffectiveToken(params2);    
+                                            }
+                                            outputTable.AddRow({
+                                            	SortIndex: row.SortIndex,
+                                                Label: row.Label,
+                                                InternalText: internalText,
+                                                Category: Category,
+                                                Recipient: row.Recipient,
+                                                Token: token
+                                            });
+                                        }
+                                        
+                                        var sort = new Object();
+                                        sort.name = "Category";
+                                        sort.ascending = true;
+                                        outputTable.Sort(sort);
+                                        
+                                        var result = outputTable;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="getSapPmStatusOrMsgsByStation">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var params = {
+                                            infoTableName : "InfoTable",
+                                            dataShapeName : "KBSapPMStatusDS"
+                                        };
+                                        // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBSapPMStatusDS)
+                                        var tempTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        var params2 = {
+                                            infoTableName : "InfoTable",
+                                            dataShapeName : "KBSapPMStatusWithTokenDS"
+                                        };
+                                        // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBSapPMStatusDS)
+                                        var outputTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params2);
+                                        
+                                        if(type === "State") {
+                                            // result: INFOTABLE dataShape: "KBSapPMStatusDS"
+                                            	tempTable = Things["KBKPILocalThingWorxDatabaseThing"].getSapPmStatusByStation({
+                                               	stationThing: stationThing /* STRING */,
+                                                machineThing: machineThing /* STRING */
+                                            });
+                                        }
+                                        
+                                        if(type === "Message") {
+                                            // result: INFOTABLE dataShape: "KBSapPMStatusDS"
+                                            	tempTable = Things["KBKPILocalThingWorxDatabaseThing"].getSapPmMsgsByStation({
+                                                stationThing: stationThing /* STRING */,
+                                                machineThing: machineThing /* STRING */
+                                            });
+                                        }
+                                        
+                                        var tableLength = tempTable.rows.length;
+                                        for (var x=0; x < tableLength; x++) {
+                                            var row = tempTable.rows[x];
+                                            var params3 = {
+                                                token: row.Status /* STRING */
+                                            };
+                                            token = Resources["RuntimeLocalizationFunctions"].GetEffectiveToken(params3);    
+                                            outputTable.AddRow({
+                                            	Status: row.Status,
+                                                token: token
+                                            });
+                                        }
+                                        
+                                        var sort = new Object();
+                                        sort.name = "token";
+                                        sort.ascending = true;
+                                        outputTable.Sort(sort);
+                                        
+                                        var result = outputTable;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="getStatonListFromMachine">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var params = {
+                                            infoTableName : "InfoTable",
+                                            dataShapeName : "KBThingNameDS"
+                                        };
+                                        var outputTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        var stationList = ThingTemplates["KBLocalStationThingTemplate"].GetImplementingThings();
+                                        
+                                        var tableLength = stationList.rows.length;
+                                        for (var x=0; x < tableLength; x++) {
+                                            var row = stationList.rows[x];
+                                            var stationThing = row.name;
+                                            //var result = stationThing;
+                                            var tempMachine = Things[stationThing].KBLocalLineThing;    
+                                            if(tempMachine == machineThing) {
+                                                //var result = tempMachine;
+                                                outputTable.AddRow({
+                                        			thingName: stationThing
+                                                });
+                                            }
+                                        }
+                                        
+                                        var sort = new Object();
+                                        sort.name = "thingName";
+                                        sort.ascending = true;
+                                        outputTable.Sort(sort);
+                                        
+                                        var result = outputTable;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="showTextToken">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var token = internalText;
+                                        
+                                        if((type === "Message") || (type === "State"))
+                                        {
+                                            var params = {
+                                                token: internalText /* STRING */
+                                            };
+                                            // result: STRING
+                                            token = Resources["RuntimeLocalizationFunctions"].GetEffectiveToken(params);
+                                        }
+                                        
+                                        var result = token;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="tempService">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var result = "aaa\nbbb";
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                </ServiceImplementations>
+                <Subscriptions></Subscriptions>
+            </ThingShape>
+            <PropertyBindings></PropertyBindings>
+            <RemotePropertyBindings></RemotePropertyBindings>
+            <RemoteServiceBindings></RemoteServiceBindings>
+            <RemoteEventBindings></RemoteEventBindings>
+            <AlertConfigurations></AlertConfigurations>
+            <ImplementedShapes></ImplementedShapes>
+            <ThingProperties></ThingProperties>
+        </Thing>
+    </Things>
+</Entities>

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b2319" majorVersion="8" minorVersion="4"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="4" schemaVersion="1041" universal="">
+	<ThingShapes>
+		<ThingShape className="" description=""
+			documentationContent="" homeMashup=""
+			lastModifiedDate="2020-04-22T10:39:59.388+02:00"
+			name="KBLocalDpmTestBenchConnectorShape" projectName="KBsmartKPI"
+			tags="KBThingWorxInstallationVocabulary:ExtensionSmartKPI">
+			<PropertyDefinitions>
+				<PropertyDefinition aspect.cacheTime="0.0"
+					aspect.dataChangeType="VALUE"
+					aspect.dataShape="KBLocalDpmTestBenchInputDefinitionDataShape"
+					aspect.isLogged="true" aspect.isPersistent="true"
+					aspect.isReadOnly="false" baseType="INFOTABLE" category=""
+					description="" isLocalOnly="false" name="InputDefinition"
+					ordinal="1" />
+				<PropertyDefinition aspect.cacheTime="0.0"
+					aspect.dataChangeType="VALUE" aspect.isLogged="false"
+					aspect.isPersistent="true" aspect.isReadOnly="false"
+					baseType="DATETIME" category="" description="" isLocalOnly="false"
+					name="lastDataTransfer" ordinal="2" />
+			</PropertyDefinitions>
+			<ServiceDefinitions>
+				<ServiceDefinition aspect.isAsync="false"
+					category="" description="" isAllowOverride="false"
+					isLocalOnly="false" isOpen="false" isPrivate="false"
+					name="DpmTestResultDataSet">
+					<ResultType baseType="BOOLEAN" description=""
+						name="result" ordinal="0" />
+					<ParameterDefinitions>
+						<FieldDefinition
+							aspect.dataShape="KBLocalStationDataReceiverPartDataShape"
+							baseType="INFOTABLE" description="" name="TestResults"
+							ordinal="3" />
+					</ParameterDefinitions>
+				</ServiceDefinition>
+			</ServiceDefinitions>
+			<EventDefinitions />
+			<ServiceMappings />
+			<ServiceImplementations>
+				<ServiceImplementation description=""
+					handlerName="Script" name="DpmTestResultDataSet">
+					<ConfigurationTables>
+						<ConfigurationTable description="Script"
+							isMultiRow="false" name="Script" ordinal="0">
+							<DataShape>
+								<FieldDefinitions>
+									<FieldDefinition baseType="STRING"
+										description="code" name="code" ordinal="0" />
+								</FieldDefinitions>
+							</DataShape>
+							<Rows>
+								<Row>
+									<code><![CDATA[var tableLengthTestResults = TestResults.rows.length;
+var tableLengthInputDefinition = me.InputDefinition.rows.length;
+var result = false;
+try {
+    logger.debug("DpmTestResultDataSet DEBUG: input length" + tableLengthTestResults + " on thing:" + me.name);
+    for (var x = 0; x < tableLengthTestResults; x++) {
+    	var rowTestResults = TestResults.rows[x];
+    	//Your code here
+        for (var y = 0; y < tableLengthInputDefinition; y++) {
+            var rowInputDefinition = me.InputDefinition.rows[y];
+            //Your code here
+    		if (rowTestResults.ShortName == rowInputDefinition.ColumnNameAtTestBench) {
+                rowTestResults.ShortName = rowInputDefinition.MeasurementDefinition;
+            }
+        }
+    }
+    
+    if(me.ExtAssignedOrder!==""){
+        var tableLength = TestResults.rows.length;
+    	//	logger.debug("Number of rows in Data Table: " + tableLength);
+        var params = {
+            	infoTableName : "InfoTable",
+            	dataShapeName : "KBLocalStationDataReceiverPartDataShape"
+            };
+        // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBLocalStationDataReceiverStateDataShape)
+            var NewPartDataInfoTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                        
+    	for (var x = 0; x < tableLength; x++) {
+            var EndDate=TestResults.rows[x].DateTime;
+            
+                        // result: INFOTABLE dataShape: "StringValueStream"
+            var ValidOrderNumberHistory =  Things[me.name].QueryStringPropertyHistory({
+            	oldestFirst: false /* BOOLEAN */,
+            	maxItems: 1 /* NUMBER */,
+            	propertyName: "ExtAssignedOrder" /* STRING */,
+            	endDate: EndDate /* DATETIME */,
+            	query: undefined /* QUERY */,
+            	startDate: undefined /* DATETIME */
+            });
+          
+            var OrderNumber="";
+            if (ValidOrderNumberHistory.rows.length>0){
+            	OrderNumber=ValidOrderNumberHistory.value;
+            }
+            logger.debug ("SetPartDataAirmatic ValidOrderNumber: " + OrderNumber);
+            //prepare updated  PartDataInfoTable 
+            
+                // KBLocalStationDataReceiverPartDataShape entry object
+            var newEntry = new Object();
+            newEntry.Description = TestResults.rows[x].Description; // STRING
+            newEntry.TrackingNumber = TestResults.rows[x].TrackingNumber; // STRING
+            newEntry.PartNumber = TestResults.rows[x].PartNumber; // STRING
+            newEntry.ShortName = TestResults.rows[x].ShortName; // STRING [Primary Key]
+            newEntry.OrderNumber = OrderNumber; // STRING
+            newEntry.Unit = TestResults.rows[x].Unit; // STRING
+            newEntry.UpperLimit = TestResults.rows[x].UpperLimit; // STRING
+            newEntry.DateTime = TestResults.rows[x].DateTime; // DATETIME [Primary Key]
+            newEntry.Line = Things[me.name].KBLocalLineThing; // STRING [Primary Key]
+            newEntry.Station = me.name; // STRING [Primary Key]
+            newEntry.Type = TestResults.rows[x].Type; // STRING [Primary Key]
+            newEntry.Identifier = TestResults.rows[x].Identifier; // STRING
+            newEntry.SerialNumber = TestResults.rows[x].SerialNumber; // STRING
+            newEntry.LocalStation = TestResults.rows[x].LocalStation; // STRING
+            newEntry.Value = TestResults.rows[x].Value; // STRING
+            newEntry.LowerLimit = TestResults.rows[x].LowerLimit; // STRING
+            
+			if (newEntry.TrackingNumber === undefined || newEntry.TrackingNumber === null) {
+				newEntry.TrackingNumber = "NULL";
+			}            
+			if (newEntry.Identifier === undefined || newEntry.Identifier === null) {
+				newEntry.Identifier = "NULL";
+			}            
+
+            NewPartDataInfoTable.AddRow(newEntry);
+              
+        }
+     		result =  me.SetPartData({
+            	partDataInfoTable: NewPartDataInfoTable /* INFOTABLE */
+            });
+    }else{
+         var params = {
+            partDataInfoTable: TestResults /* INFOTABLE */
+        };
+    	 result = me.SetPartData(params);
+    }
+    
+    if(result===true){
+       me.lastDataTransfer = new Date();
+    }
+     
+} catch(err) {
+	logger.error("SetPartDataAirmatic Error: " + err + " on thing:" + me.name);
+    result = false;
+}
+
+]]></code>
+								</Row>
+							</Rows>
+						</ConfigurationTable>
+					</ConfigurationTables>
+				</ServiceImplementation>
+			</ServiceImplementations>
+			<Subscriptions />
+			<Owner name="adm-konasm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</PropertyRead>
+					<PropertyWrite />
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true" name="KBBackGroundWorker"
+						type="Organization" />
+					<Principal isPermitted="true" name="KBOrganization"
+						type="Organization" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables />
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations>
+				<AlertDefinitions name="InputDefinition" />
+				<AlertDefinitions name="lastDataTransfer" />
+			</AlertConfigurations>
+			<InstanceRunTimePermissions />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="header : name : updated&#10;"
+					timestamp="2020-04-22T10:24:41.431+02:00" user="adm-konasm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : DpmTestResultDataSet : service updated&#10;"
+					timestamp="2020-04-22T10:25:45.259+02:00" user="adm-konasm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : DpmTestResultDataSet : service updated&#10;"
+					timestamp="2020-04-22T10:28:28.041+02:00" user="adm-konasm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : DpmTestResultDataSet : service updated&#10;"
+					timestamp="2020-04-22T10:39:59.388+02:00" user="adm-konasm" />
+			</ConfigurationChanges>
+		</ThingShape>
+	</ThingShapes>
+</Entities>

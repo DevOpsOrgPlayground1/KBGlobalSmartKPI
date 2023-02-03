@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Entities build="b97" majorVersion="8" minorVersion="4" modelPersistenceProviderPackage="MssqlPersistenceProviderPackage" revision="11" schemaVersion="1044" universal=""><ThingShapes><ThingShape className="" description="" documentationContent="" homeMashup="" lastModifiedDate="2021-04-20T08:06:50.346+02:00" name="KBBud2ChCtxProductiveCalculationThingShape" projectName="KBsmartKPI" tags="KBThingWorxAdministrationVocabulary:Administrated"><PropertyDefinitions><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="VALUE" aspect.isLogged="true" aspect.isPersistent="true" aspect.isReadOnly="false" baseType="BOOLEAN" category="" description="" isLocalOnly="false" name="Productive" ordinal="35"/></PropertyDefinitions><ServiceDefinitions><ServiceDefinition aspect.isAsync="false" category="" description="" isAllowOverride="false" isLocalOnly="false" isOpen="false" isPrivate="false" name="CalculatingProductiveState"><ResultType baseType="NOTHING" description="" name="result" ordinal="0"/><ParameterDefinitions><FieldDefinition aspect.isRequired="true" baseType="DATETIME" description="" name="ProductionDate" ordinal="2"/><FieldDefinition baseType="BOOLEAN" description="" name="Productive1" ordinal="3"/><FieldDefinition baseType="BOOLEAN" description="" name="Productive2" ordinal="4"/></ParameterDefinitions></ServiceDefinition></ServiceDefinitions><EventDefinitions/><ServiceMappings/><ServiceImplementations><ServiceImplementation description="" handlerName="Script" name="CalculatingProductiveState"><ConfigurationTables><ConfigurationTable description="Script" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[//Calculating Productive State
+var productive_mode = Productive1;
+if (productive_mode === null) {productive_mode = false};
+var productive_mode1 = Productive2;
+if (productive_mode1 === null) {productive_mode1 = false};
+
+var productive_mode_final;
+
+var write_status = false;
+var status = "";
+var substatus = "";
+var machinedatavalue = -1;
+		//0: Production
+		//1: Planned shut down --> organizational
+		//2: Machine Shut down --> technical
+		//3: Speed losses --> speed
+
+if ((productive_mode || productive_mode1) && !me.Productive){
+    write_status = true;
+    status = "KBMaschStatus.1.Productive";
+    substatus = "KBMaschStatus.2.Productive.Start";
+    machinedatavalue = 0;
+	productive_mode_final=true;
+} else if ((!productive_mode && !productive_mode1) && me.Productive){
+    write_status = true;
+    status = "KBMaschStatus.1.OI.AutoSet";
+    substatus = "KBMaschStatus.2.OI.AutoSet.Start";
+    machinedatavalue = 1;
+	productive_mode_final=false;
+}
+
+//OEE2.0 Handling:
+try {
+	if (write_status) {
+	    me.Productive = productive_mode_final;
+	}
+	if (me.ImplementsShape({thingShapeName: "KBOperatorScreenRailV2StateThingShape" })) {
+		write_status = me.CheckMachineStatus({StatusLevel1 : status, StatusLevel2 : substatus, WriteStatus : write_status});
+		status = me.GetCurrentStatusLevel1();
+		substatus = me.GetCurrentStatusLevel2();
+	}
+} catch(err) {
+	logger.error(me.name+": Error OEE2.0 Handling: "+err);
+}
+
+
+if (write_status) {
+    me.Productive = productive_mode_final;
+    
+    
+    var params = {
+        infoTableName : "InfoTable",
+        dataShapeName : "KBLocalStationDataReceiverStateDataShape"
+    };
+
+    // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBLocalStationDataReceiverStateDataShape)
+    var infoTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+
+    // dateValue:DATETIME
+    var dateValue = ProductionDate;
+    //dateValue.setMilliseconds(0);
+
+    // KBLocalStationDataReceiverStateDataShape entry object
+    var newEntry = new Object();
+    newEntry.Line = me.KBLocalLineThing; // STRING - isPrimaryKey = true
+    newEntry.Station = me.name; // STRING - isPrimaryKey = true
+    newEntry.Type = "Operator Screen"; // STRING - isPrimaryKey = true
+    newEntry.Description = "Kepware"; // STRING
+    newEntry.Identifier = substatus; // STRING
+    newEntry.ShortName = status; // STRING - isPrimaryKey = true
+    newEntry.DateTime = dateValue; // DATETIME - isPrimaryKey = true
+
+    infoTable.AddRow(newEntry);
+
+    var params = {
+        stateInfoTable: infoTable /* INFOTABLE */
+    };
+
+    // result: BOOLEAN
+    var result = me.SetState(params);
+    
+    
+    
+    
+    
+    
+	var params = {
+		infoTableName : "InfoTable",
+		dataShapeName : "KBLocalStationDataReceiverMachineDataShape"
+	};
+	
+	// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBLocalStationDataReceiverMachineDataShape)
+	var machinedata = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+	
+	
+	// KBLocalStationDataReceiverMachineDataShape entry object
+	var newEntry = new Object();
+	newEntry.Line = me.KBLocalLineThing; // STRING - isPrimaryKey = true
+	newEntry.Station = me.name; // STRING - isPrimaryKey = true
+	newEntry.Type = "MACHINEDATA"; // STRING - isPrimaryKey = true
+	newEntry.Description = "0: Production, 1: org. down, 2: tech. down 3: Speed losses"; // STRING
+	newEntry.Identifier = undefined; // STRING
+	newEntry.Value = machinedatavalue; // STRING
+	newEntry.LowerLimit = undefined; // STRING
+	newEntry.ShortName = "AutoCalculatedProductiveInfoFromMachine"; // STRING - isPrimaryKey = true
+	newEntry.Unit = undefined; // STRING
+	newEntry.UpperLimit = undefined; // STRING
+	newEntry.DateTime = dateValue; // DATETIME - isPrimaryKey = true
+	
+	machinedata.AddRow(newEntry);
+	
+	
+	
+	var params = {
+		machineDataInfoTable: machinedata /* INFOTABLE */
+	};
+	
+	// result: BOOLEAN
+	var result = me.SetMachineData(params);    
+
+}
+]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation></ServiceImplementations><Subscriptions/><Owner name="adm-abdurais" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions/><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables/><PropertyBindings/><RemotePropertyBindings/><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations/><InstanceRunTimePermissions/><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : name : updated&#10;" timestamp="2021-04-20T07:34:47.164+02:00" user="adm-abdurais"/><ConfigurationChange changeAction="MODIFY" changeReason="services : CalculatingProductiveState : input parameter Productive deleted, inputs updated&#10;" timestamp="2021-04-20T07:38:39.243+02:00" user="adm-abdurais"/></ConfigurationChanges></ThingShape></ThingShapes></Entities>

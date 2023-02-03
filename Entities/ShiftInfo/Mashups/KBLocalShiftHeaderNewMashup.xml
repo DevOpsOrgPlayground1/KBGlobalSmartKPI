@@ -1,0 +1,982 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b706"
+ majorVersion="9"
+ minorVersion="0"
+ modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+ revision="12"
+ schemaVersion="1109"
+ universal="password">
+    <Mashups>
+        <Mashup
+         aspect.isResponsive="true"
+         aspect.mashupType="mashup"
+         columns="0.0"
+         description=""
+         documentationContent=""
+         homeMashup=""
+         lastModifiedDate="2022-05-03T20:18:08.403Z"
+         name="KBLocalShiftHeaderNewMashup"
+         projectName="KBLocalShiftInfo"
+         rows="0.0"
+         tags="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read>
+                    <Principal
+                     isPermitted="true"
+                     name="KBMesKitHelperUser"
+                     type="User"></Principal>
+                </Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions>
+                <Permissions
+                 resourceName="*">
+                    <PropertyRead>
+                        <Principal
+                         isPermitted="true"
+                         name="KBMachineOperatorUserGroup"
+                         type="Group"></Principal>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                    </PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="KBMachineOperatorUserGroup"
+                         type="Group"></Principal>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+            </RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility>
+                    <Principal
+                     isPermitted="true"
+                     name="KBBackGroundWorker"
+                     type="Organization"></Principal>
+                    <Principal
+                     isPermitted="true"
+                     name="KBOrganization"
+                     type="Organization"></Principal>
+                </Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables>
+                <ConfigurationTable
+                 dataShapeName=""
+                 description="Mashup Mobile Settings"
+                 isHidden="true"
+                 isMultiRow="false"
+                 name="MobileSettings"
+                 ordinal="0">
+                    <DataShape>
+                        <FieldDefinitions>
+                            <FieldDefinition
+                             aspect.defaultValue="false"
+                             baseType="BOOLEAN"
+                             description=""
+                             name="disableZoom"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="true"
+                             baseType="BOOLEAN"
+                             description=""
+                             name="fullScreenMode"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="height"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="device-height"
+                             baseType="STRING"
+                             description=""
+                             name="heightType"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="1.0"
+                             baseType="NUMBER"
+                             description=""
+                             name="initialScale"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="iosShortcutIconTitle"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="black-translucent"
+                             baseType="STRING"
+                             description=""
+                             name="iosStatusBarAppearance"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="10.0"
+                             baseType="NUMBER"
+                             description=""
+                             name="maximumScale"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="0.1"
+                             baseType="NUMBER"
+                             description=""
+                             name="minimumScale"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="width"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="device-width"
+                             baseType="STRING"
+                             description=""
+                             name="widthType"
+                             ordinal="0"></FieldDefinition>
+                        </FieldDefinitions>
+                    </DataShape>
+                    <Rows>
+                        <Row>
+                            <disableZoom>false</disableZoom>
+                            <fullScreenMode>true</fullScreenMode>
+                            <height></height>
+                            <heightType>
+                            <![CDATA[
+                            device-height
+                            ]]>
+                            </heightType>
+                            <initialScale>1.0</initialScale>
+                            <iosShortcutIconTitle></iosShortcutIconTitle>
+                            <iosStatusBarAppearance>
+                            <![CDATA[
+                            black-translucent
+                            ]]>
+                            </iosStatusBarAppearance>
+                            <maximumScale>10.0</maximumScale>
+                            <minimumScale>0.1</minimumScale>
+                            <width></width>
+                            <widthType>
+                            <![CDATA[
+                            device-width
+                            ]]>
+                            </widthType>
+                        </Row>
+                    </Rows>
+                </ConfigurationTable>
+            </ConfigurationTables>
+            <ParameterDefinitions>
+                <FieldDefinition
+                 aspect.bindingDirection="IN"
+                 aspect.isMandatory="false"
+                 baseType="INTEGER"
+                 description=""
+                 name="dayOfWeek"
+                 ordinal="0"></FieldDefinition>
+                <FieldDefinition
+                 aspect.bindingDirection="BOTH"
+                 aspect.isMandatory="false"
+                 baseType="INTEGER"
+                 description=""
+                 name="nextNweek"
+                 ordinal="0"></FieldDefinition>
+            </ParameterDefinitions>
+            <Things></Things>
+            <ThingShapes></ThingShapes>
+            <ThingTemplates></ThingTemplates>
+            <mashupContent>
+            <![CDATA[
+            {
+              "CustomMashupCss" : "",
+              "Data" : {
+                "Session" : {
+                  "DataName" : "Session",
+                  "EntityName" : "",
+                  "EntityType" : "Session",
+                  "Id" : "session",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "SessionInterface",
+                    "Name" : "GetGlobalSessionValues",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetGlobalSessionValues"
+                  } ]
+                },
+                "Things_KBAdministratorTranslationUtilityThing" : {
+                  "DataName" : "Things_KBAdministratorTranslationUtilityThing",
+                  "EntityName" : "KBAdministratorTranslationUtilityThing",
+                  "EntityType" : "Things",
+                  "Id" : "5f40ff1b-1126-4a5c-a967-ea25c1fee604",
+                  "RefreshInterval" : 0,
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "34c053b6-b7ec-4e60-876d-2fa302f45795",
+                    "Name" : "GetTokenValue",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetTokenValue"
+                  } ]
+                },
+                "Things_KBLocalShiftHelperThing" : {
+                  "DataName" : "Things_KBLocalShiftHelperThing",
+                  "EntityName" : "KBLocalShiftHelperThing",
+                  "EntityType" : "Things",
+                  "Id" : "e1fec714-8f79-412e-b9f6-03596955ed0d",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "b447e9ef-8e48-4925-a139-531d7ce9ac46",
+                    "Name" : "GetShiftHeaderTimeInfo",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetShiftHeaderTimeInfo"
+                  } ]
+                },
+                "UserExtensions" : {
+                  "DataName" : "UserExtensions",
+                  "EntityName" : "",
+                  "EntityType" : "UserExtensions",
+                  "Id" : "UserExtensions",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "UserExtensionInterface",
+                    "Name" : "GetCurrentUserExtensionProperties",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetCurrentUserExtensionProperties"
+                  } ]
+                }
+              },
+              "DataBindings" : [ {
+                "Id" : "89eee396-5b2f-40cc-9d6b-81453154919b",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "nextNweek",
+                  "SourcePropertyBaseType" : "INTEGER",
+                  "TargetProperty" : "nextNweek",
+                  "TargetPropertyBaseType" : "INTEGER",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetShiftHeaderTimeInfo",
+                "TargetSection" : "Things_KBLocalShiftHelperThing"
+              }, {
+                "Id" : "0d25eb0b-9e27-4353-893b-c2316aea8cd5",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "dayOfWeek",
+                  "SourcePropertyBaseType" : "INTEGER",
+                  "TargetProperty" : "dayOfWeek",
+                  "TargetPropertyBaseType" : "INTEGER",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetShiftHeaderTimeInfo",
+                "TargetSection" : "Things_KBLocalShiftHelperThing"
+              }, {
+                "Id" : "5e785847-20e9-455e-ba65-e891864620be",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Output",
+                  "SourcePropertyBaseType" : "STRING",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "Text",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "expression-20",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "label-5",
+                "TargetSection" : ""
+              }, {
+                "Id" : "2be3e182-cf44-400e-97ef-c2ad04b28d4d",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "weekNumber",
+                  "SourcePropertyBaseType" : "STRING",
+                  "SourcePropertyType" : "Field",
+                  "TargetProperty" : "weekNo",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "GetShiftHeaderTimeInfo",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "UI",
+                "TargetId" : "expression-20",
+                "TargetSection" : ""
+              }, {
+                "Id" : "41bb9af7-624d-48ac-8694-4f3904fc8fe1",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Output",
+                  "SourcePropertyBaseType" : "STRING",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "Text",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "expression-21",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "label-6",
+                "TargetSection" : ""
+              }, {
+                "Id" : "893ff582-f865-4ae5-b6c5-d96b6179db47",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "YYYYMMDD",
+                  "SourcePropertyBaseType" : "STRING",
+                  "SourcePropertyType" : "Field",
+                  "TargetProperty" : "MMDD",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "GetShiftHeaderTimeInfo",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "UI",
+                "TargetId" : "expression-23",
+                "TargetSection" : ""
+              }, {
+                "Id" : "aa31695a-c2a6-49f5-be5d-2a97cc273ce6",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Output",
+                  "SourcePropertyBaseType" : "STRING",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "Text",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "expression-23",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "label-7",
+                "TargetSection" : ""
+              }, {
+                "Id" : "a7485577-b8d8-4846-af64-e8eebefe1c06",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "language",
+                  "SourcePropertyBaseType" : "STRING",
+                  "SourcePropertyType" : "Field",
+                  "TargetProperty" : "Language",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "UserExtensions",
+                "SourceDetails" : "AllData",
+                "SourceId" : "UserExtensions",
+                "SourceSection" : "UserExtensions",
+                "TargetArea" : "Data",
+                "TargetId" : "GetTokenValue",
+                "TargetSection" : "Things_KBAdministratorTranslationUtilityThing"
+              }, {
+                "Id" : "16262c1d-6adc-48bc-bc68-6d7d0ef69392",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "result",
+                  "SourcePropertyBaseType" : "STRING",
+                  "SourcePropertyType" : "Field",
+                  "TargetProperty" : "weekDay",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "GetTokenValue",
+                "SourceSection" : "Things_KBAdministratorTranslationUtilityThing",
+                "TargetArea" : "UI",
+                "TargetId" : "expression-21",
+                "TargetSection" : ""
+              }, {
+                "Id" : "3fdf9335-14b9-4ece-8cfb-b589031bf53b",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "dayOfWeek",
+                  "SourcePropertyBaseType" : "STRING",
+                  "SourcePropertyType" : "Field",
+                  "TargetProperty" : "Token",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "GetShiftHeaderTimeInfo",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "Data",
+                "TargetId" : "GetTokenValue",
+                "TargetSection" : "Things_KBAdministratorTranslationUtilityThing"
+              } ],
+              "DesignTimePermissions" : {
+                "Create" : [ ],
+                "Delete" : [ ],
+                "Metadata" : [ ],
+                "Read" : [ ],
+                "Update" : [ ]
+              },
+              "Events" : [ {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBLocalShiftHelperThing",
+                "EventHandlerService" : "GetShiftHeaderTimeInfo",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "Loaded",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "4f510b70-d8c1-4957-9458-68fa41ea020d"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBLocalShiftHelperThing",
+                "EventHandlerService" : "GetShiftHeaderTimeInfo",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "RefreshRequested",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "443dbcc9-f95e-4d79-8e87-4869f1f81969"
+              }, {
+                "EventHandlerArea" : "UI",
+                "EventHandlerId" : "expression-20",
+                "EventHandlerService" : "Evaluate",
+                "EventTriggerArea" : "Data",
+                "EventTriggerEvent" : "ServiceInvokeCompleted",
+                "EventTriggerId" : "GetShiftHeaderTimeInfo",
+                "EventTriggerSection" : "Things_KBLocalShiftHelperThing",
+                "Id" : "50406759-b5e8-4ea9-8914-f780203140b8"
+              }, {
+                "EventHandlerArea" : "UI",
+                "EventHandlerId" : "expression-23",
+                "EventHandlerService" : "Evaluate",
+                "EventTriggerArea" : "Data",
+                "EventTriggerEvent" : "ServiceInvokeCompleted",
+                "EventTriggerId" : "GetShiftHeaderTimeInfo",
+                "EventTriggerSection" : "Things_KBLocalShiftHelperThing",
+                "Id" : "5087f2b6-2cc7-485e-ba74-a35e5f39b179"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBLocalShiftHelperThing",
+                "EventHandlerService" : "GetShiftHeaderTimeInfo",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "nextNweekChanged",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "eb9127f6-396f-4422-b272-c630e1763b67"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBAdministratorTranslationUtilityThing",
+                "EventHandlerService" : "GetTokenValue",
+                "EventTriggerArea" : "Data",
+                "EventTriggerEvent" : "ServiceInvokeCompleted",
+                "EventTriggerId" : "GetShiftHeaderTimeInfo",
+                "EventTriggerSection" : "Things_KBLocalShiftHelperThing",
+                "Id" : "f647d867-5005-4be5-a302-0ea6603255c2"
+              }, {
+                "EventHandlerArea" : "UI",
+                "EventHandlerId" : "expression-21",
+                "EventHandlerService" : "Evaluate",
+                "EventTriggerArea" : "Data",
+                "EventTriggerEvent" : "ServiceInvokeCompleted",
+                "EventTriggerId" : "GetTokenValue",
+                "EventTriggerSection" : "Things_KBAdministratorTranslationUtilityThing",
+                "Id" : "97e852d1-90ac-478e-b10e-1890a97fbfb9"
+              } ],
+              "RunTimePermissions" : {
+                "permissions" : [ {
+                  "EventInvoke" : [ ],
+                  "EventSubscribe" : [ ],
+                  "PropertyRead" : [ {
+                    "isPermitted" : true,
+                    "name" : "KBUserGroup",
+                    "type" : "Group"
+                  } ],
+                  "PropertyWrite" : [ ],
+                  "ServiceInvoke" : [ {
+                    "isPermitted" : true,
+                    "name" : "KBUserGroup",
+                    "type" : "Group"
+                  } ],
+                  "resourceName" : "*"
+                } ]
+              },
+              "UI" : {
+                "Properties" : {
+                  "AddToDashboardButton" : "SimplePlus",
+                  "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+                  "Area" : "Mashup",
+                  "BGImage" : "",
+                  "BGImageRepeat" : "no-repeat",
+                  "BGImageSize" : "auto",
+                  "Columns" : 0,
+                  "ConfigureGadgetButton" : "SimpleGear",
+                  "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+                  "DisplayName" : "Mashup",
+                  "EnableParameterEditing" : false,
+                  "Height" : 618,
+                  "Id" : "mashup-root",
+                  "IgnoreWarningsInViewMashup" : false,
+                  "IsPrintLayout" : false,
+                  "Left" : 0,
+                  "MashupToEditGadget" : "DefaultMashupToEditGadget",
+                  "MinHeight" : 0,
+                  "MinWidth" : 0,
+                  "ResponsiveLayout" : true,
+                  "Rows" : 0,
+                  "ShowDataLoading" : true,
+                  "Style" : "DefaultMashupStyle",
+                  "StyleTheme" : "Base Theme",
+                  "Title" : "",
+                  "TitleBar" : false,
+                  "TitleBarStyle" : "DefaultTitleBarStyle",
+                  "TitleBarText" : "Gadget Title Here",
+                  "Top" : 0,
+                  "Type" : "mashup",
+                  "UseMasterTheme" : false,
+                  "UseTheme" : false,
+                  "UseThemeForHybrids" : false,
+                  "Visible" : true,
+                  "Width" : 1024,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Mashup",
+                  "_currentParameterDefs" : [ {
+                    "Aspects" : {
+                      "bindingDirection" : "BOTH",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "INTEGER",
+                    "Description" : "",
+                    "ParameterName" : "nextNweek"
+                  }, {
+                    "Aspects" : {
+                      "bindingDirection" : "IN",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "INTEGER",
+                    "Description" : "",
+                    "ParameterName" : "dayOfWeek"
+                  } ],
+                  "id_index" : 23,
+                  "supportsAutoResize" : true
+                },
+                "Widgets" : [ {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "ContainerClass" : "",
+                    "DisplayName" : "panel-2",
+                    "Height" : 200,
+                    "HideScrollbars" : true,
+                    "HorizontalAnchor" : "left",
+                    "Id" : "panel-2",
+                    "LastContainer" : false,
+                    "Left" : 200,
+                    "ResponsiveLayout" : true,
+                    "ShowDataLoading" : true,
+                    "Style" : "DefaultChartAreaStyle",
+                    "Top" : 120,
+                    "Type" : "panel",
+                    "VerticalAnchor" : "top",
+                    "Visible" : true,
+                    "Width" : 300,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Panel",
+                    "flex-grow" : 0
+                  },
+                  "Widgets" : [ {
+                    "Properties" : {
+                      "Area" : "UI",
+                      "DisplayName" : "shape-3",
+                      "DynamicFillOrientation" : "vertical",
+                      "DynamicRangeMaximum" : 100,
+                      "DynamicRangeMinimum" : 0,
+                      "EnableDynamicFill" : false,
+                      "GradientOrientation" : "vertical",
+                      "GradientType" : "linear",
+                      "Height" : 100,
+                      "Id" : "shape-3",
+                      "LastContainer" : false,
+                      "Left" : 0,
+                      "RectangleCornerRadius" : 10,
+                      "ResponsiveLayout" : false,
+                      "ShapeFormatter_StateParameters" : [ ],
+                      "ShapeStyle" : "DefaultChartStyle13",
+                      "ShapeType" : "rectangle",
+                      "ShowDataLoading" : true,
+                      "Top" : 0,
+                      "Type" : "shape",
+                      "UnfilledBackgroundStyle" : "DefaultShapeUnfilledBackgroundStyle",
+                      "Visible" : true,
+                      "Width" : 180,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Shape"
+                    },
+                    "Widgets" : [ ]
+                  }, {
+                    "Properties" : {
+                      "Alignment" : "left",
+                      "AllowEllipsis" : false,
+                      "Area" : "UI",
+                      "DisplayName" : "label-5",
+                      "Height" : 32,
+                      "Id" : "label-5",
+                      "LastContainer" : false,
+                      "Left" : 2,
+                      "ResponsiveLayout" : false,
+                      "ShowDataLoading" : true,
+                      "Style" : "DefaultDashboardGadgetTitleStyle",
+                      "Text" : "W50",
+                      "ToolTipField" : "",
+                      "ToolTipStyle" : "DefaultTooltipStyle",
+                      "Top" : 10,
+                      "Type" : "label",
+                      "Visible" : true,
+                      "Width" : 44,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Label",
+                      "__supportsTooltip" : true
+                    },
+                    "Widgets" : [ ]
+                  }, {
+                    "Properties" : {
+                      "Alignment" : "left",
+                      "AllowEllipsis" : false,
+                      "Area" : "UI",
+                      "DisplayName" : "label-6",
+                      "Height" : 32,
+                      "Id" : "label-6",
+                      "LastContainer" : false,
+                      "Left" : 50,
+                      "ResponsiveLayout" : false,
+                      "ShowDataLoading" : true,
+                      "Style" : "DefaultDashboardGadgetTitleStyle",
+                      "Text" : "Mon",
+                      "ToolTipField" : "",
+                      "ToolTipStyle" : "DefaultTooltipStyle",
+                      "Top" : 10,
+                      "Type" : "label",
+                      "Visible" : true,
+                      "Width" : 40,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Label",
+                      "__supportsTooltip" : true
+                    },
+                    "Widgets" : [ ]
+                  }, {
+                    "Properties" : {
+                      "Alignment" : "left",
+                      "AllowEllipsis" : false,
+                      "Area" : "UI",
+                      "DisplayName" : "label-7",
+                      "Height" : 32,
+                      "Id" : "label-7",
+                      "LastContainer" : false,
+                      "Left" : 92,
+                      "ResponsiveLayout" : false,
+                      "ShowDataLoading" : true,
+                      "Style" : "DefaultDashboardGadgetTitleStyle",
+                      "Text" : "20-10-28",
+                      "ToolTipField" : "",
+                      "ToolTipStyle" : "DefaultTooltipStyle",
+                      "Top" : 10,
+                      "Type" : "label",
+                      "Visible" : true,
+                      "Width" : 84,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Label",
+                      "__supportsTooltip" : true
+                    },
+                    "Widgets" : [ ]
+                  }, {
+                    "Properties" : {
+                      "Alignment" : "left",
+                      "AllowEllipsis" : false,
+                      "Area" : "UI",
+                      "DisplayName" : "label-8",
+                      "Height" : 32,
+                      "Id" : "label-8",
+                      "LastContainer" : false,
+                      "Left" : 0,
+                      "ResponsiveLayout" : false,
+                      "ShowDataLoading" : true,
+                      "Style" : "DefaultDashboardGadgetTitleStyle",
+                      "Text" : "0",
+                      "ToolTipField" : "",
+                      "ToolTipStyle" : "DefaultTooltipStyle",
+                      "Top" : 60,
+                      "Type" : "label",
+                      "Visible" : true,
+                      "Width" : 25,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Label",
+                      "__supportsTooltip" : true
+                    },
+                    "Widgets" : [ ]
+                  }, {
+                    "Properties" : {
+                      "Alignment" : "left",
+                      "AllowEllipsis" : false,
+                      "Area" : "UI",
+                      "DisplayName" : "label-9",
+                      "Height" : 32,
+                      "Id" : "label-9",
+                      "LastContainer" : false,
+                      "Left" : 30,
+                      "ResponsiveLayout" : false,
+                      "ShowDataLoading" : true,
+                      "Style" : "DefaultDashboardGadgetTitleStyle",
+                      "Text" : "4",
+                      "ToolTipField" : "",
+                      "ToolTipStyle" : "DefaultTooltipStyle",
+                      "Top" : 60,
+                      "Type" : "label",
+                      "Visible" : true,
+                      "Width" : 25,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Label",
+                      "__supportsTooltip" : true
+                    },
+                    "Widgets" : [ ]
+                  }, {
+                    "Properties" : {
+                      "Alignment" : "left",
+                      "AllowEllipsis" : false,
+                      "Area" : "UI",
+                      "DisplayName" : "label-10",
+                      "Height" : 32,
+                      "Id" : "label-10",
+                      "LastContainer" : false,
+                      "Left" : 60,
+                      "ResponsiveLayout" : false,
+                      "ShowDataLoading" : true,
+                      "Style" : "DefaultDashboardGadgetTitleStyle",
+                      "Text" : "8",
+                      "ToolTipField" : "",
+                      "ToolTipStyle" : "DefaultTooltipStyle",
+                      "Top" : 60,
+                      "Type" : "label",
+                      "Visible" : true,
+                      "Width" : 25,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Label",
+                      "__supportsTooltip" : true
+                    },
+                    "Widgets" : [ ]
+                  }, {
+                    "Properties" : {
+                      "Alignment" : "left",
+                      "AllowEllipsis" : false,
+                      "Area" : "UI",
+                      "DisplayName" : "label-11",
+                      "Height" : 32,
+                      "Id" : "label-11",
+                      "LastContainer" : false,
+                      "Left" : 90,
+                      "ResponsiveLayout" : false,
+                      "ShowDataLoading" : true,
+                      "Style" : "DefaultDashboardGadgetTitleStyle",
+                      "Text" : "12",
+                      "ToolTipField" : "",
+                      "ToolTipStyle" : "DefaultTooltipStyle",
+                      "Top" : 60,
+                      "Type" : "label",
+                      "Visible" : true,
+                      "Width" : 25,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Label",
+                      "__supportsTooltip" : true
+                    },
+                    "Widgets" : [ ]
+                  }, {
+                    "Properties" : {
+                      "Alignment" : "left",
+                      "AllowEllipsis" : false,
+                      "Area" : "UI",
+                      "DisplayName" : "label-12",
+                      "Height" : 32,
+                      "Id" : "label-12",
+                      "LastContainer" : false,
+                      "Left" : 120,
+                      "ResponsiveLayout" : false,
+                      "ShowDataLoading" : true,
+                      "Style" : "DefaultDashboardGadgetTitleStyle",
+                      "Text" : "16",
+                      "ToolTipField" : "",
+                      "ToolTipStyle" : "DefaultTooltipStyle",
+                      "Top" : 60,
+                      "Type" : "label",
+                      "Visible" : true,
+                      "Width" : 25,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Label",
+                      "__supportsTooltip" : true
+                    },
+                    "Widgets" : [ ]
+                  }, {
+                    "Properties" : {
+                      "Alignment" : "left",
+                      "AllowEllipsis" : false,
+                      "Area" : "UI",
+                      "DisplayName" : "label-13",
+                      "Height" : 32,
+                      "Id" : "label-13",
+                      "LastContainer" : false,
+                      "Left" : 150,
+                      "ResponsiveLayout" : false,
+                      "ShowDataLoading" : true,
+                      "Style" : "DefaultDashboardGadgetTitleStyle",
+                      "Text" : "20",
+                      "ToolTipField" : "",
+                      "ToolTipStyle" : "DefaultTooltipStyle",
+                      "Top" : 60,
+                      "Type" : "label",
+                      "Visible" : true,
+                      "Width" : 25,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Label",
+                      "__supportsTooltip" : true
+                    },
+                    "Widgets" : [ ]
+                  } ]
+                }, {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "AutoEvaluate" : false,
+                    "DataChangeType" : "ALWAYS",
+                    "DisplayName" : "getWeekNo",
+                    "Expression" : "Output = \"W\" + weekNo.substring(3,6);",
+                    "FireOnFirstValue" : false,
+                    "Height" : 28,
+                    "Id" : "expression-20",
+                    "LastContainer" : false,
+                    "Left" : 0,
+                    "OutputBaseType" : "STRING",
+                    "ResponsiveLayout" : false,
+                    "ShowDataLoading" : true,
+                    "Top" : 0,
+                    "Type" : "expression",
+                    "Visible" : true,
+                    "Width" : 200,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Expression",
+                    "_currentParameterDefs" : [ {
+                      "BaseType" : "STRING",
+                      "Description" : "",
+                      "ParameterName" : "weekNo",
+                      "isValid" : true
+                    } ],
+                    "editMode" : "edit",
+                    "helperType" : "expression",
+                    "parameters" : [ {
+                      "BaseType" : "STRING",
+                      "Description" : "",
+                      "ParameterName" : "weekNo",
+                      "isValid" : true
+                    } ],
+                    "parametersToDelete" : [ ]
+                  },
+                  "Widgets" : [ ]
+                }, {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "AutoEvaluate" : false,
+                    "DataChangeType" : "ALWAYS",
+                    "DisplayName" : "getWeekDay",
+                    "Expression" : "Output = weekDay.substring(0,3);",
+                    "FireOnFirstValue" : false,
+                    "Height" : 28,
+                    "Id" : "expression-21",
+                    "LastContainer" : false,
+                    "Left" : 0,
+                    "OutputBaseType" : "STRING",
+                    "ResponsiveLayout" : false,
+                    "ShowDataLoading" : true,
+                    "Top" : 0,
+                    "Type" : "expression",
+                    "Visible" : true,
+                    "Width" : 200,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Expression",
+                    "_currentParameterDefs" : [ {
+                      "BaseType" : "STRING",
+                      "Description" : "",
+                      "ParameterName" : "weekDay",
+                      "bindingDirection" : "Target",
+                      "bindingType" : "Property",
+                      "isBindingSource" : false,
+                      "isBindingTarget" : true,
+                      "name" : "weekDay",
+                      "shown" : true
+                    } ],
+                    "editMode" : "edit",
+                    "helperType" : "expression",
+                    "parameters" : [ {
+                      "BaseType" : "STRING",
+                      "Description" : "",
+                      "ParameterName" : "weekDay",
+                      "isValid" : true
+                    } ],
+                    "parametersToDelete" : [ ]
+                  },
+                  "Widgets" : [ ]
+                }, {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "AutoEvaluate" : false,
+                    "DataChangeType" : "ALWAYS",
+                    "DisplayName" : "getMMDD",
+                    "Expression" : "Output = MMDD.substring(2,11);",
+                    "FireOnFirstValue" : false,
+                    "Height" : 28,
+                    "Id" : "expression-23",
+                    "LastContainer" : false,
+                    "Left" : 0,
+                    "OutputBaseType" : "STRING",
+                    "ResponsiveLayout" : false,
+                    "ShowDataLoading" : true,
+                    "Top" : 0,
+                    "Type" : "expression",
+                    "Visible" : true,
+                    "Width" : 200,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Expression",
+                    "_currentParameterDefs" : [ {
+                      "BaseType" : "STRING",
+                      "Description" : "",
+                      "ParameterName" : "MMDD",
+                      "isValid" : true
+                    } ],
+                    "parameters" : [ {
+                      "BaseType" : "STRING",
+                      "Description" : "",
+                      "ParameterName" : "MMDD",
+                      "isValid" : true
+                    } ]
+                  },
+                  "Widgets" : [ ]
+                } ]
+              },
+              "mashupType" : "mashup"
+            }
+            ]]>
+            </mashupContent>
+            <preview></preview>
+        </Mashup>
+    </Mashups>
+</Entities>

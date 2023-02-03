@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b167" majorVersion="8" minorVersion="2"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="2" schemaVersion="1020" universal="">
+	<Things>
+		<Thing description="" documentationContent=""
+			effectiveThingPackage="ConfiguredThing" enabled="true" homeMashup=""
+			identifier="" lastModifiedDate="2018-12-13T12:05:12.226+01:00"
+			name="KBLocalStationDataReceiverBufferProcessorThing"
+			projectName="KBsmartKPI" published="false" tags=""
+			thingTemplate="GenericThing" valueStream="">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions />
+			<VisibilityPermissions>
+				<Visibility />
+			</VisibilityPermissions>
+			<ConfigurationTables />
+			<ThingShape>
+				<PropertyDefinitions>
+					<PropertyDefinition aspect.cacheTime="0.0"
+						aspect.dataChangeType="VALUE" aspect.defaultValue="true"
+						aspect.isLogged="false" aspect.isPersistent="false"
+						aspect.isReadOnly="false" baseType="BOOLEAN" category=""
+						description="" isLocalOnly="false" name="doProcessing" ordinal="1" />
+				</PropertyDefinitions>
+				<ServiceDefinitions>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="ProcessingDataBuffer">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="SetPartDataPrePocessor">
+						<ResultType
+							aspect.dataShape="KBLocalStationDataReceiverPartDataShape"
+							baseType="INFOTABLE" description="" name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition
+								aspect.dataShape="KBLocalStationDataReceiverPartDataShape"
+								aspect.isRequired="true" baseType="INFOTABLE" description=""
+								name="partDataInfoTable" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+				</ServiceDefinitions>
+				<EventDefinitions />
+				<ServiceMappings />
+				<ServiceImplementations>
+					<ServiceImplementation description=""
+						handlerName="Script" name="ProcessingDataBuffer">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+if (location != "MUC") {
+	
+	var DB = Resources["KBThingWorxServerSystem"].GetKPILocalThingWorxDatabaseThing();
+	
+	try {
+
+	    if (me.doProcessing != null && me.doProcessing == true) {
+
+			// date1:DATETIME
+			var date1 = new Date();
+	
+	        var bufferDataRow = Things[DB].GetProcessFloatDataFromBufferDataTable();
+
+			// date2:DATETIME
+			var date2 = new Date();
+			
+			// dateDifference(date1:DATETIME,date2:DATETIME):NUMBER
+			var difference = dateDifference(date2, date1);
+			logger.debug("ProcessingDataBuffer: time for Start GetProcessFloatDataFromBufferDataTable: " + difference);
+	        
+	        if (bufferDataRow != null && bufferDataRow.rows.length > 0){
+	                
+		        for (var y = 0; y < bufferDataRow.rows.length; y++) {
+					// date1:DATETIME
+					var date11 = new Date();
+		        	try {
+			            logger.debug("ProcessingDataBuffer: Start Service");
+		                var params = {
+		                    infoTableName : "InfoTable",
+		                    dataShapeName : bufferDataRow[y].Type
+		                };
+		
+		                // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBADGMesKitRemoteThingPartDataShape)
+		                var partDataInfoTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+		                
+		                partDataInfoTable = bufferDataRow[y].JSON;
+		                //logger.debug("ProcessingDataBuffer: "+partDataInfoTable.ToJSON());
+		                var params = {
+		                    thingShapeName: "KBLocalAdgTestBenchConnectorShape" /* THINGSHAPENAME */
+		                };
+		
+		                if(Things[bufferDataRow[y].Machine].ImplementsShape(params)) {
+		                    var params = {
+		                        partDataInfoTable: partDataInfoTable /* INFOTABLE */
+		                    };
+		
+		                    partDataInfoTable = Things[bufferDataRow[y].Machine].SetPartDataPrePocessor(params);
+		                } else {
+		                    var params = {
+		                        partDataInfoTable: partDataInfoTable /* INFOTABLE */
+		                    };
+		
+		                    partDataInfoTable = me.SetPartDataPrePocessor(params);
+		                }
+		
+						logger.debug("ProcessingDataBuffer: "+partDataInfoTable.ToJSON());
+						
+						
+						try {
+					        var params = {
+					            JSON: partDataInfoTable /* STRING */,
+					            Machine: Things[bufferDataRow[y].Machine].name  /* STRING */
+					        };
+					        Things[DB].AddProcessFloatDataJsonToDataTable(params);
+							logger.debug("ProcessingDataBuffer: AddProcessFloatDataJsonToDataTable 1");
+							
+		                    Things[bufferDataRow[y].Machine].Line = partDataInfoTable.rows[0].Line;
+		                    Things[bufferDataRow[y].Machine].Station = partDataInfoTable.rows[0].Station;
+		
+		                    if (Things[bufferDataRow[y].Machine].CurrentPartNumber != partDataInfoTable.rows[0].PartNumber) {
+		                        Things[bufferDataRow[y].Machine].LastPartNumber = Things[bufferDataRow[y].Machine].CurrentPartNumber;
+		                    }
+		                    if (Things[bufferDataRow[y].Machine].CurrentOrderNumber != partDataInfoTable.rows[0].OrderNumber) {
+		                        Things[bufferDataRow[y].Machine].LastOrderNumber = Things[bufferDataRow[y].Machine].CurrentOrderNumber;
+		                    }
+		
+		                    Things[bufferDataRow[y].Machine].CurrentPartNumber = partDataInfoTable.rows[0].PartNumber;
+		                    Things[bufferDataRow[y].Machine].CurrentOrderNumber = partDataInfoTable.rows[0].OrderNumber;
+
+		                    try {
+		                        //***DEPRECATED*** logger.debug("ProcessingDataBuffer: Service - me.PartData: start");
+		                        //***DEPRECATED*** var filter = new Object();
+		                        //***DEPRECATED*** filter.ShortName = partDataInfoTable.rows[0].ShortName;
+		                        //***DEPRECATED*** Things[bufferDataRow[y].Machine].PartData.Delete(filter);
+		                        //***DEPRECATED*** Things[bufferDataRow[y].Machine].PartData.AddRow(partDataInfoTable.rows[0]);
+		                        //***DEPRECATED*** logger.debug("ProcessingDataBuffer: Service - me.PartData: OK");
+		                    } catch(err) {
+		                        //***DEPRECATED*** logger.debug("ProcessingDataBuffer: Filter Error: " + err);
+		                    }
+							logger.debug("ProcessingDataBuffer: AddProcessFloatDataJsonToDataTable 2");
+							
+	                    } catch(err) {
+	                        logger.warn("ProcessingDataBuffer: Error in AddProcessFloatDataJsonToDataTable, doing line by line : " + err + " - " + partDataInfoTable.ToJSON());
+						
+			                var tableLength = partDataInfoTable.rows.length;
+			
+			                logger.debug("ProcessingDataBuffer: Number of rows in Data Table: " + tableLength);
+			
+			                for (var x = 0; x < tableLength; x++) {
+			
+			                    //logger.debug("ProcessingDataBuffer:  Service Executing line: " + x);
+			
+			                    //logger.info("ProcessingDataBuffer:  Service - Line: " + partDataInfoTable.rows[x].Line);
+			                    //logger.info("ProcessingDataBuffer:  Service - Station: " + partDataInfoTable.rows[x].Station);
+			                    //logger.info("ProcessingDataBuffer:  Service - ShortName: " + partDataInfoTable.rows[x].ShortName);
+			                    //logger.info("ProcessingDataBuffer:  Service - PartNumber: " + partDataInfoTable.rows[x].PartNumber);
+			                    //logger.info("ProcessingDataBuffer:  Service - SerialNumber: " + partDataInfoTable.rows[x].SerialNumber);
+			                    //logger.info("ProcessingDataBuffer:  Service - Value: " + partDataInfoTable.rows[x].Value);
+			                    //logger.info("ProcessingDataBuffer:  Service - LowerLimit: " + partDataInfoTable.rows[x].LowerLimit);
+			                    //logger.info("ProcessingDataBuffer:  Service - OrderNumber: " + partDataInfoTable.rows[x].OrderNumber);
+			                    //logger.info("ProcessingDataBuffer:  Service - UpperLimit: " + partDataInfoTable.rows[x].UpperLimit);
+			                    //logger.info("ProcessingDataBuffer:  Service - DateTime: " + partDataInfoTable.rows[x].DateTime);
+			                    //logger.info("ProcessingDataBuffer:  Service - Description: " + partDataInfoTable.rows[x].Description);
+			                    //logger.info("ProcessingDataBuffer:  Service - Identifier: " + partDataInfoTable.rows[x].Identifier);
+			                    //logger.info("ProcessingDataBuffer:  Service - TrackingNumber: " + partDataInfoTable.rows[x].TrackingNumber);
+			                    //logger.info("ProcessingDataBuffer:  Service - Machine: " + Things[bufferDataRow[y].Machine].name);
+			
+			                    Things[bufferDataRow[y].Machine].Line = partDataInfoTable.rows[x].Line;
+			                    Things[bufferDataRow[y].Machine].Station = partDataInfoTable.rows[x].Station;
+			
+			                    if (Things[bufferDataRow[y].Machine].CurrentPartNumber != partDataInfoTable.rows[x].PartNumber) {
+			                        Things[bufferDataRow[y].Machine].LastPartNumber = Things[bufferDataRow[y].Machine].CurrentPartNumber;
+			                    }
+			                    if (Things[bufferDataRow[y].Machine].CurrentOrderNumber != partDataInfoTable.rows[x].OrderNumber) {
+			                        Things[bufferDataRow[y].Machine].LastOrderNumber = Things[bufferDataRow[y].Machine].CurrentOrderNumber;
+			                    }
+			
+			                    Things[bufferDataRow[y].Machine].CurrentPartNumber = partDataInfoTable.rows[x].PartNumber;
+			                    Things[bufferDataRow[y].Machine].CurrentOrderNumber = partDataInfoTable.rows[x].OrderNumber;
+			
+			
+			                    try {
+			                        //***DEPRECATED*** logger.debug("ProcessingDataBuffer:  Service - me.PartData: start");
+			                        //***DEPRECATED*** var filter = new Object();
+			                        //***DEPRECATED*** filter.ShortName = partDataInfoTable.rows[x].ShortName;
+			                        //***DEPRECATED*** Things[bufferDataRow[y].Machine].PartData.Delete(filter);
+			                        //***DEPRECATED*** Things[bufferDataRow[y].Machine].PartData.AddRow(partDataInfoTable.rows[x]);
+			                        //***DEPRECATED*** logger.debug("ProcessingDataBuffer:  Service - me.PartData: OK");
+			                    } catch(err) {
+			                        //***DEPRECATED*** logger.debug("ProcessingDataBuffer: Filter Error: " + err);
+			                    }
+			
+			                    var value_float = 0; 
+			                    try {
+			                        var value_str = partDataInfoTable.rows[x].Value;
+			                        //logger.debug("ProcessingDataBuffer:  Service - value 1: " + value_str);
+			                        if (value_str == null || value_str == undefined || value_str == "") { value_str = "0";}
+			                        //logger.debug("ProcessingDataBuffer:  Service - value 2: " + value_str);
+			                        var value_str1 = value_str.replace(/\,/, ".");
+			                        //logger.debug("ProcessingDataBuffer:  Service - value 3: " + value_str1);
+			                        value_float = parseFloat(value_str1);
+			                        //logger.debug("ProcessingDataBuffer:  Service - value 4: " + value_float);
+			                        if (isNaN(value_float)) {
+			                            partDataInfoTable.rows[x].Identifier = partDataInfoTable.rows[x].Value;
+			                            value_float = 0; 
+			                        }
+			                        //logger.debug("ProcessingDataBuffer:  Service - value 5: " + value_float);
+			                    } catch(err) {
+			                        logger.error("ProcessingDataBuffer: parseFloat Error (Value): " + err);
+			                        partDataInfoTable.rows[x].Identifier = partDataInfoTable.rows[x].Value;
+			                    }
+			
+			                    var ul_float = 0; 
+			                    try {
+			                        var ul_str = partDataInfoTable.rows[x].UpperLimit;
+			                        if (ul_str == null || ul_str == undefined || ul_str == "") { ul_str = "0";}
+			                        var ul_str1 = ul_str.replace(/\,/, ".");
+			                        ul_float = parseFloat(ul_str1);
+			                        //logger.debug("ProcessingDataBuffer:  Service - ul: " + ul_float);
+			                        if (isNaN(ul_float)) {
+			                            ul_float = 0; 
+			                        }
+			                        //logger.debug("ProcessingDataBuffer:  Service - ul: " + ul_float);
+			                    } catch(err) {
+			                        logger.error("ProcessingDataBuffer: parseFloat Error (UL): " + err);
+			                    }
+			
+			                    var ll_float = 0; 
+			                    try {
+			                        var ll_str = partDataInfoTable.rows[x].LowerLimit;
+			                        if (ll_str == null || ll_str == undefined || ll_str == "") { ll_str = "0";}
+			                        var ll_str1 = ll_str.replace(/\,/, ".");
+			                        ll_float = parseFloat(ll_str1);
+			                        //logger.debug("ProcessingDataBuffer:  Service - ll: " + ll_float);
+			                        if (isNaN(ll_float)) {
+			                            ll_float = 0; 
+			                        }
+			                        //logger.debug("ProcessingDataBuffer:  Service - ll: " + ll_float);
+			                    } catch(err) {
+			                        logger.error("ProcessingDataBuffer: parseFloat Error (LL): " + err);
+			                    }
+			
+			                    //partDataInfoTable.rows[x].DateTime.setMilliseconds(0);
+			
+			                    //Database		
+			                    
+			                    var stationNameForDB = "";
+			                    if (partDataInfoTable.rows[x].LocalStation != null && partDataInfoTable.rows[x].LocalStation != ""){
+			                    	stationNameForDB = partDataInfoTable.rows[x].LocalStation;
+			                    } else {
+			                    	stationNameForDB = Things[bufferDataRow[y].Machine].name;
+			                    }
+			                    
+			                    logger.debug("ProcessingDataBuffer:  Service - LocalStation: "+partDataInfoTable.rows[x].LocalStation);
+			                    logger.debug("ProcessingDataBuffer:  Service - name: "+Things[bufferDataRow[y].Machine].name);
+			                    logger.debug("ProcessingDataBuffer:  Service - stationNameForDB: "+stationNameForDB);
+			
+			                    if (partDataInfoTable.rows[x].DateTime.getFullYear() != 1970) {
+				                    var params = {
+				                        PartNumber: partDataInfoTable.rows[x].PartNumber /* STRING */,
+				                        SerialNumber: partDataInfoTable.rows[x].SerialNumber /* STRING */,
+				                        ValueName: partDataInfoTable.rows[x].ShortName /* STRING */,
+				                        Value: value_float /* NUMBER */,
+				                        LowerLimit: ll_float /* NUMBER */,
+				                        OrderNumber: partDataInfoTable.rows[x].OrderNumber /* STRING */,
+				                        Unit: partDataInfoTable.rows[x].Unit /* STRING */,
+				                        UpperLimit: ul_float /* NUMBER */,
+				                        DateTime: partDataInfoTable.rows[x].DateTime /* DATETIME */,
+				                        Machine: stationNameForDB /* STRING */,
+				                        Description: partDataInfoTable.rows[x].Description,
+				                        Comment: partDataInfoTable.rows[x].Identifier,
+				                        TrackingNumber: partDataInfoTable.rows[x].TrackingNumber
+				                    };
+			                        //logger.debug("SetPartData Service - AddProcessFloatDataToDataTable: start");
+									// date1:DATETIME
+									var date1 = new Date();
+				
+			                        Things[DB].AddProcessFloatDataToDataTable(params);		
+	
+									// date2:DATETIME
+									var date2 = new Date();
+									
+									// dateDifference(date1:DATETIME,date2:DATETIME):NUMBER
+									var difference = dateDifference(date2, date1);
+									logger.debug("ProcessingDataBuffer: time for Start AddProcessFloatDataToDataTable: " + difference);
+			                        //logger.debug("ProcessingDataBuffer:  Service - AddProcessFloatDataToDataTable: OK");
+			                    } else {
+			                        logger.error("ProcessingDataBuffer:  Service - Production date not set (1970) " + Things[bufferDataRow[y].Machine].name);
+			                        throw "Production date not set (1970)" /* STRING */
+			                    }
+			                }
+	                    }
+
+	                    var params = {
+	                        partDataInfoTable: partDataInfoTable /* INFOTABLE */
+	                    };
+	
+	                    logger.debug("ProcessingDataBuffer:  Service - SetPartDataForDevice: start ("+bufferDataRow[y].Machine+")");
+	                    Things[bufferDataRow[y].Machine].SetPartDataForDevice(params);
+	                    logger.debug("ProcessingDataBuffer:  Service - SetPartDataForDevice: OK");
+
+		                var params = {
+		                    Id: bufferDataRow[y].Id /* LONG */
+		                };
+		
+						// date1:DATETIME
+						var date1 = new Date();
+			
+		                Things[DB].DeleteProcessFloatDataFromBufferDataTable(params);
+
+						// date2:DATETIME
+						var date2 = new Date();
+						
+						// dateDifference(date1:DATETIME,date2:DATETIME):NUMBER
+						var difference = dateDifference(date2, date1);
+						logger.debug("ProcessingDataBuffer: time for Start DeleteProcessFloatDataFromBufferDataTable: " + difference);
+			        } catch(err) {
+			            var errortext = err.toString().substr(0,254);
+			            logger.error("ProcessingDataBuffer: Error: " + err);
+						var deadlock = "was deadlocked on lock | communication buffer resources with another process and has been chosen as the deadlock";
+						if  (errortext.indexOf(deadlock) == -1) {			            
+				            
+				            var params = {
+				                Type: bufferDataRow[y].Type /* STRING */,
+				                JSON: bufferDataRow[y].JSON /* STRING */,
+				                Machine: bufferDataRow[y].Machine /* STRING */,
+				                Reason: errortext /* STRING */
+				            };
+				
+							// date1:DATETIME
+							var date1 = new Date();
+			
+				            var linesInserted = Things[DB].AddProcessFloatDataToErrorBufferDataTable(params);
+							
+							// date2:DATETIME
+							var date2 = new Date();
+							
+							// dateDifference(date1:DATETIME,date2:DATETIME):NUMBER
+							var difference = dateDifference(date2, date1);
+							logger.debug("ProcessingDataBuffer: time for Start AddProcessFloatDataToErrorBufferDataTable: " + difference);
+				            if (linesInserted > 0) {
+				
+				                var params = {
+				                    Id: bufferDataRow[y].Id /* LONG */
+				                };
+				
+								// date1:DATETIME
+								var date1 = new Date();
+				                Things[DB].DeleteProcessFloatDataFromBufferDataTable(params);
+								// date2:DATETIME
+								var date2 = new Date();
+								
+								// dateDifference(date1:DATETIME,date2:DATETIME):NUMBER
+								var difference = dateDifference(date2, date1);
+								logger.debug("ProcessingDataBuffer: time for Start DeleteProcessFloatDataFromBufferDataTable: " + difference);
+				            }
+				        }
+			        }
+					// date2:DATETIME
+					var date12 = new Date();
+					
+					// dateDifference(date1:DATETIME,date2:DATETIME):NUMBER
+					var difference = dateDifference(date12, date11);
+					logger.debug("ProcessingDataBuffer: time for one cycle: " + difference);
+			        
+			    }
+				logger.debug("ProcessingDataBuffer: OK 1");
+	        }
+			logger.debug("ProcessingDataBuffer: OK 2");
+	    }
+		logger.debug("ProcessingDataBuffer: OK 3");
+	} catch(err) {
+		logger.error("ProcessingDataBuffer error: " + err);
+	}
+}]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="SetPartDataPrePocessor">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+	var result = partDataInfoTable;
+	]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+				</ServiceImplementations>
+				<Subscriptions>
+				</Subscriptions>
+			</ThingShape>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations>
+				<AlertDefinitions name="doProcessing" />
+			</AlertConfigurations>
+			<ImplementedShapes />
+			<ThingProperties>
+			</ThingProperties>
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="" timestamp="2018-12-13T11:35:19.102+01:00"
+					user="adm-flassakm" />
+			</ConfigurationChanges>
+		</Thing>
+	</Things>
+</Entities>

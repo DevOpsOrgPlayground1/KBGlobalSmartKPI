@@ -1,0 +1,2846 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b692" majorVersion="9" minorVersion="0"
+	modelPersistenceProviderPackage="AzuresqlPersistenceProviderPackage"
+	revision="11" schemaVersion="1109" universal="">
+	<Mashups>
+		<Mashup aspect.isFlex="true" aspect.isResponsive="true"
+			aspect.mashupType="mashup" columns="0.0" description=""
+			documentationContent="" homeMashup=""
+			lastModifiedDate="2021-04-21T08:37:45.725Z"
+			name="KBLocalSmartKPIMachineLevelSimpleProcessDataDDFrameMashup_V1"
+			projectName="KBsmartKPI" rows="0.0" tags="">
+			<Owner name="ext-sharmash" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</PropertyRead>
+					<PropertyWrite />
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true" name="KBOrganization"
+						type="Organization" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables>
+				<ConfigurationTable dataShapeName=""
+					description="Mashup Mobile Settings" isHidden="true"
+					isMultiRow="false" name="MobileSettings" ordinal="0">
+					<DataShape>
+						<FieldDefinitions>
+							<FieldDefinition aspect.defaultValue="false"
+								baseType="BOOLEAN" description="" name="disableZoom" ordinal="0" />
+							<FieldDefinition aspect.defaultValue="true"
+								baseType="BOOLEAN" description="" name="fullScreenMode"
+								ordinal="0" />
+							<FieldDefinition baseType="STRING" description=""
+								name="height" ordinal="0" />
+							<FieldDefinition
+								aspect.defaultValue="device-height" baseType="STRING"
+								description="" name="heightType" ordinal="0" />
+							<FieldDefinition aspect.defaultValue="1.0"
+								baseType="NUMBER" description="" name="initialScale" ordinal="0" />
+							<FieldDefinition baseType="STRING" description=""
+								name="iosShortcutIconTitle" ordinal="0" />
+							<FieldDefinition
+								aspect.defaultValue="black-translucent" baseType="STRING"
+								description="" name="iosStatusBarAppearance" ordinal="0" />
+							<FieldDefinition aspect.defaultValue="10.0"
+								baseType="NUMBER" description="" name="maximumScale" ordinal="0" />
+							<FieldDefinition aspect.defaultValue="0.1"
+								baseType="NUMBER" description="" name="minimumScale" ordinal="0" />
+							<FieldDefinition baseType="STRING" description=""
+								name="width" ordinal="0" />
+							<FieldDefinition
+								aspect.defaultValue="device-width" baseType="STRING"
+								description="" name="widthType" ordinal="0" />
+						</FieldDefinitions>
+					</DataShape>
+					<Rows>
+						<Row>
+							<disableZoom>false</disableZoom>
+							<fullScreenMode>true</fullScreenMode>
+							<height />
+							<heightType><![CDATA[device-height]]></heightType>
+							<initialScale>1.0</initialScale>
+							<iosShortcutIconTitle />
+							<iosStatusBarAppearance><![CDATA[black-translucent]]></iosStatusBarAppearance>
+							<maximumScale>10.0</maximumScale>
+							<minimumScale>0.1</minimumScale>
+							<width />
+							<widthType><![CDATA[device-width]]></widthType>
+						</Row>
+					</Rows>
+				</ConfigurationTable>
+			</ConfigurationTables>
+			<ParameterDefinitions>
+				<FieldDefinition aspect.bindingDirection="IN"
+					aspect.isMandatory="false" baseType="STRING" description=""
+					name="Machine" ordinal="0" />
+			</ParameterDefinitions>
+			<Things />
+			<ThingShapes />
+			<ThingTemplates />
+			<mashupContent><![CDATA[{
+  "CustomMashupCss" : "#root_pagemashupcontainer-7_ptcsvaluedisplay-52-bounding-box, #root_pagemashupcontainer-7_htmltextarea-79 {\nheight: 100%;\n    width: 100%;\n    overflow:hidden;\n}\n\n#root_pagemashupcontainer-7_ptcsvaluedisplay-52,#root_pagemashupcontainer-7_flexcontainer-72 {\nheight: 100%;\n    width: 100%;\n    overflow:hidden;\n}\n\nptcs-value-display::part(overflow-control) {\nheight: 100%;\n     width: 100%;\n}\nptcs-value-display::part(value-container) {\nheight: 100%;\n     width: 100%;\n}\nptcs-value-display::part(item-value-container) {\nheight: 100%;\n     width: 100%;\n}\n.opened {\n    margin-left: 2em;\n}\n\n.html-tag {\n    color: rgb(136, 18, 128);\n}\n\n.folde {\n    background: url(data:image/png;base64,R0lGODlhCQAIAJEAAP///8HBwYCAgP///yH5BAUUAAMALAAAAAAJAAgAAAITnI4CFu3L3pjCBUgb%0Aznd6s31fAQA7);\n    height: 10px;\n}\n\n.folder-button {\n    -webkit-user-select: none;\n    cursor: pointer;\n    display: inline-block;\n    margin-left: 0px;\n    width: 10px;\n    background-repeat: no-repeat;\n    background-position: left top;\n    vertical-align: bottom;\n}",
+  "Data" : {
+    "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate" : {
+      "DataName" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+      "EntityName" : "KBKPILocalThingWorxDatabaseTemplate",
+      "EntityType" : "DynamicThingTemplates",
+      "Id" : "8805df63-5713-49f2-9e37-d4b6b3bf7ac3",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "50218a17-e11c-4705-a993-564985fa9320",
+        "Name" : "GetMachinesWithProcessDataForVisualization",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetMachinesWithProcessDataForVisualization"
+      }, {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "c2569b61-b7c5-4c3c-85a1-4e429e721cb8",
+        "Name" : "GetProcessDataFromDB",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetProcessDataFromDB"
+      }, {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "3467c4f9-4d12-476b-9b44-b3b18dc4fdf5",
+        "Name" : "GetProcessDataAsLines",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetProcessDataAsLines"
+      } ]
+    },
+    "Resources_KBThingWorxServerSystem" : {
+      "DataName" : "Resources_KBThingWorxServerSystem",
+      "EntityName" : "KBThingWorxServerSystem",
+      "EntityType" : "Resources",
+      "Id" : "d14ee7fd-8557-4f36-8f11-1eeea75a3050",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "01785451-aedc-4361-bbc9-982ff02af232",
+        "Name" : "GetKPILocalThingWorxDatabaseThing",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetKPILocalThingWorxDatabaseThing"
+      } ]
+    },
+    "Session" : {
+      "DataName" : "Session",
+      "EntityName" : "",
+      "EntityType" : "Session",
+      "Id" : "session",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "SessionInterface",
+        "Name" : "GetGlobalSessionValues",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetGlobalSessionValues"
+      } ]
+    },
+    "Things_KBKPILocalThingWorxDatabaseThing" : {
+      "DataName" : "Things_KBKPILocalThingWorxDatabaseThing",
+      "EntityName" : "KBKPILocalThingWorxDatabaseThing",
+      "EntityType" : "Things",
+      "Id" : "95e77550-39e1-45f0-800d-dbd0d61d4d3a",
+      "RefreshInterval" : 0,
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "f74198c4-5979-490a-923d-83ca310a248f",
+        "Name" : "GetProcessDataForPDF",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetProcessDataForPDF"
+      }, {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "514d950e-8808-46d4-b16f-c75d50d72341",
+        "Name" : "GetProcessDataForXML",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetProcessDataForXML"
+      } ]
+    },
+    "UserExtensions" : {
+      "DataName" : "UserExtensions",
+      "EntityName" : "",
+      "EntityType" : "UserExtensions",
+      "Id" : "UserExtensions",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "UserExtensionInterface",
+        "Name" : "GetCurrentUserExtensionProperties",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetCurrentUserExtensionProperties"
+      } ]
+    }
+  },
+  "DataBindings" : [ {
+    "Id" : "4afb2c80-092c-46f1-82f8-3d42776dea86",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Result",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "value",
+      "TargetPropertyBaseType" : "THINGNAME",
+      "TargetPropertyType" : "Entity"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetKPILocalThingWorxDatabaseThing",
+    "SourceSection" : "Resources_KBThingWorxServerSystem",
+    "TargetArea" : "Data",
+    "TargetId" : "EntityName",
+    "TargetSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate"
+  }, {
+    "Id" : "bd55ce02-f114-4d1f-8f88-ccc256cb9bcd",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "InfoTable",
+      "TargetProperty" : "Data",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetMachinesWithProcessDataForVisualization",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "UI",
+    "TargetId" : "ptcsdropdown-4",
+    "TargetSection" : ""
+  }, {
+    "Id" : "f01533fd-f7d4-4a89-a5b0-d4d14c5b4faf",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "DisplayName",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "LabelText",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "SelectedRows",
+    "SourceId" : "GetMachinesWithProcessDataForVisualization",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "UI",
+    "TargetId" : "ptcslabel-24",
+    "TargetSection" : ""
+  }, {
+    "Id" : "736f5911-4c1a-42f1-8df0-8b8375803912",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "InfoTable",
+      "TargetProperty" : "Data",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetProcessDataFromDB",
+    "SourceName" : "GetProcessDataFromDB",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "UI",
+    "TargetId" : "dhxgrid-37",
+    "TargetSection" : ""
+  }, {
+    "Id" : "f6cd3de7-99a1-449a-a08c-0e2f736862a4",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "StartDateTime",
+      "SourcePropertyBaseType" : "DATETIME",
+      "TargetProperty" : "StartDate",
+      "TargetPropertyBaseType" : "DATETIME",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "timeselector-21",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetProcessDataFromDB",
+    "TargetSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate"
+  }, {
+    "Id" : "05bce0c1-5bdd-44e8-bfef-d567a58130ba",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "EndDateTime",
+      "SourcePropertyBaseType" : "DATETIME",
+      "TargetProperty" : "EndDate",
+      "TargetPropertyBaseType" : "DATETIME",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "timeselector-21",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetProcessDataFromDB",
+    "TargetSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate"
+  }, {
+    "Id" : "45b80038-7b98-4b4a-b3dc-9d3005d09f84",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "ThingName",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "Machine",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "SelectedRows",
+    "SourceId" : "GetMachinesWithProcessDataForVisualization",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "Data",
+    "TargetId" : "GetProcessDataFromDB",
+    "TargetSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate"
+  }, {
+    "Id" : "75edc983-1d6d-4cd1-872c-db2d12305cba",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "isProcessDataDateTime",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "TargetProperty" : "isProcessDataDateTime",
+      "TargetPropertyBaseType" : "BOOLEAN",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "SelectedRows",
+    "SourceId" : "GetProcessDataFromDB",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "Data",
+    "TargetId" : "GetProcessDataAsLines",
+    "TargetSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate"
+  }, {
+    "Id" : "de0e0480-1c73-4280-83ae-25a1c3757609",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "isProcessDataFloat",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "TargetProperty" : "isProcessDataFloat",
+      "TargetPropertyBaseType" : "BOOLEAN",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "SelectedRows",
+    "SourceId" : "GetProcessDataFromDB",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "Data",
+    "TargetId" : "GetProcessDataAsLines",
+    "TargetSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate"
+  }, {
+    "Id" : "8cc70395-bac0-4542-a7d0-2dc1df72d059",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "isProcessDataString",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "TargetProperty" : "isProcessDataString",
+      "TargetPropertyBaseType" : "BOOLEAN",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "SelectedRows",
+    "SourceId" : "GetProcessDataFromDB",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "Data",
+    "TargetId" : "GetProcessDataAsLines",
+    "TargetSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate"
+  }, {
+    "Id" : "14d8d93d-8053-479b-a407-bf07f526a5b0",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Id",
+      "SourcePropertyBaseType" : "LONG",
+      "TargetProperty" : "Id",
+      "TargetPropertyBaseType" : "LONG",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "SelectedRows",
+    "SourceId" : "GetProcessDataFromDB",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "Data",
+    "TargetId" : "GetProcessDataAsLines",
+    "TargetSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate"
+  }, {
+    "Id" : "9fac5b2c-5f9b-4a27-938c-297ad8539821",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Machine",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "SelectedText",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "ptcsdropdown-4",
+    "TargetSection" : ""
+  }, {
+    "Id" : "656748c5-ac6c-4ad9-a73b-c8e56696dd79",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "ProcesDataType",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "inputDataType",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "SelectedRows",
+    "SourceId" : "GetProcessDataFromDB",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "UI",
+    "TargetId" : "validator-46",
+    "TargetSection" : ""
+  }, {
+    "Id" : "31fa454b-e595-4225-b5f7-884c0012c192",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Output",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "SourcePropertyType" : "property",
+      "TargetProperty" : "isPDF",
+      "TargetPropertyBaseType" : "BOOLEAN",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "validator-46",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "validator-49",
+    "TargetSection" : ""
+  }, {
+    "Id" : "1650b912-050d-4703-b8c5-ee4a68957237",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "result",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "Data",
+      "TargetPropertyBaseType" : "ANYSCALAR",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetProcessDataForPDF",
+    "SourceSection" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "TargetArea" : "UI",
+    "TargetId" : "ptcsvaluedisplay-52",
+    "TargetSection" : ""
+  }, {
+    "Id" : "34ae8fab-86f1-4642-ba8d-724249fde0f3",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "result",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "inputDataContent",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetProcessDataForPDF",
+    "SourceSection" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "TargetArea" : "UI",
+    "TargetId" : "navigationfunction-56",
+    "TargetSection" : ""
+  }, {
+    "Id" : "72239466-f91f-49ac-9ad4-5154ab154160",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Output",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "Visible",
+      "TargetPropertyBaseType" : "BOOLEAN",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "validator-49",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "gridadvanced-65",
+    "TargetSection" : ""
+  }, {
+    "Id" : "9e02ec6b-2bdf-401e-af62-390e300cc5a2",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Output",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "Expanded",
+      "TargetPropertyBaseType" : "BOOLEAN",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "validator-49",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "flexcontainer-71",
+    "TargetSection" : ""
+  }, {
+    "Id" : "83297084-0cc2-451e-8775-3242aa59d51a",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Output",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "Expanded",
+      "TargetPropertyBaseType" : "BOOLEAN",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "validator-46",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "flexcontainer-72",
+    "TargetSection" : ""
+  }, {
+    "Id" : "52a1d8cf-7438-4739-9026-92f10da41dce",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "ProcesDataType",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "inputRecordType",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "SelectedRows",
+    "SourceId" : "GetProcessDataFromDB",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "UI",
+    "TargetId" : "validator-80",
+    "TargetSection" : ""
+  }, {
+    "Id" : "d5e5db96-55b7-40c7-9cbc-967071fbf68f",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "InfoTable",
+      "TargetProperty" : "Data",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetProcessDataAsLines",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "UI",
+    "TargetId" : "gridadvanced-65",
+    "TargetSection" : ""
+  }, {
+    "Id" : "cc16693d-590c-4e49-ad0e-dbe574a871b7",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "InfoTable",
+      "TargetProperty" : "inputInfotable",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetProcessDataAsLines",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "Data",
+    "TargetId" : "GetProcessDataForPDF",
+    "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+  }, {
+    "Id" : "b2acdab6-270a-4379-a6b7-82437c0e2ac1",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "InfoTable",
+      "TargetProperty" : "inputInfotable",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetProcessDataAsLines",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "Data",
+    "TargetId" : "GetProcessDataForXML",
+    "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+  }, {
+    "Id" : "7d152045-13e8-4270-b64f-aef425df0cf6",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Output",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "SourcePropertyType" : "property",
+      "TargetProperty" : "isXML",
+      "TargetPropertyBaseType" : "BOOLEAN",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "validator-80",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "expression-81",
+    "TargetSection" : ""
+  }, {
+    "Id" : "0a594179-6b01-49f1-b907-d7ec2d28e8c8",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "result",
+      "SourcePropertyBaseType" : "XML",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "Text",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetProcessDataForXML",
+    "SourceSection" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "TargetArea" : "UI",
+    "TargetId" : "htmltextarea-79",
+    "TargetSection" : ""
+  }, {
+    "Id" : "98cae40a-359d-418e-848e-4db74f875ea9",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Output",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "Visible",
+      "TargetPropertyBaseType" : "BOOLEAN",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "expression-81",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "ptcsvaluedisplay-52",
+    "TargetSection" : ""
+  }, {
+    "Id" : "d335ad6a-71fc-4e6f-8bc5-6dbe6056c64e",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Output",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "Visible",
+      "TargetPropertyBaseType" : "BOOLEAN",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "validator-80",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "htmltextarea-79",
+    "TargetSection" : ""
+  }, {
+    "Id" : "8d82e268-6b7d-4838-aa2f-df85f7ce4ac8",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Output",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "Visible",
+      "TargetPropertyBaseType" : "BOOLEAN",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "expression-81",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "ptcsbutton-62",
+    "TargetSection" : ""
+  } ],
+  "DesignTimePermissions" : {
+    "Create" : [ ],
+    "Delete" : [ ],
+    "Metadata" : [ ],
+    "Read" : [ ],
+    "Update" : [ ]
+  },
+  "Events" : [ {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Resources_KBThingWorxServerSystem",
+    "EventHandlerService" : "GetKPILocalThingWorxDatabaseThing",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "8bc57299-3b34-4f70-8051-26407cc65647"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "EventHandlerService" : "GetMachinesWithProcessDataForVisualization",
+    "EventTriggerArea" : "Data",
+    "EventTriggerEvent" : "ServiceInvokeCompleted",
+    "EventTriggerId" : "GetKPILocalThingWorxDatabaseThing",
+    "EventTriggerSection" : "Resources_KBThingWorxServerSystem",
+    "Id" : "65644fbe-a647-4b9d-8452-dbaed4ddb79b"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "EventHandlerService" : "GetProcessDataFromDB",
+    "EventTriggerArea" : "Data",
+    "EventTriggerEvent" : "SelectedRowsChanged",
+    "EventTriggerId" : "GetMachinesWithProcessDataForVisualization",
+    "EventTriggerSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "Id" : "8d4afbf4-c0db-4013-87c7-da6feabfa176"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "EventHandlerService" : "GetProcessDataFromDB",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Updated",
+    "EventTriggerId" : "timeselector-21",
+    "EventTriggerSection" : "",
+    "Id" : "1afb0731-0343-4726-adaf-c2de625a3546"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "EventHandlerService" : "GetProcessDataAsLines",
+    "EventTriggerArea" : "Data",
+    "EventTriggerEvent" : "SelectedRowsChanged",
+    "EventTriggerId" : "GetProcessDataFromDB",
+    "EventTriggerSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "Id" : "3e84d06a-aef1-44fb-9f1e-6295c8dd7c32"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "validator-46",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "Data",
+    "EventTriggerEvent" : "ServiceInvokeCompleted",
+    "EventTriggerId" : "GetProcessDataAsLines",
+    "EventTriggerSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "Id" : "62d8969c-2075-42c8-aa16-be37c371028a"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "validator-49",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "True",
+    "EventTriggerId" : "validator-46",
+    "EventTriggerSection" : "",
+    "Id" : "ea24a739-a731-4843-b6c5-9fce990de0e3"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "validator-49",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "False",
+    "EventTriggerId" : "validator-46",
+    "EventTriggerSection" : "",
+    "Id" : "f234a0fe-2756-42b9-9c41-4fd379eda8c1"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "navigationfunction-54",
+    "EventHandlerService" : "Navigate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Clicked",
+    "EventTriggerId" : "ptcsbutton-60",
+    "EventTriggerSection" : "",
+    "Id" : "3ef8a71a-3da2-44a0-bc5c-9ba2a6d23ffc"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "navigationfunction-55",
+    "EventHandlerService" : "Navigate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Clicked",
+    "EventTriggerId" : "ptcsbutton-61",
+    "EventTriggerSection" : "",
+    "Id" : "e049a8cd-e20a-465d-b2ec-c5ca9af7a848"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "navigationfunction-56",
+    "EventHandlerService" : "Navigate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Clicked",
+    "EventTriggerId" : "ptcsbutton-62",
+    "EventTriggerSection" : "",
+    "Id" : "6f1e551a-d2c7-4ac9-aa62-551ef199f1cd"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "validator-46",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "a0de3798-37a5-43d1-be3a-396d86a51b5b"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "validator-80",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "True",
+    "EventTriggerId" : "validator-46",
+    "EventTriggerSection" : "",
+    "Id" : "3483eca9-59c1-4570-bca6-f80dd942e034"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "expression-81",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "False",
+    "EventTriggerId" : "validator-80",
+    "EventTriggerSection" : "",
+    "Id" : "152ebd25-a063-4545-a180-830e08bf7629"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "expression-81",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "True",
+    "EventTriggerId" : "validator-80",
+    "EventTriggerSection" : "",
+    "Id" : "313745d9-a6ad-412d-bd9f-315f27d80356"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "EventHandlerService" : "GetProcessDataForXML",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "True",
+    "EventTriggerId" : "validator-80",
+    "EventTriggerSection" : "",
+    "Id" : "22eb801e-95c5-4adc-9015-611f5e986cf4"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "EventHandlerService" : "GetProcessDataForPDF",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "False",
+    "EventTriggerId" : "validator-80",
+    "EventTriggerSection" : "",
+    "Id" : "7a12ef51-7cd5-40db-afb1-12150ae7c6eb"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "EventHandlerService" : "GetProcessDataForXML",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "False",
+    "EventTriggerId" : "validator-80",
+    "EventTriggerSection" : "",
+    "Id" : "d806e9be-619f-4ebc-8ccb-b5695a01e8d8"
+  } ],
+  "RunTimePermissions" : {
+    "permissions" : [ {
+      "EventInvoke" : [ ],
+      "EventSubscribe" : [ ],
+      "PropertyRead" : [ {
+        "isPermitted" : true,
+        "name" : "KBUserGroup",
+        "type" : "Group"
+      } ],
+      "PropertyWrite" : [ ],
+      "ServiceInvoke" : [ {
+        "isPermitted" : true,
+        "name" : "KBUserGroup",
+        "type" : "Group"
+      } ],
+      "resourceName" : "*"
+    } ]
+  },
+  "UI" : {
+    "Properties" : {
+      "AddToDashboardButton" : "SimplePlus",
+      "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+      "Area" : "Mashup",
+      "BGImage" : "",
+      "BGImageRepeat" : "no-repeat",
+      "BGImageSize" : "auto",
+      "Columns" : 0,
+      "ConfigureGadgetButton" : "SimpleGear",
+      "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+      "DisplayName" : "Mashup",
+      "EnableParameterEditing" : false,
+      "Height" : 618,
+      "Id" : "mashup-root",
+      "IgnoreWarningsInViewMashup" : false,
+      "IsPrintLayout" : false,
+      "Left" : 0,
+      "MashupResolution" : "1024x768",
+      "MashupToEditGadget" : "DefaultMashupToEditGadget",
+      "Master" : "KBSmartProductionMaster1Mashup",
+      "MigratedOn" : "2021-04-14T05:34:48.000Z",
+      "MinHeight" : 0,
+      "MinWidth" : 0,
+      "ResponsiveLayout" : true,
+      "Rows" : 0,
+      "ShowDataLoading" : true,
+      "Style" : "DefaultMashupStyle",
+      "StyleProperties" : {
+        "data" : {
+          "flexcontainer-30" : {
+            "parts" : {
+              "$" : {
+                "$" : {
+                  "border-radius" : "4px",
+                  "border-style" : "solid",
+                  "border-width" : "1px"
+                }
+              }
+            },
+            "widget" : "flex-container"
+          },
+          "flexcontainer-39" : {
+            "parts" : {
+              "$" : {
+                "$" : {
+                  "border-radius" : "4px",
+                  "border-style" : "solid",
+                  "border-width" : "1px"
+                }
+              }
+            },
+            "widget" : "flex-container"
+          },
+          "flexcontainer-40" : {
+            "parts" : {
+              "$" : {
+                "$" : {
+                  "border-radius" : "4px",
+                  "border-style" : "solid",
+                  "border-width" : "1px"
+                }
+              }
+            },
+            "widget" : "flex-container"
+          },
+          "ptcsbutton-60" : {
+            "parts" : {
+              "$" : {
+                "$" : {
+                  "background" : "#00407D",
+                  "border-color" : "#00407D",
+                  "color" : "#ffffff"
+                },
+                "hover" : {
+                  "color" : "#ffffff"
+                },
+                "pressed" : {
+                  "color" : "#ffffff"
+                }
+              }
+            },
+            "widget" : "ptcs-button"
+          },
+          "ptcsbutton-61" : {
+            "parts" : {
+              "$" : {
+                "$" : {
+                  "background" : "#00407D",
+                  "color" : "#ffffff"
+                },
+                "hover" : {
+                  "color" : "#ffffff"
+                },
+                "pressed" : {
+                  "color" : "#ffffff"
+                }
+              }
+            },
+            "widget" : "ptcs-button"
+          },
+          "ptcsbutton-62" : {
+            "parts" : {
+              "$" : {
+                "$" : {
+                  "background" : "#00407D",
+                  "border-color" : "#00407D",
+                  "color" : "#ffffff"
+                },
+                "hover" : {
+                  "color" : "#ffffff"
+                },
+                "pressed" : {
+                  "color" : "#ffffff"
+                }
+              }
+            },
+            "widget" : "ptcs-button"
+          },
+          "ptcslabel-23" : {
+            "parts" : {
+              "$" : {
+                "$" : {
+                  "color" : "#00457e",
+                  "font-size" : "26px",
+                  "font-weight" : "700"
+                }
+              }
+            },
+            "widget" : "ptcs-label"
+          },
+          "ptcslabel-24" : {
+            "parts" : {
+              "$" : {
+                "$" : {
+                  "color" : "#00457e",
+                  "font-size" : "26px",
+                  "font-weight" : "700"
+                }
+              }
+            },
+            "widget" : "ptcs-label"
+          }
+        },
+        "meta" : {
+          "type" : "WidgetStyler",
+          "version" : "1.0"
+        }
+      },
+      "StyleTheme" : "Base Theme",
+      "Title" : "",
+      "TitleBar" : false,
+      "TitleBarStyle" : "DefaultTitleBarStyle",
+      "TitleBarText" : "Gadget Title Here",
+      "Top" : 0,
+      "Type" : "mashup",
+      "UseMasterTheme" : false,
+      "UseTheme" : false,
+      "UseThemeForHybrids" : false,
+      "Visible" : true,
+      "Width" : 1024,
+      "Z-index" : 10,
+      "__TypeDisplayName" : "Mashup",
+      "_currentParameterDefs" : [ {
+        "Aspects" : {
+          "bindingDirection" : "IN",
+          "isMandatory" : false
+        },
+        "BaseType" : "STRING",
+        "Description" : "",
+        "ParameterName" : "Machine"
+      } ],
+      "id_index" : 81,
+      "supportsAutoResize" : true
+    },
+    "Widgets" : [ {
+      "Properties" : {
+        "Area" : "UI",
+        "DisplayName" : "container-29",
+        "EnableExpandCollapse" : false,
+        "Expanded" : true,
+        "Id" : "flexcontainer-29",
+        "LastContainer" : true,
+        "Overlay" : false,
+        "ResponsiveLayout" : true,
+        "ShowDataLoading" : true,
+        "ShowExpandCollapseTab" : false,
+        "SourceURL" : "",
+        "Style" : "DefaultContainerStyle",
+        "StyleProperties" : { },
+        "Type" : "flexcontainer",
+        "UseTheme" : true,
+        "Visible" : true,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Flex Container",
+        "align-content" : "flex-start",
+        "align-items" : "flex-start",
+        "flex-basis" : "auto",
+        "flex-direction" : "column",
+        "flex-grow" : 1,
+        "flex-max-height" : "",
+        "flex-max-width" : "",
+        "flex-min-height" : "",
+        "flex-min-width" : "",
+        "flex-shrink" : "0",
+        "flex-size" : "default",
+        "flex-wrap" : "nowrap",
+        "iconClass" : "widgets-flexcontainer",
+        "justify-content" : "flex-start",
+        "positioning" : "responsive",
+        "userCannotRemove" : true
+      },
+      "Widgets" : [ {
+        "Properties" : {
+          "Area" : "UI",
+          "DisplayName" : "container-30",
+          "EnableExpandCollapse" : false,
+          "Expanded" : true,
+          "Id" : "flexcontainer-30",
+          "LastContainer" : false,
+          "Overlay" : false,
+          "ResponsiveLayout" : true,
+          "ShowDataLoading" : true,
+          "ShowExpandCollapseTab" : false,
+          "SourceURL" : "",
+          "Style" : "DefaultContainerStyle",
+          "StyleProperties" : { },
+          "Type" : "flexcontainer",
+          "UseTheme" : true,
+          "Visible" : true,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Flex Container",
+          "align-content" : "flex-start",
+          "align-items" : "flex-start",
+          "flex-basis" : "auto",
+          "flex-direction" : "row",
+          "flex-grow" : 1,
+          "flex-max-height" : "85px",
+          "flex-max-width" : "",
+          "flex-min-height" : "85px",
+          "flex-min-width" : "",
+          "flex-shrink" : "0",
+          "flex-size" : "fixed",
+          "flex-wrap" : "nowrap",
+          "iconClass" : "widgets-flexcontainer-fixed",
+          "isLocked" : false,
+          "justify-content" : "flex-start",
+          "positioning" : "responsive",
+          "userCannotRemove" : false
+        },
+        "Widgets" : [ {
+          "Properties" : {
+            "Area" : "UI",
+            "DisplayName" : "container-26",
+            "EnableExpandCollapse" : false,
+            "Expanded" : true,
+            "Id" : "flexcontainer-26",
+            "LastContainer" : false,
+            "Overlay" : false,
+            "ResponsiveLayout" : true,
+            "ShowDataLoading" : true,
+            "ShowExpandCollapseTab" : false,
+            "SourceURL" : "",
+            "Style" : "DefaultContainerStyle",
+            "StyleProperties" : { },
+            "Type" : "flexcontainer",
+            "UseTheme" : true,
+            "Visible" : true,
+            "Z-index" : 10,
+            "__TypeDisplayName" : "Flex Container",
+            "align-content" : "flex-start",
+            "align-items" : "flex-start",
+            "flex-basis" : "0",
+            "flex-direction" : "row",
+            "flex-grow" : 50,
+            "flex-max-height" : "",
+            "flex-max-width" : "",
+            "flex-min-height" : "",
+            "flex-min-width" : "",
+            "flex-shrink" : "0",
+            "flex-size" : "default",
+            "flex-wrap" : "wrap",
+            "iconClass" : "widgets-flexcontainer",
+            "isLocked" : false,
+            "justify-content" : "flex-start",
+            "positioning" : "responsive",
+            "userCannotRemove" : false
+          },
+          "Widgets" : [ {
+            "Properties" : {
+              "Area" : "UI",
+              "DisclosureControl" : "show-more",
+              "DisplayName" : "label-23",
+              "HorizontalAlignment" : "left",
+              "Id" : "ptcslabel-23",
+              "LabelText" : "Process Data, Line",
+              "LabelType" : "label",
+              "LastContainer" : false,
+              "Left" : 0,
+              "Margin" : "5",
+              "MultiLine" : true,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "TooltipField" : "",
+              "Top" : 0,
+              "Type" : "ptcslabel",
+              "UseTheme" : true,
+              "VerticalAlignment" : "flex-start",
+              "Visible" : true,
+              "Width" : 235,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Label",
+              "overflowShowLessTxt" : "[[showLess]]",
+              "overflowShowMoreTxt" : "[[showMore]]"
+            },
+            "Widgets" : [ ]
+          }, {
+            "Properties" : {
+              "Area" : "UI",
+              "DisclosureControl" : "show-more",
+              "DisplayName" : "label-24",
+              "HorizontalAlignment" : "left",
+              "Id" : "ptcslabel-24",
+              "LabelText" : "Label",
+              "LabelType" : "label",
+              "LastContainer" : false,
+              "Left" : 0,
+              "Margin" : "5",
+              "MultiLine" : true,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "TooltipField" : "",
+              "Top" : 0,
+              "Type" : "ptcslabel",
+              "UseTheme" : true,
+              "VerticalAlignment" : "flex-start",
+              "Visible" : false,
+              "Width" : 415,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Label",
+              "overflowShowLessTxt" : "[[showLess]]",
+              "overflowShowMoreTxt" : "[[showMore]]"
+            },
+            "Widgets" : [ ]
+          }, {
+            "Properties" : {
+              "Alignment" : "left",
+              "AllLabel" : "[[all]]",
+              "Area" : "UI",
+              "AutoSelectFirstRow" : true,
+              "ClearSelectedItemsLabel" : "[[clearSelectedItems]]",
+              "ClearSelectionItem" : true,
+              "ClearSelectionLabel" : "(None)",
+              "Disabled" : false,
+              "DisplayField" : "DisplayName",
+              "DisplayName" : "dhxlist-4",
+              "EnableToolTips" : true,
+              "FilterHintText" : "Filter",
+              "Height" : 28,
+              "HintText" : "Select...",
+              "Id" : "ptcsdropdown-4",
+              "ItemMeta" : {
+                "type" : "text"
+              },
+              "Label" : "",
+              "LabelAlignment" : "left",
+              "LastContainer" : false,
+              "Left" : 0,
+              "Margin" : "5",
+              "MultiSelect" : false,
+              "NumberOfItemsInDropdownView" : 20,
+              "ResponsiveLayout" : false,
+              "RowHeight" : 28,
+              "SelectAllLabel" : "[[selectAll]]",
+              "SelectedLabel" : "[[selected]]",
+              "ShowDataLoading" : true,
+              "ShowListFilter" : false,
+              "TabSequence" : 0,
+              "Top" : 0,
+              "Type" : "ptcsdropdown",
+              "UseTheme" : true,
+              "ValueField" : "ThingName",
+              "Visible" : true,
+              "Width" : 200,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "List"
+            },
+            "Widgets" : [ ]
+          } ]
+        }, {
+          "Properties" : {
+            "Area" : "UI",
+            "DisplayName" : "container-67",
+            "EnableExpandCollapse" : false,
+            "Expanded" : true,
+            "Id" : "flexcontainer-67",
+            "LastContainer" : false,
+            "Overlay" : false,
+            "ResponsiveLayout" : false,
+            "ShowDataLoading" : true,
+            "ShowExpandCollapseTab" : false,
+            "SourceURL" : "",
+            "Style" : "DefaultContainerStyle",
+            "StyleProperties" : { },
+            "Type" : "flexcontainer",
+            "UseTheme" : true,
+            "Visible" : true,
+            "Z-index" : 10,
+            "__TypeDisplayName" : "Flex Container",
+            "align-content" : "flex-start",
+            "align-items" : "flex-start",
+            "flex-basis" : "0",
+            "flex-direction" : "row",
+            "flex-grow" : 50,
+            "flex-max-height" : "",
+            "flex-max-width" : "",
+            "flex-min-height" : "",
+            "flex-min-width" : "",
+            "flex-shrink" : "0",
+            "flex-size" : "default",
+            "flex-wrap" : "wrap",
+            "iconClass" : "widgets-flexcontainer",
+            "isLocked" : false,
+            "justify-content" : "flex-start",
+            "positioning" : "responsive",
+            "userCannotRemove" : false
+          },
+          "Widgets" : [ {
+            "Properties" : {
+              "Area" : "UI",
+              "AutoRefresh" : true,
+              "DateDelimiter" : "-",
+              "DateDisplay" : "short",
+              "DateFormat" : "yyyy-M-dd",
+              "DateFormatToken" : "",
+              "DateOrder" : "yy-mm-dd",
+              "DecadeView" : false,
+              "DisplayName" : "timeselector-21",
+              "DisplaySeconds" : true,
+              "FocusStyle" : "DefaultButtonFocusStyle",
+              "Height" : 65,
+              "Id" : "timeselector-21",
+              "Interval" : 1,
+              "IntervalType" : "d",
+              "LastContainer" : false,
+              "Left" : 0,
+              "Margin" : "5",
+              "RefreshInterval" : 60,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "ShowLockControls" : false,
+              "TabSequence" : 0,
+              "TimeAutoRefreshBtnStyle" : "DefaultTimeAutoRefreshBtnStyle",
+              "TimeBGStyle" : "DefaultTimeBGStyle",
+              "TimeDatePickerStyle" : "DefaultTimeDatePickerStyle",
+              "TimeFormat" : "hh:mm:ss",
+              "TimeRefreshBtnStyle" : "DefaultTimeRefreshBtnStyle",
+              "Top" : 0,
+              "Type" : "timeselector",
+              "UseIntervalAsMax" : false,
+              "Visible" : true,
+              "Widescreen" : false,
+              "Width" : 450,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Time Selector"
+            },
+            "Widgets" : [ ]
+          } ]
+        }, {
+          "Properties" : {
+            "Area" : "UI",
+            "DisplayName" : "container-76",
+            "EnableExpandCollapse" : false,
+            "Expanded" : true,
+            "Id" : "flexcontainer-76",
+            "LastContainer" : false,
+            "Overlay" : false,
+            "ResponsiveLayout" : false,
+            "ShowDataLoading" : true,
+            "ShowExpandCollapseTab" : false,
+            "SourceURL" : "",
+            "Style" : "DefaultContainerStyle",
+            "StyleProperties" : { },
+            "Type" : "flexcontainer",
+            "UseTheme" : true,
+            "Visible" : true,
+            "Z-index" : 10,
+            "__TypeDisplayName" : "Responsive Container",
+            "align-content" : "flex-start",
+            "align-items" : "flex-start",
+            "flex-basis" : "auto",
+            "flex-direction" : "row",
+            "flex-grow" : 1,
+            "flex-max-height" : "",
+            "flex-max-width" : "",
+            "flex-min-height" : "",
+            "flex-min-width" : "",
+            "flex-shrink" : 1,
+            "flex-size" : "default",
+            "flex-wrap" : "nowrap",
+            "iconClass" : "widgets-flexcontainer",
+            "isLocked" : false,
+            "justify-content" : "flex-start",
+            "positioning" : "responsive",
+            "userCannotRemove" : false
+          },
+          "Widgets" : [ {
+            "Properties" : {
+              "Area" : "UI",
+              "ButtonType" : "primary",
+              "ContextID" : "",
+              "Disabled" : false,
+              "DisplayName" : "ptcs-button-60",
+              "Id" : "ptcsbutton-60",
+              "Label" : "Chart",
+              "LabelAlignment" : "center",
+              "LastContainer" : false,
+              "Left" : 69.0625,
+              "Margin" : "5",
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "TabSequence" : 0,
+              "Top" : 36,
+              "Type" : "ptcsbutton",
+              "UseTheme" : true,
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Button"
+            },
+            "Widgets" : [ ]
+          }, {
+            "Properties" : {
+              "Area" : "UI",
+              "ButtonType" : "primary",
+              "ContextID" : "",
+              "Disabled" : false,
+              "DisplayName" : "ptcs-button-61",
+              "Id" : "ptcsbutton-61",
+              "Label" : "I-Chart",
+              "LabelAlignment" : "center",
+              "LastContainer" : false,
+              "Left" : 44.0625,
+              "Margin" : "5",
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "TabSequence" : 0,
+              "Top" : 71,
+              "Type" : "ptcsbutton",
+              "UseTheme" : true,
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Button"
+            },
+            "Widgets" : [ ]
+          }, {
+            "Properties" : {
+              "Area" : "UI",
+              "ButtonType" : "primary",
+              "ContextID" : "",
+              "Disabled" : false,
+              "DisplayName" : "ptcs-button-62",
+              "Id" : "ptcsbutton-62",
+              "Label" : "Expand PDF",
+              "LabelAlignment" : "center",
+              "LastContainer" : false,
+              "Left" : 39.0625,
+              "Margin" : "5",
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "TabSequence" : 0,
+              "Top" : 91,
+              "Type" : "ptcsbutton",
+              "UseTheme" : true,
+              "Visible" : false,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Button"
+            },
+            "Widgets" : [ ]
+          } ]
+        } ]
+      }, {
+        "Properties" : {
+          "Area" : "UI",
+          "DisplayName" : "container-63",
+          "EnableExpandCollapse" : true,
+          "Expanded" : true,
+          "Id" : "flexcontainer-63",
+          "LastContainer" : false,
+          "Overlay" : false,
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "ShowExpandCollapseTab" : false,
+          "SourceURL" : "",
+          "Style" : "DefaultContainerStyle",
+          "StyleProperties" : { },
+          "Type" : "flexcontainer",
+          "UseTheme" : true,
+          "Visible" : true,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Responsive Container",
+          "align-content" : "flex-start",
+          "align-items" : "flex-start",
+          "flex-basis" : "auto",
+          "flex-direction" : "row",
+          "flex-grow" : 1,
+          "flex-max-height" : "10px",
+          "flex-max-width" : "",
+          "flex-min-height" : "10px",
+          "flex-min-width" : "",
+          "flex-shrink" : 1,
+          "flex-size" : "fixed",
+          "flex-wrap" : "nowrap",
+          "iconClass" : "widgets-flexcontainer-fixed",
+          "isLocked" : false,
+          "justify-content" : "flex-start",
+          "positioning" : "responsive",
+          "userCannotRemove" : false
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "Area" : "UI",
+          "DisplayName" : "container-10",
+          "EnableExpandCollapse" : false,
+          "Expanded" : true,
+          "Id" : "flexcontainer-10",
+          "LastContainer" : true,
+          "Overlay" : false,
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "ShowExpandCollapseTab" : false,
+          "SourceURL" : "",
+          "Style" : "DefaultContainerStyle",
+          "StyleProperties" : { },
+          "Type" : "flexcontainer",
+          "UseTheme" : true,
+          "Visible" : true,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Flex Container",
+          "align-content" : "flex-start",
+          "align-items" : "flex-start",
+          "flex-basis" : "auto",
+          "flex-direction" : "row",
+          "flex-grow" : 1,
+          "flex-max-height" : "",
+          "flex-max-width" : "",
+          "flex-min-height" : "",
+          "flex-min-width" : "",
+          "flex-shrink" : "0",
+          "flex-size" : "default",
+          "flex-wrap" : "nowrap",
+          "iconClass" : "widgets-flexcontainer",
+          "isLocked" : true,
+          "justify-content" : "flex-start",
+          "positioning" : "responsive",
+          "userCannotRemove" : false
+        },
+        "Widgets" : [ {
+          "Properties" : {
+            "Area" : "UI",
+            "DisplayName" : "container-39",
+            "EnableExpandCollapse" : false,
+            "Expanded" : true,
+            "Id" : "flexcontainer-39",
+            "LastContainer" : false,
+            "Overlay" : false,
+            "ResponsiveLayout" : false,
+            "ShowDataLoading" : true,
+            "ShowExpandCollapseTab" : false,
+            "SourceURL" : "",
+            "Style" : "DefaultContainerStyle",
+            "StyleProperties" : { },
+            "Type" : "flexcontainer",
+            "UseTheme" : true,
+            "Visible" : true,
+            "Z-index" : 10,
+            "__TypeDisplayName" : "Flex Container",
+            "align-content" : "flex-start",
+            "align-items" : "flex-start",
+            "flex-basis" : "0",
+            "flex-direction" : "row",
+            "flex-grow" : 70,
+            "flex-max-height" : "",
+            "flex-max-width" : "",
+            "flex-min-height" : "",
+            "flex-min-width" : "",
+            "flex-shrink" : "0",
+            "flex-size" : "default",
+            "flex-wrap" : "nowrap",
+            "iconClass" : "widgets-flexcontainer",
+            "isLocked" : false,
+            "justify-content" : "flex-start",
+            "positioning" : "responsive",
+            "userCannotRemove" : false
+          },
+          "Widgets" : [ {
+            "Properties" : {
+              "AlignHeader" : false,
+              "Area" : "UI",
+              "AutoSelectFirstRow" : true,
+              "CellTextWrapping" : false,
+              "ColumnFormat" : {
+                "formatInfo" : [ {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "ProductionTime",
+                  "FormatOptions" : {
+                    "FormatString" : "[[dateTimeFormat_Default]]",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "DATETIME",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "ProductionTime",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "OrderNumber",
+                  "FormatOptions" : {
+                    "FormatString" : "full",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "STRING",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "OrderNumber",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "PartNumber",
+                  "FormatOptions" : {
+                    "FormatString" : "full",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "STRING",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "PartNumber",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "PartNumberRevision",
+                  "FormatOptions" : {
+                    "FormatString" : "full",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "STRING",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "Part Number Rev.",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "SerialNumber",
+                  "FormatOptions" : {
+                    "FormatString" : "full",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "STRING",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "SerialNumber",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "TrackingNumber",
+                  "FormatOptions" : {
+                    "FormatString" : "full",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "STRING",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "TrackingNumber",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "ProcesDataType",
+                  "FormatOptions" : {
+                    "FormatString" : "full",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "STRING",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "Data Type 1",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "ProcesDataType2",
+                  "FormatOptions" : {
+                    "FormatString" : "full",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "STRING",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "Data Type 2",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "isProcessDataFloat",
+                  "FormatOptions" : {
+                    "FormatString" : "checkbox",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "BOOLEAN",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "Float?",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "isProcessDataString",
+                  "FormatOptions" : {
+                    "FormatString" : "checkbox",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "BOOLEAN",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "String?",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "isProcessDataDateTime",
+                  "FormatOptions" : {
+                    "FormatString" : "checkbox",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "BOOLEAN",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "isProcessDataDateTime",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "ProcessDataFloat",
+                  "FormatOptions" : {
+                    "FormatString" : "0.00",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "NUMBER",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "Data Float",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "ProcessDataString",
+                  "FormatOptions" : {
+                    "FormatString" : "full",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "STRING",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "Data String",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "ProcessDataDateTime",
+                  "FormatOptions" : {
+                    "FormatString" : "[[dateTimeFormat_Default]]",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "DATETIME",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "Data Date Time",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "comment",
+                  "FormatOptions" : {
+                    "FormatString" : "full",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "STRING",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "Comment",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "description",
+                  "FormatOptions" : {
+                    "FormatString" : "full",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "STRING",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "Description",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                }, {
+                  "Align" : "left",
+                  "AllowEdit" : false,
+                  "FieldName" : "Identifier",
+                  "FormatOptions" : {
+                    "FormatString" : "full",
+                    "formatInfo" : {
+                      "FieldName" : "",
+                      "StateDefinition" : "",
+                      "StateDefinitionType" : "fixed",
+                      "StateFormats" : [ {
+                        "state" : "",
+                        "stateName" : "fixed"
+                      } ]
+                    },
+                    "renderer" : "STRING",
+                    "roundingEnabled" : true
+                  },
+                  "Title" : "Identifier",
+                  "ValidationExpression" : "",
+                  "ValidationMessage" : "",
+                  "Width" : "auto"
+                } ]
+              },
+              "CurrentScrollTop" : 0,
+              "DisplayName" : "dhxgrid-37",
+              "FocusStyle" : "DefaultFocusStyle",
+              "GridBackgroundStyle" : "DefaultGridBackgroundStyle",
+              "GridEditableFieldStyle" : "DefaultGridEditableFieldStyle",
+              "GridHeaderStyle" : {
+                "backgroundColor" : "rgba(0,64,125,1)",
+                "displayString" : "",
+                "fontEmphasisBold" : false,
+                "fontEmphasisItalic" : false,
+                "fontEmphasisUnderline" : false,
+                "foregroundColor" : "rgba(255,255,255,1)",
+                "image" : "",
+                "lineColor" : "rgba(192,192,192,1)",
+                "lineStyle" : "solid",
+                "lineThickness" : 1,
+                "secondaryBackgroundColor" : "rgba(0,64,125,1)",
+                "textSize" : "normal"
+              },
+              "GridHeaderTextCase" : "capitalize",
+              "GridInvalidFieldStyle" : "DefaultGridInvalidFieldStyle",
+              "Height" : 200,
+              "Id" : "dhxgrid-37",
+              "IsEditable" : false,
+              "IsPrintLayout" : false,
+              "LastContainer" : false,
+              "Left" : 0,
+              "MultiSelect" : false,
+              "ResponsiveLayout" : true,
+              "RowAlternateBackgroundStyle" : "DefaultRowAlternateBackgroundStyle",
+              "RowBackgroundStyle" : "DefaultRowBackgroundStyle",
+              "RowFormat_StateParameters" : [ ],
+              "RowHeight" : 30,
+              "RowHoverStyle" : "DefaultRowHoverStyle",
+              "RowSelectedStyle" : {
+                "backgroundColor" : "rgba(0,64,125,1)",
+                "displayString" : "",
+                "fontEmphasisBold" : false,
+                "fontEmphasisItalic" : false,
+                "fontEmphasisUnderline" : false,
+                "foregroundColor" : "rgba(255,255,255,1)",
+                "image" : "",
+                "lineColor" : "",
+                "lineStyle" : "solid",
+                "lineThickness" : 1,
+                "secondaryBackgroundColor" : "",
+                "textSize" : "normal"
+              },
+              "ScrollTop" : 0,
+              "ShowAllColumns" : false,
+              "ShowDataLoading" : true,
+              "TabSequence" : 0,
+              "Top" : 0,
+              "Type" : "dhxgrid",
+              "Visible" : true,
+              "Width" : 400,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Raster"
+            },
+            "Widgets" : [ ]
+          } ]
+        }, {
+          "Properties" : {
+            "Area" : "UI",
+            "DisplayName" : "container-64",
+            "EnableExpandCollapse" : false,
+            "Expanded" : true,
+            "Id" : "flexcontainer-64",
+            "LastContainer" : false,
+            "Overlay" : false,
+            "ResponsiveLayout" : false,
+            "ShowDataLoading" : true,
+            "ShowExpandCollapseTab" : false,
+            "SourceURL" : "",
+            "Style" : "DefaultContainerStyle",
+            "StyleProperties" : { },
+            "Type" : "flexcontainer",
+            "UseTheme" : true,
+            "Visible" : true,
+            "Z-index" : 10,
+            "__TypeDisplayName" : "Responsive Container",
+            "align-content" : "flex-start",
+            "align-items" : "flex-start",
+            "flex-basis" : "auto",
+            "flex-direction" : "row",
+            "flex-grow" : 1,
+            "flex-max-height" : "",
+            "flex-max-width" : "10px",
+            "flex-min-height" : "",
+            "flex-min-width" : "10px",
+            "flex-shrink" : 1,
+            "flex-size" : "fixed",
+            "flex-wrap" : "nowrap",
+            "iconClass" : "widgets-flexcontainer-fixed",
+            "isLocked" : false,
+            "justify-content" : "flex-start",
+            "positioning" : "responsive",
+            "userCannotRemove" : false
+          },
+          "Widgets" : [ ]
+        }, {
+          "Properties" : {
+            "Area" : "UI",
+            "DisplayName" : "container-40",
+            "EnableExpandCollapse" : false,
+            "Expanded" : true,
+            "Id" : "flexcontainer-40",
+            "LastContainer" : false,
+            "Overlay" : false,
+            "ResponsiveLayout" : false,
+            "ShowDataLoading" : true,
+            "ShowExpandCollapseTab" : false,
+            "SourceURL" : "",
+            "Style" : "DefaultContainerStyle",
+            "StyleProperties" : { },
+            "Type" : "flexcontainer",
+            "UseTheme" : true,
+            "Visible" : true,
+            "Z-index" : 10,
+            "__TypeDisplayName" : "Flex Container",
+            "align-content" : "flex-start",
+            "align-items" : "flex-start",
+            "flex-basis" : "0",
+            "flex-direction" : "column",
+            "flex-grow" : 30,
+            "flex-max-height" : "",
+            "flex-max-width" : "",
+            "flex-min-height" : "",
+            "flex-min-width" : "",
+            "flex-shrink" : "0",
+            "flex-size" : "default",
+            "flex-wrap" : "wrap",
+            "iconClass" : "widgets-flexcontainer",
+            "isLocked" : false,
+            "justify-content" : "flex-start",
+            "positioning" : "responsive",
+            "userCannotRemove" : false
+          },
+          "Widgets" : [ {
+            "Properties" : {
+              "Area" : "UI",
+              "DisplayName" : "container-71",
+              "EnableExpandCollapse" : false,
+              "Expanded" : true,
+              "Id" : "flexcontainer-71",
+              "LastContainer" : true,
+              "Overlay" : false,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "ShowExpandCollapseTab" : false,
+              "SourceURL" : "",
+              "Style" : "DefaultContainerStyle",
+              "StyleProperties" : { },
+              "Type" : "flexcontainer",
+              "UseTheme" : true,
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Flex Container",
+              "align-content" : "flex-start",
+              "align-items" : "flex-start",
+              "flex-basis" : "0",
+              "flex-direction" : "row",
+              "flex-grow" : 30,
+              "flex-max-height" : "",
+              "flex-max-width" : "",
+              "flex-min-height" : "",
+              "flex-min-width" : "",
+              "flex-shrink" : "0",
+              "flex-size" : "default",
+              "flex-wrap" : "wrap",
+              "iconClass" : "widgets-flexcontainer",
+              "isLocked" : false,
+              "justify-content" : "flex-start",
+              "positioning" : "responsive",
+              "userCannotRemove" : false
+            },
+            "Widgets" : [ {
+              "Properties" : {
+                "Area" : "UI",
+                "AutoScroll" : false,
+                "CellBorderStyle" : "DefaultGridAdvancedCellBorderStyle",
+                "ColumnFormat" : {
+                  "formatInfo" : [ {
+                    "Align" : "left",
+                    "AllowEdit" : false,
+                    "FieldName" : "LineName",
+                    "FormatOptions" : {
+                      "FormatString" : "full",
+                      "formatInfo" : {
+                        "FieldName" : "",
+                        "StateDefinition" : "",
+                        "StateDefinitionType" : "fixed",
+                        "StateFormats" : [ {
+                          "state" : "",
+                          "stateName" : "fixed"
+                        } ]
+                      },
+                      "renderer" : "STRING",
+                      "roundingEnabled" : true,
+                      "showDependentField" : false
+                    },
+                    "Title" : "LineName",
+                    "Width" : "auto",
+                    "headerTextAlignment" : "left",
+                    "hidden" : false,
+                    "inLayout" : true
+                  }, {
+                    "Align" : "left",
+                    "AllowEdit" : false,
+                    "FieldName" : "LineValue",
+                    "FormatOptions" : {
+                      "FormatString" : "full",
+                      "formatInfo" : {
+                        "FieldName" : "",
+                        "StateDefinition" : "",
+                        "StateDefinitionType" : "fixed",
+                        "StateFormats" : [ {
+                          "state" : "",
+                          "stateName" : "fixed"
+                        } ]
+                      },
+                      "renderer" : "STRING",
+                      "roundingEnabled" : true,
+                      "showDependentField" : false
+                    },
+                    "Title" : "Value",
+                    "Width" : "auto",
+                    "headerTextAlignment" : "left",
+                    "hidden" : false,
+                    "inLayout" : true
+                  } ]
+                },
+                "Configuration" : "",
+                "ConfigurationId" : 9,
+                "CookiePersistence" : true,
+                "DataOverflow" : "clipped",
+                "DataServiceBindingDef" : {
+                  "entityName" : "KBKPILocalThingWorxDatabaseTemplate",
+                  "entityType" : "DynamicThingTemplates",
+                  "target" : "GetProcessDataAsLines"
+                },
+                "DefaultSelectedRows" : "",
+                "DisplayName" : "gridadvanced-65",
+                "EnableContextMenu" : true,
+                "EnableFilterEventOnConfigChange" : true,
+                "EnableGridReset" : false,
+                "EnableGridSearch" : false,
+                "EnableSorting" : false,
+                "FocusStyle" : "DefaultFocusStyle",
+                "GridResetButtonLocation" : "top-right",
+                "GridSearchLocation" : "top-left",
+                "HeaderOverflow" : "tooltip",
+                "Height" : 300,
+                "IDFieldName" : "id",
+                "Id" : "gridadvanced-65",
+                "IsEditable" : false,
+                "LastContainer" : false,
+                "Left" : 0,
+                "Margin" : "5",
+                "MaxHeaderHeight" : 100,
+                "MinRowHeight" : 30,
+                "ResponsiveLayout" : true,
+                "RowAlternateBackgroundStyle" : "DefaultGridAdvancedRowAlternateBackgroundStyle",
+                "RowBackgroundStyle" : "DefaultGridAdvancedRowBackgroundStyle",
+                "RowFormat_StateParameters" : [ ],
+                "RowHoverStyle" : "DefaultGridAdvancedRowHoverStyle",
+                "RowSelectedStyle" : "DefaultGridAdvancedRowSelectedStyle",
+                "RowSelection" : "list",
+                "SelectedRows" : "",
+                "ShowDataLoading" : true,
+                "SortAscendingStyle" : "DefaultSortAscendingStyle",
+                "SortDescendingStyle" : "DefaultSortDescendingStyle",
+                "TableHeaderStyle" : {
+                  "backgroundColor" : "rgba(0,64,125,1)",
+                  "displayString" : "",
+                  "fontEmphasisBold" : false,
+                  "fontEmphasisItalic" : false,
+                  "fontEmphasisUnderline" : false,
+                  "foregroundColor" : "rgba(255,255,255,1)",
+                  "image" : "",
+                  "lineColor" : "rgba(192,192,192,1)",
+                  "lineStyle" : "solid",
+                  "lineThickness" : 1,
+                  "secondaryBackgroundColor" : "",
+                  "textSize" : "normal"
+                },
+                "TableWrapperStyle" : "DefaultGridAdvancedWrapperStyle",
+                "ToolbarStyle" : "DefaultToolbarStyle",
+                "TooltipStyle" : "DefaultTooltipStyle",
+                "Top" : 0,
+                "Type" : "gridadvanced",
+                "Visible" : false,
+                "Width" : 400,
+                "Z-index" : 10,
+                "__TypeDisplayName" : "Grid Advanced"
+              },
+              "Widgets" : [ ]
+            } ]
+          }, {
+            "Properties" : {
+              "Area" : "UI",
+              "DisplayName" : "container-72",
+              "EnableExpandCollapse" : true,
+              "Expanded" : false,
+              "Id" : "flexcontainer-72",
+              "LastContainer" : false,
+              "Overlay" : false,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "ShowExpandCollapseTab" : false,
+              "SourceURL" : "",
+              "Style" : "DefaultContainerStyle",
+              "StyleProperties" : { },
+              "Type" : "flexcontainer",
+              "UseTheme" : true,
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Responsive Container",
+              "align-content" : "flex-start",
+              "align-items" : "flex-start",
+              "flex-basis" : "auto",
+              "flex-direction" : "row",
+              "flex-grow" : 1,
+              "flex-max-height" : "",
+              "flex-max-width" : "",
+              "flex-min-height" : "",
+              "flex-min-width" : "",
+              "flex-shrink" : 1,
+              "flex-size" : "default",
+              "flex-wrap" : "nowrap",
+              "iconClass" : "widgets-flexcontainer",
+              "isLocked" : false,
+              "justify-content" : "flex-start",
+              "positioning" : "responsive",
+              "userCannotRemove" : false
+            },
+            "Widgets" : [ {
+              "Properties" : {
+                "Area" : "UI",
+                "DataBaseType" : "STRING",
+                "Disabled" : false,
+                "DisclosureControl" : "ellipsis",
+                "DisplayName" : "ptcs-valuedisplay-52",
+                "HorizontalAlignment" : "left",
+                "Id" : "ptcsvaluedisplay-52",
+                "ItemMeta" : {
+                  "type" : "text"
+                },
+                "Label" : "",
+                "LabelAlignment" : "left",
+                "LabelType" : "label",
+                "LastContainer" : false,
+                "Left" : 0,
+                "Margin" : "0",
+                "ModalHeight" : 380,
+                "ModalWidth" : 600,
+                "MultiLine" : true,
+                "ResponsiveLayout" : false,
+                "ShowDataLoading" : true,
+                "TabSequence" : 0,
+                "TextIfNoValue" : "",
+                "Top" : 0,
+                "Type" : "ptcsvaluedisplay",
+                "UseTheme" : true,
+                "ValueFormat" : {
+                  "FormatString" : "unsanitized",
+                  "renderer" : "HTML",
+                  "roundingEnabled" : false,
+                  "showDependentField" : false
+                },
+                "ValueFormat_StateParameters" : [ ],
+                "VerticalAlignment" : "flex-start",
+                "Visible" : false,
+                "Z-index" : 10,
+                "__TypeDisplayName" : "Value Display",
+                "overflowShowLessTxt" : "[[showLess]]",
+                "overflowShowMoreTxt" : "[[showMore]]"
+              },
+              "Widgets" : [ ]
+            }, {
+              "Properties" : {
+                "Area" : "UI",
+                "DisplayName" : "htmltextarea-79",
+                "EscapeHTMLText" : false,
+                "Height" : 200,
+                "Id" : "htmltextarea-79",
+                "Label" : "",
+                "LabelAlignment" : "left",
+                "LabelStyle" : "DefaultWidgetLabelStyle",
+                "LastContainer" : false,
+                "Left" : 77,
+                "Margin" : "5",
+                "ResponsiveLayout" : false,
+                "ShowBorder" : false,
+                "ShowDataLoading" : true,
+                "Text" : "",
+                "ToolTipField" : "",
+                "ToolTipStyle" : "DefaultTooltipStyle",
+                "Top" : 28,
+                "Type" : "htmltextarea",
+                "Visible" : false,
+                "Width" : 475,
+                "Z-index" : 10,
+                "__TypeDisplayName" : "Html TextArea",
+                "__supportsLabel" : true,
+                "__supportsTooltip" : true
+              },
+              "Widgets" : [ ]
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "Properties" : {
+        "Area" : "UI",
+        "AutoEvaluate" : false,
+        "DataChangeType" : "ALWAYS",
+        "DisplayName" : "GetPDFContentToShow",
+        "Expression" : "output = '<iframe src=\"data:application/pdf;base64,'+inputBase64Content+'\" height=\"100%\" width=\"100%\" frameborder=\"0\"></iframe>';",
+        "FireOnFirstValue" : false,
+        "Height" : 28,
+        "Id" : "expression-45",
+        "LastContainer" : false,
+        "Left" : null,
+        "OutputBaseType" : "STRING",
+        "ResponsiveLayout" : false,
+        "ShowDataLoading" : true,
+        "Top" : null,
+        "Type" : "expression",
+        "Visible" : true,
+        "Width" : 200,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Expression",
+        "_currentParameterDefs" : [ {
+          "BaseType" : "STRING",
+          "Description" : "",
+          "ParameterName" : "inputBase64Content",
+          "bindingDirection" : "Target",
+          "bindingType" : "Property",
+          "isBindingSource" : false,
+          "isBindingTarget" : true,
+          "name" : "inputBase64Content"
+        } ]
+      },
+      "Widgets" : [ ]
+    }, {
+      "Properties" : {
+        "Area" : "UI",
+        "AutoEvaluate" : false,
+        "DisplayName" : "ValidateIfPDFContent",
+        "Expression" : " output = false;\nif(inputDataType !== undefined && inputDataType !== null && inputDataType !==\"\")\n{\n    if(inputDataType === \"PDF\" || inputDataType === \"XML\")\n    {\n        output = true;\n    }\n    else\n    {\n        output = false;\n    }\n}\n    else\n    {\n        output = false;\n    }",
+        "Height" : 28,
+        "Id" : "validator-46",
+        "LastContainer" : false,
+        "Left" : null,
+        "Output" : true,
+        "ResponsiveLayout" : false,
+        "ShowDataLoading" : true,
+        "Top" : null,
+        "Type" : "validator",
+        "Visible" : true,
+        "Width" : 200,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Validator",
+        "_currentParameterDefs" : [ {
+          "BaseType" : "STRING",
+          "Description" : "",
+          "ParameterName" : "inputDataType",
+          "bindingDirection" : "Target",
+          "bindingType" : "Property",
+          "isBindingSource" : false,
+          "isBindingTarget" : true,
+          "name" : "inputDataType"
+        } ]
+      },
+      "Widgets" : [ ]
+    }, {
+      "Properties" : {
+        "Area" : "UI",
+        "DisplayName" : "Status1",
+        "Height" : 28,
+        "Id" : "statusmessage-47",
+        "LastContainer" : false,
+        "Left" : null,
+        "Message" : "I am PDF",
+        "MessageType" : "info",
+        "ResponsiveLayout" : false,
+        "ShowDataLoading" : true,
+        "Top" : null,
+        "Type" : "statusmessage",
+        "Visible" : true,
+        "Width" : 200,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Status Message"
+      },
+      "Widgets" : [ ]
+    }, {
+      "Properties" : {
+        "Area" : "UI",
+        "DisplayName" : "Status2",
+        "Height" : 28,
+        "Id" : "statusmessage-48",
+        "LastContainer" : false,
+        "Left" : null,
+        "Message" : "I am not PDF!!!",
+        "MessageType" : "info",
+        "ResponsiveLayout" : false,
+        "ShowDataLoading" : true,
+        "Top" : null,
+        "Type" : "statusmessage",
+        "Visible" : true,
+        "Width" : 200,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Status Message"
+      },
+      "Widgets" : [ ]
+    }, {
+      "Properties" : {
+        "Area" : "UI",
+        "AutoEvaluate" : false,
+        "DisplayName" : "ShowRightGrid",
+        "Expression" : "if(isPDF)\n{\n    output = false;\n}\nelse\n{\n    output = true;\n}",
+        "Height" : 28,
+        "Id" : "validator-49",
+        "LastContainer" : false,
+        "Left" : null,
+        "Output" : true,
+        "ResponsiveLayout" : false,
+        "ShowDataLoading" : true,
+        "Top" : null,
+        "Type" : "validator",
+        "Visible" : true,
+        "Width" : 200,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Validator",
+        "_currentParameterDefs" : [ {
+          "BaseType" : "BOOLEAN",
+          "DefaultValue" : false,
+          "Description" : "",
+          "ParameterName" : "isPDF",
+          "bindingDirection" : "Target",
+          "bindingType" : "Property",
+          "isBindingSource" : false,
+          "isBindingTarget" : true,
+          "name" : "isPDF"
+        } ]
+      },
+      "Widgets" : [ ]
+    }, {
+      "Properties" : {
+        "Area" : "UI",
+        "ClickOutsideToClose" : false,
+        "CloseButton" : true,
+        "DisplayName" : "ptcsbutton-42-Navigation",
+        "Id" : "navigationfunction-54",
+        "LastContainer" : false,
+        "Left" : 0,
+        "MashupParameters" : [ {
+          "BaseType" : "STRING",
+          "Description" : "",
+          "ParameterName" : "TestType",
+          "ParmDef" : {
+            "aspects" : {
+              "bindingDirection" : "IN",
+              "isMandatory" : "false",
+              "ordinal" : "1"
+            },
+            "baseType" : "STRING",
+            "description" : "",
+            "name" : "TestType",
+            "ordinal" : 0
+          }
+        }, {
+          "BaseType" : "STRING",
+          "Description" : "",
+          "ParameterName" : "Machine",
+          "ParmDef" : {
+            "aspects" : {
+              "bindingDirection" : "IN",
+              "isMandatory" : "false",
+              "ordinal" : "0"
+            },
+            "baseType" : "STRING",
+            "description" : "",
+            "name" : "Machine",
+            "ordinal" : 0
+          }
+        } ],
+        "MissingMashupMessage" : "Mashup must be selected",
+        "PopupHeight" : 0,
+        "PopupScrollbar" : "auto",
+        "PopupTitle" : "",
+        "PopupWidth" : 0,
+        "ReloadOnReplace" : false,
+        "ResponsiveLayout" : false,
+        "RoundedCorners" : true,
+        "ShowDataLoading" : true,
+        "TabSequence" : 0,
+        "TargetMashup" : "KBLocalSmartKPIMachineLevelProcessDataDDFrameMashup_V1",
+        "TargetWindow" : "new",
+        "TargetWindowType" : "replace",
+        "Text" : "tw.navigationfunction-ide.properties.text.default-value",
+        "Top" : 0,
+        "Type" : "navigationfunction",
+        "UseTheme" : true,
+        "Visible" : true,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Navigation",
+        "_currentParameterDefs" : [ {
+          "BaseType" : "STRING",
+          "Description" : "",
+          "ParameterName" : "Machine",
+          "bindingDirection" : "Target",
+          "bindingType" : "Property",
+          "isBindingSource" : false,
+          "isBindingTarget" : true,
+          "name" : "Machine"
+        }, {
+          "BaseType" : "STRING",
+          "Description" : "",
+          "ParameterName" : "TestType",
+          "bindingDirection" : "Target",
+          "bindingType" : "Property",
+          "isBindingSource" : false,
+          "isBindingTarget" : true,
+          "name" : "TestType"
+        } ]
+      },
+      "Widgets" : [ ]
+    }, {
+      "Properties" : {
+        "Area" : "UI",
+        "ClickOutsideToClose" : false,
+        "CloseButton" : true,
+        "DisplayName" : "ptcsbutton-43-Navigation",
+        "Id" : "navigationfunction-55",
+        "LastContainer" : false,
+        "Left" : 0,
+        "MashupParameters" : [ {
+          "BaseType" : "STRING",
+          "Description" : "",
+          "ParameterName" : "TestType",
+          "ParmDef" : {
+            "aspects" : {
+              "bindingDirection" : "IN",
+              "isMandatory" : "false",
+              "ordinal" : "1"
+            },
+            "baseType" : "STRING",
+            "description" : "",
+            "name" : "TestType",
+            "ordinal" : 0
+          }
+        }, {
+          "BaseType" : "STRING",
+          "Description" : "",
+          "ParameterName" : "Machine",
+          "ParmDef" : {
+            "aspects" : {
+              "bindingDirection" : "IN",
+              "isMandatory" : "false",
+              "ordinal" : "0"
+            },
+            "baseType" : "STRING",
+            "description" : "",
+            "name" : "Machine",
+            "ordinal" : 0
+          }
+        } ],
+        "MissingMashupMessage" : "Mashup must be selected",
+        "PopupHeight" : 0,
+        "PopupScrollbar" : "auto",
+        "PopupTitle" : "",
+        "PopupWidth" : 0,
+        "ReloadOnReplace" : false,
+        "ResponsiveLayout" : false,
+        "RoundedCorners" : true,
+        "ShowDataLoading" : true,
+        "TabSequence" : 0,
+        "TargetMashup" : "KBLocalSmartKPIMachineLevelIChartDDFrameMashup_V1",
+        "TargetWindow" : "new",
+        "TargetWindowType" : "replace",
+        "Text" : "tw.navigationfunction-ide.properties.text.default-value",
+        "Top" : 0,
+        "Type" : "navigationfunction",
+        "UseTheme" : true,
+        "Visible" : true,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Navigation",
+        "_currentParameterDefs" : [ {
+          "BaseType" : "STRING",
+          "Description" : "",
+          "ParameterName" : "Machine",
+          "bindingDirection" : "Target",
+          "bindingType" : "Property",
+          "isBindingSource" : false,
+          "isBindingTarget" : true,
+          "name" : "Machine"
+        }, {
+          "BaseType" : "STRING",
+          "Description" : "",
+          "ParameterName" : "TestType",
+          "bindingDirection" : "Target",
+          "bindingType" : "Property",
+          "isBindingSource" : false,
+          "isBindingTarget" : true,
+          "name" : "TestType"
+        } ]
+      },
+      "Widgets" : [ ]
+    }, {
+      "Properties" : {
+        "Area" : "UI",
+        "ClickOutsideToClose" : false,
+        "CloseButton" : true,
+        "DisplayName" : "ptcsbutton-53-Navigation",
+        "Id" : "navigationfunction-56",
+        "LastContainer" : false,
+        "Left" : 0,
+        "MashupParameters" : [ {
+          "BaseType" : "STRING",
+          "Description" : "",
+          "ParameterName" : "inputDataContent",
+          "ParmDef" : {
+            "aspects" : {
+              "bindingDirection" : "IN",
+              "isMandatory" : "false"
+            },
+            "baseType" : "STRING",
+            "description" : "",
+            "name" : "inputDataContent",
+            "ordinal" : 0
+          }
+        } ],
+        "MissingMashupMessage" : "Mashup must be selected",
+        "PopupHeight" : 0,
+        "PopupScrollbar" : "auto",
+        "PopupTitle" : "",
+        "PopupWidth" : 0,
+        "ReloadOnReplace" : false,
+        "ResponsiveLayout" : false,
+        "RoundedCorners" : true,
+        "ShowDataLoading" : true,
+        "TabSequence" : 0,
+        "TargetMashup" : "KBLocalSmartKPIMachineLevelExpandPDF_V1",
+        "TargetWindow" : "new",
+        "TargetWindowType" : "modal-popup",
+        "Text" : "tw.navigationfunction-ide.properties.text.default-value",
+        "Top" : 0,
+        "Type" : "navigationfunction",
+        "UseTheme" : true,
+        "Visible" : false,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Navigation",
+        "_currentParameterDefs" : [ {
+          "BaseType" : "STRING",
+          "Description" : "",
+          "ParameterName" : "inputDataContent",
+          "bindingDirection" : "Target",
+          "bindingType" : "Property",
+          "isBindingSource" : false,
+          "isBindingTarget" : true,
+          "name" : "inputDataContent"
+        } ]
+      },
+      "Widgets" : [ ]
+    }, {
+      "Properties" : {
+        "Area" : "UI",
+        "AutoEvaluate" : false,
+        "DisplayName" : "ValidateIfXML",
+        "Expression" : "if(inputRecordType === \"XML\")\n{\n    output = true;\n}\nelse\n{\n    output = false;\n}",
+        "Height" : 28,
+        "Id" : "validator-80",
+        "LastContainer" : false,
+        "Left" : null,
+        "Output" : true,
+        "ResponsiveLayout" : false,
+        "ShowDataLoading" : true,
+        "Top" : null,
+        "Type" : "validator",
+        "Visible" : true,
+        "Width" : 200,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Validator",
+        "_currentParameterDefs" : [ {
+          "BaseType" : "STRING",
+          "Description" : "",
+          "ParameterName" : "inputRecordType",
+          "bindingDirection" : "Target",
+          "bindingType" : "Property",
+          "isBindingSource" : false,
+          "isBindingTarget" : true,
+          "name" : "inputRecordType"
+        } ]
+      },
+      "Widgets" : [ ]
+    }, {
+      "Properties" : {
+        "Area" : "UI",
+        "AutoEvaluate" : false,
+        "DataChangeType" : "ALWAYS",
+        "DisplayName" : "ShowPDF",
+        "Expression" : "if(isXML)\n{\n    output = false;\n}\nelse\n{\n    output = true;\n}",
+        "FireOnFirstValue" : false,
+        "Height" : 28,
+        "Id" : "expression-81",
+        "LastContainer" : false,
+        "Left" : null,
+        "OutputBaseType" : "BOOLEAN",
+        "ResponsiveLayout" : false,
+        "ShowDataLoading" : true,
+        "Top" : null,
+        "Type" : "expression",
+        "Visible" : true,
+        "Width" : 200,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Expression",
+        "_currentParameterDefs" : [ {
+          "BaseType" : "BOOLEAN",
+          "DefaultValue" : false,
+          "Description" : "",
+          "ParameterName" : "isXML",
+          "bindingDirection" : "Target",
+          "bindingType" : "Property",
+          "isBindingSource" : false,
+          "isBindingTarget" : true,
+          "name" : "isXML"
+        } ]
+      },
+      "Widgets" : [ ]
+    } ]
+  },
+  "mashupType" : "mashup"
+}]]></mashupContent>
+			<preview />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="Mashup : design : updated&#10;header : name : updated&#10;"
+					timestamp="2021-04-16T06:36:41.133Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2021-04-16T12:00:26.605Z"
+					user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-19T07:39:43.410Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T07:41:51.104Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T07:43:05.023Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T07:45:08.963Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T07:45:49.806Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T07:47:00.952Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T07:51:54.282Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T07:54:05.338Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T07:55:22.875Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="custom-css : value : updated&#10;"
+					timestamp="2021-04-21T08:01:04.105Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T08:05:47.525Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T08:10:57.144Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T08:16:27.882Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T08:17:08.871Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T08:18:41.298Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T08:22:20.950Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T08:23:33.716Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T08:26:15.524Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T08:30:24.441Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="custom-css : value : updated&#10;"
+					timestamp="2021-04-21T08:32:25.072Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="custom-css : value : updated&#10;"
+					timestamp="2021-04-21T08:33:15.959Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="custom-css : value : updated&#10;"
+					timestamp="2021-04-21T08:35:17.793Z" user="ext-sharmash" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-04-21T08:37:45.725Z" user="ext-sharmash" />
+			</ConfigurationChanges>
+		</Mashup>
+	</Mashups>
+</Entities>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b167" majorVersion="8" minorVersion="2"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="2" schemaVersion="1020" universal="">
+	<Things>
+		<Thing description="" documentationContent=""
+			effectiveThingPackage="TimerThing" enabled="true" homeMashup=""
+			identifier="" lastModifiedDate="2019-03-18T09:28:35.783+01:00"
+			name="KBRateOfQualityInputTimerThing" projectName="KBsmartKPI"
+			published="false"
+			tags="KBThingWorxAdministrationVocabulary:Administrated;KBThingWorxInstallationVocabulary:ExtensionLocalSmartKPIConfiguration"
+			thingTemplate="Timer" valueStream="">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions />
+			<VisibilityPermissions>
+				<Visibility />
+			</VisibilityPermissions>
+			<ConfigurationTables>
+				<ConfigurationTable
+					description="General Settings" isMultiRow="false" name="Settings"
+					ordinal="0">
+					<DataShape>
+						<FieldDefinitions>
+							<FieldDefinition aspect.defaultValue="true"
+								baseType="BOOLEAN"
+								description="Automatically enable timer on startup"
+								name="enabled" ordinal="0" />
+							<FieldDefinition baseType="USERNAME"
+								description="User context in which to run event handlers"
+								name="runAsUser" ordinal="0" />
+							<FieldDefinition aspect.defaultValue="60000.0"
+								baseType="NUMBER" description="Update rate" name="updateRate"
+								ordinal="0" />
+						</FieldDefinitions>
+					</DataShape>
+					<Rows>
+						<Row>
+							<enabled>true</enabled>
+							<runAsUser><![CDATA[Administrator]]></runAsUser>
+							<updateRate>60000.0</updateRate>
+						</Row>
+					</Rows>
+				</ConfigurationTable>
+			</ConfigurationTables>
+			<ThingShape>
+				<PropertyDefinitions />
+				<ServiceDefinitions>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="ProcessTimer">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+				</ServiceDefinitions>
+				<EventDefinitions />
+				<ServiceMappings />
+				<ServiceImplementations>
+					<ServiceImplementation description=""
+						handlerName="Script" name="ProcessTimer">
+						<ConfigurationTables>
+							<ConfigurationTable description=""
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code>
+											<![CDATA[
+
+logger.trace("KBRateOfQualityInputTimerThing/Event.Timer: Starting");											
+
+
+//At BUD SearchThingsByShape does not work after some time any more, implementing Workarround
+//var params = {
+//	thingShape: "KBLocalSmartKPIShape" /* THINGSHAPENAME */,
+//	maxItems: 1000 /* NUMBER */
+//};
+
+// result: INFOTABLE dataShape: RootEntityList
+//var result = Resources["SearchFunctions"].SearchThingsByShape(params);
+
+var result =  Resources["SearchFunctions"].SearchThingsByTemplateWithPersistent({
+	maxItems: 999999 /* NUMBER */,
+	nameMask: undefined /* STRING */,
+	thingTemplate: "GenericThing" /* THINGTEMPLATENAME */
+});
+
+var DBConnection = Resources["KBThingWorxServerSystem"].GetKPILocalThingWorxDatabaseThing();
+
+for(var i = 0; i < result.rows.length; ++i) {
+    // no return
+
+    try {
+    if(Things[result.rows[i].name].ImplementsShape({
+        thingShapeName: "KBLocalSmartKPIShape" /* THINGSHAPENAME */
+	})){
+	    if (Things[result.rows[i].name].CanPushRateOfQualityData) {
+				logger.trace("KBRateOfQualityInputTimerThing/Event.Timer: Collecting Data from " + result.rows[i].name + ", Database Connection " + DBConnection);
+		        var params = {
+		            DatabaseConnection: DBConnection
+		        };
+		        Things[result.rows[i].name].GetAndAddQualityResultsFromDataSource(params);
+		    }
+		}
+    } catch(err) {
+		logger.trace("Error catched, continue with next Thing: "+err);
+    }
+}
+
+logger.trace("KBRateOfQualityInputTimerThing/Event.Timer: Exiting");											
+
+]]>
+										</code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+				</ServiceImplementations>
+				<Subscriptions>
+					<Subscription enabled="true" eventName="Timer"
+						source="" sourceProperty="">
+						<ServiceImplementation description=""
+							handlerName="Script" name="Event.Timer">
+							<ConfigurationTables>
+								<ConfigurationTable description=""
+									isMultiRow="false" name="Script" ordinal="0">
+									<DataShape>
+										<FieldDefinitions>
+											<FieldDefinition baseType="STRING"
+												description="code" name="code" ordinal="0" />
+										</FieldDefinitions>
+									</DataShape>
+									<Rows>
+										<Row>
+											<code><![CDATA[me.ProcessTimer();]]></code>
+										</Row>
+									</Rows>
+								</ConfigurationTable>
+							</ConfigurationTables>
+						</ServiceImplementation>
+					</Subscription>
+				</Subscriptions>
+			</ThingShape>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations />
+			<ImplementedShapes />
+			<ThingProperties />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="" timestamp="2018-10-29T11:13:13.893+01:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="subscriptions : Event.Timer : Code Updated&#10;"
+					timestamp="2019-03-18T09:28:35.642+01:00" user="adm-flassakm" />
+			</ConfigurationChanges>
+		</Thing>
+	</Things>
+</Entities>

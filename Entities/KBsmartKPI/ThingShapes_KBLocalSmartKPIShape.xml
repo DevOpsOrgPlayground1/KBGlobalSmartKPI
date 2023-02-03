@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b52" majorVersion="8" minorVersion="0"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="3" schemaVersion="1000">
+	<ThingShapes>
+		<ThingShape className="" description=""
+			documentationContent="" homeMashup=""
+			lastModifiedDate="2017-12-01T09:48:15.480+01:00"
+			name="KBLocalSmartKPIShape" projectName="KBsmartKPI"
+			tags="KBThingWorxInstallationVocabulary:ExtensionSmartKPI">
+			<PropertyDefinitions>
+				<PropertyDefinition aspect.cacheTime="0.0"
+					aspect.dataChangeType="VALUE" aspect.defaultValue="false"
+					aspect.isLogged="false" aspect.isPersistent="true"
+					aspect.isReadOnly="false" baseType="BOOLEAN" category=""
+					description="" isLocalOnly="false" name="IsSmartKpiPlantLevel"
+					ordinal="1" />
+				<PropertyDefinition aspect.cacheTime="0.0"
+					aspect.dataChangeType="VALUE" aspect.defaultValue="false"
+					aspect.isLogged="false" aspect.isPersistent="true"
+					aspect.isReadOnly="false" baseType="BOOLEAN" category=""
+					description="" isLocalOnly="false" name="IsSmartKpiAreaLevel"
+					ordinal="2" />
+				<PropertyDefinition aspect.cacheTime="0.0"
+					aspect.dataChangeType="VALUE" aspect.defaultValue="false"
+					aspect.isLogged="false" aspect.isPersistent="true"
+					aspect.isReadOnly="false" baseType="BOOLEAN" category=""
+					description="" isLocalOnly="false" name="IsSmartKpiMachineLevel"
+					ordinal="3" />
+				<PropertyDefinition aspect.cacheTime="0.0"
+					aspect.dataChangeType="VALUE" aspect.defaultValue="true"
+					aspect.isLogged="false" aspect.isPersistent="true"
+					aspect.isReadOnly="false" baseType="BOOLEAN" category=""
+					description="" isLocalOnly="false" name="IsStationAndonVisible"
+					ordinal="3" />
+				<PropertyDefinition aspect.cacheTime="0.0"
+					aspect.dataChangeType="VALUE" aspect.defaultValue="false"
+					aspect.isLogged="false" aspect.isPersistent="true"
+					aspect.isReadOnly="false" baseType="BOOLEAN" category=""
+					description="" isLocalOnly="false" name="HasRateOfQualityValues"
+					ordinal="4" />
+				<PropertyDefinition aspect.cacheTime="0.0"
+					aspect.dataChangeType="VALUE" aspect.defaultValue="false"
+					aspect.isLogged="false" aspect.isPersistent="true"
+					aspect.isReadOnly="false" baseType="BOOLEAN" category=""
+					description="" isLocalOnly="false" name="HasOEE2Values" ordinal="5" />
+				<PropertyDefinition aspect.cacheTime="0.0"
+					aspect.dataChangeType="VALUE" aspect.defaultValue="false"
+					aspect.isLogged="false" aspect.isPersistent="true"
+					aspect.isReadOnly="false" baseType="BOOLEAN" category=""
+					description="" isLocalOnly="false" name="HasUtilizationValues"
+					ordinal="6" />
+				<PropertyDefinition aspect.cacheTime="0.0"
+					aspect.dataChangeType="VALUE" aspect.defaultValue="false"
+					aspect.isLogged="false" aspect.isPersistent="true"
+					aspect.isReadOnly="false" baseType="BOOLEAN" category=""
+					description="" isLocalOnly="false" name="CanPushRateOfQualityData"
+					ordinal="7" />
+			</PropertyDefinitions>
+			<ServiceDefinitions>
+				<ServiceDefinition aspect.isAsync="false"
+					category="RQ" description="Adds a new dataset to data storage"
+					isAllowOverride="false" isLocalOnly="false" isOpen="false"
+					isPrivate="false" name="AddQualityResults">
+					<ResultType baseType="BOOLEAN"
+						description="Returns true if data can be stored successfully"
+						name="result" ordinal="0" />
+					<ParameterDefinitions>
+						<FieldDefinition baseType="DATETIME"
+							description="Date and Time when Testresult was created"
+							name="DateTime" ordinal="1" />
+						<FieldDefinition baseType="BOOLEAN" description=""
+							name="isPartOK" ordinal="2" />
+						<FieldDefinition baseType="STRING" description=""
+							name="PartNumber" ordinal="3" />
+						<FieldDefinition baseType="STRING" description=""
+							name="SerialNumber" ordinal="4" />
+						<FieldDefinition baseType="STRING" description=""
+							name="OrderNumber" ordinal="5" />
+						<FieldDefinition baseType="STRING" description=""
+							name="ScrapReason" ordinal="6" />
+						<FieldDefinition aspect.defaultValue="1"
+							baseType="INTEGER" description="" name="NumberOfParts"
+							ordinal="7" />
+						<FieldDefinition baseType="STRING" description=""
+							name="DatabaseConnection" ordinal="8" />
+					</ParameterDefinitions>
+				</ServiceDefinition>
+				<ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="SetCurrentOrderAndPartNumber">
+                        <ResultType
+                         baseType="NOTHING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="OrderNumber"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="PartNumber"
+                             ordinal="2"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+				<ServiceDefinition aspect.isAsync="false"
+					category="RQ" description="Adds a new dataset to data storage"
+					isAllowOverride="false" isLocalOnly="false" isOpen="false"
+					isPrivate="false" name="AddQualityResultsForMachine">
+					<ResultType baseType="BOOLEAN"
+						description="Returns true if data can be stored successfully"
+						name="result" ordinal="0" />
+					<ParameterDefinitions>
+						<FieldDefinition baseType="DATETIME"
+							description="Date and Time when Testresult was created"
+							name="DateTime" ordinal="1" />
+						<FieldDefinition baseType="BOOLEAN" description=""
+							name="isPartOK" ordinal="2" />
+						<FieldDefinition baseType="STRING" description=""
+							name="PartNumber" ordinal="3" />
+						<FieldDefinition baseType="STRING" description=""
+							name="SerialNumber" ordinal="4" />
+						<FieldDefinition baseType="STRING" description=""
+							name="OrderNumber" ordinal="5" />
+						<FieldDefinition baseType="STRING" description=""
+							name="ScrapReason" ordinal="6" />
+						<FieldDefinition aspect.defaultValue="1"
+							baseType="INTEGER" description="" name="NumberOfParts"
+							ordinal="7" />
+						<FieldDefinition baseType="STRING" description=""
+							name="DatabaseConnection" ordinal="8" />
+						<FieldDefinition baseType="STRING" description=""
+							name="MachineThingName" ordinal="9" />
+						<FieldDefinition aspect.defaultValue="default"
+							baseType="STRING" description="" name="StationThingName"
+							ordinal="10" />
+						<FieldDefinition aspect.defaultValue="NN"
+							baseType="STRING" description="" name="SAPOperationNumber"
+							ordinal="11" />
+					</ParameterDefinitions>
+				</ServiceDefinition>
+				<ServiceDefinition aspect.isAsync="true"
+					category="" description="" isAllowOverride="true"
+					isLocalOnly="false" isOpen="false" isPrivate="false"
+					name="GetAndAddQualityResultsFromDataSource">
+					<ResultType baseType="NOTHING" description=""
+						name="result" ordinal="0" />
+					<ParameterDefinitions>
+						<FieldDefinition baseType="STRING" description=""
+							name="DatabaseConnection" ordinal="1" />
+					</ParameterDefinitions>
+				</ServiceDefinition>
+				<ServiceDefinition aspect.isAsync="false"
+					category="" description="" isAllowOverride="false"
+					isLocalOnly="false" isOpen="false" isPrivate="false"
+					name="GetQualityResultDataSourcePointer">
+					<ResultType baseType="LONG" description="" name="result"
+						ordinal="0" />
+					<ParameterDefinitions>
+						<FieldDefinition baseType="STRING" description=""
+							name="DatabaseConnection" ordinal="1" />
+					</ParameterDefinitions>
+				</ServiceDefinition>
+				<ServiceDefinition aspect.isAsync="false"
+					category="" description="" isAllowOverride="false"
+					isLocalOnly="false" isOpen="false" isPrivate="false"
+					name="SetQualityResultDataSourcePointer">
+					<ResultType baseType="NOTHING" description=""
+						name="result" ordinal="0" />
+					<ParameterDefinitions>
+						<FieldDefinition baseType="STRING" description=""
+							name="DatabaseConnection" ordinal="1" />
+						<FieldDefinition baseType="LONG" description=""
+							name="LastIdTransferred" ordinal="2" />
+					</ParameterDefinitions>
+				</ServiceDefinition>
+			</ServiceDefinitions>
+			<EventDefinitions />
+			<ServiceMappings />
+			<ServiceImplementations>
+				<ServiceImplementation description=""
+					handlerName="Script" name="AddQualityResultsForMachine">
+					<ConfigurationTables>
+						<ConfigurationTable description="Script"
+							isMultiRow="false" name="Script" ordinal="0">
+							<DataShape>
+								<FieldDefinitions>
+									<FieldDefinition baseType="STRING"
+										description="code" name="code" ordinal="0" />
+								</FieldDefinitions>
+							</DataShape>
+							<Rows>
+								<Row>
+									<code><![CDATA[logger.debug("KBLocalSmartKPIShape/AddQualityResults: Entering Service");
+
+if (isPartOK == null) {
+    isPartOK = false;
+}
+
+//DateTime.setMilliseconds(0);
+
+logger.debug("KBLocalSmartKPIShape/addQualityResults: Entering Service isPartOK:         "+isPartOK);
+logger.debug("KBLocalSmartKPIShape/addQualityResults: Entering Service PartNumber:       "+PartNumber);
+logger.debug("KBLocalSmartKPIShape/addQualityResults: Entering Service SerialNumber:     "+SerialNumber);
+logger.debug("KBLocalSmartKPIShape/addQualityResults: Entering Service OrderNumber:      "+OrderNumber);
+logger.debug("KBLocalSmartKPIShape/addQualityResults: Entering Service DateTime:         "+DateTime);
+logger.debug("KBLocalSmartKPIShape/addQualityResults: Entering Service NumberOfParts:    "+NumberOfParts);
+logger.debug("KBLocalSmartKPIShape/addQualityResults: Entering Service MachineThingName: "+MachineThingName);
+logger.debug("KBLocalSmartKPIShape/addQualityResults: Entering Service StationThingName: "+StationThingName);
+logger.debug("KBLocalSmartKPIShape/addQualityResults: Entering Service SAPOperationNumber: "+SAPOperationNumber);
+
+
+
+
+var params = {
+	isPartOK: isPartOK /* BOOLEAN */,
+	PartNumber: PartNumber /* STRING */,
+	SerialNumber: SerialNumber /* STRING */,
+	OrderNumber: OrderNumber /* STRING */,
+	DateTime: DateTime /* DATETIME */,
+	Machine: MachineThingName /* STRING */,
+	Station: StationThingName /* STRING */,
+	ScrapReason: ScrapReason /* STRING */,
+	NumberOfParts: NumberOfParts,
+	SAPOperationNumber: SAPOperationNumber
+};
+
+// result: NUMBER
+Things[DatabaseConnection].AddQualityResultToDataTable(params);
+
+var result = true;
+
+logger.debug("KBLocalSmartKPIShape/AddQualityResults: Exiting Service");
+]]></code>
+								</Row>
+							</Rows>
+						</ConfigurationTable>
+					</ConfigurationTables>
+				</ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="SetCurrentOrderAndPartNumber">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        try{
+											var KBLocalStationThingsInfotableLength=0;
+											try{
+												var KBLocalStationThingsInfotable=me.KBLocalStationThings;
+												}catch(err1){
+													KBLocalStationThingsInfotableLength=0;
+													me.CurrentOrderNumber=OrderNumber;
+													me.CurrentPartNumber=PartNumber;
+												}
+                                        
+											try{
+												KBLocalStationThingsInfotableLength=KBLocalStationThingsInfotable.rows.length;
+											}catch(err){}
+											if(KBLocalStationThingsInfotableLength>0){
+											  for(x=0;x<KBLocalStationThingsInfotableLength;x++){
+												Things[KBLocalStationThingsInfotable.rows[x].KBLocalStationThing].CurrentOrderNumber=OrderNumber;
+												Things[KBLocalStationThingsInfotable.rows[x].KBLocalStationThing].CurrentPartNumber=PartNumber;
+											  }
+											}
+                                        }catch(err){
+                                            	logger.error("SetCurrentOrderAndPartNumber Error: " + err+ " on thing: " + me.name + " at: " + err.lineNumber);
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+				<ServiceImplementation description=""
+					handlerName="Script" name="AddQualityResults">
+					<ConfigurationTables>
+						<ConfigurationTable description="Script"
+							isMultiRow="false" name="Script" ordinal="0">
+							<DataShape>
+								<FieldDefinitions>
+									<FieldDefinition baseType="STRING"
+										description="code" name="code" ordinal="0" />
+								</FieldDefinitions>
+							</DataShape>
+							<Rows>
+								<Row>
+									<code><![CDATA[
+									
+									
+var params = {
+	isPartOK: isPartOK /* BOOLEAN */,
+	MachineThingName: me.name /* STRING */,
+	PartNumber: PartNumber /* STRING */,
+	SerialNumber: SerialNumber /* STRING */,
+	ScrapReason: ScrapReason /* STRING */,
+	OrderNumber: OrderNumber /* STRING */,
+	DatabaseConnection: DatabaseConnection /* STRING */,
+	DateTime: DateTime /* DATETIME */,
+	NumberOfParts: NumberOfParts /* INTEGER */
+};
+
+// result: BOOLEAN
+var result = me.AddQualityResultsForMachine(params);
+]]></code>
+								</Row>
+							</Rows>
+						</ConfigurationTable>
+					</ConfigurationTables>
+				</ServiceImplementation>
+				<ServiceImplementation description=""
+					handlerName="Script" name="GetAndAddQualityResultsFromDataSource">
+					<ConfigurationTables>
+						<ConfigurationTable description="Script"
+							isMultiRow="false" name="Script" ordinal="0">
+							<DataShape>
+								<FieldDefinitions>
+									<FieldDefinition baseType="STRING"
+										description="code" name="code" ordinal="0" />
+								</FieldDefinitions>
+							</DataShape>
+							<Rows>
+								<Row>
+									<code />
+								</Row>
+							</Rows>
+						</ConfigurationTable>
+					</ConfigurationTables>
+				</ServiceImplementation>
+				<ServiceImplementation description=""
+					handlerName="Script" name="GetQualityResultDataSourcePointer">
+					<ConfigurationTables>
+						<ConfigurationTable description="Script"
+							isMultiRow="false" name="Script" ordinal="0">
+							<DataShape>
+								<FieldDefinitions>
+									<FieldDefinition baseType="STRING"
+										description="code" name="code" ordinal="0" />
+								</FieldDefinitions>
+							</DataShape>
+							<Rows>
+								<Row>
+									<code><![CDATA[logger.debug("Entering Service: KBLocalSmartKPIShape/GetQualityResultDataSourcePointer");
+
+var values = Things["KBRateOfQualityImportIdPointerDataTable"].CreateValues();
+
+values.KBMachineThing = me.name;
+values.DatabaseConnection = DatabaseConnection;
+//THINGNAME [Primary Key]
+
+var params = {
+    maxItems: undefined /* NUMBER */,
+    values: values /* INFOTABLE*/,
+    query: undefined /* QUERY */,
+    source: undefined /* STRING */,
+    tags: undefined /* TAGS */
+};
+
+// result: INFOTABLE
+var importPointer = Things["KBRateOfQualityImportIdPointerDataTable"].QueryDataTableEntries(params);
+
+var lastIdTransferred = 0;
+
+
+if (importPointer != null && importPointer.getRowCount() > 0) {
+    lastIdTransferred = importPointer.getRow(0).LastIdTransferred;
+}
+else {
+
+    var params = {
+        LastIdTransferred: 0 /* LONG */
+    };
+
+    me.SetQualityResultDataSourcePointer(params);
+
+
+}
+
+var result = lastIdTransferred;
+
+logger.debug("Exiting Service: KBLocalSmartKPIShape/GetQualityResultDataSourcePointer");
+
+]]></code>
+								</Row>
+							</Rows>
+						</ConfigurationTable>
+					</ConfigurationTables>
+				</ServiceImplementation>
+				<ServiceImplementation description=""
+					handlerName="Script" name="SetQualityResultDataSourcePointer">
+					<ConfigurationTables>
+						<ConfigurationTable description="Script"
+							isMultiRow="false" name="Script" ordinal="0">
+							<DataShape>
+								<FieldDefinitions>
+									<FieldDefinition baseType="STRING"
+										description="code" name="code" ordinal="0" />
+								</FieldDefinitions>
+							</DataShape>
+							<Rows>
+								<Row>
+									<code><![CDATA[
+var values = Things["KBRateOfQualityImportIdPointerDataTable"].CreateValues();
+
+values.KBMachineThing = me.name; //STRING [Primary Key]
+values.LastIdTransferred = LastIdTransferred; //LONG
+values.DatabaseConnection = DatabaseConnection;
+
+var params = {
+	sourceType: undefined /* STRING */,
+	values: values /* INFOTABLE*/,
+	location: undefined /* LOCATION */,
+	source: undefined /* STRING */,
+	tags: undefined /* TAGS */
+};
+
+// result: STRING
+var id = Things["KBRateOfQualityImportIdPointerDataTable"].AddOrUpdateDataTableEntry(params);
+
+]]></code>
+								</Row>
+							</Rows>
+						</ConfigurationTable>
+					</ConfigurationTables>
+				</ServiceImplementation>
+			</ServiceImplementations>
+			<Subscriptions />
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</PropertyRead>
+					<PropertyWrite />
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+				<Permissions
+                 resourceName="SetCurrentOrderAndPartNumber">
+                    <PropertyRead></PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="KBMesKitHelperUser"
+                         type="User"></Principal>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true" name="KBOrganization"
+						type="Organization" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTables />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="header : name : updated&#10;"
+					timestamp="2017-12-01T09:45:50.979+01:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetAndAddQualityResultsFromDataSource : Service Added&#10;"
+					timestamp="2017-12-01T09:47:42.199+01:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2017-12-01T09:48:15.480+01:00"
+					user="adm-flassakm" />
+			</ConfigurationChanges>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations>
+				<AlertDefinitions name="HasOEE2Values" />
+				<AlertDefinitions name="HasRateOfQualityValues" />
+				<AlertDefinitions name="HasUtilizationValues" />
+				<AlertDefinitions name="IsSmartKpiAreaLevel" />
+				<AlertDefinitions name="IsSmartKpiMachineLevel" />
+				<AlertDefinitions name="IsSmartKpiPlantLevel" />
+			</AlertConfigurations>
+			<InstanceRunTimePermissions />
+		</ThingShape>
+	</ThingShapes>
+</Entities>

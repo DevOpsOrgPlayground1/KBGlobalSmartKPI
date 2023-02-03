@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b2319" majorVersion="8" minorVersion="4"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="4" schemaVersion="1041" universal="">
+	<ThingShapes>
+		<ThingShape aspect.isExtension="true" className=""
+			description="" documentationContent="" homeMashup=""
+			lastModifiedDate="2020-02-21T11:26:02.707+01:00"
+			name="KBBrqMachiningProductiveCalculationThingShape"
+			projectName="KBsmartKPI"
+			tags="KBThingWorxAdministrationVocabulary:Administrated">
+			<PropertyDefinitions>
+				<PropertyDefinition aspect.cacheTime="0.0"
+					aspect.dataChangeType="VALUE" aspect.isLogged="true"
+					aspect.isPersistent="true" aspect.isReadOnly="false"
+					baseType="BOOLEAN" category="" description="" isLocalOnly="false"
+					name="Productive" ordinal="35" />
+			</PropertyDefinitions>
+			<ServiceDefinitions>
+				<ServiceDefinition aspect.isAsync="false"
+					category="" description="" isAllowOverride="false"
+					isLocalOnly="false" isOpen="false" isPrivate="false"
+					name="CalculatingProductiveState">
+					<ResultType baseType="NOTHING" description=""
+						name="result" ordinal="0" />
+					<ParameterDefinitions>
+						<FieldDefinition baseType="BOOLEAN" description=""
+							name="AutoMode" ordinal="3" />
+						<FieldDefinition baseType="BOOLEAN" description=""
+							name="CycleActive" ordinal="2" />
+						<FieldDefinition baseType="BOOLEAN" description=""
+							name="FeedOn" ordinal="5" />
+						<FieldDefinition aspect.isRequired="true"
+							baseType="DATETIME" description="" name="ProductionDate"
+							ordinal="3" />
+						<FieldDefinition baseType="BOOLEAN" description=""
+							name="SpindleOn" ordinal="4" />
+					</ParameterDefinitions>
+				</ServiceDefinition>
+			</ServiceDefinitions>
+			<EventDefinitions />
+			<ServiceMappings />
+			<ServiceImplementations>
+				<ServiceImplementation description=""
+					handlerName="Script" name="CalculatingProductiveState">
+					<ConfigurationTables>
+						<ConfigurationTable description="Script"
+							isMultiRow="false" name="Script" ordinal="0">
+							<DataShape>
+								<FieldDefinitions>
+									<FieldDefinition baseType="STRING"
+										description="code" name="code" ordinal="0" />
+								</FieldDefinitions>
+							</DataShape>
+							<Rows>
+								<Row>
+									<code><![CDATA[//Calculating Productive State
+var cycle_active = CycleActive;
+var auto_mode = AutoMode;
+var spindle_on = SpindleOn;
+var feed_on = FeedOn;
+if (cycle_active == null) {cycle_active = false};
+if (auto_mode == null) {auto_mode = false};
+if (spindle_on == null) {spindle_on = true};
+if (feed_on == null) {feed_on = true};
+
+var write_status = false;
+var status = "";
+var substatus = "";
+var machinedatavalue = -1;
+		//0: Production
+		//1: Planned shut down --> organizational
+		//2: Machine Shut down --> technical
+		//3: Speed losses --> speed
+
+if (cycle_active && auto_mode && feed_on && spindle_on && !me.Productive){
+    write_status = true;
+    status = "KBMaschStatus.1.Productive";
+    substatus = "KBMaschStatus.2.Productive.Start";
+    machinedatavalue = 0;
+} else if (!(cycle_active && auto_mode && feed_on && spindle_on) && me.Productive){
+    write_status = true;
+    status = "KBMaschStatus.1.OI.AutoSet";
+    substatus = "KBMaschStatus.2.OI.AutoSet.Start";
+    machinedatavalue = 1; 
+}
+
+//OEE2.0 Handling:
+try {
+	if (write_status) {
+	    me.Productive = cycle_active && auto_mode && feed_on && spindle_on;
+	}
+	if (me.ImplementsShape({thingShapeName: "KBOperatorScreenRailV2StateThingShape" })) {
+		write_status = me.CheckMachineStatus({StatusLevel1 : status, StatusLevel2 : substatus, WriteStatus : write_status});
+		status = me.GetCurrentStatusLevel1();
+		substatus = me.GetCurrentStatusLevel2();
+	}
+} catch(err) {
+	logger.error(me.name+": Error OEE2.0 Handling: "+err);
+}
+
+if (write_status) {
+    me.Productive = cycle_active && auto_mode && feed_on && spindle_on;
+    
+    var params = {
+        infoTableName : "InfoTable",
+        dataShapeName : "KBLocalStationDataReceiverStateDataShape"
+    };
+
+    // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBLocalStationDataReceiverStateDataShape)
+    var infoTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+
+    // dateValue:DATETIME
+    var dateValue = ProductionDate;
+    //dateValue.setMilliseconds(0);
+
+    // KBLocalStationDataReceiverStateDataShape entry object
+    var newEntry = new Object();
+    newEntry.Line = me.KBLocalLineThing; // STRING - isPrimaryKey = true
+    newEntry.Station = me.name; // STRING - isPrimaryKey = true
+    newEntry.Type = "Operator Screen"; // STRING - isPrimaryKey = true
+    newEntry.Description = "Kepware"; // STRING
+    newEntry.Identifier = substatus; // STRING
+    newEntry.ShortName = status; // STRING - isPrimaryKey = true
+    newEntry.DateTime = dateValue; // DATETIME - isPrimaryKey = true
+
+    infoTable.AddRow(newEntry);
+
+    var params = {
+        stateInfoTable: infoTable /* INFOTABLE */
+    };
+
+    // result: BOOLEAN
+    var result = me.SetState(params);
+    
+    
+    
+    
+    
+    
+	var params = {
+		infoTableName : "InfoTable",
+		dataShapeName : "KBLocalStationDataReceiverMachineDataShape"
+	};
+	
+	// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBLocalStationDataReceiverMachineDataShape)
+	var machinedata = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+	
+	
+	// KBLocalStationDataReceiverMachineDataShape entry object
+	var newEntry = new Object();
+	newEntry.Line = me.KBLocalLineThing; // STRING - isPrimaryKey = true
+	newEntry.Station = me.name; // STRING - isPrimaryKey = true
+	newEntry.Type = "MACHINEDATA"; // STRING - isPrimaryKey = true
+	newEntry.Description = "0: Production, 1: org. down, 2: tech. down 3: Speed losses"; // STRING
+	newEntry.Identifier = undefined; // STRING
+	newEntry.Value = machinedatavalue; // STRING
+	newEntry.LowerLimit = undefined; // STRING
+	newEntry.ShortName = "AutoCalculatedProductiveInfoFromMachine"; // STRING - isPrimaryKey = true
+	newEntry.Unit = undefined; // STRING
+	newEntry.UpperLimit = undefined; // STRING
+	newEntry.DateTime = dateValue; // DATETIME - isPrimaryKey = true
+	
+	machinedata.AddRow(newEntry);
+	
+	
+	
+	var params = {
+		machineDataInfoTable: machinedata /* INFOTABLE */
+	};
+	
+	// result: BOOLEAN
+	var result = me.SetMachineData(params);    
+
+}
+]]></code>
+								</Row>
+							</Rows>
+						</ConfigurationTable>
+					</ConfigurationTables>
+				</ServiceImplementation>
+			</ServiceImplementations>
+			<Subscriptions />
+			<Owner name="SuperUser" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions />
+			<VisibilityPermissions>
+				<Visibility />
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables />
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations />
+			<InstanceRunTimePermissions />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="header : name : updated&#10;"
+					timestamp="2019-03-28T10:06:01.408+01:00" user="adm-abdurais" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : CalculatingProductiveState : Input parameter SpindleOn Updated, Inputs updated&#10;"
+					timestamp="2019-03-28T10:09:48.258+01:00" user="adm-abdurais" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="properties : CycleActive : Added, AutoMode : Added, SpindleOn : Added, FeedOn : Added&#10;services : CalculatingProductiveState : Code Updated, Input parameter CycleActive Updated, Inputs updated, Input parameter AutoMode Updated, Input parameter FeedOn Updated, Input parameter SpindleOn Updated&#10;"
+					timestamp="2019-04-25T07:42:52.238+02:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="properties : CycleActive : removed, AutoMode : removed, SpindleOn : removed, FeedOn : removed&#10;"
+					timestamp="2019-04-25T07:46:10.147+02:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : CalculatingProductiveState : Code Updated, Input parameter CycleActive Added, Inputs updated, Input parameter AutoMode Added, Input parameter SpindleOn Added, Input parameter FeedOn Added&#10;"
+					timestamp="2019-04-25T07:48:29.380+02:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-07-08T07:34:01.859+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-08-28T13:06:12.350+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-08-29T13:17:01.560+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-08-29T14:02:05.153+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-08-29T15:18:14.026+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-13T07:10:13.165+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-13T08:23:02.259+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-13T09:12:04.875+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-19T15:59:00.795+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-19T16:30:43.905+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-19T16:38:06.354+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-19T16:45:09.416+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-19T16:55:00.075+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-26T14:13:21.249+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-10-28T08:06:44.900+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-11-12T15:39:32.465+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-11-12T16:05:32.040+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-11-12T16:17:24.374+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-11-12T16:23:16.713+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-11-13T15:38:14.535+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-11-14T10:39:28.381+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-11-14T10:58:12.955+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-12-17T11:18:31.324+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2020-02-12T14:49:41.567+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2020-02-15T10:49:48.622+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2020-02-18T10:27:33.989+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2020-02-21T11:03:33.171+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2020-02-21T11:19:51.994+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2020-02-21T11:26:02.707+01:00" user="SuperUser" />
+			</ConfigurationChanges>
+		</ThingShape>
+	</ThingShapes>
+</Entities>

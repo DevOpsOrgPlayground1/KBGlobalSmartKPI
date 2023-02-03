@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b706"
+ majorVersion="9"
+ minorVersion="0"
+ modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+ revision="12"
+ schemaVersion="1109"
+ universal="password">
+    <ThingTemplates>
+        <ThingTemplate
+         baseThingTemplate="KBSnowflakeDatabaseThingTemplate"
+         description=""
+         documentationContent=""
+         effectiveThingPackage="DatabaseThing"
+         homeMashup=""
+         inheritedValueStream=""
+         lastModifiedDate="2022-09-05T11:42:27.500Z"
+         name="KBSnowflakeDatabaseSmartKPIThingTemplate"
+         projectName=""
+         tags=""
+         thingPackage=""
+         valueStream="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions></RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility></Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables>
+                <ConfigurationTable
+                 dataShapeName=""
+                 description="JDBC Settings"
+                 isMultiRow="false"
+                 name="ConnectionInfo"
+                 ordinal="0">
+                    <DataShape>
+                        <FieldDefinitions>
+                            <FieldDefinition
+                             aspect.defaultValue="SELECT NOW()"
+                             baseType="STRING"
+                             description="Connection test string/query"
+                             name="connectionValidationString"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="jdbc:mydb:/server:port/database?param=value"
+                             aspect.friendlyName="JDBC Connection String"
+                             baseType="STRING"
+                             description="JDBC Connection URL"
+                             name="jDBCConnectionURL"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="com.yourdatabase.yourDriver"
+                             aspect.friendlyName="JDBC Driver Class Name"
+                             baseType="STRING"
+                             description="JDBC Driver Class Name"
+                             name="jDBCDriverClass"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="5.0"
+                             aspect.friendlyName="Maxium Number of Connections"
+                             baseType="NUMBER"
+                             description="Maximum number of connections in the pool"
+                             name="maxConnections"
+                             ordinal="3"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.friendlyName="Database Password"
+                             baseType="PASSWORD"
+                             description="Database password"
+                             name="password"
+                             ordinal="5"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.friendlyName="Database User Name"
+                             baseType="STRING"
+                             description="Database user name"
+                             name="userName"
+                             ordinal="4"></FieldDefinition>
+                        </FieldDefinitions>
+                    </DataShape>
+                    <Rows>
+                        <Row>
+                            <connectionValidationString>
+                            <![CDATA[
+                            select getdate()
+                            ]]>
+                            </connectionValidationString>
+                            <jDBCConnectionURL>
+                            <![CDATA[
+                            jdbc:snowflake://dz96977.west-europe.azure.snowflakecomputing.com/?private_key_file=C:/KBTWX/rsa_key.p8&warehouse=PUBLIC_WH&db=PROD&schema=M_DIGI_MANUFACTURING&role=PROD_M_DIGI_MANUFACTURING_READ
+                            ]]>
+                            </jDBCConnectionURL>
+                            <jDBCDriverClass>
+                            <![CDATA[
+                            com.snowflake.client.jdbc.SnowflakeDriver
+                            ]]>
+                            </jDBCDriverClass>
+                            <maxConnections>5.0</maxConnections>
+                            <password></password>
+                            <userName>
+                            <![CDATA[
+                            SVC.MUC.THINGWORX@KNORR-BREMSE.COM
+                            ]]>
+                            </userName>
+                        </Row>
+                    </Rows>
+                </ConfigurationTable>
+                <ConfigurationTable
+                 dataShapeName=""
+                 description="Connection Monitoring Settings"
+                 isMultiRow="false"
+                 name="ConnectionMonitoring"
+                 ordinal="0">
+                    <DataShape>
+                        <FieldDefinitions>
+                            <FieldDefinition
+                             aspect.defaultValue="30000.0"
+                             aspect.friendlyName="Monitor Rate (seconds)"
+                             baseType="NUMBER"
+                             description="Monitor rate in milliseconds"
+                             name="connectionMonitorRate"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="false"
+                             aspect.friendlyName="Enable Monitoring"
+                             baseType="BOOLEAN"
+                             description="Enable connection monitoring"
+                             name="enableMonitor"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="1.0"
+                             aspect.friendlyName="Number of Retries"
+                             baseType="NUMBER"
+                             description="Number of retries"
+                             name="numberOfRetries"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="2000.0"
+                             aspect.friendlyName="Retry Delay (milliseconds)"
+                             baseType="NUMBER"
+                             description="Retry delay in milliseconds"
+                             name="retryDelay"
+                             ordinal="3"></FieldDefinition>
+                        </FieldDefinitions>
+                    </DataShape>
+                    <Rows>
+                        <Row>
+                            <connectionMonitorRate>30000.0</connectionMonitorRate>
+                            <enableMonitor>false</enableMonitor>
+                            <numberOfRetries>1.0</numberOfRetries>
+                            <retryDelay>2000.0</retryDelay>
+                        </Row>
+                    </Rows>
+                </ConfigurationTable>
+                <ConfigurationTable
+                 dataShapeName=""
+                 description="Field/Column Name Aliases"
+                 isMultiRow="true"
+                 name="ColumnAliases"
+                 ordinal="1">
+                    <DataShape>
+                        <FieldDefinitions>
+                            <FieldDefinition
+                             aspect.friendlyName="Database Column Name"
+                             baseType="STRING"
+                             description="Database column name"
+                             name="columnName"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.friendlyName="Thingworx Field Name"
+                             baseType="STRING"
+                             description="Thingworx field name"
+                             name="fieldName"
+                             ordinal="1"></FieldDefinition>
+                        </FieldDefinitions>
+                    </DataShape>
+                    <Rows></Rows>
+                </ConfigurationTable>
+            </ConfigurationTables>
+            <PropertyBindings></PropertyBindings>
+            <RemotePropertyBindings></RemotePropertyBindings>
+            <RemoteServiceBindings></RemoteServiceBindings>
+            <RemoteEventBindings></RemoteEventBindings>
+            <AlertConfigurations></AlertConfigurations>
+            <ThingShape>
+                <PropertyDefinitions></PropertyDefinitions>
+                <ServiceDefinitions>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="GetAllPlantsList">
+                        <ResultType
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="getListOFMachinesForPlant">
+                        <ResultType
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="GetProductionDeviationDataForMachine">
+                        <ResultType
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="DATETIME"
+                             description=""
+                             name="EndDate"
+                             ordinal="4"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="MachineThing"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="SourceSystem"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="DATETIME"
+                             description=""
+                             name="StartDate"
+                             ordinal="3"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                </ServiceDefinitions>
+                <EventDefinitions></EventDefinitions>
+                <ServiceMappings></ServiceMappings>
+                <ServiceImplementations>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="SQLQuery"
+                     name="GetAllPlantsList">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description="SQLQuery"
+                             isMultiRow="false"
+                             name="Query"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="NUMBER"
+                                         description="maxItems"
+                                         name="maxItems"
+                                         ordinal="0"></FieldDefinition>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="sql"
+                                         name="sql"
+                                         ordinal="0"></FieldDefinition>
+                                        <FieldDefinition
+                                         baseType="NUMBER"
+                                         description="timeout"
+                                         name="timeout"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <maxItems>500.0</maxItems>
+                                        <sql>
+                                        <![CDATA[
+                                        select SAPPlantId.TextValue as SAPPlantId , DisplayName.TextValue as DisplayName
+                                          from prod.M_DIGI_MANUFACTURING.smartKPI_MachineKeyValueData SAPPlantId, prod.M_DIGI_MANUFACTURING.smartKPI_MachineKeyValueData KBDivisionThing, 
+                                          prod.M_DIGI_MANUFACTURING.smartKPI_MachineKeyValueData DisplayName, prod.M_DIGI_MANUFACTURING.smartKPI_MachineKeyValueData thingTemplate
+                                          where KBDivisionThing.Machine = SAPPlantId.Machine
+                                          and KBDivisionThing.Machine = DisplayName.Machine
+                                          and KBDivisionThing.Machine = thingTemplate.Machine
+                                          and SAPPlantId.PropertyKey = 'SAPPlantId'
+                                          and KBDivisionThing.PropertyKey = 'KBDivisionThing'
+                                          and DisplayName.PropertyKey = 'DisplayName'
+                                          and thingTemplate.PropertyKey = 'thingTemplate'
+                                          and KBDivisionThing.TextValue = 'KBTruckDevisionThing'
+                                          and thingTemplate.TextValue in ('KBLocalPlantThingTemplate','KBGlobalPlantThingTemplate')
+                                        ]]>
+                                        </sql>
+                                        <timeout>60.0</timeout>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="SQLQuery"
+                     name="getListOFMachinesForPlant">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description="SQLQuery"
+                             isMultiRow="false"
+                             name="Query"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="NUMBER"
+                                         description="maxItems"
+                                         name="maxItems"
+                                         ordinal="0"></FieldDefinition>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="sql"
+                                         name="sql"
+                                         ordinal="0"></FieldDefinition>
+                                        <FieldDefinition
+                                         baseType="NUMBER"
+                                         description="timeout"
+                                         name="timeout"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <maxItems>500.0</maxItems>
+                                        <sql>
+                                        <![CDATA[
+                                        select SUBSTR(e.SourceSystem, 16, 3) as Plant, e.SourceSystem as SourceSystem, e.Machine as MachineThingName, e.TextValue as MachineName from 
+                                            (select  d.SourceSystem,d.PropertyKey,d.FloatValue, d.TextValue, d.Machine, d.PropertySubKey2 from 
+                                                (select a.SourceSystem, a.PropertyKey, a.FloatValue, a.TextValue, a.Machine, a.PropertySubKey2
+                                                    from smartkpi_machinekeyvaluedata a , smartkpi_machinekeyvaluedata b   
+                                                        where a.Machine=b.Machine   
+                                                        and b.PropertyKey='isActive' 
+                                                        and b.FloatValue=1 
+                                                ) d 
+                                                where d.PropertySubKey2='KBLocalMachineThingTemplate' 
+                                                and d.PropertyKey='DisplayName'
+                                                
+                                                ) e where SUBSTR(e.SourceSystem, 16, 3) in ('KEC','ALD','LIS','LIB','BER','ARC','PUN','PET')group by e.Machine, e.TextValue,e.SourceSystem
+                                        ]]>
+                                        </sql>
+                                        <timeout>60.0</timeout>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="SQLQuery"
+                     name="GetProductionDeviationDataForMachine">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description="SQLQuery"
+                             isMultiRow="false"
+                             name="Query"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="NUMBER"
+                                         description="maxItems"
+                                         name="maxItems"
+                                         ordinal="0"></FieldDefinition>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="sql"
+                                         name="sql"
+                                         ordinal="0"></FieldDefinition>
+                                        <FieldDefinition
+                                         baseType="NUMBER"
+                                         description="timeout"
+                                         name="timeout"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <maxItems>500.0</maxItems>
+                                        <sql>
+                                        <![CDATA[
+                                        with x as
+										(select orders.*,
+										    TIMEDIFF(second,ProductionTimeStart,ProductionTimeEnd) as Duration_in_sec,
+										    workers.PlannedNumberOfWorkers as PlannedNumberOfWorkers,
+										    tgMax.tgMaxTime as tgMaxTimeInSec,
+										    ProcessingCO.ProcessingTimeCO as ProcessingTimeInSecCO
+										from
+										(select
+										lead(ProductionTime) over (order by ProductionTime desc) as ProductionTimeStart,
+										ProductionTime as ProductionTimeEnd,
+										OrderNumber||', '||PartNumber||', '||SerialNumber as ident,
+										OrderNumber,
+										PartNumber,
+										isPartOK,
+										SerialNumber,
+										numberOfParts
+										from prod.m_digi_manufacturing.smartkpi
+										where ProductionTime between TO_TIMESTAMP_NTZ([[StartDate]]) and TO_TIMESTAMP_NTZ([[EndDate]])
+										and Machine = [[MachineThing]]
+										and Sourcesystem = [[SourceSystem]]
+										and DELETE_IDENTIFIER != 'DELETED') orders,
+										(select sum(floatvalue) as PlannedNumberOfWorkers, ordernumber from
+										prod.m_digi_manufacturing.smartkpi_orderkeyvaluedata
+										where Sourcesystem = [[SourceSystem]]
+										and DELETE_IDENTIFIER != 'DELETED'
+										and propertykey1 = 'PlannedNumberOfWorkers'
+										group by ordernumber) workers,
+										(select sum(CASE TextValue
+										                                    WHEN 'SEC' THEN FloatValue
+										                                    WHEN 'MIN' THEN FloatValue * 60
+										                                    WHEN 'DAY' THEN FloatValue * 24 * 60 * 60
+										                                    ELSE 0         
+										                                END) as tgMaxTime, ordernumber from
+										prod.m_digi_manufacturing.smartkpi_orderkeyvaluedata
+										where Sourcesystem = [[SourceSystem]]
+										and DELETE_IDENTIFIER != 'DELETED'
+										and propertykey1 = 'tgMaxTime'
+										group by ordernumber) tgMax,
+										(select sum(CASE TextValue
+										                                    WHEN 'SEC' THEN FloatValue
+										                                    WHEN 'MIN' THEN FloatValue * 60
+										                                    WHEN 'DAY' THEN FloatValue * 24 * 60 * 60
+										                                    ELSE 0         
+										                                END) as ProcessingTimeCO, ordernumber from
+										prod.m_digi_manufacturing.smartkpi_orderkeyvaluedata
+										where Sourcesystem = [[SourceSystem]]
+										and DELETE_IDENTIFIER != 'DELETED'
+										and propertykey1 = 'ProcessingTimeCO'
+										group by ordernumber) ProcessingCO
+										where ProductionTimeStart is not null
+										and workers.ordernumber = orders.ordernumber
+										and tgMax.ordernumber = orders.ordernumber
+										and ProcessingCO.ordernumber = orders.ordernumber)
+										select distinct MERIDIAN.PartNumber,  
+										    round(STAT.NumberOfProducedParts,2) as NumberOfProducedParts,
+										    round(STAT.NumberOfPartsPerCycle,2) as NumberOfPartsPerCycle,
+										    round(STAT.PlannedNumberOfWorkers,2) as PlannedNumberOfWorkers,  
+										    round(STAT.AVG_realProcessingTime/STAT.NumberOfPartsPerCycle,2) as AVG_realProcessingTimeInSec,  
+										    round(STAT.tgMaxTimeInSec,2) as tgMaxInSec,  
+										    round(STAT.ProcessingTimeInSecCO,2) as ProcessingTimeInSecCO,  
+										    round(MERIDIAN.Median_RealProcessingTime/STAT.NumberOfPartsPerCycle,2) as Median_RealProcessingTime,
+										    round(STAT.ProcessingTimeInSecCO - (STAT.AVG_realProcessingTime/STAT.NumberOfPartsPerCycle),2) as ProcessingTimeInSecCO_minus_realProcessingTime,
+										    round((MERIDIAN.Median_RealProcessingTime/STAT.NumberOfPartsPerCycle) - (STAT.AVG_realProcessingTime/STAT.NumberOfPartsPerCycle),2) as MedianRealProcessingTime_minus_realProcessingTime,
+										    round(ABS(((STAT.ProcessingTimeInSecCO - (STAT.AVG_realProcessingTime/STAT.NumberOfPartsPerCycle))/NULLIF((STAT.ProcessingTimeInSecCO/10),0))*10 ),2) as CODeviationPercentage,
+										    round(ABS(((STAT.tgMaxTimeInSec - (MERIDIAN.Median_RealProcessingTime/STAT.NumberOfPartsPerCycle))/NULLIF((STAT.tgMaxTimeInSec/10),0))*10 ),2) as tgMaxDeviationPercentage
+										from
+										    (select  x.PartNumber, PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY x.Duration_in_sec) OVER (PARTITION BY x.PartNumber) AS Median_RealProcessingTime
+										    from x) MERIDIAN,
+										    (select PartNumber,sum(NumberOfParts) as NumberOfProducedParts,AVG(NumberOfParts) as NumberOfPartsPerCycle, AVG(PlannedNumberOfWorkers) as PlannedNumberOfWorkers,  
+										        AVG(Duration_in_sec) as AVG_realProcessingTime, AVG(tgMaxTimeInSec) as tgMaxTimeInSec, AVG(ProcessingTimeInSecCO) as ProcessingTimeInSecCO
+										    from x group by PartNumber)STAT
+										where STAT.PartNumber = MERIDIAN.PartNumber
+										order by 1;
+                                        ]]>
+                                        </sql>
+                                        <timeout>60.0</timeout>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                </ServiceImplementations>
+                <Subscriptions></Subscriptions>
+            </ThingShape>
+            <ImplementedShapes></ImplementedShapes>
+            <SharedConfigurationTables></SharedConfigurationTables>
+            <InstanceDesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </InstanceDesignTimePermissions>
+            <InstanceRunTimePermissions>
+                <Permissions
+                 resourceName="*">
+                    <PropertyRead>
+                        <Principal
+                         isPermitted="true"
+                         name="Users"
+                         type="Group"></Principal>
+                    </PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="Users"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+            </InstanceRunTimePermissions>
+            <InstanceVisibilityPermissions>
+                <Visibility>
+                    <Principal
+                     isPermitted="true"
+                     name="KBOrganization"
+                     type="Organization"></Principal>
+                </Visibility>
+            </InstanceVisibilityPermissions>
+        </ThingTemplate>
+    </ThingTemplates>
+</Entities>

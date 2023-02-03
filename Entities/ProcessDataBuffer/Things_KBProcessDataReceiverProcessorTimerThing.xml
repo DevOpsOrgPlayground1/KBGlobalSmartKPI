@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b706"
+ majorVersion="9"
+ minorVersion="0"
+ modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+ revision="12"
+ schemaVersion="1109"
+ universal="password">
+    <Things>
+        <Thing
+         description=""
+         documentationContent=""
+         effectiveThingPackage="TimerThing"
+         enabled="true"
+         homeMashup=""
+         identifier=""
+         inheritedValueStream=""
+         lastModifiedDate="2022-11-25T09:48:43.120Z"
+         name="KBProcessDataReceiverProcessorTimerThing"
+         projectName=""
+         published="false"
+         tags=""
+         thingTemplate="Timer"
+         valueStream="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions></RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility></Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables>
+                <ConfigurationTable
+                 dataShapeName=""
+                 description="General Settings"
+                 isMultiRow="false"
+                 name="Settings"
+                 ordinal="0">
+                    <DataShape>
+                        <FieldDefinitions>
+                            <FieldDefinition
+                             aspect.defaultValue="true"
+                             baseType="BOOLEAN"
+                             description="Automatically enable timer on startup"
+                             name="enabled"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="USERNAME"
+                             description="User context in which to run event handlers"
+                             name="runAsUser"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="60000.0"
+                             baseType="NUMBER"
+                             description="Update rate"
+                             name="updateRate"
+                             ordinal="0"></FieldDefinition>
+                        </FieldDefinitions>
+                    </DataShape>
+                    <Rows>
+                        <Row>
+                            <enabled>true</enabled>
+                            <runAsUser>
+                            <![CDATA[
+                            Administrator
+                            ]]>
+                            </runAsUser>
+                            <updateRate>1000.0</updateRate>
+                        </Row>
+                    </Rows>
+                </ConfigurationTable>
+            </ConfigurationTables>
+            <ThingShape>
+                <PropertyDefinitions>
+                    <PropertyDefinition
+                     aspect.cacheTime="0.0"
+                     aspect.dataChangeType="VALUE"
+                     aspect.defaultValue="500.0"
+                     aspect.isPersistent="true"
+                     aspect.minimumValue="0.0"
+                     baseType="NUMBER"
+                     category=""
+                     description=""
+                     isLocalOnly="false"
+                     name="filesPerCycle"
+                     ordinal="8"></PropertyDefinition>
+                    <PropertyDefinition
+                     aspect.cacheTime="0.0"
+                     aspect.dataChangeType="VALUE"
+                     aspect.defaultValue="false"
+                     baseType="BOOLEAN"
+                     category=""
+                     description=""
+                     isLocalOnly="false"
+                     name="IsCVSAdgTestBenchDataProcessRunning"
+                     ordinal="6"></PropertyDefinition>
+                    <PropertyDefinition
+                     aspect.cacheTime="0.0"
+                     aspect.dataChangeType="VALUE"
+                     aspect.defaultValue="false"
+                     baseType="BOOLEAN"
+                     category=""
+                     description=""
+                     isLocalOnly="false"
+                     name="IsMachineDataProcessRunning"
+                     ordinal="6"></PropertyDefinition>
+                    <PropertyDefinition
+                     aspect.cacheTime="0.0"
+                     aspect.dataChangeType="VALUE"
+                     aspect.defaultValue="false"
+                     baseType="BOOLEAN"
+                     category=""
+                     description=""
+                     isLocalOnly="false"
+                     name="IsMessageDataProcessRunning"
+                     ordinal="7"></PropertyDefinition>
+                    <PropertyDefinition
+                     aspect.cacheTime="0.0"
+                     aspect.dataChangeType="VALUE"
+                     aspect.defaultValue="false"
+                     baseType="BOOLEAN"
+                     category=""
+                     description=""
+                     isLocalOnly="false"
+                     name="IsPartDataProcessRunning"
+                     ordinal="8"></PropertyDefinition>
+                    <PropertyDefinition
+                     aspect.cacheTime="0.0"
+                     aspect.dataChangeType="VALUE"
+                     aspect.defaultValue="false"
+                     baseType="BOOLEAN"
+                     category=""
+                     description=""
+                     isLocalOnly="false"
+                     name="IsStatusDataProcessRunning"
+                     ordinal="9"></PropertyDefinition>
+                    <PropertyDefinition
+                     aspect.cacheTime="0.0"
+                     aspect.dataChangeType="VALUE"
+                     aspect.defaultValue="false"
+                     baseType="BOOLEAN"
+                     category=""
+                     description=""
+                     isLocalOnly="false"
+                     name="IsTestBenchDataProcessRunning"
+                     ordinal="6"></PropertyDefinition>
+                </PropertyDefinitions>
+                <ServiceDefinitions>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="ProcessBufferData">
+                        <ResultType
+                         baseType="NOTHING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="MessageType"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="ProcessData">
+                        <ResultType
+                         baseType="NOTHING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                </ServiceDefinitions>
+                <EventDefinitions></EventDefinitions>
+                <ServiceMappings></ServiceMappings>
+                <ServiceImplementations>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="ProcessBufferData">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                        <FieldDefinition
+                                         baseType="JSON"
+                                         description=""
+                                         name="editorSettings"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var path = "";
+                                        if (MessageType == "StatusData") {
+                                        	path = "SetState";
+                                        } else if (MessageType == "PartData") {
+                                        	path = "SetPartData";
+                                        } else if (MessageType == "MachineData") {
+                                        	path = "SetMachineData";
+                                        } else if (MessageType == "MessageData") {
+                                        	path = "SetMessage";
+                                        } else if (MessageType == "TestBenchData") {
+                                        	path = "SetTestBenchData";
+                                        } else if (MessageType == "CVSAdgTestBenchData") {
+                                        	path = "SetCVSAdgTestBenchData";
+                                        } else {
+                                        	logger.error("KBProcessDataReceiverProcessorTimerThing." + logName + ": Not handled Message Type!!");
+                                        }
+                                        
+                                        var logName = "ProcessBufferData." + MessageType;
+                                        
+                                        logger.debug("KBProcessDataReceiverProcessorTimerThing." + logName + ": Start");
+                                        
+                                        var processingFileName = "";
+                                        var params = {
+                                        	path: path /* STRING */ ,
+                                        	nameMask: "*" /* STRING */
+                                        };
+                                        
+                                        // result: INFOTABLE dataShape: FileSystemFile
+                                        var list = Things["KBProcessDataReceiverFileRepositoryThing"].ListFiles(params);
+                                        
+                                        var filesPerCycle = me.filesPerCycle;
+                                        var numberOfRows = list.getRowCount();
+                                        if (numberOfRows > filesPerCycle) {
+                                        	numberOfRows = filesPerCycle;
+                                        }
+                                        
+                                        logger.debug("KBProcessDataReceiverProcessorTimerThing." + logName + ": rows " + numberOfRows);
+                                        
+                                        var result = 0;
+                                        var json = null;
+                                        var fileName;
+                                        for (var i = 0; i < numberOfRows; i++) {
+                                        	try {
+                                        		fileName = list.rows[i].name;
+                                        		processingFileName = list.rows[i].path;
+                                        		var thingName = fileName.substring(13, fileName.length - 5);
+                                        
+                                        		logger.debug("KBProcessDataReceiverProcessorTimerThing." + logName + ": " + thingName);
+                                        		json = Things["KBProcessDataReceiverFileRepositoryThing"].LoadJSON({
+                                        			path: processingFileName /* STRING */
+                                        		});
+                                        
+                                        		// result: INFOTABLE
+                                        		var infotable = Resources["InfoTableFunctions"].FromJSON({
+                                        			json: json /* JSON */
+                                        		});
+                                        
+                                        		if (MessageType == "StatusData") {
+                                        			//************************************************************************************************
+                                        			// result: BOOLEAN
+                                        			if (Things[thingName].SetStateWithoutBuffer({
+                                        					stateInfoTable: infotable /* INFOTABLE */
+                                        				})) {
+                                        				Things["KBProcessDataReceiverFileRepositoryThing"].DeleteFile({
+                                        					path: processingFileName /* STRING */
+                                        				});
+                                        			} else {
+                                        				logger.warn("KBProcessDataReceiverProcessorTimerThing." + logName + ": SetStateWithoutBuffer was not successful");
+                                        				result = 1;
+                                        			}
+                                        			//************************************************************************************************
+                                        		} else if (MessageType == "PartData") {
+                                        			//************************************************************************************************
+                                        			// result: BOOLEAN
+                                        			if (Things[thingName].SetPartDataWithoutBuffer({
+                                        					partDataInfoTable: infotable /* INFOTABLE */
+                                        				})) {
+                                        				Things["KBProcessDataReceiverFileRepositoryThing"].DeleteFile({
+                                        					path: processingFileName /* STRING */
+                                        				});
+                                        			} else {
+                                        				logger.warn("KBProcessDataReceiverProcessorTimerThing." + logName + ": SetPartDataWithoutBuffer was not successful");
+                                        				result = 1;
+                                        			}
+                                        			//************************************************************************************************
+                                        		} else if (MessageType == "MachineData") {
+                                        			//************************************************************************************************
+                                        			// result: BOOLEAN
+                                        			if (Things[thingName].SetMachineDataWithoutBuffer({
+                                        					machineDataInfoTable: infotable /* INFOTABLE */
+                                        				})) {
+                                        				Things["KBProcessDataReceiverFileRepositoryThing"].DeleteFile({
+                                        					path: processingFileName /* STRING */
+                                        				});
+                                        			} else {
+                                        				logger.warn("KBProcessDataReceiverProcessorTimerThing." + logName + ": SetMachineDataWithoutBuffer was not successful");
+                                        				result = 1;
+                                        			}
+                                        			//************************************************************************************************
+                                        		} else if (MessageType == "TestBenchData") {
+                                        			//************************************************************************************************
+                                        			// result: BOOLEAN
+                                        			if (Things[thingName].SetTestBenchDataWithoutBuffer({
+                                        					testBenchInfoTable: infotable /* INFOTABLE */
+                                        				})) {
+                                        				Things["KBProcessDataReceiverFileRepositoryThing"].DeleteFile({
+                                        					path: processingFileName /* STRING */
+                                        				});
+                                        			} else {
+                                        				logger.warn("KBProcessDataReceiverProcessorTimerThing." + logName + ": SetTestBenchDataWithoutBuffer was not successful");
+                                        				result = 1;
+                                        			}
+                                        			//************************************************************************************************
+                                        		} else if (MessageType == "CVSAdgTestBenchData") {
+                                        			//************************************************************************************************
+                                        			// result: BOOLEAN
+                                        			if (Things[thingName].SetCVSAdgTestBenchDataWithoutBuffer({
+                                        					testBenchInfoTable: infotable /* INFOTABLE */
+                                        				})) {
+                                        				Things["KBProcessDataReceiverFileRepositoryThing"].DeleteFile({
+                                        					path: processingFileName /* STRING */
+                                        				});
+                                        			} else {
+                                        				logger.warn("KBProcessDataReceiverProcessorTimerThing." + logName + ": SetCVSAdgTestBenchDataWithoutBuffer was not successful");
+                                        				result = 1;
+                                        			}
+                                        			//************************************************************************************************
+                                        		} else if (MessageType == "MessageData") {
+                                        			//************************************************************************************************
+                                        			// result: BOOLEAN
+                                        			if (Things[thingName].SetMessageWithoutBuffer({
+                                        					messageInfoTable: infotable /* INFOTABLE */
+                                        				})) {
+                                        				Things["KBProcessDataReceiverFileRepositoryThing"].DeleteFile({
+                                        					path: processingFileName /* STRING */
+                                        				});
+                                        			} else {
+                                        				logger.warn("KBProcessDataReceiverProcessorTimerThing." + logName + ": SetMessageWithoutBuffer was not successful");
+                                        				result = 1;
+                                        			}
+                                        		}
+                                        		//*************************************
+                                        		if (result === 1) {
+                                        			Things["KBProcessDataReceiverFileRepositoryThing"].SaveText({
+                                        
+                                        				path: 'ProcessingError\\Set' + MessageType + '\\' + fileName /* STRING */ ,
+                                        				content: json /* JSON */
+                                        			});
+                                        			try {
+                                        				Things["KBProcessDataReceiverFileRepositoryThing"].DeleteFile({
+                                        					path: processingFileName /* STRING */
+                                        				});
+                                        
+                                        			} catch (err1) {
+                                        				logger.error("KBProcessDataReceiverProcessorTimerThing." + logName + ": Error Deleting: " + err1);
+                                        			}
+                                        		}
+                                        		//*************************************
+                                        	} catch (err) {
+                                        		//	    if (err == "JavaException: com.thingworx.common.exceptions.InvalidRequestException: Thing " || err == "JavaException: org.json.JSONException: JSONObject[\"dataShape\"] not found.")
+                                        		//	    {
+                                        		//		    logger.warn("KBProcessDataReceiverProcessorTimerThing."+logName+": Error Processing (keep file for processing): " + err);
+                                        		//	    } else {
+                                        		logger.error("KBProcessDataReceiverProcessorTimerThing." + logName + ": Error Processing (move file to Error): " + err);
+                                        		var content = JSON.stringify(json);
+                                        		//try {
+                                        		//	if (err == "JavaException: org.json.JSONException: JSONObject[\"dataShape\"] not found.") {
+                                        		//		var jsonText = Things["KBProcessDataReceiverFileRepositoryThing"].LoadText({
+                                        		//			path: processingFileName /* STRING */
+                                        		//		});
+                                        		//		content += "\n" + jsonText;
+                                        		//	} 
+                                        		//} catch(err2) {
+                                        		//	logger.error("KBProcessDataReceiverProcessorTimerThing."+logName+": Error Logging: " + err2);
+                                        		//}
+                                        
+                                        		Things["KBProcessDataReceiverFileRepositoryThing"].SaveText({
+                                        			path: 'ProcessingError\\Set' + MessageType + '\\' + fileName /* STRING */ ,
+                                        			content: json /* JSON */
+                                        		});
+                                        		try {
+                                        			Things["KBProcessDataReceiverFileRepositoryThing"].DeleteFile({
+                                        				path: processingFileName /* STRING */
+                                        			});
+                                        
+                                        		} catch (err1) {
+                                        			logger.error("KBProcessDataReceiverProcessorTimerThing." + logName + ": Error Deleting: " + err1);
+                                        		}
+                                        		//		}
+                                        	}
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="ProcessData">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        if (!me.IsTestBenchDataProcessRunning){
+                                        me.IsTestBenchDataProcessRunning = true;
+                                            try {
+                                        		me.ProcessBufferData({
+                                        			MessageType: "TestBenchData" /* String */
+                                        		});
+                                            } catch(err) {
+                                        		logger.error("KBProcessDataReceiverProcessorTimerThing.ProcessTestBenchData Error: "+err);
+                                            }
+                                        me.IsTestBenchDataProcessRunning = false;
+                                        }
+                                        
+                                        if (!me.IsCVSAdgTestBenchDataProcessRunning){
+                                        me.IsCVSAdgTestBenchDataProcessRunning = true;
+                                            try {
+                                        		me.ProcessBufferData({
+                                        			MessageType: "CVSAdgTestBenchData" /* String */
+                                        		});
+                                            } catch(err) {
+                                        		logger.error("KBProcessDataReceiverProcessorTimerThing.ProcessCVSAdgTestBenchData Error: "+err);
+                                            }
+                                        me.IsCVSAdgTestBenchDataProcessRunning = false;
+                                        }
+                                        
+                                        if (!me.IsMachineDataProcessRunning){
+                                        me.IsMachineDataProcessRunning = true;
+                                            try {
+                                        		me.ProcessBufferData({
+                                        			MessageType: "MachineData" /* String */
+                                        		});
+                                            } catch(err) {
+                                        		logger.error("KBProcessDataReceiverProcessorTimerThing.ProcessMachineData Error: "+err);
+                                            }
+                                        me.IsMachineDataProcessRunning = false;
+                                        }
+                                        
+                                        if (!me.IsMessageDataProcessRunning){
+                                        me.IsMessageDataProcessRunning = true;
+                                            try {
+                                        		me.ProcessBufferData({
+                                        			MessageType: "MessageData" /* String */
+                                        		});
+                                            } catch(err) {
+                                        		logger.error("KBProcessDataReceiverProcessorTimerThing.ProcessMessageData Error: "+err);
+                                            }
+                                        me.IsMessageDataProcessRunning = false;
+                                        }
+                                        
+                                        if (!me.IsPartDataProcessRunning){
+                                        me.IsPartDataProcessRunning = true;
+                                            try {
+                                        		me.ProcessBufferData({
+                                        			MessageType: "PartData" /* String */
+                                        		});
+                                            } catch(err) {
+                                        		logger.error("KBProcessDataReceiverProcessorTimerThing.ProcessPartData Error: "+err);
+                                            }
+                                        me.IsPartDataProcessRunning = false;
+                                        }
+                                        
+                                        if (!me.IsStatusDataProcessRunning){
+                                        me.IsStatusDataProcessRunning = true;
+                                            try {
+                                        		me.ProcessBufferData({
+                                        			MessageType: "StatusData" /* String */
+                                        		});
+                                            } catch(err) {
+                                        		logger.error("KBProcessDataReceiverProcessorTimerThing.ProcessStatusData Error: "+err);
+                                            }
+                                        me.IsStatusDataProcessRunning = false;
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                </ServiceImplementations>
+                <Subscriptions>
+                    <Subscription
+                     description=""
+                     enabled="true"
+                     eventName="Timer"
+                     name="TimerStarted"
+                     source=""
+                     sourceProperty=""
+                     sourceType="Thing">
+                        <ServiceImplementation
+                         description=""
+                         handlerName="Script"
+                         name="TimerStarted">
+                            <ConfigurationTables>
+                                <ConfigurationTable
+                                 dataShapeName=""
+                                 description=""
+                                 isMultiRow="false"
+                                 name="Script"
+                                 ordinal="0">
+                                    <DataShape>
+                                        <FieldDefinitions>
+                                            <FieldDefinition
+                                             baseType="STRING"
+                                             description="code"
+                                             name="code"
+                                             ordinal="0"></FieldDefinition>
+                                        </FieldDefinitions>
+                                    </DataShape>
+                                    <Rows>
+                                        <Row>
+                                            <code>
+                                            <![CDATA[
+                                            me.ProcessData();
+                                            ]]>
+                                            </code>
+                                        </Row>
+                                    </Rows>
+                                </ConfigurationTable>
+                            </ConfigurationTables>
+                        </ServiceImplementation>
+                    </Subscription>
+                </Subscriptions>
+            </ThingShape>
+            <PropertyBindings></PropertyBindings>
+            <RemotePropertyBindings></RemotePropertyBindings>
+            <RemoteServiceBindings></RemoteServiceBindings>
+            <RemoteEventBindings></RemoteEventBindings>
+            <AlertConfigurations>
+                <AlertDefinitions
+                 name="filesPerCycle"></AlertDefinitions>
+                <AlertDefinitions
+                 name="IsMachineDataProcessRunning"></AlertDefinitions>
+                <AlertDefinitions
+                 name="IsMessageDataProcessRunning"></AlertDefinitions>
+                <AlertDefinitions
+                 name="IsPartDataProcessRunning"></AlertDefinitions>
+                <AlertDefinitions
+                 name="IsStatusDataProcessRunning"></AlertDefinitions>
+            </AlertConfigurations>
+            <ImplementedShapes></ImplementedShapes>
+            <ThingProperties>
+                <filesPerCycle>
+                    <Value>500.0</Value>
+                    <Timestamp>1970-01-01T00:00:00.000Z</Timestamp>
+                    <Quality>UNKNOWN</Quality>
+                </filesPerCycle>
+            </ThingProperties>
+        </Thing>
+    </Things>
+</Entities>

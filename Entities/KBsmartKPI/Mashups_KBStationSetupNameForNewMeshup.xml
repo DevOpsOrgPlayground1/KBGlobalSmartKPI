@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b167" majorVersion="8" minorVersion="2"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="2" schemaVersion="1020" universal="">
+	<Mashups>
+		<Mashup aspect.isResponsive="false" aspect.mashupType="mashup"
+			columns="0.0" description="" documentationContent="" homeMashup=""
+			lastModifiedDate="2019-02-12T10:58:39.167+01:00"
+			name="KBStationSetupNameForNewMeshup" projectName="" rows="0.0"
+			tags="">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions />
+			<VisibilityPermissions>
+				<Visibility />
+			</VisibilityPermissions>
+			<ConfigurationTables />
+			<ParameterDefinitions />
+			<Things>
+				<Thing>KBSmartKpiThingCreatorThing</Thing>
+			</Things>
+			<ThingShapes />
+			<ThingTemplates />
+			<mashupContent><![CDATA[{
+  "CustomMashupCss" : "",
+  "Data" : {
+    "Resources_KBThingWorxServerSystem" : {
+      "DataName" : "Resources_KBThingWorxServerSystem",
+      "EntityName" : "KBThingWorxServerSystem",
+      "EntityType" : "Resources",
+      "Id" : "7b874164-d359-4b2b-be33-aa1c5e871c27",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "6b36c855-5c1f-4739-8636-819b76880456",
+        "Name" : "GetLocationIdentifier",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetLocationIdentifier"
+      } ]
+    },
+    "Session" : {
+      "DataName" : "Session",
+      "EntityName" : "",
+      "EntityType" : "Session",
+      "Id" : "session",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "SessionInterface",
+        "Name" : "GetGlobalSessionValues",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetGlobalSessionValues"
+      } ]
+    },
+    "Things_KBSmartKpiThingCreatorThing" : {
+      "DataName" : "Things_KBSmartKpiThingCreatorThing",
+      "EntityName" : "KBSmartKpiThingCreatorThing",
+      "EntityType" : "Things",
+      "Id" : "520e291a-7d77-4624-9fda-a0c850771a44",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "771b2877-b1d0-47a9-9ea5-b1321353c5e6",
+        "Name" : "CreateLocalStation",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "CreateLocalStation"
+      }, {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "c157ba02-d78f-4681-b076-6c3776801067",
+        "Name" : "CreateLocalMesKitStation",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "CreateLocalMesKitStation"
+      } ]
+    },
+    "UserExtensions" : {
+      "DataName" : "UserExtensions",
+      "EntityName" : "",
+      "EntityType" : "UserExtensions",
+      "Id" : "UserExtensions",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "UserExtensionInterface",
+        "Name" : "GetCurrentUserExtensionProperties",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetCurrentUserExtensionProperties"
+      } ]
+    }
+  },
+  "DataBindings" : [ {
+    "Id" : "f1a7c227-7821-4d17-98fa-2a54eb88c809",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Result",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "Location",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetLocationIdentifier",
+    "SourceSection" : "Resources_KBThingWorxServerSystem",
+    "TargetArea" : "UI",
+    "TargetId" : "expression-6",
+    "TargetSection" : ""
+  }, {
+    "Id" : "c04241b4-7044-42ae-9d4e-eec34d4a10b1",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Output",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "Text",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "expression-6",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "label-5",
+    "TargetSection" : ""
+  }, {
+    "Id" : "54dcaf92-c2fe-425e-b64d-f52ef466bbaa",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Output",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "Text",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "expression-10",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "label-9",
+    "TargetSection" : ""
+  }, {
+    "Id" : "78acdc7d-a8cd-4407-8e6c-a91fbb2b596b",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Result",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "Location",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetLocationIdentifier",
+    "SourceSection" : "Resources_KBThingWorxServerSystem",
+    "TargetArea" : "UI",
+    "TargetId" : "expression-10",
+    "TargetSection" : ""
+  }, {
+    "Id" : "3040a8b7-d90a-40d8-bf85-c86ac09eba0f",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Text",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "ThingName",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "textbox-3",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "validator-13",
+    "TargetSection" : ""
+  }, {
+    "Id" : "7be585c9-7aba-4df2-bdc0-c9a706f15b13",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Text",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "ThingName",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "textbox-8",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "validator-14",
+    "TargetSection" : ""
+  }, {
+    "Id" : "cc2e1a6e-b59a-43b9-8016-e808de5ecedb",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Text",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "StationName",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "textbox-3",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "CreateLocalStation",
+    "TargetSection" : "Things_KBSmartKpiThingCreatorThing"
+  }, {
+    "Id" : "b85015b3-b118-485a-b7c0-1db6598f7b3b",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Text",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "HostName",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "textbox-8",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "CreateLocalMesKitStation",
+    "TargetSection" : "Things_KBSmartKpiThingCreatorThing"
+  } ],
+  "DesignTimePermissions" : { },
+  "Events" : [ {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Resources_KBThingWorxServerSystem",
+    "EventHandlerService" : "GetLocationIdentifier",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "2881803e-d950-4bd1-a2e0-591cb2b2756f"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "expression-6",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "Data",
+    "EventTriggerEvent" : "ServiceInvokeCompleted",
+    "EventTriggerId" : "GetLocationIdentifier",
+    "EventTriggerSection" : "Resources_KBThingWorxServerSystem",
+    "Id" : "4a9cd06c-1610-4a92-9b75-0ae1a498ef71"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "expression-10",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "Data",
+    "EventTriggerEvent" : "ServiceInvokeCompleted",
+    "EventTriggerId" : "GetLocationIdentifier",
+    "EventTriggerSection" : "Resources_KBThingWorxServerSystem",
+    "Id" : "63319102-56d1-484d-be13-916b251eb6d3"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "validator-13",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Clicked",
+    "EventTriggerId" : "button-7",
+    "EventTriggerSection" : "",
+    "Id" : "ee84866e-a09f-47d1-82e2-5720ae0ce6c3"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "validator-14",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Clicked",
+    "EventTriggerId" : "button-12",
+    "EventTriggerSection" : "",
+    "Id" : "5bb246d0-0cfe-41c4-8ebb-1cb6a7615c89"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBSmartKpiThingCreatorThing",
+    "EventHandlerService" : "CreateLocalMesKitStation",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "True",
+    "EventTriggerId" : "validator-14",
+    "EventTriggerSection" : "",
+    "Id" : "2e6ccc71-a5bb-4da0-a3cc-949ec035e5e2"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBSmartKpiThingCreatorThing",
+    "EventHandlerService" : "CreateLocalStation",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "True",
+    "EventTriggerId" : "validator-13",
+    "EventTriggerSection" : "",
+    "Id" : "b559e3cf-cc49-43bb-805c-a8ffff374feb"
+  }, {
+    "EventHandlerArea" : "Mashup",
+    "EventHandlerId" : "mashup-root",
+    "EventHandlerService" : "CloseIfPopup",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Clicked",
+    "EventTriggerId" : "button-15",
+    "EventTriggerSection" : "",
+    "Id" : "14d8f03c-0756-467e-ad69-5b41e45c575a"
+  } ],
+  "RunTimePermissions" : { },
+  "UI" : {
+    "Properties" : {
+      "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+      "Area" : "Mashup",
+      "BGImageRepeat" : "no-repeat",
+      "BGImageSize" : "auto",
+      "Columns" : 0,
+      "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+      "DisplayName" : "Mashup",
+      "EnableParameterEditing" : false,
+      "Height" : 200,
+      "Id" : "mashup-root",
+      "IgnoreWarningsInViewMashup" : false,
+      "IsPrintLayout" : false,
+      "Left" : 0,
+      "MashupToEditGadget" : "DefaultMashupToEditGadget",
+      "MinHeight" : 0,
+      "MinWidth" : 0,
+      "ResponsiveLayout" : false,
+      "Rows" : 0,
+      "ShowDataLoading" : true,
+      "Style" : "DefaultMashupStyle",
+      "Title" : "",
+      "TitleBar" : false,
+      "TitleBarStyle" : "DefaultTitleBarStyle",
+      "TitleBarText" : "Gadget Title Here",
+      "Top" : 0,
+      "Type" : "mashup",
+      "Visible" : true,
+      "Width" : 700,
+      "Z-index" : 10,
+      "__TypeDisplayName" : "Mashup",
+      "id_index" : 15,
+      "supportsAutoResize" : true
+    },
+    "Widgets" : [ {
+      "Properties" : {
+        "Area" : "UI",
+        "DisplayName" : "panel-2",
+        "Height" : 200,
+        "HideScrollbars" : false,
+        "HorizontalAnchor" : "left",
+        "Id" : "panel-2",
+        "Left" : 0,
+        "ResponsiveLayout" : false,
+        "ShowDataLoading" : true,
+        "Style" : "DefaultPanelStyle",
+        "Top" : 0,
+        "Type" : "panel",
+        "VerticalAnchor" : "top",
+        "Visible" : true,
+        "Width" : 700,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Panel"
+      },
+      "Widgets" : [ {
+        "Properties" : {
+          "Area" : "UI",
+          "CursorPosition" : 0,
+          "DefaultTextboxFocusStyle" : "DefaultFocusStyle",
+          "DisplayName" : "textbox-3",
+          "Height" : 24,
+          "Id" : "textbox-3",
+          "InnerShadow" : true,
+          "Label" : "",
+          "LabelAlignment" : "left",
+          "Left" : 190,
+          "MaskInputCharacters" : false,
+          "PlaceholderText" : "",
+          "ReadOnly" : false,
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "Style" : "DefaultTextBoxStyle",
+          "TabSequence" : 0,
+          "Text" : "",
+          "TextAlign" : "left",
+          "TextboxLabelStyle" : "DefaultWidgetLabelStyle",
+          "ToolTipField" : "",
+          "ToolTipStyle" : "DefaultTooltipStyle",
+          "Top" : 35,
+          "Type" : "textbox",
+          "Visible" : true,
+          "Width" : 200,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "TextBox",
+          "__supportsLabel" : true,
+          "__supportsTooltip" : true
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "Alignment" : "left",
+          "AllowEllipsis" : false,
+          "Area" : "UI",
+          "Description" : "",
+          "DisplayName" : "StationThing",
+          "Height" : 22,
+          "Id" : "label-4",
+          "Left" : 390,
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "Style" : "DefaultLabelStyle",
+          "Text" : "StationThing",
+          "ToolTipField" : "",
+          "ToolTipStyle" : "DefaultTooltipStyle",
+          "Top" : 35,
+          "Type" : "label",
+          "Visible" : true,
+          "Width" : 75,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Label",
+          "__supportsTooltip" : true
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "Alignment" : "right",
+          "AllowEllipsis" : false,
+          "Area" : "UI",
+          "DisplayName" : "label-5",
+          "Height" : 22,
+          "Id" : "label-5",
+          "Left" : 45,
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "Style" : "DefaultLabelStyle",
+          "ToolTipField" : "",
+          "ToolTipStyle" : "DefaultTooltipStyle",
+          "Top" : 35,
+          "Type" : "label",
+          "Visible" : true,
+          "Width" : 145,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Label",
+          "__supportsTooltip" : true
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "Area" : "UI",
+          "AutoEvaluate" : false,
+          "DataChangeType" : "VALUE",
+          "DisplayName" : "expression-6",
+          "Expression" : "Output=\"KB\"+Location",
+          "FireOnFirstValue" : false,
+          "Height" : 28,
+          "Id" : "expression-6",
+          "Left" : 0,
+          "OutputBaseType" : "STRING",
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "Top" : 45,
+          "Type" : "expression",
+          "Visible" : true,
+          "Width" : 200,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Expression",
+          "_currentParameterDefs" : [ {
+            "BaseType" : "STRING",
+            "Description" : "",
+            "ParameterName" : "Location"
+          } ]
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "ActiveStyle" : "DefaultButtonActiveStyle",
+          "Area" : "UI",
+          "CancelConfirmationButton" : "button2",
+          "ConfirmationButton1Label" : "Yes",
+          "ConfirmationButton2Label" : "No",
+          "ConfirmationPrompt" : "Do Action?",
+          "ConfirmationRequired" : false,
+          "ConfirmationTitle" : "Confirm Action",
+          "ContextId" : "",
+          "DefaultConfirmationButton" : "button1",
+          "Disabled" : false,
+          "DisabledStyle" : "DefaultButtonDisabledStyle",
+          "DisplayName" : "button-7",
+          "FocusStyle" : "DefaultButtonFocusStyle",
+          "Height" : 30,
+          "HoverStyle" : "DefaultButtonHoverStyle",
+          "IconAlignment" : "left",
+          "Id" : "button-7",
+          "Label" : "Create New Station",
+          "Left" : 495,
+          "ResponsiveLayout" : false,
+          "RoundedCorners" : true,
+          "ShowDataLoading" : true,
+          "Style" : "DefaultButtonStyle",
+          "TabSequence" : 0,
+          "ToolTipField" : "",
+          "ToolTipStyle" : "DefaultTooltipStyle",
+          "Top" : 30,
+          "Type" : "button",
+          "Visible" : true,
+          "Width" : 175,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Button",
+          "__supportsTooltip" : true
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "Area" : "UI",
+          "CursorPosition" : 0,
+          "DefaultTextboxFocusStyle" : "DefaultFocusStyle",
+          "DisplayName" : "textbox-8",
+          "Height" : 24,
+          "Id" : "textbox-8",
+          "InnerShadow" : true,
+          "Label" : "",
+          "LabelAlignment" : "left",
+          "Left" : 190,
+          "MaskInputCharacters" : false,
+          "PlaceholderText" : "",
+          "ReadOnly" : false,
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "Style" : "DefaultTextBoxStyle",
+          "TabSequence" : 0,
+          "Text" : "",
+          "TextAlign" : "left",
+          "TextboxLabelStyle" : "DefaultWidgetLabelStyle",
+          "ToolTipField" : "",
+          "ToolTipStyle" : "DefaultTooltipStyle",
+          "Top" : 85,
+          "Type" : "textbox",
+          "Visible" : true,
+          "Width" : 200,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "TextBox",
+          "__supportsLabel" : true,
+          "__supportsTooltip" : true
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "Alignment" : "right",
+          "AllowEllipsis" : false,
+          "Area" : "UI",
+          "DisplayName" : "label-9",
+          "Height" : 22,
+          "Id" : "label-9",
+          "Left" : 45,
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "Style" : "DefaultLabelStyle",
+          "ToolTipField" : "",
+          "ToolTipStyle" : "DefaultTooltipStyle",
+          "Top" : 85,
+          "Type" : "label",
+          "Visible" : true,
+          "Width" : 145,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Label",
+          "__supportsTooltip" : true
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "Area" : "UI",
+          "AutoEvaluate" : false,
+          "DataChangeType" : "VALUE",
+          "Description" : "",
+          "DisplayName" : "expression-10",
+          "Expression" : "Output=\"KB\"+Location+\"MesKit_\"",
+          "FireOnFirstValue" : false,
+          "Height" : 28,
+          "Id" : "expression-10",
+          "Left" : 5,
+          "OutputBaseType" : "STRING",
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "Top" : 100,
+          "Type" : "expression",
+          "Visible" : true,
+          "Width" : 200,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Expression",
+          "_currentParameterDefs" : [ {
+            "BaseType" : "STRING",
+            "Description" : "",
+            "ParameterName" : "Location"
+          } ]
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "Alignment" : "left",
+          "AllowEllipsis" : false,
+          "Area" : "UI",
+          "DisplayName" : "label-11",
+          "Height" : 22,
+          "Id" : "label-11",
+          "Left" : 390,
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "Style" : "DefaultLabelStyle",
+          "Text" : "StationThing",
+          "ToolTipField" : "",
+          "ToolTipStyle" : "DefaultTooltipStyle",
+          "Top" : 85,
+          "Type" : "label",
+          "Visible" : true,
+          "Width" : 75,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Label",
+          "__supportsTooltip" : true
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "ActiveStyle" : "DefaultButtonActiveStyle",
+          "Area" : "UI",
+          "CancelConfirmationButton" : "button2",
+          "ConfirmationButton1Label" : "Yes",
+          "ConfirmationButton2Label" : "No",
+          "ConfirmationPrompt" : "Do Action?",
+          "ConfirmationRequired" : false,
+          "ConfirmationTitle" : "Confirm Action",
+          "ContextId" : "",
+          "DefaultConfirmationButton" : "button1",
+          "Disabled" : false,
+          "DisabledStyle" : "DefaultButtonDisabledStyle",
+          "DisplayName" : "button-12",
+          "FocusStyle" : "DefaultButtonFocusStyle",
+          "Height" : 30,
+          "HoverStyle" : "DefaultButtonHoverStyle",
+          "IconAlignment" : "left",
+          "Id" : "button-12",
+          "Label" : "Create new MesKit Station Thing",
+          "Left" : 495,
+          "ResponsiveLayout" : false,
+          "RoundedCorners" : true,
+          "ShowDataLoading" : true,
+          "Style" : "DefaultButtonStyle",
+          "TabSequence" : 0,
+          "ToolTipField" : "",
+          "ToolTipStyle" : "DefaultTooltipStyle",
+          "Top" : 80,
+          "Type" : "button",
+          "Visible" : true,
+          "Width" : 175,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Button",
+          "__supportsTooltip" : true
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "Area" : "UI",
+          "AutoEvaluate" : false,
+          "DisplayName" : "validator-13",
+          "Expression" : "ThingName!=\"\"",
+          "Height" : 28,
+          "Id" : "validator-13",
+          "Left" : 10,
+          "Output" : false,
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "Top" : 30,
+          "Type" : "validator",
+          "Visible" : true,
+          "Width" : 200,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Validator",
+          "_currentParameterDefs" : [ {
+            "BaseType" : "STRING",
+            "Description" : "",
+            "ParameterName" : "ThingName"
+          } ]
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "Area" : "UI",
+          "AutoEvaluate" : false,
+          "Description" : "",
+          "DisplayName" : "validator-14",
+          "Expression" : "ThingName!=\"\"",
+          "Height" : 28,
+          "Id" : "validator-14",
+          "Left" : 15,
+          "Output" : false,
+          "ResponsiveLayout" : false,
+          "ShowDataLoading" : true,
+          "Top" : 85,
+          "Type" : "validator",
+          "Visible" : true,
+          "Width" : 200,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Validator",
+          "_currentParameterDefs" : [ {
+            "BaseType" : "STRING",
+            "Description" : "",
+            "ParameterName" : "ThingName"
+          } ]
+        },
+        "Widgets" : [ ]
+      }, {
+        "Properties" : {
+          "ActiveStyle" : "DefaultButtonActiveStyle",
+          "Area" : "UI",
+          "CancelConfirmationButton" : "button2",
+          "ConfirmationButton1Label" : "Yes",
+          "ConfirmationButton2Label" : "No",
+          "ConfirmationPrompt" : "Do Action?",
+          "ConfirmationRequired" : false,
+          "ConfirmationTitle" : "Confirm Action",
+          "ContextId" : "",
+          "CustomClass" : "",
+          "DefaultConfirmationButton" : "button1",
+          "Disabled" : false,
+          "DisabledStyle" : "DefaultButtonDisabledStyle",
+          "DisplayName" : "button-15",
+          "FocusStyle" : "DefaultButtonFocusStyle",
+          "Height" : 30,
+          "HoverStyle" : "DefaultButtonHoverStyle",
+          "IconAlignment" : "left",
+          "Id" : "button-15",
+          "Label" : "close",
+          "Left" : 500,
+          "ResponsiveLayout" : false,
+          "RoundedCorners" : true,
+          "ShowDataLoading" : true,
+          "Style" : "DefaultButtonStyle",
+          "TabSequence" : 0,
+          "ToolTipField" : "",
+          "ToolTipStyle" : "DefaultTooltipStyle",
+          "Top" : 155,
+          "Type" : "button",
+          "Visible" : true,
+          "Width" : 170,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Button",
+          "__supportsTooltip" : true
+        },
+        "Widgets" : [ ]
+      } ]
+    } ]
+  },
+  "mashupType" : "mashup"
+}]]></mashupContent>
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="header : name : updated&#10;documentation : updated&#10;"
+					timestamp="2019-02-12T08:52:40.789+01:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2019-02-12T09:02:32.826+01:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2019-02-12T09:08:43.674+01:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2019-02-12T09:09:46.569+01:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2019-02-12T09:51:36.978+01:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2019-02-12T09:54:07.047+01:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2019-02-12T09:55:45.709+01:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2019-02-12T09:58:30.920+01:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2019-02-12T10:00:28.113+01:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2019-02-12T10:34:39.892+01:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2019-02-12T10:36:36.880+01:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2019-02-12T10:58:39.167+01:00"
+					user="adm-flassakm" />
+			</ConfigurationChanges>
+		</Mashup>
+	</Mashups>
+</Entities>

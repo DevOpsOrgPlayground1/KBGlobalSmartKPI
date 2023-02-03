@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b97" majorVersion="8" minorVersion="4"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="11" schemaVersion="1044" universal="">
+	<Mashups>
+		<Mashup aspect.isResponsive="true" aspect.mashupType="mashup"
+			columns="0.0" description="" documentationContent="" homeMashup=""
+			lastModifiedDate="2020-10-27T14:12:08.509+01:00"
+			name="KBProductionAdvisorPartsMashup" projectName="" rows="0.0"
+			tags="">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read>
+					<Principal isPermitted="true" name="KBMesKitHelperUser"
+						type="User" />
+				</Read>
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true" name="KBMesKitHelperUser"
+							type="User" />
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</PropertyRead>
+					<PropertyWrite />
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="KBMesKitHelperUser"
+							type="User" />
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true" name="KBBackGroundWorker"
+						type="Organization" />
+					<Principal isPermitted="true" name="KBOrganization"
+						type="Organization" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables />
+			<ParameterDefinitions>
+				<FieldDefinition aspect.ordinal="2"
+					baseType="DATETIME" description="" name="EndDate" ordinal="0" />
+				<FieldDefinition aspect.ordinal="0"
+					baseType="STRING" description="" name="KBLocalMachineThing"
+					ordinal="0" />
+				<FieldDefinition aspect.ordinal="1"
+					baseType="DATETIME" description="" name="StartDate" ordinal="0" />
+			</ParameterDefinitions>
+			<Things>
+				<Thing>KBKPILocalThingWorxDatabaseThing</Thing>
+			</Things>
+			<ThingShapes />
+			<ThingTemplates />
+			<mashupContent><![CDATA[{
+  "CustomMashupCss" : "",
+  "Data" : {
+    "Session" : {
+      "DataName" : "Session",
+      "EntityName" : "",
+      "EntityType" : "Session",
+      "Id" : "session",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "SessionInterface",
+        "Name" : "GetGlobalSessionValues",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetGlobalSessionValues"
+      } ]
+    },
+    "Things_KBKPILocalThingWorxDatabaseThing" : {
+      "DataName" : "Things_KBKPILocalThingWorxDatabaseThing",
+      "EntityName" : "KBKPILocalThingWorxDatabaseThing",
+      "EntityType" : "Things",
+      "Id" : "b4bb5284-e60f-443b-99c8-04b8204a38d3",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "2f96474e-8d4b-4c73-bbaa-ac905e4701ae",
+        "Name" : "GetProducedPartsWithoutSAPData",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetProducedPartsWithoutSAPData"
+      } ]
+    },
+    "UserExtensions" : {
+      "DataName" : "UserExtensions",
+      "EntityName" : "",
+      "EntityType" : "UserExtensions",
+      "Id" : "UserExtensions",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "UserExtensionInterface",
+        "Name" : "GetCurrentUserExtensionProperties",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetCurrentUserExtensionProperties"
+      } ]
+    }
+  },
+  "DataBindings" : [ {
+    "Id" : "d05129ce-79af-4a09-87cd-717c98f4680e",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "KBLocalMachineThing",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "LineThingName",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetCVSProductionTargetDetail",
+    "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+  }, {
+    "Id" : "0c9a30d5-63ba-4a0c-af03-c10d20ecbdfd",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "StartDate",
+      "SourcePropertyBaseType" : "DATETIME",
+      "TargetProperty" : "StartTime",
+      "TargetPropertyBaseType" : "DATETIME",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetCVSProductionTargetDetail",
+    "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+  }, {
+    "Id" : "0d3eac4b-d5da-4746-b8f5-d44d5a97898f",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "EndDate",
+      "SourcePropertyBaseType" : "DATETIME",
+      "TargetProperty" : "EndTime",
+      "TargetPropertyBaseType" : "DATETIME",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetCVSProductionTargetDetail",
+    "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+  }, {
+    "Id" : "b5c32681-59c9-415b-be12-044f46fc52af",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "KBLocalMachineThing",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "Text",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "label-6",
+    "TargetSection" : ""
+  }, {
+    "Id" : "d108e9c9-13b9-4e8c-92ce-e1c3156a8789",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "StartDate",
+      "SourcePropertyBaseType" : "DATETIME",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "Text",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "label-13",
+    "TargetSection" : ""
+  }, {
+    "Id" : "06dcabb8-ab87-4973-91d2-e24256a43d40",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "EndDate",
+      "SourcePropertyBaseType" : "DATETIME",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "Text",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "label-14",
+    "TargetSection" : ""
+  }, {
+    "Id" : "e977d4aa-0eb5-4895-91e2-69ca9ea44a1a",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "StartDate",
+      "SourcePropertyBaseType" : "DATETIME",
+      "TargetProperty" : "StartDate",
+      "TargetPropertyBaseType" : "DATETIME",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetProducedPartsWithoutSAPData",
+    "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+  }, {
+    "Id" : "88988328-5562-4cb0-9a4a-e512e7ab347a",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "EndDate",
+      "SourcePropertyBaseType" : "DATETIME",
+      "TargetProperty" : "EndDate",
+      "TargetPropertyBaseType" : "DATETIME",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetProducedPartsWithoutSAPData",
+    "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+  }, {
+    "Id" : "61e217f2-353f-409f-ba35-627069933804",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "KBLocalMachineThing",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "Machine",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetProducedPartsWithoutSAPData",
+    "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+  }, {
+    "Id" : "440efef2-221c-4fe8-a72e-8ae42f3073d3",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "InfoTable",
+      "TargetProperty" : "Data",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetProducedPartsWithoutSAPData",
+    "SourceSection" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "TargetArea" : "UI",
+    "TargetId" : "dhxgrid-5",
+    "TargetSection" : ""
+  } ],
+  "DesignTimePermissions" : {
+    "Create" : [ ],
+    "Delete" : [ ],
+    "Metadata" : [ ],
+    "Read" : [ {
+      "isPermitted" : true,
+      "name" : "KBMesKitHelperUser",
+      "type" : "User"
+    } ],
+    "Update" : [ ]
+  },
+  "Events" : [ {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "EventHandlerService" : "GetProducedPartsWithoutSAPData",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "3c71f3d2-04e3-40f7-b3d9-7890ca371483"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "EventHandlerService" : "GetProducedPartsWithoutSAPData",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "RefreshRequested",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "ce91f1e9-a1e0-41d2-be6c-6450497277b3"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "EventHandlerService" : "GetProducedPartsWithoutSAPData",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "KBLocalMachineThingChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "7924ccac-6878-4c4e-82ee-b8327af180c0"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "EventHandlerService" : "GetProducedPartsWithoutSAPData",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "StartDateChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "f7a6d6d6-724e-4e72-8113-293fa3b95380"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "EventHandlerService" : "GetProducedPartsWithoutSAPData",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "EndDateChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "a20298a5-21db-4472-9656-998d692ccc76"
+  } ],
+  "RunTimePermissions" : {
+    "permissions" : [ {
+      "EventInvoke" : [ ],
+      "EventSubscribe" : [ ],
+      "PropertyRead" : [ {
+        "isPermitted" : true,
+        "name" : "KBUserGroup",
+        "type" : "Group"
+      }, {
+        "isPermitted" : true,
+        "name" : "KBMesKitHelperUser",
+        "type" : "User"
+      } ],
+      "PropertyWrite" : [ ],
+      "ServiceInvoke" : [ {
+        "isPermitted" : true,
+        "name" : "KBUserGroup",
+        "type" : "Group"
+      }, {
+        "isPermitted" : true,
+        "name" : "KBMesKitHelperUser",
+        "type" : "User"
+      } ],
+      "resourceName" : "*"
+    } ]
+  },
+  "UI" : {
+    "Properties" : {
+      "AddToDashboardButton" : "SimplePlus",
+      "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+      "Area" : "Mashup",
+      "BGImage" : "",
+      "BGImageRepeat" : "no-repeat",
+      "BGImageSize" : "auto",
+      "Columns" : 0,
+      "ConfigureGadgetButton" : "SimpleGear",
+      "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+      "DisplayName" : "Mashup",
+      "EnableParameterEditing" : false,
+      "EndDate" : "2019-08-06T12:00:00.000Z",
+      "Height" : 618,
+      "Id" : "mashup-root",
+      "IgnoreWarningsInViewMashup" : false,
+      "IsPrintLayout" : false,
+      "KBLocalMachineThing" : "KBLisLaa6MachineThing",
+      "Left" : 0,
+      "MashupToEditGadget" : "DefaultMashupToEditGadget",
+      "MinHeight" : 0,
+      "MinWidth" : 0,
+      "ResponsiveLayout" : true,
+      "Rows" : 0,
+      "ShowDataLoading" : true,
+      "StartDate" : "2019-08-06T04:00:00.000Z",
+      "Style" : "DefaultMashupStyle",
+      "StyleTheme" : "Base Theme",
+      "Title" : "",
+      "TitleBar" : false,
+      "TitleBarStyle" : "DefaultTitleBarStyle",
+      "TitleBarText" : "Gadget Title Here",
+      "Top" : 0,
+      "Type" : "mashup",
+      "UseThemeForHybrids" : false,
+      "Visible" : true,
+      "Width" : 1024,
+      "Z-index" : 10,
+      "__TypeDisplayName" : "Mashup",
+      "_currentParameterDefs" : [ {
+        "BaseType" : "STRING",
+        "DefaultValue" : "KBLisLaa6MachineThing",
+        "Description" : "",
+        "ParameterName" : "KBLocalMachineThing"
+      }, {
+        "BaseType" : "DATETIME",
+        "DefaultValue" : "2019-08-06T04:00:00.000Z",
+        "Description" : "",
+        "ParameterName" : "StartDate"
+      }, {
+        "BaseType" : "DATETIME",
+        "DefaultValue" : "2019-08-06T12:00:00.000Z",
+        "Description" : "",
+        "ParameterName" : "EndDate"
+      } ],
+      "id_index" : 18,
+      "supportsAutoResize" : true
+    },
+    "Widgets" : [ {
+      "Properties" : {
+        "Area" : "UI",
+        "Columns" : 0,
+        "DisplayName" : "layout-1",
+        "Footer" : false,
+        "FooterHeight" : 0,
+        "Header" : true,
+        "HeaderHeight" : 100,
+        "Id" : "layout-1",
+        "IncludeSpacingInFixedAreas" : false,
+        "IsPrintLayout" : false,
+        "Left" : 485,
+        "LeftSidebar" : false,
+        "LeftSidebarWidth" : 0,
+        "Orientation" : "vertical",
+        "PctColumn1" : 50,
+        "PctColumn2" : 50,
+        "PctColumn3" : 1,
+        "PctColumn4" : 1,
+        "PctColumn5" : 1,
+        "PctColumn6" : 1,
+        "PctColumn7" : 1,
+        "PctColumn8" : 1,
+        "PctRow1" : 100,
+        "PctRow2" : 0,
+        "PctRow3" : 0,
+        "PctRow4" : 0,
+        "PctRow5" : 0,
+        "PctRow6" : 0,
+        "PctRow7" : 0,
+        "PctRow8" : 0,
+        "PrintMarginLeftRight" : 0.5,
+        "PrintMarginTopBottom" : 0.5,
+        "PrintWidth" : 650,
+        "ResponsiveLayout" : true,
+        "RightSidebar" : false,
+        "RightSidebarWidth" : 0,
+        "Rows" : 1,
+        "ShowDataLoading" : true,
+        "Spacing" : 2,
+        "Top" : 100,
+        "Type" : "layout",
+        "Visible" : true,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Layout"
+      },
+      "Widgets" : [ {
+        "Properties" : {
+          "AnimateExpandCollapse" : true,
+          "Area" : "UI",
+          "BGImageRepeat" : "no-repeat",
+          "BGImageSize" : "auto",
+          "DisplayName" : "Header",
+          "ExpandCollapseTabLocation" : "outside",
+          "Expanded" : true,
+          "Id" : "container-2",
+          "MinHeight" : 0,
+          "MinWidth" : 0,
+          "Overlay" : false,
+          "OverlayIsTransparent" : false,
+          "ResponsiveLayout" : true,
+          "ShowDataLoading" : true,
+          "ShowExpandCollapseTab" : false,
+          "Style" : "DefaultContainerStyle",
+          "TabCollapseStyle" : "DefaultTabCollapseStyle",
+          "TabExpandStyle" : "DefaultTabExpandStyle",
+          "TabHeight" : 36,
+          "TabLocation" : "center",
+          "TabOffset" : 0,
+          "TabWidth" : 36,
+          "Type" : "container",
+          "Visible" : true,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Container",
+          "userCannotRemove" : true
+        },
+        "Widgets" : [ {
+          "Properties" : {
+            "Area" : "UI",
+            "ContainerClass" : "",
+            "DisplayName" : "panel-4",
+            "Height" : 200,
+            "HideScrollbars" : false,
+            "HorizontalAnchor" : "left",
+            "Id" : "panel-4",
+            "Left" : 550,
+            "ResponsiveLayout" : true,
+            "ShowDataLoading" : true,
+            "Style" : "DefaultPanelStyle",
+            "Top" : 45,
+            "Type" : "panel",
+            "VerticalAnchor" : "top",
+            "Visible" : true,
+            "Width" : 300,
+            "Z-index" : 10,
+            "__TypeDisplayName" : "Panel"
+          },
+          "Widgets" : [ {
+            "Properties" : {
+              "Alignment" : "left",
+              "AllowEllipsis" : false,
+              "Area" : "UI",
+              "DisplayName" : "label-6",
+              "Height" : 27,
+              "Id" : "label-6",
+              "Left" : 35,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "Style" : "KB.BigLabelStyle",
+              "ToolTipField" : "",
+              "ToolTipStyle" : "DefaultTooltipStyle",
+              "Top" : 25,
+              "Type" : "label",
+              "Visible" : true,
+              "Width" : 395,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Label",
+              "__supportsTooltip" : true
+            },
+            "Widgets" : [ ]
+          }, {
+            "Properties" : {
+              "Alignment" : "left",
+              "AllowEllipsis" : false,
+              "Area" : "UI",
+              "DisplayName" : "label-11",
+              "Height" : 22,
+              "Id" : "label-11",
+              "Left" : 755,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "Style" : "DefaultLabelStyle",
+              "Text" : "Start Date:",
+              "ToolTipField" : "",
+              "ToolTipStyle" : "DefaultTooltipStyle",
+              "Top" : 15,
+              "Type" : "label",
+              "Visible" : true,
+              "Width" : 60,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Label",
+              "__supportsTooltip" : true
+            },
+            "Widgets" : [ ]
+          }, {
+            "Properties" : {
+              "Alignment" : "left",
+              "AllowEllipsis" : false,
+              "Area" : "UI",
+              "DisplayName" : "label-12",
+              "Height" : 22,
+              "Id" : "label-12",
+              "Left" : 755,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "Style" : "DefaultLabelStyle",
+              "Text" : "End Date:",
+              "ToolTipField" : "",
+              "ToolTipStyle" : "DefaultTooltipStyle",
+              "Top" : 40,
+              "Type" : "label",
+              "Visible" : true,
+              "Width" : 60,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Label",
+              "__supportsTooltip" : true
+            },
+            "Widgets" : [ ]
+          }, {
+            "Properties" : {
+              "Alignment" : "left",
+              "AllowEllipsis" : false,
+              "Area" : "UI",
+              "DisplayName" : "label-13",
+              "Height" : 22,
+              "Id" : "label-13",
+              "Left" : 820,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "Style" : "DefaultLabelStyle",
+              "ToolTipField" : "",
+              "ToolTipStyle" : "DefaultTooltipStyle",
+              "Top" : 15,
+              "Type" : "label",
+              "Visible" : true,
+              "Width" : 165,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Label",
+              "__supportsTooltip" : true
+            },
+            "Widgets" : [ ]
+          }, {
+            "Properties" : {
+              "Alignment" : "left",
+              "AllowEllipsis" : false,
+              "Area" : "UI",
+              "DisplayName" : "label-14",
+              "Height" : 22,
+              "Id" : "label-14",
+              "Left" : 820,
+              "ResponsiveLayout" : false,
+              "ShowDataLoading" : true,
+              "Style" : "DefaultLabelStyle",
+              "ToolTipField" : "",
+              "ToolTipStyle" : "DefaultTooltipStyle",
+              "Top" : 40,
+              "Type" : "label",
+              "Visible" : true,
+              "Width" : 165,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Label",
+              "__supportsTooltip" : true
+            },
+            "Widgets" : [ ]
+          } ]
+        } ]
+      }, {
+        "Properties" : {
+          "AnimateExpandCollapse" : true,
+          "Area" : "UI",
+          "BGImageRepeat" : "no-repeat",
+          "BGImageSize" : "auto",
+          "DisplayName" : "Row 1",
+          "ExpandCollapseTabLocation" : "outside",
+          "Expanded" : true,
+          "Id" : "container-3",
+          "MinHeight" : 0,
+          "MinWidth" : 0,
+          "Overlay" : false,
+          "OverlayIsTransparent" : false,
+          "ResponsiveLayout" : true,
+          "ShowDataLoading" : true,
+          "ShowExpandCollapseTab" : false,
+          "Style" : "DefaultContainerStyle",
+          "TabCollapseStyle" : "DefaultTabCollapseStyle",
+          "TabExpandStyle" : "DefaultTabExpandStyle",
+          "TabHeight" : 36,
+          "TabLocation" : "center",
+          "TabOffset" : 0,
+          "TabWidth" : 36,
+          "Type" : "container",
+          "Visible" : true,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Container",
+          "userCannotRemove" : true
+        },
+        "Widgets" : [ {
+          "Properties" : {
+            "AlignHeader" : false,
+            "Area" : "UI",
+            "AutoSelectFirstRow" : false,
+            "CellTextWrapping" : false,
+            "ColumnFormat" : {
+              "formatInfo" : [ {
+                "Align" : "left",
+                "AllowEdit" : false,
+                "FieldName" : "CreationTime",
+                "FormatOptions" : {
+                  "FormatString" : "[[dateTimeFormat_Default]]",
+                  "formatInfo" : {
+                    "FieldName" : "",
+                    "StateDefinition" : "",
+                    "StateDefinitionType" : "fixed",
+                    "StateFormats" : [ {
+                      "state" : "",
+                      "stateName" : "fixed"
+                    } ]
+                  },
+                  "renderer" : "DATETIME",
+                  "roundingEnabled" : true
+                },
+                "Title" : "Creation Time",
+                "ValidationExpression" : "",
+                "ValidationMessage" : "",
+                "Width" : "auto"
+              }, {
+                "Align" : "left",
+                "AllowEdit" : false,
+                "FieldName" : "ProductionTime",
+                "FormatOptions" : {
+                  "FormatString" : "[[dateTimeFormat_Default]]",
+                  "formatInfo" : {
+                    "FieldName" : "",
+                    "StateDefinition" : "",
+                    "StateDefinitionType" : "fixed",
+                    "StateFormats" : [ {
+                      "state" : "",
+                      "stateName" : "fixed"
+                    } ]
+                  },
+                  "renderer" : "DATETIME",
+                  "roundingEnabled" : true
+                },
+                "Title" : "Production Time",
+                "ValidationExpression" : "",
+                "ValidationMessage" : "",
+                "Width" : "auto"
+              }, {
+                "Align" : "left",
+                "AllowEdit" : false,
+                "FieldName" : "isPartOK",
+                "FormatOptions" : {
+                  "FormatString" : "checkbox",
+                  "formatInfo" : {
+                    "FieldName" : "",
+                    "StateDefinition" : "",
+                    "StateDefinitionType" : "fixed",
+                    "StateFormats" : [ {
+                      "state" : "",
+                      "stateName" : "fixed"
+                    } ]
+                  },
+                  "renderer" : "BOOLEAN",
+                  "roundingEnabled" : true
+                },
+                "Title" : "is Part OK",
+                "ValidationExpression" : "",
+                "ValidationMessage" : "",
+                "Width" : "auto"
+              }, {
+                "Align" : "left",
+                "AllowEdit" : false,
+                "FieldName" : "PartNumber",
+                "FormatOptions" : {
+                  "FormatString" : "full",
+                  "formatInfo" : {
+                    "FieldName" : "",
+                    "StateDefinition" : "",
+                    "StateDefinitionType" : "fixed",
+                    "StateFormats" : [ {
+                      "state" : "",
+                      "stateName" : "fixed"
+                    } ]
+                  },
+                  "renderer" : "STRING",
+                  "roundingEnabled" : true
+                },
+                "Title" : "Part Number",
+                "ValidationExpression" : "",
+                "ValidationMessage" : "",
+                "Width" : "auto"
+              }, {
+                "Align" : "left",
+                "AllowEdit" : false,
+                "FieldName" : "SerialNumber",
+                "FormatOptions" : {
+                  "FormatString" : "full",
+                  "formatInfo" : {
+                    "FieldName" : "",
+                    "StateDefinition" : "",
+                    "StateDefinitionType" : "fixed",
+                    "StateFormats" : [ {
+                      "state" : "",
+                      "stateName" : "fixed"
+                    } ]
+                  },
+                  "renderer" : "STRING",
+                  "roundingEnabled" : true
+                },
+                "Title" : "Serial Number",
+                "ValidationExpression" : "",
+                "ValidationMessage" : "",
+                "Width" : "auto"
+              }, {
+                "Align" : "left",
+                "AllowEdit" : false,
+                "FieldName" : "OrderNumber",
+                "FormatOptions" : {
+                  "FormatString" : "full",
+                  "formatInfo" : {
+                    "FieldName" : "",
+                    "StateDefinition" : "",
+                    "StateDefinitionType" : "fixed",
+                    "StateFormats" : [ {
+                      "state" : "",
+                      "stateName" : "fixed"
+                    } ]
+                  },
+                  "renderer" : "STRING",
+                  "roundingEnabled" : true
+                },
+                "Title" : "Order Number",
+                "ValidationExpression" : "",
+                "ValidationMessage" : "",
+                "Width" : "auto"
+              }, {
+                "Align" : "left",
+                "AllowEdit" : false,
+                "FieldName" : "ScrapReason",
+                "FormatOptions" : {
+                  "FormatString" : "full",
+                  "formatInfo" : {
+                    "FieldName" : "",
+                    "StateDefinition" : "",
+                    "StateDefinitionType" : "fixed",
+                    "StateFormats" : [ {
+                      "state" : "",
+                      "stateName" : "fixed"
+                    } ]
+                  },
+                  "renderer" : "STRING",
+                  "roundingEnabled" : true
+                },
+                "Title" : "Scrap Reason",
+                "ValidationExpression" : "",
+                "ValidationMessage" : "",
+                "Width" : "auto"
+              }, {
+                "Align" : "right",
+                "AllowEdit" : false,
+                "FieldName" : "numberOfParts",
+                "FormatOptions" : {
+                  "FormatString" : "0",
+                  "formatInfo" : {
+                    "FieldName" : "",
+                    "StateDefinition" : "",
+                    "StateDefinitionType" : "fixed",
+                    "StateFormats" : [ {
+                      "state" : "",
+                      "stateName" : "fixed"
+                    } ]
+                  },
+                  "renderer" : "INTEGER",
+                  "roundingEnabled" : true
+                },
+                "Title" : "number of Parts",
+                "ValidationExpression" : "",
+                "ValidationMessage" : "",
+                "Width" : "auto"
+              }, {
+                "Align" : "left",
+                "AllowEdit" : false,
+                "FieldName" : "Station",
+                "FormatOptions" : {
+                  "FormatString" : "full",
+                  "formatInfo" : {
+                    "FieldName" : "",
+                    "StateDefinition" : "",
+                    "StateDefinitionType" : "fixed",
+                    "StateFormats" : [ {
+                      "state" : "",
+                      "stateName" : "fixed"
+                    } ]
+                  },
+                  "renderer" : "STRING",
+                  "roundingEnabled" : true
+                },
+                "Title" : "Station",
+                "ValidationExpression" : "",
+                "ValidationMessage" : "",
+                "Width" : "auto"
+              } ]
+            },
+            "CurrentScrollTop" : 0,
+            "DisplayName" : "dhxgrid-5",
+            "FocusStyle" : "DefaultFocusStyle",
+            "GridBackgroundStyle" : "DefaultGridBackgroundStyle",
+            "GridEditableFieldStyle" : "DefaultGridEditableFieldStyle",
+            "GridHeaderStyle" : "DefaultGridHeaderStyle",
+            "GridHeaderTextCase" : "capitalize",
+            "GridInvalidFieldStyle" : "DefaultGridInvalidFieldStyle",
+            "Height" : 200,
+            "Id" : "dhxgrid-5",
+            "IsEditable" : false,
+            "IsPrintLayout" : false,
+            "Left" : 310,
+            "MultiSelect" : false,
+            "ResponsiveLayout" : true,
+            "RowAlternateBackgroundStyle" : "DefaultRowAlternateBackgroundStyle",
+            "RowBackgroundStyle" : "DefaultRowBackgroundStyle",
+            "RowFormat_StateParameters" : [ ],
+            "RowHeight" : 30,
+            "RowHoverStyle" : "DefaultRowHoverStyle",
+            "RowSelectedStyle" : "DefaultRowSelectedStyle",
+            "ScrollTop" : 0,
+            "ShowAllColumns" : false,
+            "ShowDataLoading" : true,
+            "TabSequence" : 0,
+            "Top" : 80,
+            "Type" : "dhxgrid",
+            "Visible" : true,
+            "Width" : 400,
+            "Z-index" : 10,
+            "__TypeDisplayName" : "Grid"
+          },
+          "Widgets" : [ ]
+        } ]
+      } ]
+    } ]
+  },
+  "mashupType" : "mashup"
+}]]></mashupContent>
+			<preview />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="header : name : updated&#10;"
+					timestamp="2020-10-27T14:11:19.282+01:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2020-10-27T14:12:08.509+01:00" user="adm-flassakm" />
+			</ConfigurationChanges>
+		</Mashup>
+	</Mashups>
+</Entities>

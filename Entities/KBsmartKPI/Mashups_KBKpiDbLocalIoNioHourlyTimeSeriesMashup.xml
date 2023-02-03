@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b167" majorVersion="8" minorVersion="2"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="2" schemaVersion="1020" universal="">
+	<Mashups>
+		<Mashup aspect.isResponsive="true" aspect.mashupType="mashup"
+			columns="0.0" description="" documentationContent="" homeMashup=""
+			lastModifiedDate="2019-07-10T11:30:18.296+02:00"
+			name="KBKpiDbLocalIoNioHourlyTimeSeriesMashup"
+			projectName="KBsmartKPI" rows="0.0"
+			tags="KBThingWorxInstallationVocabulary:ExtensionSmartKPI">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</PropertyRead>
+					<PropertyWrite />
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true" name="KBOrganization"
+						type="Organization" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTables />
+			<ParameterDefinitions>
+				<FieldDefinition aspect.ordinal="1"
+					baseType="STRING" description="" name="DBKPIName" ordinal="0" />
+				<FieldDefinition aspect.ordinal="0"
+					baseType="STRING" description="" name="MachineThingName"
+					ordinal="0" />
+			</ParameterDefinitions>
+			<Things>
+				<Thing>KBTimeHelperThing</Thing>
+			</Things>
+			<ThingShapes />
+			<ThingTemplates>
+				<ThingTemplate>KBKPILocalThingWorxDatabaseTemplate</ThingTemplate>
+			</ThingTemplates>
+			<mashupContent><![CDATA[{
+  "CustomMashupCss" : "",
+  "Data" : {
+    "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate" : {
+      "DataName" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+      "EntityName" : "KBKPILocalThingWorxDatabaseTemplate",
+      "EntityType" : "DynamicThingTemplates",
+      "Id" : "08c98c5d-903a-4743-9c8e-145e65527c4b",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "0dc71a27-1d9e-4ad4-a75e-edc8ddcede8a",
+        "Name" : "GetIoNioDataLast7Days",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetIoNioDataLast7Days"
+      } ]
+    },
+    "Resources_KBThingWorxServerSystem" : {
+      "DataName" : "Resources_KBThingWorxServerSystem",
+      "EntityName" : "KBThingWorxServerSystem",
+      "EntityType" : "Resources",
+      "Id" : "2b4d777f-b302-4a1f-bf4f-1b6e73430ec2",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "29015dd1-6b5e-496b-ac21-125c371847b4",
+        "Name" : "GetKPILocalThingWorxDatabaseThing",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetKPILocalThingWorxDatabaseThing"
+      } ]
+    },
+    "Session" : {
+      "DataName" : "Session",
+      "EntityName" : "",
+      "EntityType" : "Session",
+      "Id" : "session",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "SessionInterface",
+        "Name" : "GetGlobalSessionValues",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetGlobalSessionValues"
+      } ]
+    },
+    "Things_KBTimeHelperThing" : {
+      "DataName" : "Things_KBTimeHelperThing",
+      "EntityName" : "KBTimeHelperThing",
+      "EntityType" : "Things",
+      "Id" : "3010ac71-5deb-41e8-b3a2-6f0f449cdfae",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "44d31744-6e25-49a5-b070-7184c94e9f73",
+        "Name" : "GetNow",
+        "Parameters" : {
+          "RoundToNextHour" : true
+        },
+        "RefreshInterval" : 0,
+        "Target" : "GetNow"
+      }, {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "3a57c9bc-e25d-44f4-b109-c025da532e19",
+        "Name" : "GetLast7dStart",
+        "Parameters" : {
+          "RoundToNextHour" : true
+        },
+        "RefreshInterval" : 0,
+        "Target" : "GetLast7dStart"
+      } ]
+    },
+    "UserExtensions" : {
+      "DataName" : "UserExtensions",
+      "EntityName" : "",
+      "EntityType" : "UserExtensions",
+      "Id" : "UserExtensions",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "UserExtensionInterface",
+        "Name" : "GetCurrentUserExtensionProperties",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetCurrentUserExtensionProperties"
+      } ]
+    }
+  },
+  "DataBindings" : [ {
+    "Id" : "bcc683a0-89ee-48ff-893f-03020d4e69d1",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Result",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "value",
+      "TargetPropertyBaseType" : "THINGNAME",
+      "TargetPropertyType" : "Entity"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetKPILocalThingWorxDatabaseThing",
+    "SourceSection" : "Resources_KBThingWorxServerSystem",
+    "TargetArea" : "Data",
+    "TargetId" : "EntityName",
+    "TargetSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate"
+  }, {
+    "Id" : "87f448fc-9cd0-474f-882b-49f7fe432578",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "MachineThingName",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "Machine",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetIoNioDataLast7Days",
+    "TargetSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate"
+  }, {
+    "Id" : "7e35b8c5-73e5-48a7-ae4c-f3797399890b",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "InfoTable",
+      "TargetProperty" : "Data",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetIoNioDataLast7Days",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "UI",
+    "TargetId" : "timeserieschart-11",
+    "TargetSection" : ""
+  }, {
+    "Id" : "24a2d689-23dc-482b-897f-30b4800ae187",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "result",
+      "SourcePropertyBaseType" : "DATETIME",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "XAxisMaximum",
+      "TargetPropertyBaseType" : "DATETIME",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetNow",
+    "SourceSection" : "Things_KBTimeHelperThing",
+    "TargetArea" : "UI",
+    "TargetId" : "timeserieschart-11",
+    "TargetSection" : ""
+  }, {
+    "Id" : "41acf7e7-3eeb-4656-a67a-1ea8dbe8cf01",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "result",
+      "SourcePropertyBaseType" : "DATETIME",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "XAxisMinimum",
+      "TargetPropertyBaseType" : "DATETIME",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetLast7dStart",
+    "SourceSection" : "Things_KBTimeHelperThing",
+    "TargetArea" : "UI",
+    "TargetId" : "timeserieschart-11",
+    "TargetSection" : ""
+  } ],
+  "DesignTimePermissions" : { },
+  "Events" : [ {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Resources_KBThingWorxServerSystem",
+    "EventHandlerService" : "GetKPILocalThingWorxDatabaseThing",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "7f32a6a2-e914-46e6-859b-866c796c2286"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Resources_KBThingWorxServerSystem",
+    "EventHandlerService" : "GetKPILocalThingWorxDatabaseThing",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "RefreshRequested",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "eead041a-f0ed-4a80-91d9-b6a351bb2c63"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Resources_KBThingWorxServerSystem",
+    "EventHandlerService" : "GetKPILocalThingWorxDatabaseThing",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "MachineThingNameChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "84640033-b8ba-42ec-991a-b8a7196c1b3f"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "EventHandlerService" : "GetIoNioDataLast7Days",
+    "EventTriggerArea" : "Data",
+    "EventTriggerEvent" : "ServiceInvokeCompleted",
+    "EventTriggerId" : "GetKPILocalThingWorxDatabaseThing",
+    "EventTriggerSection" : "Resources_KBThingWorxServerSystem",
+    "Id" : "4c08a462-b673-41e3-ad1d-7ffc92ad1b84"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBTimeHelperThing",
+    "EventHandlerService" : "GetNow",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "586d19ae-c9a6-45e8-a0d5-27bf93bd67a3"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBTimeHelperThing",
+    "EventHandlerService" : "GetLast7dStart",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "bb04438a-4c3e-4a96-acef-9e2e68841e99"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBTimeHelperThing",
+    "EventHandlerService" : "GetNow",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "RefreshRequested",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "93a623ea-61dc-4c37-a30d-f9a69e76acf7"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBTimeHelperThing",
+    "EventHandlerService" : "GetNow",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "MachineThingNameChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "3a2dcc73-c822-4f52-aac8-acf1a01eaf42"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBTimeHelperThing",
+    "EventHandlerService" : "GetLast7dStart",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "RefreshRequested",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "ceaa2211-ede2-45dc-8f88-fccc48fa8f74"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBTimeHelperThing",
+    "EventHandlerService" : "GetLast7dStart",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "MachineThingNameChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "b78efad2-4dbe-47f5-aa1f-1249d7f85add"
+  } ],
+  "RunTimePermissions" : { },
+  "UI" : {
+    "Properties" : {
+      "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+      "Area" : "Mashup",
+      "BGImageRepeat" : "no-repeat",
+      "BGImageSize" : "auto",
+      "Columns" : 0,
+      "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+      "DBKPIName" : "-nothing-",
+      "DisplayName" : "Mashup",
+      "EnableParameterEditing" : false,
+      "Height" : 618,
+      "Id" : "mashup-root",
+      "IgnoreWarningsInViewMashup" : false,
+      "IsPrintLayout" : false,
+      "Left" : 0,
+      "MachineThingName" : "-nothing-",
+      "MashupToEditGadget" : "DefaultMashupToEditGadget",
+      "MinHeight" : 0,
+      "MinWidth" : 0,
+      "ResponsiveLayout" : true,
+      "Rows" : 0,
+      "ShowDataLoading" : true,
+      "Style" : "DefaultMashupStyle",
+      "Title" : "",
+      "TitleBar" : false,
+      "TitleBarStyle" : "DefaultTitleBarStyle",
+      "TitleBarText" : "Gadget Title Here",
+      "Top" : 0,
+      "Type" : "mashup",
+      "Visible" : true,
+      "Width" : 1024,
+      "Z-index" : 10,
+      "__TypeDisplayName" : "Mashup",
+      "_currentParameterDefs" : [ {
+        "BaseType" : "STRING",
+        "DefaultValue" : "-nothing-",
+        "Description" : "",
+        "ParameterName" : "MachineThingName"
+      }, {
+        "BaseType" : "STRING",
+        "DefaultValue" : "-nothing-",
+        "Description" : "",
+        "ParameterName" : "DBKPIName"
+      } ],
+      "id_index" : 11,
+      "supportsAutoResize" : true
+    },
+    "Widgets" : [ {
+      "Properties" : {
+        "AllowSelection" : true,
+        "AllowXAxisZoom" : true,
+        "AllowYAxisZoom" : true,
+        "Area" : "UI",
+        "AxisAutoscale1" : true,
+        "AxisAutoscale10" : true,
+        "AxisAutoscale11" : true,
+        "AxisAutoscale12" : true,
+        "AxisAutoscale13" : true,
+        "AxisAutoscale14" : true,
+        "AxisAutoscale15" : true,
+        "AxisAutoscale16" : true,
+        "AxisAutoscale2" : true,
+        "AxisAutoscale3" : true,
+        "AxisAutoscale4" : true,
+        "AxisAutoscale5" : true,
+        "AxisAutoscale6" : true,
+        "AxisAutoscale7" : true,
+        "AxisAutoscale8" : true,
+        "AxisAutoscale9" : true,
+        "AxisFormat1" : "0000.0",
+        "AxisFormat10" : "0000.0",
+        "AxisFormat11" : "0000.0",
+        "AxisFormat12" : "0000.0",
+        "AxisFormat13" : "0000.0",
+        "AxisFormat14" : "0000.0",
+        "AxisFormat15" : "0000.0",
+        "AxisFormat16" : "0000.0",
+        "AxisFormat2" : "0000.0",
+        "AxisFormat3" : "0000.0",
+        "AxisFormat4" : "0000.0",
+        "AxisFormat5" : "0000.0",
+        "AxisFormat6" : "0000.0",
+        "AxisFormat7" : "0000.0",
+        "AxisFormat8" : "0000.0",
+        "AxisFormat9" : "0000.0",
+        "AxisMaximum1" : 100,
+        "AxisMaximum10" : 100,
+        "AxisMaximum11" : 100,
+        "AxisMaximum12" : 100,
+        "AxisMaximum13" : 100,
+        "AxisMaximum14" : 100,
+        "AxisMaximum15" : 100,
+        "AxisMaximum16" : 100,
+        "AxisMaximum2" : 100,
+        "AxisMaximum3" : 100,
+        "AxisMaximum4" : 100,
+        "AxisMaximum5" : 100,
+        "AxisMaximum6" : 100,
+        "AxisMaximum7" : 100,
+        "AxisMaximum8" : 100,
+        "AxisMaximum9" : 100,
+        "AxisMinimum1" : 0,
+        "AxisMinimum10" : 0,
+        "AxisMinimum11" : 0,
+        "AxisMinimum12" : 0,
+        "AxisMinimum13" : 0,
+        "AxisMinimum14" : 0,
+        "AxisMinimum15" : 0,
+        "AxisMinimum16" : 0,
+        "AxisMinimum2" : 0,
+        "AxisMinimum3" : 0,
+        "AxisMinimum4" : 0,
+        "AxisMinimum5" : 0,
+        "AxisMinimum6" : 0,
+        "AxisMinimum7" : 0,
+        "AxisMinimum8" : 0,
+        "AxisMinimum9" : 0,
+        "AxisZeroscale1" : false,
+        "AxisZeroscale10" : false,
+        "AxisZeroscale11" : false,
+        "AxisZeroscale12" : false,
+        "AxisZeroscale13" : false,
+        "AxisZeroscale14" : false,
+        "AxisZeroscale15" : false,
+        "AxisZeroscale16" : false,
+        "AxisZeroscale2" : false,
+        "AxisZeroscale3" : false,
+        "AxisZeroscale4" : false,
+        "AxisZeroscale5" : false,
+        "AxisZeroscale6" : false,
+        "AxisZeroscale7" : false,
+        "AxisZeroscale8" : false,
+        "AxisZeroscale9" : false,
+        "ChartAreaStyle" : "DefaultChartAreaStyle",
+        "ChartIndicatorStyle" : "DefaultChartIndicatorStyle",
+        "ChartLegendStyle" : "DefaultChartLegendStyle",
+        "ChartOrientation" : "vertical",
+        "ChartStyle" : "DefaultChartStyle",
+        "ChartTitle" : "Hourly Based (last 7 days)",
+        "ChartTitleStyle" : "DefaultChartTitleStyle",
+        "ChartType" : "line",
+        "DataField1" : "KPIFloatValue",
+        "DataField2" : "KPIFloatValue1",
+        "DataLabel1" : "",
+        "DisplayName" : "timeserieschart-11",
+        "EnableHover" : true,
+        "GridStyle" : "DefaultChartGridStyle",
+        "Height" : 240,
+        "Id" : "timeserieschart-11",
+        "Left" : 0,
+        "LegendLocation" : "right",
+        "LegendOrientation" : "vertical",
+        "LegendWidth" : 0,
+        "MarkerSize" : 3,
+        "MarkerType" : "circle",
+        "NumberOfSeries" : 2,
+        "ResponsiveLayout" : true,
+        "SecondaryYAxisAutoscale" : true,
+        "SecondaryYAxisFormat" : "0000.0",
+        "SecondaryYAxisMaximum" : 100,
+        "SecondaryYAxisMinimum" : 0,
+        "SecondaryYAxisZeroscale" : false,
+        "SelectedItemStyle" : "DefaultChartSelectionStyle",
+        "SeriesDataStyle10_StateParameters" : [ ],
+        "SeriesDataStyle11_StateParameters" : [ ],
+        "SeriesDataStyle12_StateParameters" : [ ],
+        "SeriesDataStyle13_StateParameters" : [ ],
+        "SeriesDataStyle14_StateParameters" : [ ],
+        "SeriesDataStyle15_StateParameters" : [ ],
+        "SeriesDataStyle16_StateParameters" : [ ],
+        "SeriesDataStyle1_StateParameters" : [ ],
+        "SeriesDataStyle2_StateParameters" : [ ],
+        "SeriesDataStyle3_StateParameters" : [ ],
+        "SeriesDataStyle4_StateParameters" : [ ],
+        "SeriesDataStyle5_StateParameters" : [ ],
+        "SeriesDataStyle6_StateParameters" : [ ],
+        "SeriesDataStyle7_StateParameters" : [ ],
+        "SeriesDataStyle8_StateParameters" : [ ],
+        "SeriesDataStyle9_StateParameters" : [ ],
+        "SeriesMarkerType1" : "chart",
+        "SeriesMarkerType10" : "chart",
+        "SeriesMarkerType11" : "chart",
+        "SeriesMarkerType12" : "chart",
+        "SeriesMarkerType13" : "chart",
+        "SeriesMarkerType14" : "chart",
+        "SeriesMarkerType15" : "chart",
+        "SeriesMarkerType16" : "chart",
+        "SeriesMarkerType2" : "chart",
+        "SeriesMarkerType3" : "chart",
+        "SeriesMarkerType4" : "chart",
+        "SeriesMarkerType5" : "chart",
+        "SeriesMarkerType6" : "chart",
+        "SeriesMarkerType7" : "chart",
+        "SeriesMarkerType8" : "chart",
+        "SeriesMarkerType9" : "chart",
+        "SeriesStyle1" : "DefaultChartStyle2",
+        "SeriesStyle10" : "DefaultChartStyle10",
+        "SeriesStyle11" : "DefaultChartStyle11",
+        "SeriesStyle12" : "DefaultChartStyle12",
+        "SeriesStyle13" : "DefaultChartStyle13",
+        "SeriesStyle14" : "DefaultChartStyle14",
+        "SeriesStyle15" : "DefaultChartStyle15",
+        "SeriesStyle16" : "DefaultChartStyle16",
+        "SeriesStyle2" : "DefaultChartStyle3",
+        "SeriesStyle3" : "DefaultChartStyle3",
+        "SeriesStyle4" : "DefaultChartStyle4",
+        "SeriesStyle5" : "DefaultChartStyle5",
+        "SeriesStyle6" : "DefaultChartStyle6",
+        "SeriesStyle7" : "DefaultChartStyle7",
+        "SeriesStyle8" : "DefaultChartStyle8",
+        "SeriesStyle9" : "DefaultChartStyle9",
+        "SeriesType1" : "chart",
+        "SeriesType10" : "chart",
+        "SeriesType11" : "chart",
+        "SeriesType12" : "chart",
+        "SeriesType13" : "chart",
+        "SeriesType14" : "chart",
+        "SeriesType15" : "chart",
+        "SeriesType16" : "chart",
+        "SeriesType2" : "chart",
+        "SeriesType3" : "chart",
+        "SeriesType4" : "chart",
+        "SeriesType5" : "chart",
+        "SeriesType6" : "chart",
+        "SeriesType7" : "chart",
+        "SeriesType8" : "chart",
+        "SeriesType9" : "chart",
+        "ShowDataLoading" : false,
+        "ShowLegend" : false,
+        "ShowXAxis" : true,
+        "ShowXAxisGrid" : true,
+        "ShowXAxisLabels" : true,
+        "ShowXAxisTicks" : true,
+        "ShowYAxis" : true,
+        "ShowYAxisGrid" : true,
+        "ShowYAxisLabels" : true,
+        "ShowYAxisTicks" : true,
+        "SingleDataSource" : true,
+        "Smoothing" : false,
+        "Top" : 0,
+        "Type" : "timeserieschart",
+        "UseSecondaryAxis1" : false,
+        "UseSecondaryAxis10" : false,
+        "UseSecondaryAxis11" : false,
+        "UseSecondaryAxis12" : false,
+        "UseSecondaryAxis13" : false,
+        "UseSecondaryAxis14" : false,
+        "UseSecondaryAxis15" : false,
+        "UseSecondaryAxis16" : false,
+        "UseSecondaryAxis2" : false,
+        "UseSecondaryAxis3" : false,
+        "UseSecondaryAxis4" : false,
+        "UseSecondaryAxis5" : false,
+        "UseSecondaryAxis6" : false,
+        "UseSecondaryAxis7" : false,
+        "UseSecondaryAxis8" : false,
+        "UseSecondaryAxis9" : false,
+        "Visible" : true,
+        "Width" : 640,
+        "XAxisAutoscale" : false,
+        "XAxisField" : "KPIDateTime",
+        "XAxisFormat" : "dd.MM.",
+        "XAxisIntervals" : 7,
+        "XAxisLabels" : 7,
+        "XAxisMinorTicks" : 0,
+        "XAxisSmoothScaling" : false,
+        "XAxisStyle" : "DefaultChartAxisStyle",
+        "XAxisZeroscale" : false,
+        "YAxisAutoscale" : true,
+        "YAxisFormat" : "0000.0",
+        "YAxisIntervals" : 10,
+        "YAxisLabels" : 2,
+        "YAxisMaximum" : 100,
+        "YAxisMinimum" : 0,
+        "YAxisMinorTicks" : 1,
+        "YAxisMode" : "single",
+        "YAxisStyle" : "DefaultChartAxisStyle",
+        "YAxisZeroscale" : true,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Time Series Chart"
+      },
+      "Widgets" : [ ]
+    } ]
+  },
+  "mashupType" : "mashup"
+}]]></mashupContent>
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="header : name : updated&#10;"
+					timestamp="2019-07-10T11:08:34.557+02:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2019-07-10T11:10:08.278+02:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2019-07-10T11:12:22.188+02:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2019-07-10T11:27:38.838+02:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2019-07-10T11:30:18.296+02:00"
+					user="adm-flassakm" />
+			</ConfigurationChanges>
+		</Mashup>
+	</Mashups>
+</Entities>

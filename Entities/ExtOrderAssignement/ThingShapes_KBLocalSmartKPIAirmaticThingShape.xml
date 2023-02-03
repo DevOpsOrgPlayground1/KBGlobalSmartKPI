@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b2319" majorVersion="8" minorVersion="4"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="4" schemaVersion="1041" universal="">
+	<ThingShapes>
+		<ThingShape className="" description=""
+			documentationContent="" homeMashup=""
+			lastModifiedDate="2020-07-22T11:02:06.347+02:00"
+			name="KBLocalSmartKPIAirmaticThingShape" projectName="KBsmartKPI"
+			tags="">
+			<PropertyDefinitions>
+				<PropertyDefinition aspect.cacheTime="0.0"
+					aspect.dataChangeType="VALUE" aspect.isLogged="true"
+					aspect.isPersistent="true" baseType="STRING" category=""
+					description="" isLocalOnly="false" name="ExtAssignedOrder"
+					ordinal="4" />
+			</PropertyDefinitions>
+			<ServiceDefinitions>
+				<ServiceDefinition aspect.isAsync="false"
+					category="" description="" isAllowOverride="false"
+					isLocalOnly="false" isOpen="false" isPrivate="false"
+					name="SetExtAssignedOrder">
+					<ResultType baseType="BOOLEAN" description=""
+						name="result" ordinal="0" />
+					<ParameterDefinitions>
+						<FieldDefinition baseType="STRING" description=""
+							name="OrderNumber" ordinal="1" />
+					</ParameterDefinitions>
+				</ServiceDefinition>
+				<ServiceDefinition aspect.isAsync="false"
+					category="" description="" isAllowOverride="false"
+					isLocalOnly="false" isOpen="false" isPrivate="false"
+					name="SetPartDataAirmatic">
+					<ResultType baseType="BOOLEAN" description=""
+						name="result" ordinal="0" />
+					<ParameterDefinitions>
+						<FieldDefinition
+							aspect.dataShape="KBLocalStationDataReceiverPartDataShape"
+							baseType="INFOTABLE" description="" name="partDataInfoTable"
+							ordinal="1" />
+					</ParameterDefinitions>
+				</ServiceDefinition>
+				<ServiceDefinition aspect.isAsync="false"
+					category="" description="" isAllowOverride="false"
+					isLocalOnly="false" isOpen="false" isPrivate="false"
+					name="UpdateAllAirmaticThings">
+					<ResultType aspect.dataShape="EntityList"
+						baseType="INFOTABLE" description="" name="result" ordinal="0" />
+					<ParameterDefinitions />
+				</ServiceDefinition>
+			</ServiceDefinitions>
+			<EventDefinitions />
+			<ServiceMappings />
+			<ServiceImplementations>
+				<ServiceImplementation description=""
+					handlerName="Script" name="SetExtAssignedOrder">
+					<ConfigurationTables>
+						<ConfigurationTable description=""
+							isMultiRow="false" name="Script" ordinal="0">
+							<DataShape>
+								<FieldDefinitions>
+									<FieldDefinition baseType="STRING"
+										description="code" name="code" ordinal="0" />
+								</FieldDefinitions>
+							</DataShape>
+							<Rows>
+								<Row>
+									<code><![CDATA[var result=false;
+try {
+    if(OrderNumber!==""){
+       	 	me.ExtAssignedOrder=OrderNumber;
+    }
+    result=true;
+}catch(err){
+    logger.error("KBLocalSmartKPIAirmatic SetExtAssignedOrder Error: " + err +" On station:"+me.name);
+}]]></code>
+								</Row>
+							</Rows>
+						</ConfigurationTable>
+					</ConfigurationTables>
+				</ServiceImplementation>
+				<ServiceImplementation description=""
+					handlerName="Script" name="SetPartDataAirmatic">
+					<ConfigurationTables>
+						<ConfigurationTable description=""
+							isMultiRow="false" name="Script" ordinal="0">
+							<DataShape>
+								<FieldDefinitions>
+									<FieldDefinition baseType="STRING"
+										description="code" name="code" ordinal="0" />
+								</FieldDefinitions>
+							</DataShape>
+							<Rows>
+								<Row>
+									<code><![CDATA[var result = false;
+var result2 = false;
+try {
+	//prepare updated  PartDataInfoTable 
+    var params = {
+    	infoTableName : "InfoTable",
+    	dataShapeName : "KBLocalStationDataReceiverPartDataShape"
+    };
+
+    var NewPartDataInfoTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+        
+	logger.debug("SetPartDataAirmatic Started ");
+    var tableLength = partDataInfoTable.rows.length;
+	for (var x = 0; x < tableLength; x++) {
+        var EndDate=partDataInfoTable.rows[x].DateTime;
+        var OrderNumber="";
+        if(me.ExtAssignedOrder!==""){
+            var ValidOrderNumberHistory =  Things[me.name].QueryStringPropertyHistory({
+            	oldestFirst: false /* BOOLEAN */,
+            	maxItems: 1 /* NUMBER */,
+            	propertyName: "ExtAssignedOrder" /* STRING */,
+            	endDate: EndDate /* DATETIME */,
+            	query: undefined /* QUERY */,
+            	startDate: undefined /* DATETIME */
+            });
+          
+            if (ValidOrderNumberHistory.rows.length>0){
+            	OrderNumber=ValidOrderNumberHistory.value;
+            }
+            logger.debug ("SetPartDataAirmatic ValidOrderNumber: " + OrderNumber);
+        }
+        var MyValue=0;
+        if (isNaN(partDataInfoTable.rows[x].Value.replace(',', '.'))){
+            logger.debug("SetPartDataAirmatic Warn. The value field: " + partDataInfoTable.rows[x].Value + " on thing:" + me.name + " is not numeric");
+            if (partDataInfoTable.rows[x].Value.toUpperCase()=="TRUE"){
+            	MyValue=1;
+            }
+        }
+        else{
+     	   MyValue=partDataInfoTable.rows[x].Value.replace(',', '.');
+        }
+        var MyUpLim;
+        if (isNaN(partDataInfoTable.rows[x].UpperLimit.replace(',', '.'))){
+            MyUpLim="";
+        	logger.debug("SetPartDataAirmatic Warn. The UpperLimit field: " + partDataInfoTable.rows[x].UpperLimit + " on thing:" + me.name + " is not numeric");}
+        else{
+     	   MyUpLim=partDataInfoTable.rows[x].UpperLimit.replace(',', '.');
+        }
+        var MyLowLim;
+        if (isNaN(partDataInfoTable.rows[x].LowerLimit.replace(',', '.'))){
+            MyLowLim="";
+        	logger.debug("SetPartDataAirmatic Warn. The LowerLimit field: " + partDataInfoTable.rows[x].LowerLimit + " on thing:" + me.name + " is not numeric");}
+        else{
+     	   MyLowLim=partDataInfoTable.rows[x].LowerLimit.replace(',', '.');
+        }
+            // KBLocalStationDataReceiverPartDataShape entry object
+        var newEntry = new Object();
+        newEntry.Description = partDataInfoTable.rows[x].Description; // STRING
+        newEntry.TrackingNumber = partDataInfoTable.rows[x].TrackingNumber; // STRING
+        newEntry.PartNumber = partDataInfoTable.rows[x].PartNumber; // STRING
+        newEntry.ShortName = partDataInfoTable.rows[x].ShortName; // STRING [Primary Key]
+        newEntry.OrderNumber = OrderNumber; // STRING
+        newEntry.Unit = partDataInfoTable.rows[x].Unit; // STRING
+        newEntry.UpperLimit = MyUpLim; // STRING
+        newEntry.DateTime = partDataInfoTable.rows[x].DateTime; // DATETIME [Primary Key]
+        newEntry.Line = Things[me.name].KBLocalLineThing; // STRING [Primary Key]
+        newEntry.Station = me.name; // STRING [Primary Key]
+        newEntry.Type = partDataInfoTable.rows[x].Type; // STRING [Primary Key]
+        newEntry.Identifier = partDataInfoTable.rows[x].Identifier; // STRING
+        newEntry.SerialNumber = partDataInfoTable.rows[x].SerialNumber; // STRING
+        newEntry.LocalStation = partDataInfoTable.rows[x].LocalStation; // STRING
+        newEntry.Value = MyValue; // STRING
+        newEntry.LowerLimit = MyLowLim; // STRING
+        
+			if (newEntry.TrackingNumber === undefined || newEntry.TrackingNumber === null) {
+				newEntry.TrackingNumber = null; // "NULL"
+			}            
+			if (newEntry.Identifier === undefined || newEntry.Identifier === null) {
+				newEntry.Identifier = null;
+			}            
+        
+        NewPartDataInfoTable.AddRow(newEntry);
+    }
+    result2 =  me.SetPartData({
+        	partDataInfoTable: NewPartDataInfoTable /* INFOTABLE */
+        });
+        logger.debug("SetPartDataAirmatic Finished ");
+    
+    if(result2===false){
+        result=false;
+    }else{
+    	result = true;
+    }
+} catch(err) {
+	logger.error("SetPartDataAirmatic Error: " + err + " on thing:" + me.name);
+    result = false;
+}]]></code>
+								</Row>
+							</Rows>
+						</ConfigurationTable>
+					</ConfigurationTables>
+				</ServiceImplementation>
+				<ServiceImplementation description=""
+					handlerName="Script" name="UpdateAllAirmaticThings">
+					<ConfigurationTables>
+						<ConfigurationTable description=""
+							isMultiRow="false" name="Script" ordinal="0">
+							<DataShape>
+								<FieldDefinitions>
+									<FieldDefinition baseType="STRING"
+										description="code" name="code" ordinal="0" />
+								</FieldDefinitions>
+							</DataShape>
+							<Rows>
+								<Row>
+									<code><![CDATA[try {
+    var params = {
+    	maxItems: undefined /* NUMBER */,
+    	nameMask: undefined /* STRING */,
+    	query: undefined /* QUERY */,
+    	thingTemplate:  "KBLocalStationThingTemplate" /* THINGTEMPLATENAME */,
+    	tags: undefined /* TAGS */
+    };
+    
+    // result: INFOTABLE dataShape: RootEntityList
+    var ListOfStations = Resources["SearchFunctions"].SearchThingsByTemplate(params);
+    //check and filter Airmatic StationThings
+			if (ListOfStations.rows.length>0){
+				var query = {
+                        "filters": {
+                        "fieldName": "name",
+                        "type": "LIKE",
+						"value": "%Airmatic%StationThing"
+                                     }
+				};
+             
+				var params = {
+					sortingOrFilteringTarget: ListOfStations /* INFOTABLE */,
+					sortOrFilterQuery: query /* QUERY */
+				};
+
+				//filtered Group tasks infotable
+				ListOfStations = Resources["PTC.Factory.CommonTagPickerUtilities"].DoSortingOrFiltering(params);
+			}
+			
+    	var params2 = {
+        				infoTableName : "InfoTable",
+        				dataShapeName : "EntityList"
+    			};
+ 		var resultList = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params2);
+ 		var newEntry = new Object();
+		var TableLenght=ListOfStations.rows.length;
+      
+		for (var x = 0; x < TableLenght; x++) {
+    			newEntry.name = ListOfStations.rows[x].name; 
+                newEntry.description = undefined ; // STRING - isPrimaryKey = true
+                logger.debug("UpdateAllAirmaticThings start");
+                if(ListOfStations.rows[x].name!==""&&Things[ListOfStations.rows[x].name].ExtAssignedOrder!==""){
+                    Resources["EntityServices"].AddShapeToThing({
+                    	name: ListOfStations.rows[x].name /* THINGNAME */,
+                    	thingShapeName: "KBLocalSmartKPIAirmaticThingShape" /* THINGSHAPENAME */
+                    });
+        		}
+            	resultList.AddRow(newEntry);
+         }
+	logger.debug("UpdateAllAirmaticThings end");
+    var result=resultList;
+}catch(err) {
+	logger.error("UpdateAllAirmaticThings Error: " + err + " , " + x);
+	
+}]]></code>
+								</Row>
+							</Rows>
+						</ConfigurationTable>
+					</ConfigurationTables>
+				</ServiceImplementation>
+			</ServiceImplementations>
+			<Subscriptions />
+			<Owner name="adm-konasm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true"
+							name="KBeTerminalHelperUser" type="User" />
+						<Principal isPermitted="true" name="KBMesKitHelperUser"
+							type="User" />
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</PropertyRead>
+					<PropertyWrite>
+						<Principal isPermitted="true"
+							name="KBeTerminalHelperUser" type="User" />
+						<Principal isPermitted="true" name="KBMesKitHelperUser"
+							type="User" />
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</PropertyWrite>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+							name="KBeTerminalHelperUser" type="User" />
+						<Principal isPermitted="true" name="KBMesKitHelperUser"
+							type="User" />
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true" name="KBBackGroundWorker"
+						type="Organization" />
+					<Principal isPermitted="true"
+						name="KBKECLocalTechnicalUser" type="Organization" />
+					<Principal isPermitted="true" name="KBOrganization"
+						type="Organization" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables />
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations>
+				<AlertDefinitions name="ExtAssignedOrder" />
+			</AlertConfigurations>
+			<InstanceRunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true" name="KBMesKitHelperUser"
+							type="User" />
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</PropertyRead>
+					<PropertyWrite>
+						<Principal isPermitted="true" name="KBMesKitHelperUser"
+							type="User" />
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</PropertyWrite>
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="KBMesKitHelperUser"
+							type="User" />
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+			</InstanceRunTimePermissions>
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="header : name : updated&#10;"
+					timestamp="2020-07-20T10:35:25.908+02:00" user="adm-konasm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : SetPartDataAirmatic : service updated&#10;"
+					timestamp="2020-07-20T11:02:32.678+02:00" user="adm-konasm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : SetPartDataAirmatic : service updated&#10;"
+					timestamp="2020-07-22T11:01:13.437+02:00" user="adm-konasm" />
+			</ConfigurationChanges>
+		</ThingShape>
+	</ThingShapes>
+</Entities>

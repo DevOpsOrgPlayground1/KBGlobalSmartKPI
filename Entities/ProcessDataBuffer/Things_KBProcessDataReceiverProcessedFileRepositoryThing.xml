@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b167" majorVersion="8" minorVersion="2"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="2" schemaVersion="1020" universal="">
+	<Things>
+		<Thing description="" documentationContent=""
+			effectiveThingPackage="FileRepositoryThing" enabled="true"
+			homeMashup="" identifier=""
+			lastModifiedDate="2019-05-22T15:29:41.806+02:00"
+			name="KBProcessDataReceiverProcessedFileRepositoryThing"
+			projectName="" published="false" tags=""
+			thingTemplate="FileRepository" valueStream="">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+						<Principal isPermitted="true" name="KBOGSHelperUser"
+							type="User" />
+						<Principal isPermitted="true" name="KBMesKitHelperUser"
+							type="User" />
+						<Principal isPermitted="true"
+							name="KBTestBenchFileRepositoryUser" type="User" />
+					</PropertyRead>
+					<PropertyWrite>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+						<Principal isPermitted="true" name="KBOGSHelperUser"
+							type="User" />
+						<Principal isPermitted="true" name="KBMesKitHelperUser"
+							type="User" />
+						<Principal isPermitted="true"
+							name="KBTestBenchFileRepositoryUser" type="User" />
+					</PropertyWrite>
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+						<Principal isPermitted="true" name="KBOGSHelperUser"
+							type="User" />
+						<Principal isPermitted="true" name="KBMesKitHelperUser"
+							type="User" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true" name="KBBackGroundWorker"
+						type="Organization" />
+					<Principal isPermitted="true" name="KBOrganization"
+						type="Organization" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTables />
+			<ThingShape>
+				<PropertyDefinitions />
+				<ServiceDefinitions />
+				<EventDefinitions />
+				<ServiceMappings />
+				<ServiceImplementations />
+				<Subscriptions>
+					<Subscription description="" enabled="true"
+						eventName="ThingStart" name="Autostart" source=""
+						sourceProperty="" sourceType="Thing">
+						<ServiceImplementation description=""
+							handlerName="Script" name="Autostart">
+							<ConfigurationTables>
+								<ConfigurationTable description=""
+									isMultiRow="false" name="Script" ordinal="0">
+									<DataShape>
+										<FieldDefinitions>
+											<FieldDefinition baseType="STRING"
+												description="code" name="code" ordinal="0" />
+										</FieldDefinitions>
+									</DataShape>
+									<Rows>
+										<Row>
+											<code><![CDATA[try {
+    me.CreateFolder({
+        path: "SetMachineData" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+
+try {
+    me.CreateFolder({
+        path: "SetMessage" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "SetTestBenchData" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "SetCVSAdgTestBenchData" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+
+try {
+    me.CreateFolder({
+        path: "SetPartData" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+
+try {
+    me.CreateFolder({
+        path: "SetState" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}]]></code>
+										</Row>
+									</Rows>
+								</ConfigurationTable>
+							</ConfigurationTables>
+						</ServiceImplementation>
+					</Subscription>
+				</Subscriptions>
+			</ThingShape>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations />
+			<ImplementedShapes />
+			<ThingProperties />
+			<ConfigurationChanges>
+			</ConfigurationChanges>
+		</Thing>
+	</Things>
+</Entities>

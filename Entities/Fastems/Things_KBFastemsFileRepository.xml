@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b97" majorVersion="8" minorVersion="4"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="11" schemaVersion="1044" universal="">
+	<Things>
+		<Thing description="" documentationContent=""
+			effectiveThingPackage="FileRepositoryThing" enabled="true"
+			homeMashup="" identifier=""
+			lastModifiedDate="2021-07-16T10:51:18.365Z"
+			name="KBFastemsFileRepository" projectName="KBsmartKPI"
+			published="false" tags="" thingTemplate="FileRepository"
+			valueStream="">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions />
+			<VisibilityPermissions>
+				<Visibility />
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables />
+			<ThingShape>
+				<PropertyDefinitions>
+					<PropertyDefinition aspect.cacheTime="0.0"
+						aspect.dataChangeType="VALUE" aspect.defaultValue="false"
+						baseType="BOOLEAN" category="" description="" isLocalOnly="false"
+						name="isProcessMessagesRunning" ordinal="2" />
+				</PropertyDefinitions>
+				<ServiceDefinitions>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false" name="Init">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="ProcessMessages">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+				</ServiceDefinitions>
+				<EventDefinitions />
+				<ServiceMappings />
+				<ServiceImplementations>
+					<ServiceImplementation description=""
+						handlerName="Script" name="Init">
+						<ConfigurationTables>
+							<ConfigurationTable
+								description="" isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[try {
+    me.CreateFolder({
+        path: "/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.130_1989_S3448341/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.130_1989_S3448341/In/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.130_1989_S3448341/In/Error/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.130_1989_S3448341/Out/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.133_1990_S3448342/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.133_1990_S3448342/In/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.133_1990_S3448342/In/Error/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.133_1990_S3448342/Out/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.142_1992_S3448343/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.142_1992_S3448343/In/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.142_1992_S3448343/In/Error/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.142_1992_S3448343/Out/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.146_1993_S3448344/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.146_1993_S3448344/In/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.146_1993_S3448344/In/Error/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.146_1993_S3448344/Out/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.150_1994_S3448345/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.150_1994_S3448345/In/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.150_1994_S3448345/In/Error/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+
+try {
+    me.CreateFolder({
+        path: "/10.5.62.150_1994_S3448345/Out/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+    ]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="ProcessMessages">
+						<ConfigurationTables>
+							<ConfigurationTable 
+								description="" isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[if (!me.isProcessMessagesRunning){
+    me.isProcessMessagesRunning = true;
+    try {
+        // result: INFOTABLE dataShape: "FileSystemDirectory"
+        var directories = me.ListDirectories({
+            path: "/" /* STRING */,
+            nameMask: undefined /* STRING */
+        });
+        var directoriestableLength = directories.rows.length;
+        for (var directoriesx=0; directoriesx < directoriestableLength; directoriesx++) {
+            var directoriesrow = directories.rows[directoriesx];
+            //Your code here
+
+            // result: INFOTABLE dataShape: RootEntityList
+            var fastemsMachines = Resources["SearchFunctions"].SearchThingsByShape({
+                thingShape: "KBFastemsThingShape" /* THINGSHAPENAME */,
+                maxItems: undefined /* NUMBER */,
+                nameMask: undefined /* STRING */,
+                query: undefined /* QUERY */,
+                tags: undefined /* TAGS */
+            });
+            var fastemsMachine = "";
+
+            var fastemsMachinestableLength = fastemsMachines.rows.length;
+            for (var fastemsMachinesx=0; fastemsMachinesx < fastemsMachinestableLength; fastemsMachinesx++) {
+                var fastemsMachinesrow = fastemsMachines.rows[fastemsMachinesx];
+                if (Things[fastemsMachinesrow.name].OrdersRepositoryPath == directoriesrow.path+"/Out/") {
+                    fastemsMachine = fastemsMachinesrow.name;
+                    break;
+                }
+            }
+            if (fastemsMachine != "") {
+                // result: INFOTABLE dataShape: "FileSystemFile"
+                var files = me.ListFiles({
+                    path: directoriesrow.path + "/In/" /* STRING */,
+                    nameMask: "*.xml" /* STRING */
+                });  
+               
+                var filestableLength = files.rows.length;
+                for (var filesx=0; filesx < filestableLength; filesx++) {
+	                try {
+	                    // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBLocalStationDataReceiverMessageDataShape)
+	                    var messageInfoTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape({
+	                        infoTableName : "InfoTable",
+	                        dataShapeName : "KBLocalStationDataReceiverMessageDataShape"
+	                    });
+	
+	                    var filesrow = files.rows[filesx];
+	                    //Your code here
+	                    // Content: XML
+	                    var xmlSOAPContenttext = String(me.LoadText({
+	                        path: filesrow.path /* STRING */
+	                        }));
+	                        
+	                    var messagetype = "Unknmown";
+	                    if (xmlSOAPContenttext.indexOf("ManufacturedArticle") > 0){
+	                    	messagetype = "FASTEMS Manufactured Article";
+	                    } else if (xmlSOAPContenttext.indexOf("ModifiedPart") > 0){
+	                    	messagetype = "FASTEMS Modified Part";
+	                    }
+	                    
+	                    var OrderNbr = xmlSOAPContenttext.substring(xmlSOAPContenttext.indexOf("<OrderNbr>")+10, xmlSOAPContenttext.indexOf("</OrderNbr>"));
+	                    var ItemId = xmlSOAPContenttext.substring(xmlSOAPContenttext.indexOf("<ItemId>")+8, xmlSOAPContenttext.indexOf("</ItemId>"));
+	                    var OperationNbr = xmlSOAPContenttext.substring(xmlSOAPContenttext.indexOf("<OperationNbr>")+14, xmlSOAPContenttext.indexOf("</OperationNbr>"));
+	                    var IsLastOperation = xmlSOAPContenttext.substring(xmlSOAPContenttext.indexOf("<IsLastOperation>")+17, xmlSOAPContenttext.indexOf("</IsLastOperation>"));
+	                    var Amount = xmlSOAPContenttext.substring(xmlSOAPContenttext.indexOf("<Amount>")+8, xmlSOAPContenttext.indexOf("</Amount>"));
+	                    var TimeStamp = xmlSOAPContenttext.substring(xmlSOAPContenttext.indexOf("<TimeStamp>")+11, xmlSOAPContenttext.indexOf("</TimeStamp>"));
+	                    var Message = xmlSOAPContenttext.substring(xmlSOAPContenttext.indexOf("<Message>")+9, xmlSOAPContenttext.indexOf("</Message>"));
+	                    var text = "Order Number = " + OrderNbr + " \n" +
+													"Part Number = " + ItemId + " \n" +
+													"Operation = " + OperationNbr + " \n" +
+													"Amount = " + Amount + " \n" +
+													"Is Last Operation = " + IsLastOperation + " \n" +
+													"Time Stamp = " + TimeStamp + " \n" +
+													"Message = " + Message;
+	                    
+	                    // KBLocalStationDataReceiverMessageDataShape entry object
+	                    var newEntry = new Object();
+	                    newEntry.Line = Things[fastemsMachine].KBLocalLineThing; // STRING [Primary Key]
+	                    newEntry.Station = fastemsMachine; // STRING [Primary Key]
+	                    newEntry.Description = filesrow.path; // STRING
+	                    newEntry.Type = messagetype; // STRING [Primary Key]
+	                    newEntry.DateTime = filesrow.lastModifiedDate; // DATETIME [Primary Key]
+	                    newEntry.Identifier = text; // STRING
+	                    newEntry.ShortName = filesrow.name; // STRING [Primary Key]
+	
+	                    messageInfoTable.AddRow(newEntry);
+	
+	                    newEntry = new Object();
+	                    newEntry.Line = Things[fastemsMachine].KBLocalLineThing; // STRING [Primary Key]
+	                    newEntry.Station = fastemsMachine; // STRING [Primary Key]
+	                    newEntry.Description = filesrow.path; // STRING
+	                    newEntry.Type = "FASTEMS Manufactured Article"; // STRING [Primary Key]
+	                    newEntry.DateTime = filesrow.lastModifiedDate; // DATETIME [Primary Key]
+	                    newEntry.Identifier = xmlSOAPContenttext; // STRING
+	                    newEntry.ShortName = filesrow.name; // STRING [Primary Key]
+	
+	                    messageInfoTable.AddRow(newEntry);
+	                    // result: BOOLEAN
+	                    var result = Things[fastemsMachine].SetMessage({
+	                        messageInfoTable: messageInfoTable /* INFOTABLE */
+	                    });
+	                    
+	                    me.DeleteFile({
+							path: filesrow.path /* STRING */
+						});
+				    } catch(err) {
+						logger.error("KBFastemsFileRepository Error for filesrow.path: "+err);
+						var target = filesrow.path;
+						target=target.replace("/In/","/In/Error/");
+						me.MoveFile({
+							targetPath: filesrow.path /* STRING */,
+							overwrite: true /* BOOLEAN */,
+							sourcePath: filesrow.path /* STRING */
+						});						
+				    }
+                }
+            }
+        }
+        
+    } catch(err) {
+		logger.error("KBFastemsFileRepository Error: "+err);
+    }
+    me.isProcessMessagesRunning = false;
+}]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+				</ServiceImplementations>
+				<Subscriptions>
+					<Subscription description="" enabled="true"
+						eventName="ThingStart" name="ThingStart" source=""
+						sourceProperty="" sourceType="Thing">
+						<ServiceImplementation description=""
+							handlerName="Script" name="ThingStart">
+							<ConfigurationTables>
+								<ConfigurationTable 
+									description="" isMultiRow="false" name="Script" ordinal="0">
+									<DataShape>
+										<FieldDefinitions>
+											<FieldDefinition baseType="STRING"
+												description="code" name="code" ordinal="0" />
+										</FieldDefinitions>
+									</DataShape>
+									<Rows>
+										<Row>
+											<code><![CDATA[ me.Init();]]></code>
+										</Row>
+									</Rows>
+								</ConfigurationTable>
+							</ConfigurationTables>
+						</ServiceImplementation>
+					</Subscription>
+				</Subscriptions>
+			</ThingShape>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations>
+				<AlertDefinitions name="isProcessMessagesRunning" />
+			</AlertConfigurations>
+			<ImplementedShapes />
+			<ThingProperties />
+		</Thing>
+	</Things>
+</Entities>

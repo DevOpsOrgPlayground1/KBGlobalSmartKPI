@@ -1,0 +1,1642 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b706"
+ majorVersion="9"
+ minorVersion="0"
+ modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+ revision="12"
+ schemaVersion="1109"
+ universal="password">
+    <Things>
+        <Thing
+         description=""
+         documentationContent=""
+         effectiveThingPackage="ConfiguredThing"
+         enabled="true"
+         homeMashup=""
+         identifier=""
+         inheritedValueStream=""
+         lastModifiedDate="2022-03-07T05:35:34.275Z"
+         name="KBLocalShiftHelperThing"
+         projectName="KBLocalShiftInfo"
+         published="false"
+         tags=""
+         thingTemplate="GenericThing"
+         valueStream="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions>
+                <Permissions
+                 resourceName="*">
+                    <PropertyRead>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                         <Principal
+                         isPermitted="true"
+                         name="KBMesKitHelperUser"
+                         type="User"></Principal>
+                    </PropertyRead>
+                    <PropertyWrite>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                     <Principal
+                         isPermitted="true"
+                         name="KBMesKitHelperUser"
+                         type="User"></Principal>
+                    </PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                         <Principal
+                         isPermitted="true"
+                         name="KBMesKitHelperUser"
+                         type="User"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                    </EventInvoke>
+                    <EventSubscribe>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                    </EventSubscribe>
+                </Permissions>
+            </RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility>
+                    <Principal
+                     isPermitted="true"
+                     name="KBBackGroundWorker"
+                     type="Organization"></Principal>
+                    <Principal
+                     isPermitted="true"
+                     name="KBOrganization"
+                     type="Organization"></Principal>
+                </Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables></ConfigurationTables>
+            <ThingShape>
+                <PropertyDefinitions></PropertyDefinitions>
+                <ServiceDefinitions>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="AddNextNweekIntoMachineList">
+                        <ResultType
+                         aspect.dataShape="KBMachineNamewithNextNweekDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="INTEGER"
+                             description=""
+                             name="ActionType"
+                             ordinal="3"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.dataShape="KBMachineNameWithUIDDataShape"
+                             baseType="INFOTABLE"
+                             description=""
+                             name="MachineList"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="INTEGER"
+                             description=""
+                             name="NextNweek"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="INTEGER"
+                             description=""
+                             name="OrderType"
+                             ordinal="4"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="AddNextNweekIntoMachineList-bak">
+                        <ResultType
+                         aspect.dataShape="KBMachineNamewithNextNweekDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="INTEGER"
+                             description=""
+                             name="ActionType"
+                             ordinal="3"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.dataShape="KBMachineNameWithUIDDataShape"
+                             baseType="INFOTABLE"
+                             description=""
+                             name="MachineList"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="INTEGER"
+                             description=""
+                             name="NextNweek"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="INTEGER"
+                             description=""
+                             name="OrderType"
+                             ordinal="4"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="getAreaListFromPlant">
+                        <ResultType
+                         aspect.dataShape="KBAreaNameDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="plantCode"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.thingTemplate="KBLocalPlantThingTemplate"
+                             baseType="THINGNAME"
+                             description=""
+                             name="plantThing"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="getAreaListFromPlant-bak">
+                        <ResultType
+                         aspect.dataShape="KBAreaNameDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="plantCode"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.thingTemplate="KBLocalPlantThingTemplate"
+                             baseType="THINGNAME"
+                             description=""
+                             name="plantThing"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="getMachineListFromArea">
+                        <ResultType
+                         aspect.dataShape="KBMachineNameWithUIDDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             aspect.thingTemplate="KBLocalAreaThingTemplate"
+                             baseType="THINGNAME"
+                             description=""
+                             name="areaThingName"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="plantCode"
+                             ordinal="2"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="getMachineListFromArea-bak">
+                        <ResultType
+                         aspect.dataShape="KBMachineNameWithUIDDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             aspect.thingTemplate="KBLocalAreaThingTemplate"
+                             baseType="THINGNAME"
+                             description=""
+                             name="areaThingName"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="plantCode"
+                             ordinal="2"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="GetMachineListFromThingShape">
+                        <ResultType
+                         aspect.dataShape="KBMachineNameWithUIDDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="PlantCode"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="THINGNAME"
+                             description=""
+                             name="PlantThing"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="GetPlantList">
+                        <ResultType
+                         aspect.dataShape="kBPlantListDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             aspect.thingTemplate="KBLocalDivisionThingTemplate"
+                             baseType="THINGNAME"
+                             description=""
+                             name="KBDivisionThing"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="GetShiftHeaderTimeInfo">
+                        <ResultType
+                         aspect.dataShape="KBLocalShiftHeaderTimeInfoDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="INTEGER"
+                             description=""
+                             name="dayOfWeek"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="INTEGER"
+                             description=""
+                             name="nextNweek"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="OutputShiftInfo">
+                        <ResultType
+                         aspect.dataShape="KBLocalShiftforShowDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             aspect.dataShape="KBLocalShiftforShowDataShape"
+                             baseType="INFOTABLE"
+                             description=""
+                             name="OriData"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="OutputShiftInfo-bak20201104">
+                        <ResultType
+                         aspect.dataShape="KBLocalShiftforShowDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             aspect.dataShape="KBLocalShiftforShowDataShape"
+                             baseType="INFOTABLE"
+                             description=""
+                             name="OriData"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="OutputShiftInfoWithLabel">
+                        <ResultType
+                         aspect.dataShape="KBLocalShiftInfoWithLabelDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             aspect.dataShape="KBLocalShiftInfoWithLabelDataShape"
+                             baseType="INFOTABLE"
+                             description=""
+                             name="oriData"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="tempJS">
+                        <ResultType
+                         baseType="STRING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="tryCase">
+                        <ResultType
+                         baseType="NOTHING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                </ServiceDefinitions>
+                <EventDefinitions></EventDefinitions>
+                <ServiceMappings></ServiceMappings>
+                <ServiceImplementations>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="AddNextNweekIntoMachineList">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        try {
+                                        
+                                        	var params = {
+                                        		infoTableName : "InfoTable",
+                                        		dataShapeName : "KBMachineNamewithNextNweekDataShape"
+                                        	};
+                                        
+                                        	// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBMachineNameWithUIDDataShape)
+                                        	var tempTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        	var tableLength = MachineList.rows.length;
+                                        	//logger.info("rows.length="+tableLength);
+                                        	for (var x=0; x < tableLength; x++) {
+                                        		var row = MachineList.rows[x];
+                                        		//logger.info("x="+x);
+                                        		//logger.info("Machine="+row.Machine);
+                                        		//logger.info("NextNweek="+NextNweek);
+                                        		tempTable.AddRow({
+                                        			NextNweek:NextNweek,
+                                        			ActionType:ActionType,
+                                        			OrderType:OrderType,
+                                                    UID:row.UID, 
+                                        			PlantCode:row.PlantCode, 
+                                        			SAPMachineName:row.SAPMachineName, 
+                                        			MachineThingName:row.MachineThingName,
+                                                    ShowMachineName:row.ShowMachineName
+                                        		});
+                                        		//Your code here
+                                        	}
+                                        
+                                        	// reorder by ShowMachineName
+                                            var sort = new Object();
+                                            sort.name = "ShowMachineName";
+                                            sort.ascending = true;
+                                            tempTable.Sort(sort);
+                                            
+                                        	var params2 = {
+                                        		infoTableName : "InfoTable",
+                                        		dataShapeName : "KBMachineNamewithNextNweekDataShape"
+                                        	};
+                                        	var tempTable2 = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params2);    
+                                        
+                                            var tableLength2 = tempTable.rows.length;
+                                            for (var x2=0; x2 < tableLength2; x2++) {
+                                                var row2 = tempTable.rows[x2];
+                                        		tempTable2.AddRow({
+                                        			NextNweek:row2.NextNweek,
+                                        			ActionType:row2.ActionType,
+                                        			OrderType:row2.OrderType,
+                                                    UID:x2+1, 
+                                        			PlantCode:row2.PlantCode, 
+                                        			SAPMachineName:row2.SAPMachineName, 
+                                        			MachineThingName:row2.MachineThingName,
+                                                    ShowMachineName:row2.ShowMachineName
+                                        		});        
+                                            }   
+                                        	var result = tempTable2;
+                                        
+                                        } catch(err) {
+                                        	logger.error("AddNextNweekIntoMachineList error.");
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="AddNextNweekIntoMachineList-bak">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        try {
+                                        
+                                        	var params = {
+                                        		infoTableName : "InfoTable",
+                                        		dataShapeName : "KBMachineNamewithNextNweekDataShape"
+                                        	};
+                                        
+                                        	// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBMachineNameWithUIDDataShape)
+                                        	var tempTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        	var tableLength = MachineList.rows.length;
+                                        	//logger.info("rows.length="+tableLength);
+                                        	for (var x=0; x < tableLength; x++) {
+                                        		var row = MachineList.rows[x];
+                                        		//logger.info("x="+x);
+                                        		//logger.info("Machine="+row.Machine);
+                                        		//logger.info("NextNweek="+NextNweek);
+                                        		tempTable.AddRow({
+                                        			NextNweek:NextNweek,
+                                        			ActionType:ActionType,
+                                        			OrderType:OrderType,
+                                                    UID:row.UID, 
+                                        			PlantCode:row.PlantCode, 
+                                        			SAPMachineName:row.SAPMachineName, 
+                                        			MachineThingName:row.MachineThingName,
+                                                    ShowMachineName:row.ShowMachineName
+                                        		});
+                                        		//Your code here
+                                        	}
+                                        
+                                        	var result = tempTable;
+                                        
+                                        } catch(err) {
+                                        	logger.error("AddNextNweekIntoMachineList error.");
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="getAreaListFromPlant">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        try {
+                                        
+                                        	// getAreaListFromPlant
+                                        	var params = {
+                                        		infoTableName : "InfoTable",
+                                        		dataShapeName : "KBAreaNameDataShape"
+                                        	};
+                                        	var outputTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        	// get Area List
+                                        	var areaList =  ThingTemplates["KBLocalAreaThingTemplate"].GetImplementingThings();
+                                        	//var result = areaList;
+                                        
+                                        	// check Area with Plant
+                                        	var tableLength = areaList.rows.length;
+                                        	for (var x=0; x < tableLength; x++) {
+                                        		var row = areaList.rows[x];
+                                        		var thingName = row.name;    
+                                        		var displayName = Things[thingName].DisplayName;    
+                                        		var plant = Things[thingName].KBPlantThing;
+                                                var areaActive = Things[thingName].isActive;
+                                        		if((plant == plantThing) && (areaActive === true)) {
+                                        		   outputTable.AddRow({
+                                        			   displayName: displayName,
+                                        			   thingName: thingName,
+                                        			   plantCode: plantCode
+                                        		   });
+                                        		   }
+                                        	}
+                                        
+                                        	// sort by name
+                                        	var sort = new Object();
+                                        	sort.name = "displayName";
+                                        	sort.ascending = true;
+                                        	outputTable.Sort(sort);
+                                        	var result = outputTable;
+                                        
+                                        } catch(err) {
+                                        	logger.error("getAreaListFromPlant error.");
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="getAreaListFromPlant-bak">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        try {
+                                        
+                                        	// getAreaListFromPlant
+                                        	var params = {
+                                        		infoTableName : "InfoTable",
+                                        		dataShapeName : "KBAreaNameDataShape"
+                                        	};
+                                        	var outputTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        	// get Area List
+                                        	var areaList =  ThingTemplates["KBLocalAreaThingTemplate"].GetImplementingThings();
+                                        	//var result = areaList;
+                                        
+                                        	// check Area with Plant
+                                        	var tableLength = areaList.rows.length;
+                                        	for (var x=0; x < tableLength; x++) {
+                                        		var row = areaList.rows[x];
+                                        		var thingName = row.name;    
+                                        		var displayName = Things[thingName].DisplayName;    
+                                        		var plant = Things[thingName].KBPlantThing;
+                                        		if(plant == plantThing) {
+                                        		   outputTable.AddRow({
+                                        			   displayName: displayName,
+                                        			   thingName: thingName,
+                                        			   plantCode: plantCode
+                                        		   });
+                                        		   }
+                                        	}
+                                        
+                                        	// sort by name
+                                        	var sort = new Object();
+                                        	sort.name = "displayName";
+                                        	sort.ascending = true;
+                                        	outputTable.Sort(sort);
+                                        	var result = outputTable;
+                                        
+                                        } catch(err) {
+                                        	logger.error("getAreaListFromPlant error.");
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="getMachineListFromArea">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        try {
+                                        
+                                        	// getMachineListFromArea
+                                        	var params = {
+                                        		infoTableName : "InfoTable",
+                                        		dataShapeName : "KBMachineNameWithUIDDataShape"
+                                        	};
+                                        	var outputTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        	// get machine list
+                                        	var machineList = Things[areaThingName].KBMachineThings;
+                                        	//var result = machineList;
+                                        
+                                        	// get detail machine info
+                                        	var tableLength = machineList.rows.length;
+                                        	//logger.debug("getMachineListFromArea, tableLength=" + tableLength);
+                                        	for (var x=0; x < tableLength; x++) {
+                                        		var row = machineList.rows[x];
+                                        		//logger.debug("getMachineListFromArea, row=" + row);
+                                        		var machineThingName = row.KBMachineThing;
+                                        		//logger.debug("getMachineListFromArea, machineThingName=" + machineThingName);
+                                        		var UID = x + 1;
+                                        		var PlantCode = plantCode;
+                                        		var ShowMachineName = Things[machineThingName].DisplayName;
+                                        		var SAPMachineName = Things[machineThingName].SAPWorkcenterNumber;
+                                        		var MachineThingName = machineThingName; 
+                                                var machineAcitve = Things[machineThingName].isActive;
+                                                if(machineAcitve===true) {
+                                                    outputTable.AddRow({
+                                                        UID: UID,
+                                                        PlantCode: PlantCode,
+                                                        ShowMachineName: ShowMachineName,
+                                                        SAPMachineName: SAPMachineName,
+                                                        MachineThingName: MachineThingName
+                                                    });        
+                                                }
+                                        	}
+                                        
+                                        	// sort
+                                        	var sort = new Object();
+                                        	sort.name = "ShowMachineName";
+                                        	sort.ascending = true;
+                                        	outputTable.Sort(sort);
+                                        
+                                        	var result = outputTable;
+                                        
+                                        } catch(err) {
+                                        	logger.error("getMachineListFromArea error.");
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="getMachineListFromArea-bak">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        try {
+                                        
+                                        	// getMachineListFromArea
+                                        	var params = {
+                                        		infoTableName : "InfoTable",
+                                        		dataShapeName : "KBMachineNameWithUIDDataShape"
+                                        	};
+                                        	var outputTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        	// get machine list
+                                        	var machineList = Things[areaThingName].KBMachineThings;
+                                        	//var result = machineList;
+                                        
+                                        	// get detail machine info
+                                        	var tableLength = machineList.rows.length;
+                                        	//logger.debug("getMachineListFromArea, tableLength=" + tableLength);
+                                        	for (var x=0; x < tableLength; x++) {
+                                        		var row = machineList.rows[x];
+                                        		//logger.debug("getMachineListFromArea, row=" + row);
+                                        		var machineThingName = row.KBMachineThing;
+                                        		//logger.debug("getMachineListFromArea, machineThingName=" + machineThingName);
+                                        		var UID = x + 1;
+                                        		var PlantCode = plantCode;
+                                        		var ShowMachineName = Things[machineThingName].DisplayName;
+                                        		var SAPMachineName = Things[machineThingName].SAPWorkcenterNumber;
+                                        		var MachineThingName = machineThingName; 
+                                        		outputTable.AddRow({
+                                        			UID: UID,
+                                        			PlantCode: PlantCode,
+                                        			ShowMachineName: ShowMachineName,
+                                        			SAPMachineName: SAPMachineName,
+                                        			MachineThingName: MachineThingName
+                                        		});
+                                        	}
+                                        
+                                        	// sort
+                                        	var sort = new Object();
+                                        	sort.name = "ShowMachineName";
+                                        	sort.ascending = true;
+                                        	outputTable.Sort(sort);
+                                        
+                                        	var result = outputTable;
+                                        
+                                        } catch(err) {
+                                        	logger.error("getMachineListFromArea error.");
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="GetMachineListFromThingShape">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        try {
+                                        
+                                        	// GetMachineListFromThingShape2
+                                        	// Create Output Table
+                                        	var params0 = {
+                                        		infoTableName : "InfoTable",
+                                        		dataShapeName : "KBMachineNameWithUIDDataShape"
+                                        	};
+                                        	var result = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params0);
+                                        
+                                        	var params = {
+                                        		maxItems: 999999 /* NUMBER */,
+                                        		nameMask: undefined /* STRING */,
+                                        		query: undefined /* QUERY */,
+                                        		thingTemplate: "KBLocalMachineThingTemplate" /* THINGTEMPLATENAME */,
+                                        		tags: undefined /* TAGS */
+                                        	};
+                                        
+                                        	// result: INFOTABLE dataShape: RootEntityList
+                                        	var machines = Resources["SearchFunctions"].SearchThingsByTemplateWithPersistent(params);
+                                        
+                                        	var tableLength = machines.rows.length;
+                                        	var i = 0;
+                                        
+                                        	for (var x = 0; x < tableLength; x++) {
+                                        		try {
+                                        			i = i + 1;
+                                        			// result: INFOTABLE
+                                        			var row = machines.rows[x];
+                                        			//Your code here
+                                        			// KBMachinesForProductionAdvisorDataShape entry object
+                                        			
+                                        			var rowMachine = row.name;
+                                        			var rowPlant = Things[rowMachine].KBPlantThing;
+                                        			var rowDevision = Things[rowPlant].KBDivisionThing;
+                                        			
+                                        			logger.debug ("GetMachineListFromThingShape: rowMachine --> "+rowMachine+" ("+x+" of "+tableLength+")");
+                                        			logger.debug ("GetMachineListFromThingShape: rowPlant --> "+rowPlant+" ("+x+" of "+tableLength+")");
+                                        			logger.debug ("GetMachineListFromThingShape: rowDevision --> "+rowDevision+" ("+x+" of "+tableLength+")");
+                                        			if (rowPlant == PlantThing) {
+                                        				if (Things[rowMachine].isActive) {
+                                        					var newEntry = new Object();
+                                        					newEntry.UID = i;
+                                        					newEntry.PlantCode = PlantCode;
+                                        					newEntry.SAPMachineName = Things[rowMachine].SAPWorkcenterNumber;
+                                        					newEntry.ShowMachineName = Things[rowMachine].DisplayName; // STRING
+                                        					newEntry.MachineThingName = rowMachine;
+                                        					result.AddRow(newEntry);
+                                        				}
+                                        			}	
+                                        		} catch(err) {
+                                        			logger.debug ("GetMachineListFromThingShape: "+err);
+                                        		}
+                                        
+                                        	}
+                                        
+                                        
+                                        	// Sort by ShowMachineName
+                                        	var sort = new Object();
+                                        	sort.name = "ShowMachineName";
+                                        	sort.ascending = true;
+                                        	result.Sort(sort);
+                                        
+                                        } catch(err) {
+                                        	logger.error("GetMachineListFromThingShape error.");
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="GetPlantList">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        try {
+                                        
+                                        	// #1. get plant thing list
+                                        	var params = {
+                                        	maxItems: undefined /* NUMBER */,
+                                        	nameMask: undefined /* STRING */,
+                                        	query: undefined /* QUERY */,
+                                        	thingTemplate: "KBLocalPlantThingTemplate" /* THINGTEMPLATENAME */,
+                                        	tags: undefined /* TAGS */
+                                        	};
+                                        	var plantThingList = Resources["SearchFunctions"].SearchThingsByTemplate(params);
+                                        	//var result = plantThingList;
+                                        
+                                        	// #2. create tempTable for output
+                                        	var params2 = {
+                                        		infoTableName : "InfoTable",
+                                        		dataShapeName : "kBPlantListDataShape"
+                                        	};
+                                        	var tempTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params2);
+                                        
+                                        	// #3. check and output tempTable
+                                        	var tableLength = plantThingList.rows.length;
+                                        	var Qty = 0;
+                                        	for (var x=0; x < tableLength; x++) {
+                                        		var row = plantThingList.rows[x];
+                                        		var DisplayName = Things[row.name].DisplayName;
+                                        		var SAPPlantId = Things[row.name].SAPPlantId;
+                                        		var DivisionThing = Things[row.name].KBDivisionThing;
+                                        		//var DivisionThingName = Things[DivisionThing].name;
+                                        		//var result = DivisionThingName;
+                                        		//if ((row.isActive===true)&&(DivisionThing==KBDivisionThing)) {
+                                        		if (DivisionThing==KBDivisionThing) {
+                                        			Qty++;
+                                        			tempTable.AddRow({
+                                        				DisplayName:DisplayName, 
+                                        				SAPPlantId:SAPPlantId, 
+                                        				PlantThing:Things[row.name].name,
+                                        				Qty:Qty
+                                        				//KBDivisionThing:Things[row.name].KBDivisionThing
+                                        			});
+                                        		}
+                                        	}
+                                        
+                                        	// #4. Update Qty
+                                        	var params4 = {
+                                        		infoTableName : "InfoTable",
+                                        		dataShapeName : "kBPlantListDataShape"
+                                        	};
+                                        	var tempTable4 = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params4);
+                                        	var tableLength4 = tempTable.rows.length;
+                                        	for (var x4=0; x4 < tableLength4; x4++) {
+                                        		var row4 = tempTable.rows[x4];
+                                        		tempTable4.AddRow({
+                                        			DisplayName:row4.DisplayName, 
+                                        			SAPPlantId:row4.SAPPlantId, 
+                                        			PlantThing:row4.PlantThing,
+                                        			Qty:tableLength4    
+                                        		});
+                                        	}
+                                        
+                                        	// #5. Sort and output
+                                        	var sort = new Object();
+                                        	sort.name = "DisplayName";
+                                        	sort.ascending = true;
+                                        	tempTable4.Sort(sort);
+                                        	var result = tempTable4;
+                                        
+                                        } catch(err) {
+                                        	logger.error("GetPlantList error.");
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="GetShiftHeaderTimeInfo">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        try {
+                                        
+                                        	//#1 get week number
+                                        	var shiftDay =  Things["KBTimeHelperThing"].GetCurrentWeekStart();
+                                        	//var result = shiftDay;
+                                            shiftDay = dateAddDays(shiftDay, 7*nextNweek+dayOfWeek-1);
+                                        	//var result = shiftDay;    
+                                            
+                                        	var wk =  Things["KBTimeHelperThing"].GetWeekNumber({
+                                        		DateTime: shiftDay /* DATETIME */
+                                        	});
+                                        	var wk2 = "WK#" + wk.toString();
+                                            //var result = wk2;
+                                        
+                                        	//#2 get day of week
+                                        	var dayOfWeek2 = "";
+                                        	if(dayOfWeek===7) {
+	                                        		dayOfWeek2 = "OrderShiftInfoBoard.Sunday";
+	                                        	}
+	                                        	if(dayOfWeek===1) {
+	                                        		dayOfWeek2 = "OrderShiftInfoBoard.Monday";
+	                                        	}
+	                                        	if(dayOfWeek===2) {
+	                                        		dayOfWeek2 = "OrderShiftInfoBoard.Tuesday";
+	                                        	}
+	                                        	if(dayOfWeek===3) {
+                                        			dayOfWeek2 = "OrderShiftInfoBoard.Wednesday";
+                                        		}
+                                        		if(dayOfWeek===4) {
+                                        			dayOfWeek2 = "OrderShiftInfoBoard.Thursday";
+                                        		}
+                                        		if(dayOfWeek===5) {
+                                        			dayOfWeek2 = "OrderShiftInfoBoard.Friday";
+                                        		}
+                                        		if(dayOfWeek===6) {
+                                        			dayOfWeek2 = "OrderShiftInfoBoard.Saturday";
+                                        		}
+                                        
+                                        	//#3 Get DD/MM/YYYY
+                                        	//var formattedDate = shiftDay.toISOString();//.slice(0,10); //.replace(/-/g,"");
+                                            // result: STRING
+                                            var formattedDate =  Things["KBTimeHelperThing"].GetDateTimeForVisualization({
+                                                ShowDeDate: false /* BOOLEAN */,
+                                                ShowTime: false /* BOOLEAN */,
+                                                ShowEnDate: true /* BOOLEAN */,
+                                                DateTime: shiftDay /* DATETIME */
+                                            });    
+                                            //var result = formattedDate;
+                                        
+                                        	//#4 Output data
+                                        	var params = {
+                                        		infoTableName : "InfoTable",
+                                        		dataShapeName : "KBLocalShiftHeaderTimeInfoDataShape"
+                                        	};
+                                        
+                                        	// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBLocalShiftHeaderTimeInfoDS)
+                                        	var tempTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        	tempTable.AddRow({"weekNumber":wk2, "dayOfWeek":dayOfWeek2, "YYYYMMDD":formattedDate});
+                                        
+                                        	var result = tempTable;
+                                        
+                                        } catch(err) {
+                                        	logger.error("GetShiftHeaderTimeInfo error.");
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="OutputShiftInfo">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var T1 = OriData.rows[0].T1;
+                                        //logger.info('T1='+T1);
+                                        var T2 = OriData.rows[0].T2;
+                                        var StartTime = T1;
+                                        var EndTime = T1;
+                                        
+                                        var params = {
+                                            infoTableName : "InfoTable",
+                                            dataShapeName : "KBLocalShiftforShowDataShape"
+                                        };
+                                        
+                                        // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBLocalShiftforShowDataShape)
+                                        var tempTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        //logger.info('temp table created.');
+                                        
+                                        //var Init tempTable with NA state;
+                                        for (var x=0; x < 2016; x++) {
+                                            EndTime = dateAddMinutes(StartTime, 5);
+                                            tempTable.AddRow({
+                                            	"Id": x+1,
+                                                "StartTime": StartTime,
+                                                "EndTime": EndTime,
+                                                "Diff": 5,
+                                                "Qualifier": "NA",
+                                                "T1": T1,
+                                                "T2": T2
+                                            });
+                                            StartTime = EndTime;
+                                        }
+                                        //logger.info('temp table inited');
+                                        
+                                        // Check and Update W/B
+                                        for (x=0; x < 2016; x++) {
+                                            var row = tempTable.rows[x]; 
+                                        	var tableLength = OriData.rows.length;   
+                                            for (var x2=0; x2 < tableLength; x2++) {
+                                            	var row2 = OriData.rows[x2];      
+                                                if(row.StartTime>=row2.StartTime) {
+                                        			if(row.EndTime<=row2.EndTime) {
+                                                        row.Qualifier = row2.Qualifier;
+                                                    }
+                                        		}
+                                            }
+                                        }
+                                        
+                                        var result = tempTable;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="OutputShiftInfo-bak20201104">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        try {
+                                        
+                                        	var T1 = OriData.rows[0].T1;
+                                        	//logger.info('T1='+T1);
+                                        	var T2 = OriData.rows[0].T2;
+                                        	var StartTime = T1;
+                                        	var EndTime = T1;
+                                        
+                                        	var params = {
+                                        		infoTableName : "InfoTable",
+                                        		dataShapeName : "KBLocalShiftforShowDataShape"
+                                        	};
+                                        
+                                        	// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBLocalShiftforShowDataShape)
+                                        	var tempTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        	//logger.info('temp table created.');
+                                        
+                                        	//var Init tempTable with NA state;
+                                        	for (var x=0; x < 672; x++) {
+                                        		EndTime = dateAddMinutes(StartTime, 15);
+                                        		tempTable.AddRow({
+                                        			"Id": x+1,
+                                        			"StartTime": StartTime,
+                                        			"EndTime": EndTime,
+                                        			"Diff": 15,
+                                        			"Qualifier": "NA",
+                                        			"T1": T1,
+                                        			"T2": T2
+                                        		});
+                                        		StartTime = EndTime;
+                                        	}
+                                        	//logger.info('temp table inited');
+                                        
+                                        	// Check and Update W/B
+                                        	for (x=0; x < 672; x++) {
+                                        		var row = tempTable.rows[x]; 
+                                        		var tableLength = OriData.rows.length;   
+                                        		for (var x2=0; x2 < tableLength; x2++) {
+                                        			var row2 = OriData.rows[x2];      
+                                        			if(row.StartTime>=row2.StartTime) {
+                                        				if(row.EndTime<=row2.EndTime) {
+                                        					row.Qualifier = row2.Qualifier;
+                                        				}
+                                        			}
+                                        		}
+                                        	}
+                                        
+                                        	var result = tempTable;
+                                        
+                                        } catch(err) {
+                                        	logger.error("OutputShiftInfo error.");
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="OutputShiftInfoWithLabel">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        // OutputShiftInfo
+                                        // #0. case of 0 record
+                                        var params9 = {
+                                            infoTableName : "InfoTable",
+                                            dataShapeName : "KBLocalShiftInfoWithLabelDataShape"
+                                        };
+                                        var outputTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params9);
+                                        var result = outputTable;
+                                        
+                                        try {
+                                        	var tableLength = oriData.rows.length;	
+                                            logger.debug("OutputShiftInfo: inputTable length =" + tableLength);
+                                            
+                                        	// #1 Create Base InfoTabel for compare
+                                        	var params0 = {
+                                        		infoTableName : "InfoTable",
+                                        		dataShapeName : "KBLocalShiftInfoWithLabelDataShape"
+                                        	};
+                                        	var baseTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params0);
+                                        	var T1 = oriData.rows[0].T1;
+                                        	var T2 = oriData.rows[0].T2;
+                                        	//var PlantCode = oriData.rows[0].PlantCode;
+                                        	//var SAPMachineName = oriData.rows[0].SAPMachineName;
+                                        	var st = T1; 
+                                        	for (var c0=0; c0<2020; c0++) {
+                                        		var et = dateAddMinutes(st, 5);	
+                                        		baseTable.AddRow({
+                                        			Id: 0,
+                                        			Machine: "",
+                                        			StartTime: st,
+                                        			EndTime: et,
+                                        			Diff: 5,
+                                        			Qualifier: "NA",
+                                        			Name: "",
+                                        			T1: T1,
+                                        			T2: T2,
+                                        			Label: ""
+                                        		});		
+                                        		st = et;
+                                        	}
+                                        	logger.debug("OutputShiftInfo: baseTable created.");	
+                                        		
+                                        		
+                                        	var c = 0;
+                                        	// #2. Change Id
+                                        	for (var x=0; x < tableLength; x++) {
+                                        		var row = oriData.rows[x];
+                                        		var Id = row.Id;
+                                        		var Machine = row.Machine;
+                                        		var StartTime = row.StartTime;
+                                        		var EndTime = row.EndTime;
+                                        		if(EndTime > dateAddMinutes(st, -15)) {EndTime = dateAddMinutes(st, -15);}
+                                        		var Diff = row.Diff;
+                                        		var Qualifier = row.Qualifier;
+                                        		var ShiftName = row.Name;
+                                        		//var T1 = row.T1;
+                                        		//var T2 = row.T2;
+                                        		var Label = "";
+                                        		var Uti = row.Label;
+                                        		//var Uti = Math.round(100*Diff/(24*60)) + '%';
+                                        		var Qualifier2 = "Undefined";
+                                        		if(Qualifier === "B") {Qualifier2 = "Break";}
+                                        		if(Qualifier === "W") {Qualifier2 = "Working Time";}
+                                        		if(Qualifier === "M") {Qualifier2 = "PM Order";}
+                                        		if(Qualifier === "P") {Qualifier2 = "Planned Downtime";}
+                                        		if(Qualifier === "D") {Qualifier2 = "Resource inactive";}		
+                                                var dateValue = new Date();
+                                                var utcOffset1 = Things["KBKPILocalThingWorxDatabaseThing"].GetUTCOffsetAtDate({
+                                                    DateTime: dateValue /* DATETIME */
+                                                });
+                                                var utcOffset2 = 0 - utcOffset1.rows[0].Offset;
+                                                // dateAddMinutes(dateValue:DATETIME, amount:NUMBER):STRING
+                                                var StartTime2 = dateAddMinutes(StartTime, utcOffset2);        
+                                                var EndTime2 = dateAddMinutes(EndTime, utcOffset2);                   
+                                                Label = Qualifier + ", ";
+                                        		Label = Label + Qualifier2 + ", ";
+                                        		Label = Label + Machine + ", ";
+                                        		Label = Label + dateFormat(StartTime2, "yyyy-MM-dd HH:mm:ss") + " ~ ";
+                                        		Label = Label + dateFormat(EndTime2, "yyyy-MM-dd HH:mm:ss") + ", ";
+                                        		//Label = Label + Qualifier + ", ";    
+                                        		Label = Label + ShiftName + ", ";
+                                        		Label = Label + Uti;
+                                        		outputTable.AddRow({
+                                        			Id: Id,
+                                        			Machine: Machine,
+                                        			StartTime: StartTime,
+                                        			EndTime: EndTime,
+                                        			Diff: Diff,
+                                        			Qualifier: Qualifier,
+                                        			Name: ShiftName,
+                                        			T1: T1,
+                                        			T2: T2,
+                                        			Label: Label
+                                        		});	
+                                        		
+                                        		c = c + 1;
+                                        		logger.debug("OutputShiftInfo: inputTable length with id =" + c);
+                                        	}
+                                        	logger.debug("OutputShiftInfo: OutputTable length with id =" + outputTable.rows.length);
+                                        
+                                        	// #3. Compare outputTable with baseTable
+                                        	for (var cb=0; cb<2020; cb++) {
+                                        		var rowb = baseTable.rows[cb]; 
+                                        		var flag = false;
+                                        		for (var co=0; co < tableLength; co++) {	
+                                        			var rowo = outputTable.rows[co]; 
+                                        			var diff1 = dateDifference(rowo.StartTime, rowb.StartTime)/1000/60;
+                                        			var diff2 = dateDifference(rowo.EndTime, rowb.EndTime)/1000/60;		
+                                        			//var diff1 = Math.abs(diff1);
+                                        			//var diff2 = Math.abs(diff2);
+                                        			if(((Math.abs(diff1)<=5) && (diff2>=5)) || ((diff1<=-5) && (diff2>=5)) || ((diff1<=-5) && (Math.abs(diff2)<=5))){
+                                        			//if ((diff1 <= 15) || (diff2 <= 15)) {
+                                        				flag = true;
+                                        			}
+                                        		}
+                                        		if(flag === false) {
+                                        			outputTable.AddRow({
+                                        				Id: 0,
+                                        				Machine: "",
+                                        				StartTime: rowb.StartTime,
+                                        				EndTime: rowb.EndTime,
+                                        				Diff: 5,
+                                        				Qualifier: "NA",
+                                        				Name: "",
+                                        				T1: T1,
+                                        				T2: T2,
+                                        				Label: ""
+                                        			});				
+                                        		}
+                                        	}
+                                        
+                                        	// #4. Reorder outputTable
+                                        	var sort = new Object();
+                                        	sort.name = "StartTime";
+                                        	sort.ascending = true;
+                                        	outputTable.Sort(sort); 
+                                        
+                                        	result = outputTable;	
+                                        
+                                        } catch(err) {
+                                        
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="tempJS">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var result = Math.round(1/3*100) + "%";
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="tryCase">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        try {
+                                        
+                                        } catch(err) {
+                                        
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                </ServiceImplementations>
+                <Subscriptions></Subscriptions>
+            </ThingShape>
+            <PropertyBindings></PropertyBindings>
+            <RemotePropertyBindings></RemotePropertyBindings>
+            <RemoteServiceBindings></RemoteServiceBindings>
+            <RemoteEventBindings></RemoteEventBindings>
+            <AlertConfigurations></AlertConfigurations>
+            <ImplementedShapes></ImplementedShapes>
+            <ThingProperties></ThingProperties>
+        </Thing>
+    </Things>
+</Entities>

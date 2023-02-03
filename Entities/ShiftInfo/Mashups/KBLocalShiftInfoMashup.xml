@@ -1,0 +1,2487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b706"
+ majorVersion="9"
+ minorVersion="0"
+ modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+ revision="12"
+ schemaVersion="1109"
+ universal="password">
+    <Mashups>
+        <Mashup
+         aspect.isFlex="true"
+         aspect.isResponsive="true"
+         aspect.mashupType="mashup"
+         columns="0.0"
+         description=""
+         documentationContent=""
+         homeMashup=""
+         lastModifiedDate="2022-05-03T20:50:45.162Z"
+         name="KBLocalShiftInfoMashup"
+         projectName="KBLocalShiftInfo"
+         rows="0.0"
+         tags="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions>
+                <Permissions
+                 resourceName="*">
+                    <PropertyRead>
+                        <Principal
+                         isPermitted="true"
+                         name="KBMesKitHelperUser"
+                         type="User"></Principal>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                    </PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="KBMesKitHelperUser"
+                         type="User"></Principal>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+            </RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility>
+                    <Principal
+                     isPermitted="true"
+                     name="KBBackGroundWorker"
+                     type="Organization"></Principal>
+                    <Principal
+                     isPermitted="true"
+                     name="KBOrganization"
+                     type="Organization"></Principal>
+                </Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables>
+                <ConfigurationTable
+                 dataShapeName=""
+                 description="Mashup Mobile Settings"
+                 isHidden="true"
+                 isMultiRow="false"
+                 name="MobileSettings"
+                 ordinal="0">
+                    <DataShape>
+                        <FieldDefinitions>
+                            <FieldDefinition
+                             aspect.defaultValue="false"
+                             baseType="BOOLEAN"
+                             description=""
+                             name="disableZoom"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="true"
+                             baseType="BOOLEAN"
+                             description=""
+                             name="fullScreenMode"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="height"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="device-height"
+                             baseType="STRING"
+                             description=""
+                             name="heightType"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="1.0"
+                             baseType="NUMBER"
+                             description=""
+                             name="initialScale"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="iosShortcutIconTitle"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="black-translucent"
+                             baseType="STRING"
+                             description=""
+                             name="iosStatusBarAppearance"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="10.0"
+                             baseType="NUMBER"
+                             description=""
+                             name="maximumScale"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="0.1"
+                             baseType="NUMBER"
+                             description=""
+                             name="minimumScale"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="width"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="device-width"
+                             baseType="STRING"
+                             description=""
+                             name="widthType"
+                             ordinal="0"></FieldDefinition>
+                        </FieldDefinitions>
+                    </DataShape>
+                    <Rows>
+                        <Row>
+                            <disableZoom>false</disableZoom>
+                            <fullScreenMode>true</fullScreenMode>
+                            <height></height>
+                            <heightType>
+                            <![CDATA[
+                            device-height
+                            ]]>
+                            </heightType>
+                            <initialScale>1.0</initialScale>
+                            <iosShortcutIconTitle></iosShortcutIconTitle>
+                            <iosStatusBarAppearance>
+                            <![CDATA[
+                            black-translucent
+                            ]]>
+                            </iosStatusBarAppearance>
+                            <maximumScale>10.0</maximumScale>
+                            <minimumScale>0.1</minimumScale>
+                            <width></width>
+                            <widthType>
+                            <![CDATA[
+                            device-width
+                            ]]>
+                            </widthType>
+                        </Row>
+                    </Rows>
+                </ConfigurationTable>
+            </ConfigurationTables>
+            <ParameterDefinitions>
+                <FieldDefinition
+                 aspect.bindingDirection="BOTH"
+                 aspect.isMandatory="false"
+                 baseType="STRING"
+                 description=""
+                 name="KBDivisionThing"
+                 ordinal="0"></FieldDefinition>
+            </ParameterDefinitions>
+            <Things></Things>
+            <ThingShapes></ThingShapes>
+            <ThingTemplates></ThingTemplates>
+            <mashupContent>
+            <![CDATA[
+            {
+              "CustomMashupCss" : "",
+              "Data" : {
+                "Session" : {
+                  "DataName" : "Session",
+                  "EntityName" : "",
+                  "EntityType" : "Session",
+                  "Id" : "session",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "SessionInterface",
+                    "Name" : "GetGlobalSessionValues",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetGlobalSessionValues"
+                  } ]
+                },
+                "Things_KBLocalShiftHelperThing" : {
+                  "DataName" : "Things_KBLocalShiftHelperThing",
+                  "EntityName" : "KBLocalShiftHelperThing",
+                  "EntityType" : "Things",
+                  "Id" : "96a106ab-2e69-4ab3-b753-aab9267f3564",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "3ac8a3ba-5a50-4406-a9f1-08bc2e467051",
+                    "Name" : "GetPlantList",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetPlantList"
+                  }, {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "36fe5c73-a324-43ba-aa46-3a2decd64891",
+                    "Name" : "AddNextNweekIntoMachineList",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "AddNextNweekIntoMachineList"
+                  }, {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "44dd462a-a346-4ffe-8466-80a07ee37479",
+                    "Name" : "getAreaListFromPlant",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "getAreaListFromPlant"
+                  }, {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "9af0a14a-cae9-40e5-b6cd-f7861b7c2f7b",
+                    "Name" : "getMachineListFromArea",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "getMachineListFromArea"
+                  } ]
+                },
+                "UserExtensions" : {
+                  "DataName" : "UserExtensions",
+                  "EntityName" : "",
+                  "EntityType" : "UserExtensions",
+                  "Id" : "UserExtensions",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "UserExtensionInterface",
+                    "Name" : "GetCurrentUserExtensionProperties",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetCurrentUserExtensionProperties"
+                  } ]
+                }
+              },
+              "DataBindings" : [ {
+                "Id" : "8f587c3b-87d1-49d3-abc7-2d84e0b7f5f5",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "",
+                  "SourcePropertyBaseType" : "INFOTABLE",
+                  "SourcePropertyType" : "InfoTable",
+                  "TargetProperty" : "Data",
+                  "TargetPropertyBaseType" : "INFOTABLE",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "GetPlantList",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "UI",
+                "TargetId" : "dhxlist-18",
+                "TargetSection" : ""
+              }, {
+                "Id" : "66940f90-a293-4579-94d7-39c60466bf98",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "KBDivisionThing",
+                  "SourcePropertyBaseType" : "STRING",
+                  "TargetProperty" : "KBDivisionThing",
+                  "TargetPropertyBaseType" : "THINGNAME",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetPlantList",
+                "TargetSection" : "Things_KBLocalShiftHelperThing"
+              }, {
+                "Id" : "78e97a8c-d1ef-42d6-8abb-9a477d2ff4a3",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Value",
+                  "SourcePropertyBaseType" : "NUMBER",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "wknum",
+                  "TargetPropertyBaseType" : "NUMBER",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "numericentry-13",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "expression-37",
+                "TargetSection" : ""
+              }, {
+                "Id" : "f0bce06b-a646-484c-9506-b0b634f8cebf",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Output",
+                  "SourcePropertyBaseType" : "NUMBER",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "Value",
+                  "TargetPropertyBaseType" : "NUMBER",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "expression-37",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "numericentry-13",
+                "TargetSection" : ""
+              }, {
+                "Id" : "529285b2-1166-4431-894a-76d83ef5f5af",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Output",
+                  "SourcePropertyBaseType" : "NUMBER",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "Value",
+                  "TargetPropertyBaseType" : "NUMBER",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "expression-38",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "numericentry-14",
+                "TargetSection" : ""
+              }, {
+                "Id" : "7d367877-d7e2-4f48-8986-35844ad30a2c",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Value",
+                  "SourcePropertyBaseType" : "NUMBER",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "wknum",
+                  "TargetPropertyBaseType" : "NUMBER",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "numericentry-14",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "expression-38",
+                "TargetSection" : ""
+              }, {
+                "Id" : "a04967d1-2d0b-474f-95bf-7b4f49632ec7",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Value",
+                  "SourcePropertyBaseType" : "NUMBER",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "Num1",
+                  "TargetPropertyBaseType" : "NUMBER",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "numericentry-13",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "expression-39",
+                "TargetSection" : ""
+              }, {
+                "Id" : "dc2dd58e-bda3-4194-9dca-943b4330e529",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Value",
+                  "SourcePropertyBaseType" : "NUMBER",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "Num2",
+                  "TargetPropertyBaseType" : "NUMBER",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "numericentry-14",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "expression-39",
+                "TargetSection" : ""
+              }, {
+                "Id" : "2e3ee9b7-ce1a-4507-89e7-38e6524efa61",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Output",
+                  "SourcePropertyBaseType" : "NUMBER",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "Value",
+                  "TargetPropertyBaseType" : "NUMBER",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "expression-39",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "numericentry-19",
+                "TargetSection" : ""
+              }, {
+                "Id" : "d65a0e6d-6df9-44d8-9562-f96a5bb9b1a7",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Output",
+                  "SourcePropertyBaseType" : "NUMBER",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "nextNweek",
+                  "TargetPropertyBaseType" : "INTEGER",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "expression-39",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "mashupcontainer-35",
+                "TargetSection" : ""
+              }, {
+                "Id" : "359fe8e2-2b2a-4ee3-9a86-20b9f86e3814",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Output",
+                  "SourcePropertyBaseType" : "NUMBER",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "nextNweek",
+                  "TargetPropertyBaseType" : "INTEGER",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "expression-39",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "mashupcontainer-36",
+                "TargetSection" : ""
+              }, {
+                "Id" : "5f371835-4b02-48a1-a048-1c785c6b7269",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Output",
+                  "SourcePropertyBaseType" : "NUMBER",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "nextNweek",
+                  "TargetPropertyBaseType" : "INTEGER",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "expression-39",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "mashupcontainer-40",
+                "TargetSection" : ""
+              }, {
+                "Id" : "ee95ec6e-c0d5-4831-9eaa-c56797f99e92",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Output",
+                  "SourcePropertyBaseType" : "NUMBER",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "nextNweek",
+                  "TargetPropertyBaseType" : "INTEGER",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "expression-39",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "mashupcontainer-41",
+                "TargetSection" : ""
+              }, {
+                "Id" : "a9a861f1-c80e-4cdb-a768-b693f2fb97d8",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Output",
+                  "SourcePropertyBaseType" : "NUMBER",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "nextNweek",
+                  "TargetPropertyBaseType" : "INTEGER",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "expression-39",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "mashupcontainer-42",
+                "TargetSection" : ""
+              }, {
+                "Id" : "d1784746-e331-4c76-8e16-7ccfa81f7383",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Output",
+                  "SourcePropertyBaseType" : "NUMBER",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "nextNweek",
+                  "TargetPropertyBaseType" : "INTEGER",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "expression-39",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "mashupcontainer-43",
+                "TargetSection" : ""
+              }, {
+                "Id" : "f808a465-2c5b-4ec8-a39a-15483ae170d5",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Output",
+                  "SourcePropertyBaseType" : "NUMBER",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "nextNweek",
+                  "TargetPropertyBaseType" : "INTEGER",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "expression-39",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "mashupcontainer-44",
+                "TargetSection" : ""
+              }, {
+                "Id" : "d63ef1bc-c9a5-481a-a97c-1ec6cd2fe85a",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Value",
+                  "SourcePropertyBaseType" : "NUMBER",
+                  "TargetProperty" : "NextNweek",
+                  "TargetPropertyBaseType" : "INTEGER",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "numericentry-19",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "AddNextNweekIntoMachineList",
+                "TargetSection" : "Things_KBLocalShiftHelperThing"
+              }, {
+                "Id" : "81713b55-b321-4d04-846d-a92de5186f72",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "",
+                  "SourcePropertyBaseType" : "",
+                  "SourcePropertyType" : "Data",
+                  "TargetProperty" : "Data",
+                  "TargetPropertyBaseType" : "INFOTABLE"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "AddNextNweekIntoMachineList",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "UI",
+                "TargetId" : "collection-46",
+                "TargetSection" : ""
+              }, {
+                "Id" : "a1b8fbdc-d809-43fc-9f8d-197a30304527",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Qty",
+                  "SourcePropertyBaseType" : "INTEGER",
+                  "SourcePropertyType" : "Field",
+                  "TargetProperty" : "PlantQty",
+                  "TargetPropertyBaseType" : "NUMBER",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "GetPlantList",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "UI",
+                "TargetId" : "validator-47",
+                "TargetSection" : ""
+              }, {
+                "Id" : "ea5187bd-9ddb-42da-9730-49275e980da7",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Output",
+                  "SourcePropertyBaseType" : "BOOLEAN",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "Visible",
+                  "TargetPropertyBaseType" : "BOOLEAN",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "validator-47",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "dhxlist-18",
+                "TargetSection" : ""
+              }, {
+                "Id" : "dbef76f9-ad67-434a-a6bb-b14f9ca21247",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Output",
+                  "SourcePropertyBaseType" : "BOOLEAN",
+                  "SourcePropertyType" : "Property",
+                  "TargetProperty" : "Visible",
+                  "TargetPropertyBaseType" : "BOOLEAN",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "validator-47",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "label-15",
+                "TargetSection" : ""
+              }, {
+                "Id" : "af235e4b-4920-4cb5-bff0-7d134cb6bfc5",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "",
+                  "SourcePropertyBaseType" : "INFOTABLE",
+                  "SourcePropertyType" : "InfoTable",
+                  "TargetProperty" : "Data",
+                  "TargetPropertyBaseType" : "INFOTABLE",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "getAreaListFromPlant",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "UI",
+                "TargetId" : "dhxlist-49",
+                "TargetSection" : ""
+              }, {
+                "Id" : "cb331521-7425-40cd-9c09-7026e4c2d1bb",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "SAPPlantId",
+                  "SourcePropertyBaseType" : "STRING",
+                  "TargetProperty" : "plantCode",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "SelectedRows",
+                "SourceId" : "GetPlantList",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "Data",
+                "TargetId" : "getAreaListFromPlant",
+                "TargetSection" : "Things_KBLocalShiftHelperThing"
+              }, {
+                "Id" : "c1160b2c-1b1f-4f3d-83b7-b6409efb9eda",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "PlantThing",
+                  "SourcePropertyBaseType" : "THINGNAME",
+                  "TargetProperty" : "plantThing",
+                  "TargetPropertyBaseType" : "THINGNAME",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "SelectedRows",
+                "SourceId" : "GetPlantList",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "Data",
+                "TargetId" : "getAreaListFromPlant",
+                "TargetSection" : "Things_KBLocalShiftHelperThing"
+              }, {
+                "Id" : "3df74f55-0bf0-43ce-8bf0-a38b02e9f14e",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "plantCode",
+                  "SourcePropertyBaseType" : "STRING",
+                  "TargetProperty" : "plantCode",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "SelectedRows",
+                "SourceId" : "getAreaListFromPlant",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "Data",
+                "TargetId" : "getMachineListFromArea",
+                "TargetSection" : "Things_KBLocalShiftHelperThing"
+              }, {
+                "Id" : "964df6ed-ceff-4a7b-bfe1-0a9069e173cc",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "thingName",
+                  "SourcePropertyBaseType" : "THINGNAME",
+                  "TargetProperty" : "areaThingName",
+                  "TargetPropertyBaseType" : "THINGNAME",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "SelectedRows",
+                "SourceId" : "getAreaListFromPlant",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "Data",
+                "TargetId" : "getMachineListFromArea",
+                "TargetSection" : "Things_KBLocalShiftHelperThing"
+              }, {
+                "Id" : "f2f440bf-c4a8-49f4-a973-7a525c484533",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "",
+                  "SourcePropertyBaseType" : "INFOTABLE",
+                  "TargetProperty" : "MachineList",
+                  "TargetPropertyBaseType" : "INFOTABLE",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "getMachineListFromArea",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "Data",
+                "TargetId" : "AddNextNweekIntoMachineList",
+                "TargetSection" : "Things_KBLocalShiftHelperThing"
+              } ],
+              "DesignTimePermissions" : {
+                "Create" : [ ],
+                "Delete" : [ ],
+                "Metadata" : [ ],
+                "Read" : [ ],
+                "Update" : [ ]
+              },
+              "Events" : [ {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBLocalShiftHelperThing",
+                "EventHandlerService" : "GetPlantList",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "Loaded",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "83d0875b-0b6a-49a8-a7ee-6f2a68fd5633"
+              }, {
+                "EventHandlerArea" : "UI",
+                "EventHandlerId" : "expression-37",
+                "EventHandlerService" : "Evaluate",
+                "EventTriggerArea" : "UI",
+                "EventTriggerEvent" : "Clicked",
+                "EventTriggerId" : "button-16",
+                "EventTriggerSection" : "",
+                "Id" : "2f05b40d-2b0d-4d85-a95e-17f651172fc4"
+              }, {
+                "EventHandlerArea" : "UI",
+                "EventHandlerId" : "expression-38",
+                "EventHandlerService" : "Evaluate",
+                "EventTriggerArea" : "UI",
+                "EventTriggerEvent" : "Clicked",
+                "EventTriggerId" : "button-17",
+                "EventTriggerSection" : "",
+                "Id" : "63476efe-1fb1-4e26-99e2-8ae3b029bc09"
+              }, {
+                "EventHandlerArea" : "UI",
+                "EventHandlerId" : "expression-39",
+                "EventHandlerService" : "Evaluate",
+                "EventTriggerArea" : "UI",
+                "EventTriggerEvent" : "Changed",
+                "EventTriggerId" : "expression-37",
+                "EventTriggerSection" : "",
+                "Id" : "2a32d265-94a9-44c2-8b97-79ba1c46c2c3"
+              }, {
+                "EventHandlerArea" : "UI",
+                "EventHandlerId" : "expression-39",
+                "EventHandlerService" : "Evaluate",
+                "EventTriggerArea" : "UI",
+                "EventTriggerEvent" : "Changed",
+                "EventTriggerId" : "expression-38",
+                "EventTriggerSection" : "",
+                "Id" : "d423370c-d177-4de6-9ace-266facc768da"
+              }, {
+                "EventHandlerArea" : "UI",
+                "EventHandlerId" : "expression-37",
+                "EventHandlerService" : "Evaluate",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "Loaded",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "3488c898-f2bd-4de6-9832-9ee85e14eeed"
+              }, {
+                "EventHandlerArea" : "UI",
+                "EventHandlerId" : "expression-38",
+                "EventHandlerService" : "Evaluate",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "Loaded",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "df97cc6c-678d-4b02-9b46-05d3c011d6cc"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBLocalShiftHelperThing",
+                "EventHandlerService" : "AddNextNweekIntoMachineList",
+                "EventTriggerArea" : "UI",
+                "EventTriggerEvent" : "Changed",
+                "EventTriggerId" : "expression-39",
+                "EventTriggerSection" : "",
+                "Id" : "f2627595-75e2-46b1-afd3-874eb929c3e8"
+              }, {
+                "EventHandlerArea" : "UI",
+                "EventHandlerId" : "validator-47",
+                "EventHandlerService" : "Evaluate",
+                "EventTriggerArea" : "Data",
+                "EventTriggerEvent" : "ServiceInvokeCompleted",
+                "EventTriggerId" : "GetPlantList",
+                "EventTriggerSection" : "Things_KBLocalShiftHelperThing",
+                "Id" : "10bdfc6a-fb89-45f1-b044-26e4a0b0afae"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBLocalShiftHelperThing",
+                "EventHandlerService" : "getAreaListFromPlant",
+                "EventTriggerArea" : "Data",
+                "EventTriggerEvent" : "SelectedRowsChanged",
+                "EventTriggerId" : "GetPlantList",
+                "EventTriggerSection" : "Things_KBLocalShiftHelperThing",
+                "Id" : "696f96a2-383d-4267-819c-c13204ad1f41"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBLocalShiftHelperThing",
+                "EventHandlerService" : "getMachineListFromArea",
+                "EventTriggerArea" : "Data",
+                "EventTriggerEvent" : "SelectedRowsChanged",
+                "EventTriggerId" : "getAreaListFromPlant",
+                "EventTriggerSection" : "Things_KBLocalShiftHelperThing",
+                "Id" : "729c86c2-3027-42cf-87ac-e88e1234a6a8"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBLocalShiftHelperThing",
+                "EventHandlerService" : "AddNextNweekIntoMachineList",
+                "EventTriggerArea" : "Data",
+                "EventTriggerEvent" : "ServiceInvokeCompleted",
+                "EventTriggerId" : "getMachineListFromArea",
+                "EventTriggerSection" : "Things_KBLocalShiftHelperThing",
+                "Id" : "44839144-596d-41bf-bc6d-35bdfd99f3cb"
+              } ],
+              "RunTimePermissions" : {
+                "permissions" : [ {
+                  "EventInvoke" : [ ],
+                  "EventSubscribe" : [ ],
+                  "PropertyRead" : [ {
+                    "isPermitted" : true,
+                    "name" : "KBUserGroup",
+                    "type" : "Group"
+                  } ],
+                  "PropertyWrite" : [ ],
+                  "ServiceInvoke" : [ {
+                    "isPermitted" : true,
+                    "name" : "KBUserGroup",
+                    "type" : "Group"
+                  } ],
+                  "resourceName" : "*"
+                } ]
+              },
+              "UI" : {
+                "Properties" : {
+                  "AddToDashboardButton" : "SimplePlus",
+                  "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+                  "Area" : "Mashup",
+                  "BGImage" : "",
+                  "BGImageRepeat" : "no-repeat",
+                  "BGImageSize" : "auto",
+                  "Columns" : 0,
+                  "ConfigureGadgetButton" : "SimpleGear",
+                  "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+                  "DisplayName" : "Mashup",
+                  "EnableParameterEditing" : false,
+                  "Height" : 618,
+                  "Id" : "mashup-root",
+                  "IgnoreWarningsInViewMashup" : false,
+                  "IsPrintLayout" : false,
+                  "Left" : 0,
+                  "MashupToEditGadget" : "DefaultMashupToEditGadget",
+                  "MinHeight" : 0,
+                  "MinWidth" : 0,
+                  "ResponsiveLayout" : true,
+                  "Rows" : 0,
+                  "ShowDataLoading" : true,
+                  "Style" : "DefaultMashupStyle",
+                  "StyleTheme" : "Base Theme",
+                  "Title" : "",
+                  "TitleBar" : false,
+                  "TitleBarStyle" : "DefaultTitleBarStyle",
+                  "TitleBarText" : "Gadget Title Here",
+                  "Top" : 0,
+                  "Type" : "mashup",
+                  "UseMasterTheme" : false,
+                  "UseTheme" : false,
+                  "UseThemeForHybrids" : false,
+                  "Visible" : true,
+                  "Width" : 1024,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Mashup",
+                  "_currentParameterDefs" : [ {
+                    "Aspects" : {
+                      "bindingDirection" : "BOTH",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "KBDivisionThing"
+                  } ],
+                  "flex-grow" : 0,
+                  "id_index" : 51,
+                  "supportsAutoResize" : true
+                },
+                "Widgets" : [ {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "DisplayName" : "flexcontainer-2",
+                    "EnableExpandCollapse" : false,
+                    "Expanded" : true,
+                    "Id" : "flexcontainer-2",
+                    "LastContainer" : true,
+                    "Overlay" : false,
+                    "ResponsiveLayout" : true,
+                    "ShowDataLoading" : true,
+                    "ShowExpandCollapseTab" : false,
+                    "SourceURL" : "",
+                    "Style" : "DefaultContainerStyle",
+                    "StyleProperties" : { },
+                    "Type" : "flexcontainer",
+                    "UseTheme" : false,
+                    "Visible" : true,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Flex Container",
+                    "align-content" : "flex-start",
+                    "align-items" : "flex-start",
+                    "flex-basis" : "auto",
+                    "flex-direction" : "column",
+                    "flex-grow" : 1,
+                    "flex-height" : 0,
+                    "flex-max-height" : "",
+                    "flex-max-width" : "",
+                    "flex-min-height" : "",
+                    "flex-min-width" : "",
+                    "flex-shrink" : 0,
+                    "flex-size" : "default",
+                    "flex-width" : 0,
+                    "flex-wrap" : "nowrap",
+                    "iconClass" : "widgets-flexcontainer",
+                    "justify-content" : "flex-start",
+                    "positioning" : "responsive",
+                    "userCannotRemove" : true
+                  },
+                  "Widgets" : [ {
+                    "Properties" : {
+                      "Area" : "UI",
+                      "DisplayName" : "Header",
+                      "EnableExpandCollapse" : false,
+                      "Expanded" : true,
+                      "Id" : "flexcontainer-4",
+                      "LastContainer" : false,
+                      "Overlay" : false,
+                      "ResponsiveLayout" : true,
+                      "ShowDataLoading" : true,
+                      "ShowExpandCollapseTab" : false,
+                      "SourceURL" : "",
+                      "Style" : "DefaultContainerStyle",
+                      "StyleProperties" : { },
+                      "Type" : "flexcontainer",
+                      "UseTheme" : false,
+                      "Visible" : true,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Flex Container",
+                      "align-content" : "flex-start",
+                      "align-items" : "flex-start",
+                      "flex-basis" : "auto",
+                      "flex-direction" : "row",
+                      "flex-grow" : 1,
+                      "flex-height" : 0,
+                      "flex-max-height" : "220px",
+                      "flex-max-width" : "",
+                      "flex-min-height" : "220px",
+                      "flex-min-width" : "",
+                      "flex-shrink" : 0,
+                      "flex-size" : "default",
+                      "flex-width" : 0,
+                      "flex-wrap" : "nowrap",
+                      "iconClass" : "widgets-flexcontainer-fixed",
+                      "isLocked" : false,
+                      "justify-content" : "flex-start",
+                      "positioning" : "responsive",
+                      "userCannotRemove" : false
+                    },
+                    "Widgets" : [ {
+                      "Properties" : {
+                        "Area" : "UI",
+                        "ContainerClass" : "",
+                        "DisplayName" : "panel-7",
+                        "Height" : 200,
+                        "HideScrollbars" : false,
+                        "HorizontalAnchor" : "left",
+                        "Id" : "panel-7",
+                        "LastContainer" : false,
+                        "Left" : 180,
+                        "ResponsiveLayout" : true,
+                        "ShowDataLoading" : true,
+                        "Style" : "DefaultPanelStyle",
+                        "Top" : 80,
+                        "Type" : "panel",
+                        "VerticalAnchor" : "top",
+                        "Visible" : true,
+                        "Width" : 300,
+                        "Z-index" : 10,
+                        "__TypeDisplayName" : "Panel"
+                      },
+                      "Widgets" : [ {
+                        "Properties" : {
+                          "Area" : "UI",
+                          "DisplayName" : "fieldset-10",
+                          "FieldsetLabelStyle" : "DefaultFieldsetLabelStyle",
+                          "FieldsetStyle" : "KBLocalOGSTaskAvailableStyle",
+                          "Height" : 200,
+                          "Id" : "fieldset-10",
+                          "LastContainer" : false,
+                          "Left" : 10,
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "Title" : "",
+                          "Top" : 10,
+                          "Type" : "fieldset",
+                          "UseTheme" : false,
+                          "Visible" : true,
+                          "Width" : 240,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Fieldset"
+                        },
+                        "Widgets" : [ {
+                          "Properties" : {
+                            "Alignment" : "center",
+                            "AllowEllipsis" : false,
+                            "Area" : "UI",
+                            "DisplayName" : "label-11",
+                            "Height" : 87,
+                            "Id" : "label-11",
+                            "LastContainer" : false,
+                            "Left" : 0,
+                            "ResponsiveLayout" : false,
+                            "ShowDataLoading" : true,
+                            "Style" : "KBLocalShiftBoardHeaderStyle",
+                            "Text" : "[[OrderShiftInfoBoard.ShiftTitle]]",
+                            "ToolTipField" : "",
+                            "ToolTipStyle" : "DefaultTooltipStyle",
+                            "Top" : 55,
+                            "Type" : "label",
+                            "Visible" : true,
+                            "Width" : 240,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Label",
+                            "__supportsTooltip" : true
+                          },
+                          "Widgets" : [ ]
+                        }, {
+                          "Properties" : {
+                            "Alignment" : "center",
+                            "AllowEllipsis" : false,
+                            "Area" : "UI",
+                            "DisplayName" : "label-12",
+                            "Height" : 42,
+                            "Id" : "label-12",
+                            "LastContainer" : false,
+                            "Left" : 0,
+                            "ResponsiveLayout" : false,
+                            "ShowDataLoading" : true,
+                            "Style" : "KBLocalShiftBoardHeaderStyle",
+                            "Text" : "Board",
+                            "ToolTipField" : "",
+                            "ToolTipStyle" : "DefaultTooltipStyle",
+                            "Top" : 100,
+                            "Type" : "label",
+                            "Visible" : true,
+                            "Width" : 240,
+                            "Z-index" : 9,
+                            "__TypeDisplayName" : "Label",
+                            "__supportsTooltip" : true
+                          },
+                          "Widgets" : [ ]
+                        } ]
+                      }, {
+                        "Properties" : {
+                          "AllowDecimals" : false,
+                          "AllowNegatives" : true,
+                          "Area" : "UI",
+                          "ConstrainValue" : false,
+                          "DisplayName" : "numericentry-13",
+                          "FixedDigits" : 0,
+                          "Height" : 24,
+                          "Id" : "numericentry-13",
+                          "InnerShadow" : true,
+                          "Label" : "",
+                          "LabelAlignment" : "left",
+                          "LastContainer" : false,
+                          "Left" : 600,
+                          "Maximum" : 100,
+                          "Minimum" : 0,
+                          "NumericEntryFocusStyle" : "DefaultFocusStyle",
+                          "NumericEntryLabelStyle" : "DefaultWidgetLabelStyle",
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "Style" : "DefaultTextBoxStyle",
+                          "TabSequence" : 0,
+                          "ToolTipField" : "",
+                          "ToolTipStyle" : "DefaultTooltipStyle",
+                          "Top" : 5,
+                          "Type" : "numericentry",
+                          "UseTheme" : false,
+                          "Value" : 0,
+                          "ValueAlign" : "right",
+                          "Visible" : false,
+                          "Width" : 50,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Numeric Entry",
+                          "__supportsLabel" : true,
+                          "__supportsTooltip" : true
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "AllowDecimals" : false,
+                          "AllowNegatives" : true,
+                          "Area" : "UI",
+                          "ConstrainValue" : false,
+                          "DisplayName" : "numericentry-14",
+                          "FixedDigits" : 0,
+                          "Height" : 24,
+                          "Id" : "numericentry-14",
+                          "InnerShadow" : true,
+                          "Label" : "",
+                          "LabelAlignment" : "left",
+                          "LastContainer" : false,
+                          "Left" : 730,
+                          "Maximum" : 100,
+                          "Minimum" : 0,
+                          "NumericEntryFocusStyle" : "DefaultFocusStyle",
+                          "NumericEntryLabelStyle" : "DefaultWidgetLabelStyle",
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "Style" : "DefaultTextBoxStyle",
+                          "TabSequence" : 0,
+                          "ToolTipField" : "",
+                          "ToolTipStyle" : "DefaultTooltipStyle",
+                          "Top" : 10,
+                          "Type" : "numericentry",
+                          "UseTheme" : false,
+                          "Value" : 0,
+                          "ValueAlign" : "right",
+                          "Visible" : false,
+                          "Width" : 50,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Numeric Entry",
+                          "__supportsLabel" : true,
+                          "__supportsTooltip" : true
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "Alignment" : "left",
+                          "AllowEllipsis" : false,
+                          "Area" : "UI",
+                          "DisplayName" : "label-15",
+                          "Height" : 22,
+                          "Id" : "label-15",
+                          "LastContainer" : false,
+                          "Left" : 265,
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "Style" : "DefaultLabelStyle",
+                          "Text" : "Select Plant:",
+                          "ToolTipField" : "",
+                          "ToolTipStyle" : "DefaultTooltipStyle",
+                          "Top" : 20,
+                          "Type" : "label",
+                          "Visible" : false,
+                          "Width" : 75,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Label",
+                          "__supportsTooltip" : true
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "ActiveStyle" : "DefaultButtonActiveStyle",
+                          "Area" : "UI",
+                          "CancelConfirmationButton" : "button2",
+                          "ConfirmationButton1Label" : "Yes",
+                          "ConfirmationButton2Label" : "No",
+                          "ConfirmationPrompt" : "Do Action?",
+                          "ConfirmationRequired" : false,
+                          "ConfirmationTitle" : "Confirm Action",
+                          "ContextId" : "",
+                          "DefaultConfirmationButton" : "button1",
+                          "Disabled" : false,
+                          "DisabledStyle" : "DefaultButtonDisabledStyle",
+                          "DisplayName" : "button-16",
+                          "FocusStyle" : "DefaultButtonFocusStyle",
+                          "Height" : 45,
+                          "HoverStyle" : "DefaultButtonHoverStyle",
+                          "IconAlignment" : "left",
+                          "Id" : "button-16",
+                          "Label" : "[[OrderShiftInfoBoard.PreviousWeek]]",
+                          "LastContainer" : false,
+                          "Left" : 600,
+                          "ResponsiveLayout" : false,
+                          "RoundedCorners" : true,
+                          "ShowDataLoading" : true,
+                          "SingleClickSelectOnTablets" : true,
+                          "Style" : "DefaultButtonStyle",
+                          "TabSequence" : 0,
+                          "ToolTipField" : "",
+                          "ToolTipStyle" : "DefaultTooltipStyle",
+                          "Top" : 45,
+                          "Type" : "button",
+                          "Visible" : true,
+                          "Width" : 105,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Button",
+                          "__supportsTooltip" : true
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "ActiveStyle" : "DefaultButtonActiveStyle",
+                          "Area" : "UI",
+                          "CancelConfirmationButton" : "button2",
+                          "ConfirmationButton1Label" : "Yes",
+                          "ConfirmationButton2Label" : "No",
+                          "ConfirmationPrompt" : "Do Action?",
+                          "ConfirmationRequired" : false,
+                          "ConfirmationTitle" : "Confirm Action",
+                          "ContextId" : "",
+                          "DefaultConfirmationButton" : "button1",
+                          "Disabled" : false,
+                          "DisabledStyle" : "DefaultButtonDisabledStyle",
+                          "DisplayName" : "button-17",
+                          "FocusStyle" : "DefaultButtonFocusStyle",
+                          "Height" : 45,
+                          "HoverStyle" : "DefaultButtonHoverStyle",
+                          "IconAlignment" : "left",
+                          "Id" : "button-17",
+                          "Label" : "[[OrderShiftInfoBoard.NextWeek]]",
+                          "LastContainer" : false,
+                          "Left" : 720,
+                          "ResponsiveLayout" : false,
+                          "RoundedCorners" : true,
+                          "ShowDataLoading" : true,
+                          "SingleClickSelectOnTablets" : true,
+                          "Style" : "DefaultButtonStyle",
+                          "TabSequence" : 0,
+                          "ToolTipField" : "",
+                          "ToolTipStyle" : "DefaultTooltipStyle",
+                          "Top" : 45,
+                          "Type" : "button",
+                          "Visible" : true,
+                          "Width" : 105,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Button",
+                          "__supportsTooltip" : true
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "Alignment" : "left",
+                          "Area" : "UI",
+                          "AutoSelectFirstRow" : true,
+                          "ClearIfNoSelection" : false,
+                          "ComboDropdownButtonStyle" : "DefaultComboDropdownButtonStyle",
+                          "ComboEnableCheckbox" : false,
+                          "ComboItemHighlightedStyle" : "DefaultComboItemHighlightedStyle",
+                          "ComboTextboxStyle" : "DefaultComboTextboxStyle",
+                          "DisableSelectedStyle" : false,
+                          "DisplayField" : "DisplayName",
+                          "DisplayName" : "dhxlist-18",
+                          "DropdownButtonStyle" : "DefaultDropdownButtonStyle",
+                          "DropdownSelectedStyle" : "DefaultDropdownSelectedStyle",
+                          "DropdownStyle" : "DefaultDropdownStyle",
+                          "EnableKeyboardSelections" : true,
+                          "EnableToolTips" : true,
+                          "Height" : 38,
+                          "HeightOfDropdownView" : 170,
+                          "Id" : "dhxlist-18",
+                          "Label" : "",
+                          "LabelAlignment" : "left",
+                          "LastContainer" : false,
+                          "Left" : 265,
+                          "ListBackgroundStyle" : "DefaultListBackgroundStyle",
+                          "ListFocusStyle" : "DefaultFocusStyle",
+                          "ListItemAlternateStyle" : "DefaultListItemAlternateStyle",
+                          "ListItemHoverStyle" : "DefaultListItemHoverStyle",
+                          "ListItemSelectedStyle" : "DefaultListItemSelectedStyle",
+                          "ListItemStyle" : "DefaultListItemStyle",
+                          "ListLabelStyle" : "DefaultWidgetLabelStyle",
+                          "MultiSelect" : false,
+                          "NumberOfItemsInDropdownView" : 6,
+                          "NumberOfItemsPerPage" : 500,
+                          "ResponsiveLayout" : false,
+                          "RowHeight" : 28,
+                          "ShowDataLoading" : true,
+                          "SingleClickSelectOnTablets" : false,
+                          "TabSequence" : -1,
+                          "TextIfNoSelectionType" : "editable",
+                          "TextVerticalAlignment" : 28,
+                          "ToolTipStyle" : "DefaultTooltipStyle",
+                          "Top" : 45,
+                          "Type" : "dhxlist",
+                          "ValueField" : "DisplayName",
+                          "View" : "dropdown",
+                          "Visible" : true,
+                          "Width" : 120,
+                          "WidthOfDropdownView" : 110,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "List",
+                          "__supportsLabel" : true,
+                          "__supportsTooltip" : true
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "AllowDecimals" : false,
+                          "AllowNegatives" : true,
+                          "Area" : "UI",
+                          "ConstrainValue" : false,
+                          "DisplayName" : "numericentry-19",
+                          "FixedDigits" : 0,
+                          "Height" : 24,
+                          "Id" : "numericentry-19",
+                          "InnerShadow" : true,
+                          "Label" : "",
+                          "LabelAlignment" : "left",
+                          "LastContainer" : false,
+                          "Left" : 680,
+                          "Maximum" : 100,
+                          "Minimum" : 0,
+                          "NumericEntryFocusStyle" : "DefaultFocusStyle",
+                          "NumericEntryLabelStyle" : "DefaultWidgetLabelStyle",
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "Style" : "DefaultTextBoxStyle",
+                          "TabSequence" : 0,
+                          "ToolTipField" : "",
+                          "ToolTipStyle" : "DefaultTooltipStyle",
+                          "Top" : 90,
+                          "Type" : "numericentry",
+                          "UseTheme" : false,
+                          "Value" : 0,
+                          "ValueAlign" : "right",
+                          "Visible" : false,
+                          "Width" : 50,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Numeric Entry",
+                          "__supportsLabel" : true,
+                          "__supportsTooltip" : true
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "Area" : "UI",
+                          "DisplayName" : "fieldset-20",
+                          "FieldsetLabelStyle" : "DefaultFieldsetLabelStyle",
+                          "FieldsetStyle" : "DefaultChartStyle13",
+                          "Height" : 90,
+                          "Id" : "fieldset-20",
+                          "LastContainer" : false,
+                          "Left" : 850,
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "Title" : "",
+                          "Top" : 10,
+                          "Type" : "fieldset",
+                          "UseTheme" : false,
+                          "Visible" : true,
+                          "Width" : 720,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Fieldset"
+                        },
+                        "Widgets" : [ {
+                          "Properties" : {
+                            "Alignment" : "left",
+                            "AllowEllipsis" : false,
+                            "Area" : "UI",
+                            "DisplayName" : "label-21",
+                            "Height" : 22,
+                            "Id" : "label-21",
+                            "LastContainer" : false,
+                            "Left" : 15,
+                            "ResponsiveLayout" : false,
+                            "ShowDataLoading" : true,
+                            "Style" : "DefaultTableHeaderStyle",
+                            "Text" : "[[OrderShiftInfoBoard.Legend]]",
+                            "ToolTipField" : "",
+                            "ToolTipStyle" : "DefaultTooltipStyle",
+                            "Top" : 30,
+                            "Type" : "label",
+                            "Visible" : true,
+                            "Width" : 85,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Label",
+                            "__supportsTooltip" : true
+                          },
+                          "Widgets" : [ ]
+                        }, {
+                          "Properties" : {
+                            "Alignment" : "left",
+                            "AllowEllipsis" : false,
+                            "Area" : "UI",
+                            "DisplayName" : "label-22",
+                            "Height" : 22,
+                            "Id" : "label-22",
+                            "LastContainer" : false,
+                            "Left" : 185,
+                            "ResponsiveLayout" : false,
+                            "ShowDataLoading" : true,
+                            "Style" : "DefaultLabelStyle",
+                            "Text" : "[[OrderShiftInfoBoard.Break]]",
+                            "ToolTipField" : "",
+                            "ToolTipStyle" : "DefaultTooltipStyle",
+                            "Top" : 20,
+                            "Type" : "label",
+                            "Visible" : true,
+                            "Width" : 130,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Label",
+                            "__supportsTooltip" : true
+                          },
+                          "Widgets" : [ ]
+                        }, {
+                          "Properties" : {
+                            "Area" : "UI",
+                            "DisplayName" : "shape-23",
+                            "DynamicFillOrientation" : "vertical",
+                            "DynamicRangeMaximum" : 100,
+                            "DynamicRangeMinimum" : 0,
+                            "EnableDynamicFill" : false,
+                            "GradientOrientation" : "vertical",
+                            "GradientType" : "linear",
+                            "Height" : 20,
+                            "Id" : "shape-23",
+                            "LastContainer" : false,
+                            "Left" : 125,
+                            "RectangleCornerRadius" : 10,
+                            "ResponsiveLayout" : false,
+                            "ShapeFormatter_StateParameters" : [ ],
+                            "ShapeStyle" : "DefaultChartStyle4",
+                            "ShapeType" : "rectangle",
+                            "ShowDataLoading" : true,
+                            "Top" : 20,
+                            "Type" : "shape",
+                            "UnfilledBackgroundStyle" : "DefaultShapeUnfilledBackgroundStyle",
+                            "Visible" : true,
+                            "Width" : 50,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Shape"
+                          },
+                          "Widgets" : [ ]
+                        }, {
+                          "Properties" : {
+                            "Area" : "UI",
+                            "DisplayName" : "shape-24",
+                            "DynamicFillOrientation" : "vertical",
+                            "DynamicRangeMaximum" : 100,
+                            "DynamicRangeMinimum" : 0,
+                            "EnableDynamicFill" : false,
+                            "GradientOrientation" : "vertical",
+                            "GradientType" : "linear",
+                            "Height" : 20,
+                            "Id" : "shape-24",
+                            "LastContainer" : false,
+                            "Left" : 125,
+                            "RectangleCornerRadius" : 10,
+                            "ResponsiveLayout" : false,
+                            "ShapeFormatter_StateParameters" : [ ],
+                            "ShapeStyle" : "DefaultChartStyle2",
+                            "ShapeType" : "rectangle",
+                            "ShowDataLoading" : true,
+                            "Top" : 55,
+                            "Type" : "shape",
+                            "UnfilledBackgroundStyle" : "DefaultShapeUnfilledBackgroundStyle",
+                            "Visible" : true,
+                            "Width" : 50,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Shape"
+                          },
+                          "Widgets" : [ ]
+                        }, {
+                          "Properties" : {
+                            "Alignment" : "left",
+                            "AllowEllipsis" : false,
+                            "Area" : "UI",
+                            "DisplayName" : "label-25",
+                            "Height" : 22,
+                            "Id" : "label-25",
+                            "LastContainer" : false,
+                            "Left" : 185,
+                            "ResponsiveLayout" : false,
+                            "ShowDataLoading" : true,
+                            "Style" : "DefaultLabelStyle",
+                            "Text" : "[[OrderShiftInfoBoard.WorkingTime]]",
+                            "ToolTipField" : "",
+                            "ToolTipStyle" : "DefaultTooltipStyle",
+                            "Top" : 55,
+                            "Type" : "label",
+                            "Visible" : true,
+                            "Width" : 130,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Label",
+                            "__supportsTooltip" : true
+                          },
+                          "Widgets" : [ ]
+                        }, {
+                          "Properties" : {
+                            "Alignment" : "left",
+                            "AllowEllipsis" : false,
+                            "Area" : "UI",
+                            "DisplayName" : "label-26",
+                            "Height" : 22,
+                            "Id" : "label-26",
+                            "LastContainer" : false,
+                            "Left" : 370,
+                            "ResponsiveLayout" : false,
+                            "ShowDataLoading" : true,
+                            "Style" : "DefaultLabelStyle",
+                            "Text" : "[[OrderShiftInfoBoard.PMOrder]]",
+                            "ToolTipField" : "",
+                            "ToolTipStyle" : "DefaultTooltipStyle",
+                            "Top" : 20,
+                            "Type" : "label",
+                            "Visible" : true,
+                            "Width" : 150,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Label",
+                            "__supportsTooltip" : true
+                          },
+                          "Widgets" : [ ]
+                        }, {
+                          "Properties" : {
+                            "Area" : "UI",
+                            "DisplayName" : "shape-27",
+                            "DynamicFillOrientation" : "vertical",
+                            "DynamicRangeMaximum" : 100,
+                            "DynamicRangeMinimum" : 0,
+                            "EnableDynamicFill" : false,
+                            "GradientOrientation" : "vertical",
+                            "GradientType" : "linear",
+                            "Height" : 20,
+                            "Id" : "shape-27",
+                            "LastContainer" : false,
+                            "Left" : 305,
+                            "RectangleCornerRadius" : 10,
+                            "ResponsiveLayout" : false,
+                            "ShapeFormatter_StateParameters" : [ ],
+                            "ShapeStyle" : "DefaultChartStyle1",
+                            "ShapeType" : "rectangle",
+                            "ShowDataLoading" : true,
+                            "Top" : 20,
+                            "Type" : "shape",
+                            "UnfilledBackgroundStyle" : "DefaultShapeUnfilledBackgroundStyle",
+                            "Visible" : true,
+                            "Width" : 50,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Shape"
+                          },
+                          "Widgets" : [ ]
+                        }, {
+                          "Properties" : {
+                            "Area" : "UI",
+                            "DisplayName" : "shape-28",
+                            "DynamicFillOrientation" : "vertical",
+                            "DynamicRangeMaximum" : 100,
+                            "DynamicRangeMinimum" : 0,
+                            "EnableDynamicFill" : false,
+                            "GradientOrientation" : "vertical",
+                            "GradientType" : "linear",
+                            "Height" : 20,
+                            "Id" : "shape-28",
+                            "LastContainer" : false,
+                            "Left" : 305,
+                            "RectangleCornerRadius" : 10,
+                            "ResponsiveLayout" : false,
+                            "ShapeFormatter_StateParameters" : [ ],
+                            "ShapeStyle" : "DefaultChartStyle14",
+                            "ShapeType" : "rectangle",
+                            "ShowDataLoading" : true,
+                            "Top" : 55,
+                            "Type" : "shape",
+                            "UnfilledBackgroundStyle" : "DefaultShapeUnfilledBackgroundStyle",
+                            "Visible" : true,
+                            "Width" : 50,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Shape"
+                          },
+                          "Widgets" : [ ]
+                        }, {
+                          "Properties" : {
+                            "Alignment" : "left",
+                            "AllowEllipsis" : false,
+                            "Area" : "UI",
+                            "DisplayName" : "label-29",
+                            "Height" : 22,
+                            "Id" : "label-29",
+                            "LastContainer" : false,
+                            "Left" : 370,
+                            "ResponsiveLayout" : false,
+                            "ShowDataLoading" : true,
+                            "Style" : "DefaultLabelStyle",
+                            "Text" : "[[OrderShiftInfoBoard.PlannedDowntime]]",
+                            "ToolTipField" : "",
+                            "ToolTipStyle" : "DefaultTooltipStyle",
+                            "Top" : 55,
+                            "Type" : "label",
+                            "Visible" : true,
+                            "Width" : 150,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Label",
+                            "__supportsTooltip" : true
+                          },
+                          "Widgets" : [ ]
+                        }, {
+                          "Properties" : {
+                            "Area" : "UI",
+                            "DisplayName" : "shape-30",
+                            "DynamicFillOrientation" : "vertical",
+                            "DynamicRangeMaximum" : 100,
+                            "DynamicRangeMinimum" : 0,
+                            "EnableDynamicFill" : false,
+                            "GradientOrientation" : "vertical",
+                            "GradientType" : "linear",
+                            "Height" : 20,
+                            "Id" : "shape-30",
+                            "LastContainer" : false,
+                            "Left" : 516,
+                            "RectangleCornerRadius" : 10,
+                            "ResponsiveLayout" : false,
+                            "ShapeFormatter_StateParameters" : [ ],
+                            "ShapeStyle" : "DefaultChartStyle3",
+                            "ShapeType" : "rectangle",
+                            "ShowDataLoading" : true,
+                            "Top" : 20,
+                            "Type" : "shape",
+                            "UnfilledBackgroundStyle" : "DefaultShapeUnfilledBackgroundStyle",
+                            "Visible" : true,
+                            "Width" : 50,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Shape"
+                          },
+                          "Widgets" : [ ]
+                        }, {
+                          "Properties" : {
+                            "Alignment" : "left",
+                            "AllowEllipsis" : false,
+                            "Area" : "UI",
+                            "DisplayName" : "label-31",
+                            "Height" : 22,
+                            "Id" : "label-31",
+                            "LastContainer" : false,
+                            "Left" : 580,
+                            "ResponsiveLayout" : false,
+                            "ShowDataLoading" : true,
+                            "Style" : "DefaultLabelStyle",
+                            "Text" : "[[OrderShiftInfoBoard.ResourceInactive]]",
+                            "ToolTipField" : "",
+                            "ToolTipStyle" : "DefaultTooltipStyle",
+                            "Top" : 20,
+                            "Type" : "label",
+                            "Visible" : true,
+                            "Width" : 175,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Label",
+                            "__supportsTooltip" : true
+                          },
+                          "Widgets" : [ ]
+                        }, {
+                          "Properties" : {
+                            "Area" : "UI",
+                            "DisplayName" : "shape-32",
+                            "DynamicFillOrientation" : "vertical",
+                            "DynamicRangeMaximum" : 100,
+                            "DynamicRangeMinimum" : 0,
+                            "EnableDynamicFill" : false,
+                            "GradientOrientation" : "vertical",
+                            "GradientType" : "linear",
+                            "Height" : 20,
+                            "Id" : "shape-32",
+                            "LastContainer" : false,
+                            "Left" : 515,
+                            "RectangleCornerRadius" : 10,
+                            "ResponsiveLayout" : false,
+                            "ShapeFormatter_StateParameters" : [ ],
+                            "ShapeStyle" : "DefaultChartStyle7",
+                            "ShapeType" : "rectangle",
+                            "ShowDataLoading" : true,
+                            "Top" : 55,
+                            "Type" : "shape",
+                            "UnfilledBackgroundStyle" : "DefaultShapeUnfilledBackgroundStyle",
+                            "Visible" : true,
+                            "Width" : 25,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Shape"
+                          },
+                          "Widgets" : [ ]
+                        }, {
+                          "Properties" : {
+                            "Alignment" : "left",
+                            "AllowEllipsis" : false,
+                            "Area" : "UI",
+                            "DisplayName" : "label-33",
+                            "Height" : 22,
+                            "Id" : "label-33",
+                            "LastContainer" : false,
+                            "Left" : 580,
+                            "ResponsiveLayout" : false,
+                            "ShowDataLoading" : true,
+                            "Style" : "DefaultLabelStyle",
+                            "Text" : "[[OrderShiftInfoBoard.Undefined]]",
+                            "ToolTipField" : "",
+                            "ToolTipStyle" : "DefaultTooltipStyle",
+                            "Top" : 55,
+                            "Type" : "label",
+                            "Visible" : true,
+                            "Width" : 130,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Label",
+                            "__supportsTooltip" : true
+                          },
+                          "Widgets" : [ ]
+                        }, {
+                          "Properties" : {
+                            "Area" : "UI",
+                            "DisplayName" : "shape-34",
+                            "DynamicFillOrientation" : "vertical",
+                            "DynamicRangeMaximum" : 100,
+                            "DynamicRangeMinimum" : 0,
+                            "EnableDynamicFill" : false,
+                            "GradientOrientation" : "vertical",
+                            "GradientType" : "linear",
+                            "Height" : 20,
+                            "Id" : "shape-34",
+                            "LastContainer" : false,
+                            "Left" : 545,
+                            "RectangleCornerRadius" : 10,
+                            "ResponsiveLayout" : false,
+                            "ShapeFormatter_StateParameters" : [ ],
+                            "ShapeStyle" : "DefaultWikiStyle",
+                            "ShapeType" : "rectangle",
+                            "ShowDataLoading" : true,
+                            "Top" : 55,
+                            "Type" : "shape",
+                            "UnfilledBackgroundStyle" : "DefaultShapeUnfilledBackgroundStyle",
+                            "Visible" : true,
+                            "Width" : 25,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Shape"
+                          },
+                          "Widgets" : [ ]
+                        } ]
+                      }, {
+                        "Properties" : {
+                          "Area" : "UI",
+                          "DisplayName" : "mashupcontainer-35",
+                          "Height" : 100,
+                          "Id" : "mashupcontainer-35",
+                          "LastContainer" : false,
+                          "Left" : 260,
+                          "MashupParameters" : [ {
+                            "BaseType" : "INTEGER",
+                            "Description" : "",
+                            "ParameterName" : "nextNweek",
+                            "ParmDef" : {
+                              "aspects" : {
+                                "bindingDirection" : "BOTH",
+                                "isMandatory" : "false"
+                              },
+                              "baseType" : "INTEGER",
+                              "description" : "",
+                              "name" : "nextNweek",
+                              "ordinal" : 0
+                            }
+                          }, {
+                            "BaseType" : "INTEGER",
+                            "Description" : "",
+                            "ParameterName" : "dayOfWeek",
+                            "ParmDef" : {
+                              "aspects" : {
+                                "bindingDirection" : "IN",
+                                "isMandatory" : "false"
+                              },
+                              "baseType" : "INTEGER",
+                              "description" : "",
+                              "name" : "dayOfWeek",
+                              "ordinal" : 0
+                            }
+                          } ],
+                          "Name" : "KBLocalShiftHeaderNewMashup",
+                          "ResizeToContent" : false,
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "TabSequenceGroup" : 0,
+                          "Top" : 110,
+                          "Type" : "mashupcontainer",
+                          "Visible" : true,
+                          "Width" : 180,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Contained Mashup",
+                          "dayOfWeek" : 1
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "Area" : "UI",
+                          "DisplayName" : "mashupcontainer-36",
+                          "Height" : 100,
+                          "Id" : "mashupcontainer-36",
+                          "LastContainer" : false,
+                          "Left" : 440,
+                          "MashupParameters" : [ {
+                            "BaseType" : "INTEGER",
+                            "Description" : "",
+                            "ParameterName" : "nextNweek",
+                            "ParmDef" : {
+                              "aspects" : {
+                                "bindingDirection" : "BOTH",
+                                "isMandatory" : "false"
+                              },
+                              "baseType" : "INTEGER",
+                              "description" : "",
+                              "name" : "nextNweek",
+                              "ordinal" : 0
+                            }
+                          }, {
+                            "BaseType" : "INTEGER",
+                            "Description" : "",
+                            "ParameterName" : "dayOfWeek",
+                            "ParmDef" : {
+                              "aspects" : {
+                                "bindingDirection" : "IN",
+                                "isMandatory" : "false"
+                              },
+                              "baseType" : "INTEGER",
+                              "description" : "",
+                              "name" : "dayOfWeek",
+                              "ordinal" : 0
+                            }
+                          } ],
+                          "Name" : "KBLocalShiftHeaderNewMashup",
+                          "ResizeToContent" : false,
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "TabSequenceGroup" : 0,
+                          "Top" : 110,
+                          "Type" : "mashupcontainer",
+                          "Visible" : true,
+                          "Width" : 180,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Contained Mashup",
+                          "dayOfWeek" : 2
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "Area" : "UI",
+                          "DisplayName" : "mashupcontainer-40",
+                          "Height" : 100,
+                          "Id" : "mashupcontainer-40",
+                          "LastContainer" : false,
+                          "Left" : 620,
+                          "MashupParameters" : [ {
+                            "BaseType" : "INTEGER",
+                            "Description" : "",
+                            "ParameterName" : "nextNweek",
+                            "ParmDef" : {
+                              "aspects" : {
+                                "bindingDirection" : "BOTH",
+                                "isMandatory" : "false"
+                              },
+                              "baseType" : "INTEGER",
+                              "description" : "",
+                              "name" : "nextNweek",
+                              "ordinal" : 0
+                            }
+                          }, {
+                            "BaseType" : "INTEGER",
+                            "Description" : "",
+                            "ParameterName" : "dayOfWeek",
+                            "ParmDef" : {
+                              "aspects" : {
+                                "bindingDirection" : "IN",
+                                "isMandatory" : "false"
+                              },
+                              "baseType" : "INTEGER",
+                              "description" : "",
+                              "name" : "dayOfWeek",
+                              "ordinal" : 0
+                            }
+                          } ],
+                          "Name" : "KBLocalShiftHeaderNewMashup",
+                          "ResizeToContent" : false,
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "TabSequenceGroup" : 0,
+                          "Top" : 110,
+                          "Type" : "mashupcontainer",
+                          "Visible" : true,
+                          "Width" : 180,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Contained Mashup",
+                          "dayOfWeek" : 3
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "Area" : "UI",
+                          "DisplayName" : "mashupcontainer-41",
+                          "Height" : 100,
+                          "Id" : "mashupcontainer-41",
+                          "LastContainer" : false,
+                          "Left" : 800,
+                          "MashupParameters" : [ {
+                            "BaseType" : "INTEGER",
+                            "Description" : "",
+                            "ParameterName" : "nextNweek",
+                            "ParmDef" : {
+                              "aspects" : {
+                                "bindingDirection" : "BOTH",
+                                "isMandatory" : "false"
+                              },
+                              "baseType" : "INTEGER",
+                              "description" : "",
+                              "name" : "nextNweek",
+                              "ordinal" : 0
+                            }
+                          }, {
+                            "BaseType" : "INTEGER",
+                            "Description" : "",
+                            "ParameterName" : "dayOfWeek",
+                            "ParmDef" : {
+                              "aspects" : {
+                                "bindingDirection" : "IN",
+                                "isMandatory" : "false"
+                              },
+                              "baseType" : "INTEGER",
+                              "description" : "",
+                              "name" : "dayOfWeek",
+                              "ordinal" : 0
+                            }
+                          } ],
+                          "Name" : "KBLocalShiftHeaderNewMashup",
+                          "ResizeToContent" : false,
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "TabSequenceGroup" : 0,
+                          "Top" : 110,
+                          "Type" : "mashupcontainer",
+                          "Visible" : true,
+                          "Width" : 180,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Contained Mashup",
+                          "dayOfWeek" : 4
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "Area" : "UI",
+                          "DisplayName" : "mashupcontainer-42",
+                          "Height" : 100,
+                          "Id" : "mashupcontainer-42",
+                          "LastContainer" : false,
+                          "Left" : 980,
+                          "MashupParameters" : [ {
+                            "BaseType" : "INTEGER",
+                            "Description" : "",
+                            "ParameterName" : "nextNweek",
+                            "ParmDef" : {
+                              "aspects" : {
+                                "bindingDirection" : "BOTH",
+                                "isMandatory" : "false"
+                              },
+                              "baseType" : "INTEGER",
+                              "description" : "",
+                              "name" : "nextNweek",
+                              "ordinal" : 0
+                            }
+                          }, {
+                            "BaseType" : "INTEGER",
+                            "Description" : "",
+                            "ParameterName" : "dayOfWeek",
+                            "ParmDef" : {
+                              "aspects" : {
+                                "bindingDirection" : "IN",
+                                "isMandatory" : "false"
+                              },
+                              "baseType" : "INTEGER",
+                              "description" : "",
+                              "name" : "dayOfWeek",
+                              "ordinal" : 0
+                            }
+                          } ],
+                          "Name" : "KBLocalShiftHeaderNewMashup",
+                          "ResizeToContent" : false,
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "TabSequenceGroup" : 0,
+                          "Top" : 110,
+                          "Type" : "mashupcontainer",
+                          "Visible" : true,
+                          "Width" : 180,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Contained Mashup",
+                          "dayOfWeek" : 5
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "Area" : "UI",
+                          "DisplayName" : "mashupcontainer-43",
+                          "Height" : 100,
+                          "Id" : "mashupcontainer-43",
+                          "LastContainer" : false,
+                          "Left" : 1160,
+                          "MashupParameters" : [ {
+                            "BaseType" : "INTEGER",
+                            "Description" : "",
+                            "ParameterName" : "nextNweek",
+                            "ParmDef" : {
+                              "aspects" : {
+                                "bindingDirection" : "BOTH",
+                                "isMandatory" : "false"
+                              },
+                              "baseType" : "INTEGER",
+                              "description" : "",
+                              "name" : "nextNweek",
+                              "ordinal" : 0
+                            }
+                          }, {
+                            "BaseType" : "INTEGER",
+                            "Description" : "",
+                            "ParameterName" : "dayOfWeek",
+                            "ParmDef" : {
+                              "aspects" : {
+                                "bindingDirection" : "IN",
+                                "isMandatory" : "false"
+                              },
+                              "baseType" : "INTEGER",
+                              "description" : "",
+                              "name" : "dayOfWeek",
+                              "ordinal" : 0
+                            }
+                          } ],
+                          "Name" : "KBLocalShiftHeaderNewMashup",
+                          "ResizeToContent" : false,
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "TabSequenceGroup" : 0,
+                          "Top" : 110,
+                          "Type" : "mashupcontainer",
+                          "Visible" : true,
+                          "Width" : 180,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Contained Mashup",
+                          "dayOfWeek" : 6
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "Area" : "UI",
+                          "DisplayName" : "mashupcontainer-44",
+                          "Height" : 100,
+                          "Id" : "mashupcontainer-44",
+                          "LastContainer" : false,
+                          "Left" : 1340,
+                          "MashupParameters" : [ {
+                            "BaseType" : "INTEGER",
+                            "Description" : "",
+                            "ParameterName" : "nextNweek",
+                            "ParmDef" : {
+                              "aspects" : {
+                                "bindingDirection" : "BOTH",
+                                "isMandatory" : "false"
+                              },
+                              "baseType" : "INTEGER",
+                              "description" : "",
+                              "name" : "nextNweek",
+                              "ordinal" : 0
+                            }
+                          }, {
+                            "BaseType" : "INTEGER",
+                            "Description" : "",
+                            "ParameterName" : "dayOfWeek",
+                            "ParmDef" : {
+                              "aspects" : {
+                                "bindingDirection" : "IN",
+                                "isMandatory" : "false"
+                              },
+                              "baseType" : "INTEGER",
+                              "description" : "",
+                              "name" : "dayOfWeek",
+                              "ordinal" : 0
+                            }
+                          } ],
+                          "Name" : "KBLocalShiftHeaderNewMashup",
+                          "ResizeToContent" : false,
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "TabSequenceGroup" : 0,
+                          "Top" : 110,
+                          "Type" : "mashupcontainer",
+                          "Visible" : true,
+                          "Width" : 180,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Contained Mashup",
+                          "dayOfWeek" : 7
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "Alignment" : "left",
+                          "Area" : "UI",
+                          "AutoSelectFirstRow" : true,
+                          "ClearIfNoSelection" : false,
+                          "ComboDropdownButtonStyle" : "DefaultComboDropdownButtonStyle",
+                          "ComboEnableCheckbox" : false,
+                          "ComboItemHighlightedStyle" : "DefaultComboItemHighlightedStyle",
+                          "ComboTextboxStyle" : "DefaultComboTextboxStyle",
+                          "DisableSelectedStyle" : false,
+                          "DisplayField" : "displayName",
+                          "DisplayName" : "dhxlist-49",
+                          "DropdownButtonStyle" : "DefaultDropdownButtonStyle",
+                          "DropdownSelectedStyle" : "DefaultDropdownSelectedStyle",
+                          "DropdownStyle" : "DefaultDropdownStyle",
+                          "EnableKeyboardSelections" : true,
+                          "EnableToolTips" : true,
+                          "Height" : 38,
+                          "HeightOfDropdownView" : 170,
+                          "Id" : "dhxlist-49",
+                          "Label" : "",
+                          "LabelAlignment" : "left",
+                          "LastContainer" : false,
+                          "Left" : 415,
+                          "ListBackgroundStyle" : "DefaultListBackgroundStyle",
+                          "ListFocusStyle" : "DefaultFocusStyle",
+                          "ListItemAlternateStyle" : "DefaultListItemAlternateStyle",
+                          "ListItemHoverStyle" : "DefaultListItemHoverStyle",
+                          "ListItemSelectedStyle" : "DefaultListItemSelectedStyle",
+                          "ListItemStyle" : "DefaultListItemStyle",
+                          "ListLabelStyle" : "DefaultWidgetLabelStyle",
+                          "MultiSelect" : false,
+                          "NumberOfItemsInDropdownView" : 6,
+                          "NumberOfItemsPerPage" : 500,
+                          "ResponsiveLayout" : false,
+                          "RowHeight" : 28,
+                          "ShowDataLoading" : true,
+                          "SingleClickSelectOnTablets" : false,
+                          "TabSequence" : -1,
+                          "TextIfNoSelectionType" : "editable",
+                          "TextVerticalAlignment" : 28,
+                          "ToolTipStyle" : "DefaultTooltipStyle",
+                          "Top" : 45,
+                          "Type" : "dhxlist",
+                          "ValueField" : "displayName",
+                          "View" : "dropdown",
+                          "Visible" : true,
+                          "Width" : 165,
+                          "WidthOfDropdownView" : 110,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "List",
+                          "__supportsLabel" : true,
+                          "__supportsTooltip" : true
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "Alignment" : "left",
+                          "AllowEllipsis" : false,
+                          "Area" : "UI",
+                          "DisplayName" : "label-51",
+                          "Height" : 22,
+                          "Id" : "label-51",
+                          "LastContainer" : false,
+                          "Left" : 415,
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "Style" : "DefaultLabelStyle",
+                          "Text" : "[[OrderShiftInfoBoard.SelectArea]]",
+                          "ToolTipField" : "",
+                          "ToolTipStyle" : "DefaultTooltipStyle",
+                          "Top" : 15,
+                          "Type" : "label",
+                          "Visible" : true,
+                          "Width" : 75,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Label",
+                          "__supportsTooltip" : true
+                        },
+                        "Widgets" : [ ]
+                      } ]
+                    } ]
+                  }, {
+                    "Properties" : {
+                      "Area" : "UI",
+                      "DisplayName" : "Body",
+                      "EnableExpandCollapse" : false,
+                      "Expanded" : true,
+                      "Id" : "flexcontainer-3",
+                      "LastContainer" : false,
+                      "Overlay" : false,
+                      "ResponsiveLayout" : false,
+                      "ShowDataLoading" : true,
+                      "ShowExpandCollapseTab" : false,
+                      "SourceURL" : "",
+                      "Style" : "DefaultContainerStyle",
+                      "StyleProperties" : { },
+                      "Type" : "flexcontainer",
+                      "UseTheme" : false,
+                      "Visible" : true,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Flex Container",
+                      "align-content" : "flex-start",
+                      "align-items" : "flex-start",
+                      "flex-basis" : "auto",
+                      "flex-direction" : "row",
+                      "flex-grow" : 1,
+                      "flex-height" : 0,
+                      "flex-max-height" : "",
+                      "flex-max-width" : "",
+                      "flex-min-height" : "",
+                      "flex-min-width" : "",
+                      "flex-shrink" : 0,
+                      "flex-size" : "default",
+                      "flex-width" : 0,
+                      "flex-wrap" : "nowrap",
+                      "iconClass" : "widgets-flexcontainer",
+                      "isLocked" : true,
+                      "justify-content" : "flex-start",
+                      "positioning" : "responsive",
+                      "userCannotRemove" : false
+                    },
+                    "Widgets" : [ {
+                      "Properties" : {
+                        "Area" : "UI",
+                        "ContainerClass" : "",
+                        "DisplayName" : "panel-8",
+                        "Height" : 200,
+                        "HideScrollbars" : false,
+                        "HorizontalAnchor" : "left",
+                        "Id" : "panel-8",
+                        "LastContainer" : false,
+                        "Left" : 135,
+                        "ResponsiveLayout" : true,
+                        "ShowDataLoading" : true,
+                        "Style" : "DefaultPanelStyle",
+                        "Top" : 110,
+                        "Type" : "panel",
+                        "VerticalAnchor" : "top",
+                        "Visible" : true,
+                        "Width" : 300,
+                        "Z-index" : 10,
+                        "__TypeDisplayName" : "Panel"
+                      },
+                      "Widgets" : [ {
+                        "Properties" : {
+                          "AllowSelection" : false,
+                          "AlwaysUseCustomScrollerOniOS" : true,
+                          "Area" : "UI",
+                          "AutoSelectFirstRow" : false,
+                          "BottomPadding" : 0,
+                          "CellActiveStyle" : "DefaultCollectionCellActiveStyle",
+                          "CellAlternateStyle" : "DefaultCollectionCellAlternateStyle",
+                          "CellBorderRadius" : 0,
+                          "CellBoxShadow" : "",
+                          "CellHeightField" : "",
+                          "CellHoverStyle" : "DefaultCollectionCellHoverStyle",
+                          "CellMashupSelectedField" : "",
+                          "CellMenuStatesIconGravity" : "Left",
+                          "CellMenuStatesIconSize" : 16,
+                          "CellMenuStatesOrientation" : "Horizontal",
+                          "CellMenuStatesUseBuiltin" : false,
+                          "CellMultipleSelectionType" : "Disabled",
+                          "CellPointer" : "Auto",
+                          "CellSelectedStyle" : "DefaultCollectionCellSelectedStyle",
+                          "CellStyle" : "DefaultCollectionCellStyle",
+                          "CellWidthField" : "",
+                          "CustomClass" : "",
+                          "DisableWrapping" : false,
+                          "DisplayName" : "collection-46",
+                          "FlowLayoutAlignment" : "Top",
+                          "FlowLayoutContentGravity" : "Center",
+                          "FlowLayoutGravity" : "Spaced",
+                          "FooterHeight" : 44,
+                          "FooterSectionParam" : "",
+                          "HandleSelectionUpdates" : true,
+                          "HasSelectedCells" : false,
+                          "HeaderHeight" : 44,
+                          "HeaderSectionParam" : "",
+                          "Height" : 600,
+                          "Id" : "collection-46",
+                          "ItemLoadBehavior" : "loadAll",
+                          "LastContainer" : false,
+                          "Left" : 0,
+                          "LeftAlignFinalRow" : false,
+                          "Mashup" : "KBLocalMachineShiftInfoBaseWithLabel2021Mashup",
+                          "MashupGlobalPropertyBinding" : "{}",
+                          "MashupHeight" : 60,
+                          "MashupNameField" : "",
+                          "MashupPropertyBinding" : "{\"UID\":\"UID\",\"PlantCode\":\"PlantCode\",\"SAPMachineName\":\"SAPMachineName\",\"NextNweek\":\"NextNweek\",\"ShowMachineName\":\"ShowMachineName\"}",
+                          "MashupWidth" : 240,
+                          "MinimumSpacing" : 0,
+                          "MultiSelect" : false,
+                          "OffScreenBufferFactor" : 0.1,
+                          "PinFootersToBottom" : false,
+                          "PinHeadersToTop" : true,
+                          "PlaysIntroAnimation" : false,
+                          "ResponsiveLayout" : false,
+                          "RippleEffectStyle" : "DefaultCollectionRippleStyle",
+                          "RowSpacing" : 0,
+                          "ScrollbarType" : "hover",
+                          "ScrollsToSelectedCell" : false,
+                          "SectionInsetBottom" : 0,
+                          "SectionInsetLeft" : 0,
+                          "SectionInsetRight" : 0,
+                          "SectionInsetTop" : 0,
+                          "SelectedCellsCount" : 0,
+                          "ShowDataLoading" : true,
+                          "ShowFooters" : false,
+                          "ShowHeaders" : false,
+                          "SortAscending" : true,
+                          "SortField" : "UID",
+                          "Top" : 10,
+                          "TopPadding" : 0,
+                          "Type" : "collection",
+                          "UIDField" : "UID",
+                          "UseCustomScrollerOnWindowsDesktops" : true,
+                          "UseMashupDimensions" : false,
+                          "UseRippleEffect" : false,
+                          "View" : "table",
+                          "Visible" : true,
+                          "Width" : 1600,
+                          "Z-index" : 10,
+                          "_CanDoubleClick" : false,
+                          "_EventDataShape" : "{\"ActionType\":{\"name\":\"ActionType\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"INTEGER\",\"ordinal\":6},\"MachineThingName\":{\"name\":\"MachineThingName\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"STRING\",\"ordinal\":8},\"NextNweek\":{\"name\":\"NextNweek\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"INTEGER\",\"ordinal\":5},\"OrderType\":{\"name\":\"OrderType\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"INTEGER\",\"ordinal\":7},\"PlantCode\":{\"name\":\"PlantCode\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"STRING\",\"ordinal\":2},\"SAPMachineName\":{\"name\":\"SAPMachineName\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"STRING\",\"ordinal\":4},\"ShowMachineName\":{\"name\":\"ShowMachineName\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"STRING\",\"ordinal\":3},\"UID\":{\"name\":\"UID\",\"aspects\":{\"isPrimaryKey\":true},\"description\":\"\",\"baseType\":\"INTEGER\",\"ordinal\":1}}",
+                          "_GlobalDataShape" : "{}",
+                          "_MenuDefinition" : "[]",
+                          "__TypeDisplayName" : "Collection"
+                        },
+                        "Widgets" : [ ]
+                      } ]
+                    } ]
+                  } ]
+                }, {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "AutoEvaluate" : false,
+                    "DataChangeType" : "ALWAYS",
+                    "DisplayName" : "preWeek",
+                    "Expression" : "Output = wknum - 1;",
+                    "FireOnFirstValue" : false,
+                    "Height" : 28,
+                    "Id" : "expression-37",
+                    "LastContainer" : false,
+                    "Left" : 0,
+                    "OutputBaseType" : "NUMBER",
+                    "ResponsiveLayout" : false,
+                    "ShowDataLoading" : true,
+                    "Top" : 0,
+                    "Type" : "expression",
+                    "Visible" : true,
+                    "Width" : 200,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Expression",
+                    "_currentParameterDefs" : [ {
+                      "BaseType" : "NUMBER",
+                      "Description" : "",
+                      "ParameterName" : "wknum",
+                      "isValid" : true
+                    } ],
+                    "editMode" : "edit",
+                    "helperType" : "expression",
+                    "parameters" : [ {
+                      "BaseType" : "NUMBER",
+                      "Description" : "",
+                      "ParameterName" : "wknum",
+                      "isValid" : true
+                    } ]
+                  },
+                  "Widgets" : [ ]
+                }, {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "AutoEvaluate" : false,
+                    "DataChangeType" : "ALWAYS",
+                    "DisplayName" : "nextWeek",
+                    "Expression" : "Output = wknum + 1;",
+                    "FireOnFirstValue" : false,
+                    "Height" : 28,
+                    "Id" : "expression-38",
+                    "LastContainer" : false,
+                    "Left" : 0,
+                    "OutputBaseType" : "NUMBER",
+                    "ResponsiveLayout" : false,
+                    "ShowDataLoading" : true,
+                    "Top" : 0,
+                    "Type" : "expression",
+                    "Visible" : true,
+                    "Width" : 200,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Expression",
+                    "_currentParameterDefs" : [ {
+                      "BaseType" : "NUMBER",
+                      "Description" : "",
+                      "ParameterName" : "wknum",
+                      "isValid" : true
+                    } ],
+                    "parameters" : [ {
+                      "BaseType" : "NUMBER",
+                      "Description" : "",
+                      "ParameterName" : "wknum",
+                      "isValid" : true
+                    } ]
+                  },
+                  "Widgets" : [ ]
+                }, {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "AutoEvaluate" : true,
+                    "DataChangeType" : "ALWAYS",
+                    "DisplayName" : "weekNum",
+                    "Expression" : "Output = Num1 + Num2;",
+                    "FireOnFirstValue" : true,
+                    "Height" : 28,
+                    "Id" : "expression-39",
+                    "LastContainer" : false,
+                    "Left" : 0,
+                    "OutputBaseType" : "NUMBER",
+                    "ResponsiveLayout" : false,
+                    "ShowDataLoading" : true,
+                    "Top" : 0,
+                    "Type" : "expression",
+                    "Visible" : true,
+                    "Width" : 200,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Expression",
+                    "_currentParameterDefs" : [ {
+                      "BaseType" : "NUMBER",
+                      "Description" : "",
+                      "ParameterName" : "Num1",
+                      "isValid" : true
+                    }, {
+                      "BaseType" : "NUMBER",
+                      "Description" : "",
+                      "ParameterName" : "Num2",
+                      "isValid" : true
+                    } ],
+                    "editMode" : "edit",
+                    "helperType" : "expression",
+                    "parameters" : [ {
+                      "BaseType" : "NUMBER",
+                      "Description" : "",
+                      "ParameterName" : "Num1",
+                      "isValid" : true
+                    }, {
+                      "BaseType" : "NUMBER",
+                      "Description" : "",
+                      "ParameterName" : "Num2",
+                      "isValid" : true
+                    } ],
+                    "parametersToDelete" : [ ]
+                  },
+                  "Widgets" : [ ]
+                }, {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "AutoEvaluate" : false,
+                    "DisplayName" : "PlantQtyGT1",
+                    "Expression" : "PlantQty > 1",
+                    "Height" : 28,
+                    "Id" : "validator-47",
+                    "LastContainer" : false,
+                    "Left" : 0,
+                    "Output" : true,
+                    "ResponsiveLayout" : false,
+                    "ShowDataLoading" : true,
+                    "Top" : 0,
+                    "Type" : "validator",
+                    "Visible" : true,
+                    "Width" : 200,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Validator",
+                    "_currentParameterDefs" : [ {
+                      "BaseType" : "NUMBER",
+                      "Description" : "",
+                      "ParameterName" : "PlantQty",
+                      "isValid" : true
+                    } ],
+                    "editMode" : "edit",
+                    "helperType" : "validator",
+                    "parameters" : [ {
+                      "BaseType" : "NUMBER",
+                      "Description" : "",
+                      "ParameterName" : "PlantQty",
+                      "isValid" : true
+                    } ]
+                  },
+                  "Widgets" : [ ]
+                } ]
+              },
+              "mashupType" : "mashup"
+            }
+            ]]>
+            </mashupContent>
+            <preview></preview>
+        </Mashup>
+    </Mashups>
+</Entities>

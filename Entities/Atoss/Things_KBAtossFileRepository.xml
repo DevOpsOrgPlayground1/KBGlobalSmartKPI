@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b97" majorVersion="8" minorVersion="4"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="11" schemaVersion="1044" universal="">
+	<Things>
+		<Thing description="" documentationContent=""
+			effectiveThingPackage="FileRepositoryThing" enabled="true"
+			homeMashup="" identifier=""
+			lastModifiedDate="2021-06-15T16:19:33.338+02:00"
+			name="KBAtossFileRepository" projectName="KBsmartKPI" published="false" tags=""
+			thingTemplate="FileRepository" valueStream="">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead />
+					<PropertyWrite />
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="AtossUploadUser"
+							type="User" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true" name="KBBackGroundWorker"
+						type="Organization" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables />
+			<ThingShape>
+				<PropertyDefinitions>
+                    <PropertyDefinition
+                     aspect.cacheTime="0.0"
+                     aspect.dataChangeType="VALUE"
+                     aspect.isLogged="false"
+                     aspect.isPersistent="false"
+                     aspect.isReadOnly="false"
+                     baseType="BOOLEAN"
+                     category=""
+                     description=""
+                     isLocalOnly="false"
+                     name="ReadInputFilesServiceIsRunning"
+                     ordinal="1"></PropertyDefinition>
+				</PropertyDefinitions>
+				<ServiceDefinitions>
+					<ServiceDefinition aspect.isAsync="true"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="ReadInputFiles">
+						<ResultType
+							baseType="NOTHING" description="" name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="ParseAtossFile">
+						<ResultType
+							baseType="NOTHING" description="" name="result" ordinal="0" />
+	                    <ParameterDefinitions>
+	                        <FieldDefinition
+	                         aspect.isRequired="true"
+	                         aspect.dataShape="KBAtossWorkerPlanningDataShape"
+	                         baseType="INFOTABLE"
+	                         description=""
+	                         name="AtossContent"
+	                         ordinal="1"></FieldDefinition>
+	                    </ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false" name="Init">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="UploadCSV">
+						<ResultType baseType="BOOLEAN" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.isRequired="true"
+								baseType="BLOB" description="" name="CSV" ordinal="3" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="FileName" ordinal="2" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+				</ServiceDefinitions>
+				<EventDefinitions />
+				<ServiceMappings />
+				<ServiceImplementations>
+					<ServiceImplementation description=""
+						handlerName="Script" name="ReadInputFiles">
+						<ConfigurationTables>
+							<ConfigurationTable description=""
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+
+logger.debug("KBAtossFileRepository: ReadInputFiles triggered");
+if (!me.ReadInputFilesServiceIsRunning) {
+    me.ReadInputFilesServiceIsRunning = true;
+  	try {
+	logger.debug("KBAtossFileRepository: Start ReadInputFiles");
+	
+	var filesRaw =  me.ListFiles({
+		path: "/" /* STRING */,
+		nameMask: "*.csv" /* STRING */
+	});
+	
+	logger.debug("KBAtossFileRepository: "+filesRaw.rows.length+" files found");
+	
+	var files = Resources["InfoTableFunctions"].Sort({
+		sortColumn: "name" /* STRING */,
+		t: filesRaw /* INFOTABLE */,
+		ascending: true /* BOOLEAN */
+	});
+	
+	logger.debug("KBAtossFileRepository: "+filesRaw.rows.length+" sorted files found");
+	
+	
+	var filesLength = files.rows.length;
+	for (var f=0; f < filesLength; f++) {
+	    var file = files.rows[f];
+	    //Your code here
+		logger.debug("KBAtossFileRepository: "+file.path);
+		// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBAtossWorkerPlanningDataShape)
+		var result = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape({
+		    infoTableName : "InfoTable",
+		    dataShapeName : "KBAtossWorkerPlanningDataShape"
+		});
+		try {
+	
+	        // Content: STRING
+	        var Content =  me.LoadText({
+	            path: file.path /* STRING */
+	        });
+	        var lines = Content.split("\n");
+	        for (var l=0; l < lines.length; l++) {
+	            var line = lines[l];
+				logger.debug("KBAtossFileRepository: Line "+l+" --> "+line);
+				if (line != ""){ 
+		            var data = line.split(";");
+		
+		            // KBAtossWorkerPlanningDataShape entry object
+		            var newEntry = new Object();
+		            newEntry.Date = data[0]; // STRING
+		            newEntry.Area = data[1]; // STRING
+		            newEntry.Workplace = data[2]; // STRING
+		            newEntry.ShiftName = data[3]; // STRING
+		            newEntry.NumberOfWorkers = data[4]; // STRING
+		            newEntry.StartShift = data[5]; // STRING
+		            newEntry.EndShift = data[6]; // STRING
+		            newEntry.ShiftFactor = data[7]; // STRING
+		            newEntry.PerformanceIndicator = data[8]; // STRING
+	
+		            newEntry.FullLine = line; // STRING
+		
+		            logger.debug("KBAtossFileRepository: Line "+l+" --> ShiftFactor "+newEntry.ShiftFactor);
+		            logger.debug("KBAtossFileRepository: Line "+l+" --> Area "+newEntry.Area);
+		            logger.debug("KBAtossFileRepository: Line "+l+" --> EndShift "+newEntry.EndShift);
+		            logger.debug("KBAtossFileRepository: Line "+l+" --> ShiftName "+newEntry.ShiftName);
+		            logger.debug("KBAtossFileRepository: Line "+l+" --> PerformanceIndicator "+newEntry.PerformanceIndicator);
+		            logger.debug("KBAtossFileRepository: Line "+l+" --> Workplace "+newEntry.Workplace);
+		            logger.debug("KBAtossFileRepository: Line "+l+" --> NumberOfWorkers "+newEntry.NumberOfWorkers);
+		            logger.debug("KBAtossFileRepository: Line "+l+" --> Date "+newEntry.Date);
+		            logger.debug("KBAtossFileRepository: Line "+l+" --> FullLine "+newEntry.FullLine);
+		            logger.debug("KBAtossFileRepository: Line "+l+" --> StartShift "+newEntry.StartShift);
+		
+		            var date = newEntry.Date.split(".");
+		            var startTime;
+		            var endTime;
+		            var timeOffset = 0;
+		            if (newEntry.StartShift.indexOf(":") > 0) {
+		                startTime = newEntry.StartShift.split(":");
+		            }
+		            if (newEntry.StartShift.indexOf("*") > 0) {
+		                startTime = newEntry.StartShift.split("*");
+		                timeOffset = 1;
+		            }
+		
+		
+		            logger.debug("KBAtossFileRepository: Line "+l+" --> timeOffset"+timeOffset);
+		            logger.debug("KBAtossFileRepository: Line "+l+" --> StartShiftAsDate"+date[2]+"~"+date[1]+"~"+date[0]+"~"+startTime[0]+"~"+startTime[1]+"~0~0");
+		            newEntry.StartShiftAsDate = new Date (parseInt(date[2],10)-0, parseInt(date[1],10)-1, parseInt(date[0],10), parseInt(startTime[0],10), parseInt(startTime[1],10), 0, 0);
+		            newEntry.StartShiftAsDate = dateAddDays(newEntry.StartShiftAsDate, timeOffset);
+		
+		            timeOffset = 0;
+		            if (newEntry.EndShift.indexOf(":") > 0) {
+		                endTime = newEntry.EndShift.split(":");
+		            }
+		            if (newEntry.EndShift.indexOf("*") > 0) {
+		                endTime = newEntry.EndShift.split("*");
+		                timeOffset = 1;
+		            }
+		
+		            logger.debug("KBAtossFileRepository: Line "+l+" --> timeOffset"+timeOffset);
+		            logger.debug("KBAtossFileRepository: Line "+l+" --> EndShiftAsDate"+date[2]+"~"+date[1]+"~"+date[0]+"~"+startTime[0]+"~"+startTime[1]+"~0~0");
+		            newEntry.EndShiftAsDate = new Date (parseInt(date[2],10)-0, parseInt(date[1],10)-1, parseInt(date[0],10), parseInt(endTime[0],10), parseInt(endTime[1],10), 0, 0);
+		            newEntry.EndShiftAsDate = dateAddDays(newEntry.EndShiftAsDate, timeOffset);
+		
+		            logger.debug("KBAtossFileRepository: Line "+l+" --> StartShiftAsDate"+newEntry.StartShiftAsDate);
+		            logger.debug("KBAtossFileRepository: Line "+l+" --> EndShiftAsDate"+newEntry.EndShiftAsDate);
+		
+		
+		            if (newEntry.ShiftName != "FREI") {
+		                result.AddRow(newEntry);
+		            }
+		        }
+	        }
+	    } catch (err) {
+	        logger.error("KBAtossFileRepository: "+err);
+	    }
+	    try{
+			logger.debug("KBAtossFileRepository: "+file.path+" ParseAtossFile");
+			me.ParseAtossFile({AtossContent: result});
+			logger.debug("KBAtossFileRepository: "+file.path+" Move File");
+			me.MoveFile({sourcePath: file.path, targetPath: "/Done"+file.path, overwrite: true});
+			//me.DeleteFile({path: file.path});
+			logger.debug("KBAtossFileRepository: "+file.path+" done");
+	    } catch (err) {
+	        logger.error("KBAtossFileRepository: "+err);
+	        me.MoveFile({sourcePath: file.path, targetPath: "/Error"+file.path, overwrite: true});
+	    }
+	}
+	logger.debug("KBAtossFileRepository: End ReadInputFiles");
+    } catch (err) {
+        logger.error("KBAtossFileRepository: Overall Error "+err);
+    }
+	me.ReadInputFilesServiceIsRunning = false;
+}
+
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="Init">
+						<ConfigurationTables>
+							<ConfigurationTable description=""
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[try {
+    me.CreateFolder({
+        path: "/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+try {
+    me.CreateFolder({
+        path: "/Error/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+try {
+    me.CreateFolder({
+        path: "/Done/" /* STRING */
+    });
+} catch(err) {
+	if (err == "JavaException: java.lang.Exception: File Already Exists") {
+		logger.debug(me.name+": "+err);
+	} else {
+		logger.warn(me.name+": "+err);
+	}
+}
+    ]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="ParseAtossFile">
+						<ConfigurationTables>
+							<ConfigurationTable description=""
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+										
+										
+										
+var atoss =  AtossContent;
+
+var timezone = Things["KBTimeHelperThing"].ServerTimeZone;
+
+var day = '~empty~';
+var tableLengthAtossForDelete = atoss.rows.length;
+for (var xxx=0; xxx < tableLengthAtossForDelete; xxx++) {
+    var rowAtossForDelete = atoss.rows[xxx];
+    //Your code here
+    if (rowAtossForDelete.Date != day){
+        day = rowAtossForDelete.Date;
+        // result: NUMBER
+        logger.debug("KBAtossFileRepository: Delete all entries for "+day);
+        Things["KBKPILocalThingWorxDatabaseThing"]["DeleteAtossStaffMessageEntries"]({
+            Day: day /* STRING */
+        });
+    }
+}
+
+
+
+
+
+// result: INFOTABLE
+var atossSorted = Resources["InfoTableFunctions"].Sort({
+	sortColumn: "Workplace" /* STRING */,
+	t: atoss /* INFOTABLE */,
+	ascending: true /* BOOLEAN */
+});
+var lastAtossWorkplace = "~empty~";
+var lastTWXThing = "~empty~";
+
+var tableLengthAtoss = atossSorted.rows.length;
+for (var x=0; x < tableLengthAtoss; x++) {
+    logger.debug("KBAtossFileRepository: lastAtossWorkplace "+lastAtossWorkplace);
+    logger.debug("KBAtossFileRepository: lastTWXThing "+lastTWXThing);
+    var rowAtoss = atossSorted.rows[x];
+    //Your code here
+    logger.debug("KBAtossFileRepository: rowAtoss "+x);
+    logger.debug("KBAtossFileRepository: rowAtoss.Workplace "+rowAtoss.Workplace);
+    if (lastAtossWorkplace != rowAtoss.Workplace) {
+        logger.debug("KBAtossFileRepository: lastAtossWorkplace != rowAtoss.Workplace");
+        lastAtossWorkplace = "~empty~";
+        lastTWXThing = "~empty~";
+
+        // result: INFOTABLE dataShape: SpotlightSearchWithPersistent
+        var machines = Resources["SearchFunctions"].SearchThingsByTemplateWithPersistent({
+            maxItems: 999999 /* NUMBER */,
+            nameMask: undefined /* STRING */,
+            thingTemplate: "KBLocalMachineThingTemplate" /* THINGTEMPLATENAME */
+        });
+
+        var tableLengthMachines = machines.rows.length;
+        for (var xx=0; xx < tableLengthMachines; xx++) {
+            var rowMachines = machines.rows[xx];
+            //Your code here
+            try {
+                if (rowAtoss.Workplace == Things[rowMachines.name].AtossWorkplace) {
+                    logger.debug("KBAtossFileRepository: rowAtoss.Workplace == Things[rowMachines.name].AtossWorkplace ");
+                    logger.debug("KBAtossFileRepository: rowAtoss "+xx);
+                    logger.debug("KBAtossFileRepository: rowMachines.name "+rowMachines.name);
+                    lastAtossWorkplace = rowAtoss.Workplace;
+                    lastTWXThing = rowMachines.name;
+                }
+            } catch(err) {
+
+            }
+        }
+    }
+    if (lastTWXThing != "~empty~")
+    {
+    
+		var offset1 = Resources["KBThingWorxServerSystem"].GetTimeZoneOffsetInMinutesWithDate({
+		timeZoneId: timezone /* STRING */,
+		dateTime: rowAtoss.StartShiftAsDate
+		});
+ 		var AtossStartShiftAsDate = dateAddMinutes(rowAtoss.StartShiftAsDate, -offset1);    
+		var offset2 = Resources["KBThingWorxServerSystem"].GetTimeZoneOffsetInMinutesWithDate({
+		timeZoneId: timezone /* STRING */,
+		dateTime: rowAtoss.EndShiftAsDate
+		});
+ 		var AtossEndShiftAsDate = dateAddMinutes(rowAtoss.EndShiftAsDate, -offset2);    
+    
+    
+    
+        logger.debug("KBAtossFileRepository: Do Insert for "+lastTWXThing+" "+rowAtoss.FullLine+" Start");
+        logger.debug("KBAtossFileRepository: Do Insert for "+lastTWXThing+" StartShiftAsDate "+rowAtoss.StartShiftAsDate);
+        logger.debug("KBAtossFileRepository: Do Insert for "+lastTWXThing+" EndShiftAsDate "+rowAtoss.EndShiftAsDate);
+        logger.debug("KBAtossFileRepository: Do Insert for "+lastTWXThing+" UTC StartShiftAsDate "+AtossStartShiftAsDate);
+        logger.debug("KBAtossFileRepository: Do Insert for "+lastTWXThing+" UTC EndShiftAsDate "+AtossEndShiftAsDate);
+        logger.debug("KBAtossFileRepository: Do Insert for "+lastTWXThing+" NumberOfWorkers "+rowAtoss.NumberOfWorkers);
+		// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBLocalStationDataReceiverMessageDataShape)
+		var messageInfoTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape({
+		    infoTableName : "InfoTable",
+		    dataShapeName : "KBLocalStationDataReceiverMessageDataShape"
+		});
+        
+        if (lastTWXThing != "" && lastTWXThing != null && lastTWXThing != undefined &&
+        	Things[lastTWXThing].MainStationForLineStatus != "" && Things[lastTWXThing].MainStationForLineStatus != null && Things[lastTWXThing].MainStationForLineStatus != undefined &&
+        	Things[Things[lastTWXThing].MainStationForLineStatus] != "" && Things[Things[lastTWXThing].MainStationForLineStatus] != null && Things[Things[lastTWXThing].MainStationForLineStatus] != undefined){                            
+
+            // KBLocalStationDataReceiverMessageDataShape entry object
+            var newEntry = new Object();
+            newEntry.Line = lastTWXThing; // STRING [Primary Key]
+            newEntry.Station = lastTWXThing; // STRING [Primary Key]
+            newEntry.Type = "Atoss"; // STRING [Primary Key]
+            newEntry.Description = "Atoss: "+rowAtoss.FullLine; // STRING
+            newEntry.Identifier = rowAtoss.PerformanceIndicator; // STRING
+            newEntry.ShortName = "PerformanceIndicator"; // STRING [Primary Key]
+            newEntry.DateTime = AtossStartShiftAsDate; // DATETIME [Primary Key]
+
+            messageInfoTable.AddRow(newEntry);
+
+            // KBLocalStationDataReceiverMessageDataShape entry object
+            var newEntry = new Object();
+            newEntry.Line = lastTWXThing; // STRING [Primary Key]
+            newEntry.Station = lastTWXThing; // STRING [Primary Key]
+            newEntry.Type = "Atoss"; // STRING [Primary Key]
+            newEntry.Description = "Atoss: "+rowAtoss.FullLine; // STRING
+            newEntry.Identifier = rowAtoss.ShiftFactor; // STRING
+            newEntry.ShortName = "ShiftFactor"; // STRING [Primary Key]
+            newEntry.DateTime = AtossStartShiftAsDate; // DATETIME [Primary Key]
+
+            messageInfoTable.AddRow(newEntry);
+
+	        logger.debug("KBAtossFileRepository: Do Insert for "+lastTWXThing+" MainStationForLineStatus "+Things[lastTWXThing].MainStationForLineStatus);
+	        for (var i=0;i<rowAtoss.NumberOfWorkers;i++) {
+	            // KBLocalStationDataReceiverMessageDataShape entry object
+	            var newEntry = new Object();
+	            newEntry.Line = lastTWXThing; // STRING [Primary Key]
+	            newEntry.Station = Things[lastTWXThing].MainStationForLineStatus; // STRING [Primary Key]
+	            newEntry.Type = "STAFF"; // STRING [Primary Key]
+	            newEntry.Description = "Atoss: "+rowAtoss.FullLine; // STRING
+	            newEntry.Identifier = "Worker "+i; // STRING
+	            newEntry.ShortName = "Login"; // STRING [Primary Key]
+	            newEntry.DateTime = dateAddMilliseconds(AtossStartShiftAsDate,1); // DATETIME [Primary Key]
+	
+	            messageInfoTable.AddRow(newEntry);
+	            // KBLocalStationDataReceiverMessageDataShape entry object
+	            newEntry = new Object();
+	            newEntry.Line = lastTWXThing; // STRING [Primary Key]
+	            newEntry.Station = Things[lastTWXThing].MainStationForLineStatus; // STRING [Primary Key]
+	            newEntry.Type = "STAFF"; // STRING [Primary Key]
+	            newEntry.Description = "Atoss: "+rowAtoss.FullLine; // STRING
+	            newEntry.Identifier = "Worker "+i; // STRING
+	            newEntry.ShortName = "Logout"; // STRING [Primary Key]
+	            newEntry.DateTime = dateAddMilliseconds(AtossEndShiftAsDate,-1); // DATETIME [Primary Key]
+	
+	            messageInfoTable.AddRow(newEntry);
+	        }
+	        Things[Things[lastTWXThing].MainStationForLineStatus].SetMessageWithoutBuffer({
+	            messageInfoTable: messageInfoTable /* INFOTABLE */
+	        });
+	    }else {
+	    	logger.warn("KBAtossFileRepository: No Main Station defined for "+lastTWXThing);
+	    }
+        logger.debug("KBAtossFileRepository: Do Insert for "+lastTWXThing+" "+rowAtoss.FullLine+" End");
+    }
+}
+
+										
+										
+										
+										
+										
+										
+										    ]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="UploadCSV">
+						<ConfigurationTables>
+							<ConfigurationTable description=""
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var params = {
+    path: FileName /* STRING */,
+    content: CSV /* BLOB */
+};
+// no return
+me.SaveBinary(params);
+
+var result = true;
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+				</ServiceImplementations>
+				<Subscriptions>
+					<Subscription description="" enabled="true"
+						eventName="ThingStart" name="ThingStart" source=""
+						sourceProperty="" sourceType="Thing">
+						<ServiceImplementation description=""
+							handlerName="Script" name="ThingStart">
+							<ConfigurationTables>
+								<ConfigurationTable description=""
+									isMultiRow="false" name="Script" ordinal="0">
+									<DataShape>
+										<FieldDefinitions>
+											<FieldDefinition baseType="STRING"
+												description="code" name="code" ordinal="0" />
+										</FieldDefinitions>
+									</DataShape>
+									<Rows>
+										<Row>
+											<code><![CDATA[ me.Init();]]></code>
+										</Row>
+									</Rows>
+								</ConfigurationTable>
+							</ConfigurationTables>
+						</ServiceImplementation>
+					</Subscription>
+				</Subscriptions>
+			</ThingShape>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations />
+			<ImplementedShapes />
+			<ThingProperties />
+		</Thing>
+	</Things>
+</Entities>

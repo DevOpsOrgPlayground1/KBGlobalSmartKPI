@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b167" majorVersion="8" minorVersion="2"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="2" schemaVersion="1020" universal="">
+	<Things>
+		<Thing description="" documentationContent=""
+			effectiveThingPackage="SchedulerThing" enabled="true" homeMashup=""
+			identifier="" lastModifiedDate="2019-08-07T14:50:54.446+02:00"
+			name="KBsmartKPIUpdateShiftCalendarFromGlobalToLocalScheduler" projectName=""
+			published="false" tags="" thingTemplate="Scheduler" valueStream="">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions />
+			<VisibilityPermissions>
+				<Visibility />
+			</VisibilityPermissions>
+			<ConfigurationTables>
+				<ConfigurationTable
+					description="General Settings" isMultiRow="false" name="Settings"
+					ordinal="0">
+					<DataShape>
+						<FieldDefinitions>
+							<FieldDefinition aspect.defaultValue="true"
+								baseType="BOOLEAN"
+								description="Automatically enable scheduler on startup"
+								name="enabled" ordinal="0" />
+							<FieldDefinition baseType="USERNAME"
+								description="User context in which to run event handlers"
+								name="runAsUser" ordinal="0" />
+							<FieldDefinition
+								aspect.defaultValue="0 0/1 * * * ?" baseType="SCHEDULE"
+								description="Execution Schedule (Cron String)" name="schedule"
+								ordinal="0" />
+						</FieldDefinitions>
+					</DataShape>
+					<Rows>
+						<Row>
+							<enabled>true</enabled>
+							<runAsUser />
+							<schedule><![CDATA[0 0 2 * * ? *]]></schedule>
+						</Row>
+					</Rows>
+				</ConfigurationTable>
+			</ConfigurationTables>
+			<ThingShape>
+				<PropertyDefinitions />
+				<ServiceDefinitions>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="UpdateShiftCalendar">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.isRequired="true"
+								baseType="DATETIME" description="" name="EndDate" ordinal="2" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="DATETIME" description="" name="StartDate" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="UpdateShiftCalendarSlot">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+				</ServiceDefinitions>
+				<EventDefinitions />
+				<ServiceMappings />
+				<ServiceImplementations>
+					<ServiceImplementation description=""
+						handlerName="Script" name="UpdateShiftCalendar">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+logger.debug("UpdateShiftCalendar Start");
+
+var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("UpdateShiftCalendar location: "+location);
+
+StartDate.setHours(0);
+StartDate.setMinutes(0);
+StartDate.setSeconds(0);
+StartDate.setMilliseconds(0);
+logger.debug("UpdateShiftCalendar StartDate: "+StartDate);
+
+EndDate = dateAddDays(EndDate, 1);
+EndDate.setHours(0);
+EndDate.setMinutes(0);
+EndDate.setSeconds(0);
+EndDate.setMilliseconds(0);
+logger.debug("UpdateShiftCalendar EndDate: "+EndDate);
+
+if (location != "MUC") {
+
+    var params = {
+        maxItems: 999999 /* NUMBER */,
+        nameMask: undefined /* STRING */,
+        query: undefined /* QUERY */,
+        thingTemplate: "KBLocalPlantThingTemplate" /* THINGTEMPLATENAME */,
+        tags: undefined /* TAGS */
+    };
+
+    // result: INFOTABLE dataShape: RootEntityList
+    var plants = Resources["SearchFunctions"].SearchThingsByTemplateWithPersistent(params);
+    var tableLengthplants = plants.rows.length;
+
+	logger.debug("UpdateShiftCalendar tableLengthplants: "+tableLengthplants);
+    for (var xplants = 0; xplants < tableLengthplants; xplants++) {
+        var rowplants = plants.rows[xplants];
+        //Your code here
+        
+        var plantId = "";
+        
+        if (Things[rowplants.name].getShiftCalendarFromSAP){
+	        plantId = Things[rowplants.name].SAPPlantId;
+        } else {
+	        plantId = Things[rowplants.name].PlantIdForNonSAPShiftCalendar;
+        }
+        
+        
+		logger.debug("UpdateShiftCalendar plantId: "+plantId);
+        
+        
+        if (plantId != "") {
+             
+            var params = {
+                endDate: EndDate /* DATETIME */,
+                plant: plantId /* STRING */,
+                startDate: StartDate /* DATETIME */
+            };
+
+            // result: NUMBER
+            Things["KBKPILocalThingWorxDatabaseThing"].DeleteShiftDatasFromDataTable(params);
+			logger.debug("UpdateShiftCalendar DeleteShiftDatasFromDataTable "+plantId);
+            
+            var params = {
+                maxItems: 999999 /* NUMBER */,
+                nameMask: undefined /* STRING */,
+                query: undefined /* QUERY */,
+                thingTemplate: "KBLocalMachineThingTemplate" /* THINGTEMPLATENAME */,
+                tags: undefined /* TAGS */
+            };
+
+            // result: INFOTABLE dataShape: RootEntityList
+            var machines = Resources["SearchFunctions"].SearchThingsByTemplateWithPersistent(params);
+            var tableLengthmachines = machines.rows.length;
+			logger.debug("UpdateShiftCalendar tableLengthmachines: "+tableLengthmachines);
+
+            for (var xmachines = 0; xmachines < tableLengthmachines; xmachines++) {
+                var rowmachines = machines.rows[xmachines];
+                //Your code here
+
+				logger.debug("UpdateShiftCalendar rowmachines: "+rowmachines.name);
+				logger.debug("UpdateShiftCalendar SAPWorkcenterNumber: "+Things[rowmachines.name].SAPWorkcenterNumber);
+				logger.debug("UpdateShiftCalendar UseAlternativeWorkcenterIdForNonSAPShiftCalendars: "+Things[rowmachines.name].UseAlternativeWorkcenterIdForNonSAPShiftCalendars);
+				logger.debug("UpdateShiftCalendar AlternativeWorkcenterIdForNonSAPShiftCalendars: "+Things[rowmachines.name].AlternativeWorkcenterIdForNonSAPShiftCalendars);
+				
+
+				var globalWorkCenterNumber = Things[rowmachines.name].SAPWorkcenterNumber;
+				if (Things[rowmachines.name].UseAlternativeWorkcenterIdForNonSAPShiftCalendars) {
+					globalWorkCenterNumber = Things[rowmachines.name].AlternativeWorkcenterIdForNonSAPShiftCalendars;
+				}
+
+				logger.debug("UpdateShiftCalendar globalWorkCenterNumber: "+globalWorkCenterNumber);
+
+                if (globalWorkCenterNumber != "" && Things[rowmachines.name].SAPWorkcenterNumber != "") {
+
+                    var params = {
+                        MachineSAP: globalWorkCenterNumber /* STRING */,
+                        StartDate: StartDate /* DATETIME */,
+                        EndDate: EndDate /* DATETIME */,
+                        PlantSAP: plantId /* STRING */
+                    };
+
+                    // result: INFOTABLE dataShape: KBShiftInfoDataShape
+                    var shiftInfo = Things["KBGlobalThingWorxThing"].GetShiftInfo(params);
+
+                    var tableLengthshiftInfo = shiftInfo.rows.length;
+
+                    for (var xshiftInfo = 0; xshiftInfo < tableLengthshiftInfo; xshiftInfo++) {
+                        var rowshiftInfo = shiftInfo.rows[xshiftInfo];
+                        var d = new Date();
+                        //var endDateTime = dateAddMinutes(dateAddMinutes(rowshiftInfo.EndTime, -1 * rowshiftInfo.TimezoneOffset), d.getTimezoneOffset());
+                        //var startDateTime = dateAddMinutes(dateAddMinutes(rowshiftInfo.StartTime, -1 * rowshiftInfo.TimezoneOffset), d.getTimezoneOffset());
+                        
+                        //Quickfix for V9
+                        //if (plantId == "MLK-FactoryMaster" || plantId == "BUD-NDNC" || plantId == "1201" || plantId == "2001" || plantId == "292D" || plantId == "2901" || plantId == "KBB" || plantId == "1051" || plantId == "2601" || plantId == "KBA" || plantId == "PNA" || plantId == "3916"){
+	                     var endDateTime = rowshiftInfo.EndTime;
+	                     var startDateTime = rowshiftInfo.StartTime;
+                        //}
+                        //Quickfix for V9
+                        
+                        
+                        //Your code here
+                        var params = {
+                            EndTime: endDateTime /* DATETIME */,
+                            machine: Things[rowmachines.name].SAPWorkcenterNumber /* STRING */,
+                            plant: plantId /* STRING */,
+                            StartTime: startDateTime /* DATETIME */,
+                            Qualifier: rowshiftInfo.Qualifier /* STRING */,
+                            Name: rowshiftInfo.Name /* STRING */,
+                            utilization: rowshiftInfo.utilization
+                        };
+
+                        // result: NUMBER
+                        Things["KBKPILocalThingWorxDatabaseThing"].AddShiftDataToDataTable(params);
+                    }
+                }
+            }
+
+        }
+    }
+}]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="UpdateShiftCalendarSlot">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+if (location != "MUC") {
+
+	// dateValue:DATETIME
+	var startdate = new Date();
+
+	// dateAddDays(dateValue:DATETIME,amount:NUMBER):STRING
+	 startdate = dateAddDays(startdate, -1);
+
+	// dateValue:DATETIME
+	var enddate = new Date();
+
+	// dateAddDays(dateValue:DATETIME,amount:NUMBER):STRING
+	 enddate = dateAddDays(enddate, 4);
+
+
+	var params = {
+		StartDate: startdate /* DATETIME */ ,
+		EndDate: enddate /* DATETIME */
+	};
+
+	me.UpdateShiftCalendar(params);
+
+
+	var searchResult = Resources["SearchFunctions"].SearchThings({
+		maxItems: 999999 /* NUMBER */ ,
+		searchExpression: undefined /* STRING */ ,
+		types: undefined /* JSON */ ,
+		thingTemplates: {
+			"items": ["KBLocalMachineThingTemplate"]
+		} /* JSON */ ,
+		identifierSearchExpression: undefined /* STRING */ ,
+		modelTags: undefined /* TAGS */ ,
+		thingShapes: undefined /* JSON */ ,
+		query: undefined /* QUERY */ ,
+		aspects: undefined /* JSON */ ,
+		excludedAspects: undefined /* JSON */ ,
+		networks: undefined /* JSON */ ,
+		maxSearchItems: undefined /* NUMBER */
+	});
+
+	var machines = searchResult[0].thingResults;
+
+	var tableLength = machines.rows.length;
+	var DB = Resources["KBThingWorxServerSystem"].GetKPILocalThingWorxDatabaseThing();
+	for (var x = 0; x < tableLength; x++) {
+		var machine = machines.rows[x];
+		logger.debug("KBsmartKPIUpdateShiftCalendarFromGlobalToLocalSchedulerV2, FillTEMPSmartKPIFullShiftForMachine: Machine " + machine.name);
+		//Your code here
+		if (Things[machine.name].ImplementsShape({thingShapeName: "KBLocalMachineSmartKPIShape"}) && Things[machine.name].isActive) {
+			logger.debug("KBsmartKPIUpdateShiftCalendarFromGlobalToLocalSchedulerV2 FillTEMPSmartKPIFullShiftForMachine: CalculateSingleMachineForActualKPIs Machine " + machine.name);
+			Things[DB].FillTEMPSmartKPIFullShiftForMachine({
+				Machine: machine.name /* STRING */
+			});
+
+		}
+	}
+
+//	Things["KBKPILocalThingWorxDatabaseThing"].FillTEMPSmartKPIFullShift();
+
+}]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+				</ServiceImplementations>
+				<Subscriptions>
+					<Subscription enabled="true"
+						eventName="ScheduledEvent" source="" sourceProperty="">
+						<ServiceImplementation description=""
+							handlerName="Script" name="Event.ScheduledEvent">
+							<ConfigurationTables>
+								<ConfigurationTable description=""
+									isMultiRow="false" name="Script" ordinal="0">
+									<DataShape>
+										<FieldDefinitions>
+											<FieldDefinition baseType="STRING"
+												description="code" name="code" ordinal="0" />
+										</FieldDefinitions>
+									</DataShape>
+									<Rows>
+										<Row>
+											<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+if (location != "MUC") {
+
+	me.UpdateShiftCalendarSlot();
+}
+
+]]></code>
+										</Row>
+									</Rows>
+								</ConfigurationTable>
+							</ConfigurationTables>
+						</ServiceImplementation>
+					</Subscription>
+				</Subscriptions>
+			</ThingShape>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations />
+			<ImplementedShapes />
+			<ThingProperties />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="header : name : updated, thingTemplate : updated&#10;configuration : Settings : updated&#10;"
+					timestamp="2019-08-07T14:47:11.487+02:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : UpdateShiftCalendarSlot : Code Updated, Service Added,  : Input parameter StartDate Added, Input parameter EndDate Added, UpdateShiftCalendar : Inputs updated, Code Updated, Service Added&#10;"
+					timestamp="2019-08-07T14:48:55.461+02:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : UpdateShiftCalendarSlot : Code Updated&#10;subscriptions : New subscription : Code Updated, Event.ScheduledEvent : New subscription, Subscription Added&#10;"
+					timestamp="2019-08-07T14:50:54.446+02:00" user="adm-flassakm" />
+			</ConfigurationChanges>
+		</Thing>
+	</Things>
+</Entities>

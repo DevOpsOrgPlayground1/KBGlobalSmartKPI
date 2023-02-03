@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b97" majorVersion="8" minorVersion="4"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="11" schemaVersion="1044" universal="">
+	<Things>
+		<Thing description="" documentationContent=""
+			effectiveThingPackage="ConfiguredThing" enabled="true" homeMashup=""
+			identifier="" lastModifiedDate="2021-01-15T08:44:07.948+01:00"
+			name="KBsmartKPILocalHelper" projectName="KBsmartKPI"
+			published="false"
+			tags="KBThingWorxInstallationVocabulary:ExtensionSmartKPI"
+			thingTemplate="GenericThing" valueStream="">
+			<Owner name="adm-konasm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</PropertyRead>
+					<PropertyWrite />
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true" name="KBOrganization"
+						type="Organization" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables />
+			<ThingShape>
+				<PropertyDefinitions />
+				<ServiceDefinitions>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="GetAreasforSmartKPIVisualization">
+						<ResultType aspect.dataShape="KBNameForMenuDataShape"
+							baseType="INFOTABLE" description="" name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="GetMachinesforSmartKPIVisualization">
+						<ResultType aspect.dataShape="KBNameForMenuDataShape"
+							baseType="INFOTABLE" description="" name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition baseType="STRING" description=""
+								name="type" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="GetPlantsforSmartKPIVisualization">
+						<ResultType aspect.dataShape="KBNameForMenuDataShape"
+							baseType="INFOTABLE" description="" name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+				</ServiceDefinitions>
+				<EventDefinitions />
+				<ServiceMappings />
+				<ServiceImplementations>
+					<ServiceImplementation description=""
+						handlerName="Script" name="GetAreasforSmartKPIVisualization">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var params = {
+	thingShape: undefined/* THINGSHAPENAME */,
+	maxItems: 999 /* NUMBER */,
+	nameMask: undefined /* STRING */,
+	query: undefined /* QUERY */,
+	thingTemplate: 'KBLocalAreaThingTemplate' /* THINGTEMPLATENAME */
+};
+
+// result: INFOTABLE dataShape: DeviceStatus
+var data = Resources["DeviceFunctions"].SearchDevices(params);
+
+var params = {
+	infoTableName : "InfoTable",
+	dataShapeName : "KBNameForMenuDataShape"
+};
+
+// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBNameForMenuDataShape)
+var result = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+
+for (var i = 0; i < data.getRowCount(); i++) {
+    if ( Things[data.getRow(i).name].IsSmartKpiAreaLevel && Things[data.getRow(i).name].isActive) {
+        // KBNameForMenuDataShape entry object
+        var newEntry = new Object();
+        newEntry.DisplayName = Things[data.getRow(i).name].DisplayName; // STRING
+        newEntry.ThingName = data.getRow(i).name; // STRING
+        
+        result.AddRow(newEntry);
+
+
+    }
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="GetMachinesforSmartKPIVisualization">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[IsMachine=true;
+var template='KBLocalMachineThingTemplate';
+if (type=='Station'){
+    IsMachine=false;
+    template='KBLocalStationThingTemplate';
+}
+var params = {
+	thingShape: 'KBLocalSmartKPIShape' /* THINGSHAPENAME */,
+	maxItems: undefined /* NUMBER */,
+	nameMask: undefined /* STRING */,
+	query: undefined /* QUERY */,
+	thingTemplate: template /* THINGTEMPLATENAME */
+};
+
+// result: INFOTABLE dataShape: DeviceStatus
+var data = Resources["DeviceFunctions"].SearchDevices(params);
+
+// result: INFOTABLE dataShape: RootEntityList
+//var data = ThingShapes["KBLocalSmartKPIShape"].GetImplementingThingsWithData();
+
+var params = {
+	infoTableName : "InfoTable",
+	dataShapeName : "KBNameForMenuDataShape"
+};
+
+// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBNameForMenuDataShape)
+var result = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+
+   
+for (var i = 0; i < data.getRowCount(); i++) {
+    if (Things[data.getRow(i).name].IsSmartKpiMachineLevel==IsMachine && Things[data.getRow(i).name].isActive) {
+        // KBNameForMenuDataShape entry object
+        var newEntry = new Object();
+        newEntry.DisplayName = Things[data.getRow(i).name].DisplayName; // STRING
+        newEntry.ThingName = data.getRow(i).name; // STRING
+        
+        result.AddRow(newEntry);
+
+
+    }
+}
+var sort = new Object();
+sort.name = 'DisplayName';
+sort.ascending = true;
+result.Sort(sort);
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="GetPlantsforSmartKPIVisualization">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var params = {
+	thingShape: 'KBLocalSmartKPIShape' /* THINGSHAPENAME */,
+	maxItems: 999 /* NUMBER */,
+	nameMask: undefined /* STRING */,
+	query: undefined /* QUERY */,
+	thingTemplate: 'KBLocalPlantThingTemplate' /* THINGTEMPLATENAME */
+};
+
+// result: INFOTABLE dataShape: DeviceStatus
+var data = Resources["DeviceFunctions"].SearchDevices(params);
+
+// result: INFOTABLE dataShape: RootEntityList
+//var data = ThingShapes["KBLocalSmartKPIShape"].GetImplementingThingsWithData();
+
+var params = {
+	infoTableName : "InfoTable",
+	dataShapeName : "KBNameForMenuDataShape"
+};
+
+// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBNameForMenuDataShape)
+var result = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+
+
+
+for (var i = 0; i < data.getRowCount(); i++) {
+    if (Things[data.getRow(i).name].IsSmartKpiPlantLevel && Things[data.getRow(i).name].isActive) {
+        // KBNameForMenuDataShape entry object
+        var newEntry = new Object();
+        newEntry.DisplayName = Things[data.getRow(i).name].DisplayName; // STRING
+        newEntry.ThingName = data.getRow(i).name; // STRING
+        
+        result.AddRow(newEntry);
+
+
+    }
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+				</ServiceImplementations>
+				<Subscriptions />
+			</ThingShape>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations />
+			<ImplementedShapes />
+			<ThingProperties />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="header : name : updated&#10;"
+					timestamp="2021-01-15T08:41:34.713+01:00" user="adm-konasm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetMachinesforSmartKPIVisualization : service updated&#10;"
+					timestamp="2021-01-15T08:44:07.933+01:00" user="adm-konasm" />
+			</ConfigurationChanges>
+		</Thing>
+	</Things>
+</Entities>

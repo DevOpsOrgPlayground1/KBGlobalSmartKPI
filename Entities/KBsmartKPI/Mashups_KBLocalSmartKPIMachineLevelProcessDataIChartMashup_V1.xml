@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Entities build="b692" majorVersion="9" minorVersion="0" modelPersistenceProviderPackage="AzuresqlPersistenceProviderPackage" revision="11" schemaVersion="1109" universal=""><Mashups><Mashup
+	aspect.isResponsive="true" aspect.mashupType="mashup" columns="0.0"
+	description="" documentationContent="" homeMashup=""
+	lastModifiedDate="2022-02-01T15:54:04.211Z"
+	name="KBLocalSmartKPIMachineLevelProcessDataIChartMashup_V1"
+	projectName="KBsmartKPI" rows="0.0"
+	tags="KBThingWorxInstallationVocabulary:ExtensionSmartKPI">
+	<Owner name="adm-flassakm" type="User" /><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions><Permissions resourceName="*"><PropertyRead><Principal isPermitted="true" name="KBUserGroup" type="Group"/></PropertyRead><PropertyWrite/><ServiceInvoke><Principal isPermitted="true" name="KBUserGroup" type="Group"/></ServiceInvoke><EventInvoke/><EventSubscribe/></Permissions></RunTimePermissions><VisibilityPermissions><Visibility><Principal isPermitted="true" name="KBOrganization" type="Organization"/></Visibility></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables><ConfigurationTable dataShapeName="" description="Mashup Mobile Settings" isHidden="true" isMultiRow="false" name="MobileSettings" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition aspect.defaultValue="false" baseType="BOOLEAN" description="" name="disableZoom" ordinal="0"/><FieldDefinition aspect.defaultValue="true" baseType="BOOLEAN" description="" name="fullScreenMode" ordinal="0"/><FieldDefinition baseType="STRING" description="" name="height" ordinal="0"/><FieldDefinition aspect.defaultValue="device-height" baseType="STRING" description="" name="heightType" ordinal="0"/><FieldDefinition aspect.defaultValue="1.0" baseType="NUMBER" description="" name="initialScale" ordinal="0"/><FieldDefinition baseType="STRING" description="" name="iosShortcutIconTitle" ordinal="0"/><FieldDefinition aspect.defaultValue="black-translucent" baseType="STRING" description="" name="iosStatusBarAppearance" ordinal="0"/><FieldDefinition aspect.defaultValue="10.0" baseType="NUMBER" description="" name="maximumScale" ordinal="0"/><FieldDefinition aspect.defaultValue="0.1" baseType="NUMBER" description="" name="minimumScale" ordinal="0"/><FieldDefinition baseType="STRING" description="" name="width" ordinal="0"/><FieldDefinition aspect.defaultValue="device-width" baseType="STRING" description="" name="widthType" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><disableZoom>false</disableZoom><fullScreenMode>true</fullScreenMode><height/><heightType><![CDATA[device-height]]></heightType><initialScale>1.0</initialScale><iosShortcutIconTitle/><iosStatusBarAppearance><![CDATA[black-translucent]]></iosStatusBarAppearance><maximumScale>10.0</maximumScale><minimumScale>0.1</minimumScale><width/><widthType><![CDATA[device-width]]></widthType></Row></Rows></ConfigurationTable></ConfigurationTables><ParameterDefinitions><FieldDefinition aspect.ordinal="1" baseType="DATETIME" description="" name="EndDate" ordinal="0"/><FieldDefinition aspect.ordinal="2" baseType="STRING" description="" name="Machine" ordinal="0"/><FieldDefinition aspect.ordinal="3" baseType="STRING" description="" name="ProcessParameterType" ordinal="0"/><FieldDefinition aspect.ordinal="0" baseType="DATETIME" description="" name="StartDate" ordinal="0"/></ParameterDefinitions><Things/><ThingShapes/><ThingTemplates><ThingTemplate>KBKPILocalThingWorxDatabaseTemplate</ThingTemplate></ThingTemplates><mashupContent><![CDATA[{
+  "Data" : {
+    "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate" : {
+      "DataName" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+      "EntityName" : "KBKPILocalThingWorxDatabaseTemplate",
+      "EntityType" : "DynamicThingTemplates",
+      "Id" : "3256132a-eacd-4d86-ae1a-2d9e89bbf991",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "16fa1810-4fc8-4b4b-8c13-b6a9a2502f03",
+        "Name" : "GetTop30ProcessDataFromDB",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetTop30ProcessDataFromDB"
+      } ]
+    },
+    "Resources_KBThingWorxServerSystem" : {
+      "DataName" : "Resources_KBThingWorxServerSystem",
+      "EntityName" : "KBThingWorxServerSystem",
+      "EntityType" : "Resources",
+      "Id" : "3832247b-69a6-4717-9607-a632375229d6",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "72ac8f66-8fd0-4f07-8416-c26d3a85bb57",
+        "Name" : "GetKPILocalThingWorxDatabaseThing",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetKPILocalThingWorxDatabaseThing"
+      } ]
+    },
+    "Session" : {
+      "DataName" : "Session",
+      "EntityName" : "",
+      "EntityType" : "Session",
+      "Id" : "session",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "SessionInterface",
+        "Name" : "GetGlobalSessionValues",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetGlobalSessionValues"
+      } ]
+    },
+    "UserExtensions" : {
+      "DataName" : "UserExtensions",
+      "EntityName" : "",
+      "EntityType" : "UserExtensions",
+      "Id" : "UserExtensions",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "UserExtensionInterface",
+        "Name" : "GetCurrentUserExtensionProperties",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetCurrentUserExtensionProperties"
+      } ]
+    }
+  },
+  "DataBindings" : [ {
+    "Id" : "2fe8f7de-5c6c-4e10-ba16-7744ff3cab1a",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Result",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "value",
+      "TargetPropertyBaseType" : "THINGNAME",
+      "TargetPropertyType" : "Entity"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetKPILocalThingWorxDatabaseThing",
+    "SourceSection" : "Resources_KBThingWorxServerSystem",
+    "TargetArea" : "Data",
+    "TargetId" : "EntityName",
+    "TargetSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate"
+  }, {
+    "Id" : "0a42bd99-5447-40c5-8f26-446c5bd6678a",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "EndDate",
+      "SourcePropertyBaseType" : "DATETIME",
+      "TargetProperty" : "EndDate",
+      "TargetPropertyBaseType" : "DATETIME",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetTop30ProcessDataFromDB",
+    "TargetSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate"
+  }, {
+    "Id" : "708a69a8-fcd2-40f4-a7e8-b4e65e0896f6",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Machine",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "Machine",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetTop30ProcessDataFromDB",
+    "TargetSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate"
+  }, {
+    "Id" : "69c3e3fb-87f2-4a72-a326-d646a2dd17e0",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "ProcessParameterType",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "ProcessDataType",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetTop30ProcessDataFromDB",
+    "TargetSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate"
+  }, {
+    "Id" : "67147512-28a3-4fed-bd0a-7f4a62c9fac8",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "InfoTable",
+      "TargetProperty" : "Data",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetTop30ProcessDataFromDB",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "UI",
+    "TargetId" : "ichart-13",
+    "TargetSection" : ""
+  }, {
+    "Id" : "bb066b9d-aa50-40d4-9561-1968dbd0cce1",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "ProcesDataLSL",
+      "SourcePropertyBaseType" : "NUMBER",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "LSL",
+      "TargetPropertyBaseType" : "NUMBER",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetTop30ProcessDataFromDB",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "UI",
+    "TargetId" : "ichart-13",
+    "TargetSection" : ""
+  }, {
+    "Id" : "b8a84f66-2850-4c4d-aad0-517af87c798e",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "ProcesDataUSL",
+      "SourcePropertyBaseType" : "NUMBER",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "USL",
+      "TargetPropertyBaseType" : "NUMBER",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetTop30ProcessDataFromDB",
+    "SourceSection" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "TargetArea" : "UI",
+    "TargetId" : "ichart-13",
+    "TargetSection" : ""
+  } ],
+  "DesignTimePermissions" : { },
+  "Events" : [ {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Resources_KBThingWorxServerSystem",
+    "EventHandlerService" : "GetKPILocalThingWorxDatabaseThing",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "f9a1a409-7f88-4937-8628-99a8c8d4c33d"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Resources_KBThingWorxServerSystem",
+    "EventHandlerService" : "GetKPILocalThingWorxDatabaseThing",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "RefreshRequested",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "46a1dffe-8f82-49e3-be79-de9be68941f0"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Resources_KBThingWorxServerSystem",
+    "EventHandlerService" : "GetKPILocalThingWorxDatabaseThing",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "StartDateChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "217b12c8-a133-4b42-81ae-157f6f95da93"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Resources_KBThingWorxServerSystem",
+    "EventHandlerService" : "GetKPILocalThingWorxDatabaseThing",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "EndDateChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "ba415d3d-5109-499b-91a3-d794de80ee90"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Resources_KBThingWorxServerSystem",
+    "EventHandlerService" : "GetKPILocalThingWorxDatabaseThing",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "MachineChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "ccef7dfc-f36b-4e6c-8019-7de291b88a25"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Resources_KBThingWorxServerSystem",
+    "EventHandlerService" : "GetKPILocalThingWorxDatabaseThing",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "ProcessParameterTypeChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "651785f2-3b36-4766-a9c1-e1e96d95a305"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "DynamicThingTemplates_KBKPILocalThingWorxDatabaseTemplate",
+    "EventHandlerService" : "GetTop30ProcessDataFromDB",
+    "EventTriggerArea" : "Data",
+    "EventTriggerEvent" : "ServiceInvokeCompleted",
+    "EventTriggerId" : "GetKPILocalThingWorxDatabaseThing",
+    "EventTriggerSection" : "Resources_KBThingWorxServerSystem",
+    "Id" : "31e33a4c-bb98-4bf6-b3a9-c972ef0d24de"
+  } ],
+  "RunTimePermissions" : { },
+  "UI" : {
+    "Properties" : {
+      "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+      "Area" : "Mashup",
+      "BGImageRepeat" : "no-repeat",
+      "BGImageSize" : "auto",
+      "Columns" : 0,
+      "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+      "DisplayName" : "Mashup",
+      "EnableParameterEditing" : false,
+      "EndDate" : "2017-12-12T23:00:00.000Z",
+      "Height" : 618,
+      "Id" : "mashup-root",
+      "IgnoreWarningsInViewMashup" : false,
+      "IsPrintLayout" : false,
+      "Left" : 0,
+      "Machine" : "KBLisLaa7MachineThing",
+      "MashupToEditGadget" : "DefaultMashupToEditGadget",
+      "MinHeight" : 0,
+      "MinWidth" : 0,
+      "ProcessParameterType" : "Mesure Couple Raccort 1",
+      "ResponsiveLayout" : true,
+      "Rows" : 0,
+      "ShowDataLoading" : true,
+      "StartDate" : "2017-12-11T23:00:00.000Z",
+      "Style" : "DefaultMashupStyle",
+      "Title" : "",
+      "TitleBar" : false,
+      "TitleBarStyle" : "DefaultTitleBarStyle",
+      "TitleBarText" : "Gadget Title Here",
+      "Top" : 0,
+      "Type" : "mashup",
+      "Visible" : true,
+      "Width" : 1024,
+      "Z-index" : 10,
+      "__TypeDisplayName" : "Mashup",
+      "_currentParameterDefs" : [ {
+        "BaseType" : "DATETIME",
+        "DefaultValue" : "2017-11-30T23:00:00.000Z",
+        "Description" : "",
+        "ParameterName" : "StartDate"
+      }, {
+        "BaseType" : "DATETIME",
+        "DefaultValue" : "2017-12-10T23:00:00.000Z",
+        "Description" : "",
+        "ParameterName" : "EndDate"
+      }, {
+        "BaseType" : "STRING",
+        "DefaultValue" : "KBLisLaa8MachineThing",
+        "Description" : "",
+        "ParameterName" : "Machine"
+      }, {
+        "BaseType" : "STRING",
+        "DefaultValue" : "M1",
+        "Description" : "",
+        "ParameterName" : "ProcessParameterType"
+      } ],
+      "id_index" : 15,
+      "supportsAutoResize" : true
+    },
+    "Widgets" : [ {
+      "Properties" : {
+        "Area" : "UI",
+        "Area1StdDev" : "DefaultChartStyle2",
+        "Area2StdDev" : "DefaultChartStyle15",
+        "Area3StdDev" : "DefaultChartStyle16",
+        "D2" : 1.128,
+        "DisplayName" : "ichart-13",
+        "FieldName" : "ProcesData",
+        "Height" : 340,
+        "Id" : "ichart-13",
+        "K1" : 3,
+        "K2" : 9,
+        "K3" : 6,
+        "K4" : 14,
+        "K5" : 2,
+        "K6" : 4,
+        "K7" : 15,
+        "K8" : 8,
+        "LSL" : -6,
+        "Left" : 100,
+        "LineLCL&UCL" : "DefaultChartStyle",
+        "LineLSL&USL" : "DefaultChartStyle3",
+        "ResponsiveLayout" : true,
+        "ShowAdditionalData" : true,
+        "ShowDataLoading" : true,
+        "ShowLCL&UCL" : true,
+        "ShowLSL&USL" : true,
+        "ShowStdDevAreas" : true,
+        "ShowTestsResults" : true,
+        "Test1Style" : "DefaultChartStyle1",
+        "Test2Style" : "DefaultChartStyle2",
+        "Test3Style" : "DefaultChartStyle3",
+        "Test4Style" : "DefaultChartStyle4",
+        "Test5Style" : "DefaultChartStyle5",
+        "Test6Style" : "DefaultChartStyle6",
+        "Test7Style" : "DefaultChartStyle7",
+        "Test8Style" : "DefaultChartStyle8",
+        "Test9Style" : "DefaultChartStyle9",
+        "Title" : "I-Chart",
+        "Top" : 35,
+        "Type" : "ichart",
+        "USL" : 6,
+        "Visible" : true,
+        "Width" : 420,
+        "XAxisTitle" : "x-scale ID",
+        "YAxisTitle" : "data/uom",
+        "Z-index" : 10,
+        "__TypeDisplayName" : "I-Chart"
+      },
+      "Widgets" : [ ]
+    } ]
+  },
+  "mashupType" : "mashup"
+}]]></mashupContent><preview/><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : name : updated&#10;" timestamp="2022-02-01T15:54:04.211Z" user="adm-flassakm"/></ConfigurationChanges></Mashup></Mashups></Entities>

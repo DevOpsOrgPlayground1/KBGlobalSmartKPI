@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b97"
+ majorVersion="8"
+ minorVersion="4"
+ modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+ revision="11"
+ schemaVersion="1044"
+ universal="password">
+    <Mashups>
+        <Mashup
+         aspect.isResponsive="true"
+         aspect.mashupType="mashup"
+         columns="0.0"
+         description=""
+         documentationContent=""
+         homeMashup=""
+         lastModifiedDate="2021-03-24T02:57:11.954+01:00"
+         name="KBLocalMachineOrderInfoBase2021Mashup"
+         projectName="KBLocalOrderInfo"
+         rows="0.0"
+         tags="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read>
+                <Principal
+                     isPermitted="true"
+                     name="KBMachineOperatorUserGroup"
+                     type="Group"></Principal>
+                    <Principal
+                     isPermitted="true"
+                     name="KBUserGroup"
+                     type="Group"></Principal>
+                </Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions>
+                <Permissions
+                 resourceName="*">
+                    <PropertyRead>
+                    	<Principal
+                         isPermitted="true"
+                         name="KBMachineOperatorUserGroup"
+                         type="Group"></Principal>
+                        <Principal
+                         isPermitted="true"
+                         name="KBMesKitHelperUser"
+                         type="User"></Principal>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                    </PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke>
+                    	<Principal
+                         isPermitted="true"
+                         name="KBMachineOperatorUserGroup"
+                         type="Group"></Principal>
+                        <Principal
+                         isPermitted="true"
+                         name="KBMesKitHelperUser"
+                         type="User"></Principal>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+            </RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility>
+                    <Principal
+                     isPermitted="true"
+                     name="KBBackGroundWorker"
+                     type="Organization"></Principal>
+                    <Principal
+                     isPermitted="true"
+                     name="KBOrganization"
+                     type="Organization"></Principal>
+                </Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables></ConfigurationTables>
+            <ParameterDefinitions>
+                <FieldDefinition
+                 aspect.bindingDirection="IN"
+                 aspect.isMandatory="false"
+                 aspect.ordinal="3"
+                 baseType="INTEGER"
+                 description=""
+                 name="ActionType"
+                 ordinal="0"></FieldDefinition>
+                <FieldDefinition
+                 aspect.bindingDirection="IN"
+                 aspect.isMandatory="false"
+                 aspect.ordinal="4"
+                 baseType="STRING"
+                 description=""
+                 name="MachineThingName"
+                 ordinal="0"></FieldDefinition>
+                <FieldDefinition
+                 aspect.bindingDirection="IN"
+                 aspect.isMandatory="false"
+                 aspect.ordinal="2"
+                 baseType="INTEGER"
+                 description=""
+                 name="NextNweek"
+                 ordinal="0"></FieldDefinition>
+                <FieldDefinition
+                 aspect.bindingDirection="IN"
+                 aspect.isMandatory="false"
+                 aspect.ordinal="5"
+                 baseType="INTEGER"
+                 description=""
+                 name="OrderType"
+                 ordinal="0"></FieldDefinition>
+                <FieldDefinition
+                 aspect.bindingDirection="IN"
+                 aspect.isMandatory="false"
+                 aspect.ordinal="1"
+                 baseType="STRING"
+                 description=""
+                 name="PlantCode"
+                 ordinal="0"></FieldDefinition>
+                <FieldDefinition
+                 aspect.bindingDirection="IN"
+                 aspect.isMandatory="false"
+                 aspect.ordinal="0"
+                 baseType="STRING"
+                 description=""
+                 name="SAPMachineName"
+                 ordinal="0"></FieldDefinition>
+                <FieldDefinition
+                 aspect.bindingDirection="IN"
+                 aspect.isMandatory="false"
+                 aspect.ordinal="6"
+                 baseType="STRING"
+                 description=""
+                 name="ShowMachineName"
+                 ordinal="0"></FieldDefinition>
+                <FieldDefinition
+                 aspect.bindingDirection="IN"
+                 aspect.isMandatory="false"
+                 aspect.ordinal="7"
+                 baseType="INTEGER"
+                 description=""
+                 name="UID"
+                 ordinal="0"></FieldDefinition>
+            </ParameterDefinitions>
+            <Things>
+                <Thing>KBLocalOrderHelperThing</Thing>
+            </Things>
+            <ThingShapes></ThingShapes>
+            <ThingTemplates></ThingTemplates>
+            <mashupContent>
+            <![CDATA[
+            {
+              "CustomMashupCss" : "",
+              "Data" : {
+                "Session" : {
+                  "DataName" : "Session",
+                  "EntityName" : "",
+                  "EntityType" : "Session",
+                  "Id" : "session",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "SessionInterface",
+                    "Name" : "GetGlobalSessionValues",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetGlobalSessionValues"
+                  } ]
+                },
+                "Things_KBLocalOrderHelperThing" : {
+                  "DataName" : "Things_KBLocalOrderHelperThing",
+                  "EntityName" : "KBLocalOrderHelperThing",
+                  "EntityType" : "Things",
+                  "Id" : "f130b34e-c58f-4126-9302-7fa099ba93a4",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "cc198eb0-26ed-4556-95f5-7432478419e9",
+                    "Name" : "SplitAllOrder",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "SplitAllOrder"
+                  }, {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "90d712be-b95d-4076-aab4-4bf609044f1a",
+                    "Name" : "GetPlannedOrActualOrderInfoByStation",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetPlannedOrActualOrderInfoByStation"
+                  } ]
+                },
+                "UserExtensions" : {
+                  "DataName" : "UserExtensions",
+                  "EntityName" : "",
+                  "EntityType" : "UserExtensions",
+                  "Id" : "UserExtensions",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "UserExtensionInterface",
+                    "Name" : "GetCurrentUserExtensionProperties",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetCurrentUserExtensionProperties"
+                  } ]
+                }
+              },
+              "DataBindings" : [ {
+                "Id" : "4b244b86-d8f2-4ab1-84f1-8ac2ed140e54",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "",
+                  "SourcePropertyBaseType" : "INFOTABLE",
+                  "SourcePropertyType" : "InfoTable",
+                  "TargetProperty" : "Data",
+                  "TargetPropertyBaseType" : "INFOTABLE",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "SplitAllOrder",
+                "SourceSection" : "Things_KBLocalOrderHelperThing",
+                "TargetArea" : "UI",
+                "TargetId" : "collection-39",
+                "TargetSection" : ""
+              }, {
+                "Id" : "657998db-3e17-45a2-ba36-5ab20560eed2",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "SAPMachineName",
+                  "SourcePropertyBaseType" : "STRING",
+                  "TargetProperty" : "SAPMachineName",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetPlannedOrActualOrderInfoByStation",
+                "TargetSection" : "Things_KBLocalOrderHelperThing"
+              }, {
+                "Id" : "c3418311-3ebe-40ac-885f-7db7949c851e",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "PlantCode",
+                  "SourcePropertyBaseType" : "STRING",
+                  "TargetProperty" : "PlantCode",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetPlannedOrActualOrderInfoByStation",
+                "TargetSection" : "Things_KBLocalOrderHelperThing"
+              }, {
+                "Id" : "9148186d-0a47-491f-8314-ef35104cce22",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "NextNweek",
+                  "SourcePropertyBaseType" : "INTEGER",
+                  "TargetProperty" : "NextNweek",
+                  "TargetPropertyBaseType" : "INTEGER",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetPlannedOrActualOrderInfoByStation",
+                "TargetSection" : "Things_KBLocalOrderHelperThing"
+              }, {
+                "Id" : "78596ae1-5032-4907-bade-8209815f84c0",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "ActionType",
+                  "SourcePropertyBaseType" : "INTEGER",
+                  "TargetProperty" : "ActionType",
+                  "TargetPropertyBaseType" : "INTEGER",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetPlannedOrActualOrderInfoByStation",
+                "TargetSection" : "Things_KBLocalOrderHelperThing"
+              }, {
+                "Id" : "3162614a-2893-418b-bdfe-983aabe7148d",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "MachineThingName",
+                  "SourcePropertyBaseType" : "STRING",
+                  "TargetProperty" : "MachineThingName",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetPlannedOrActualOrderInfoByStation",
+                "TargetSection" : "Things_KBLocalOrderHelperThing"
+              }, {
+                "Id" : "5f3a96ce-e155-47bc-928c-f7232403f655",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "",
+                  "SourcePropertyBaseType" : "",
+                  "SourcePropertyType" : "Data",
+                  "TargetProperty" : "OriOrderInfo",
+                  "TargetPropertyBaseType" : "INFOTABLE"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "GetPlannedOrActualOrderInfoByStation",
+                "SourceSection" : "Things_KBLocalOrderHelperThing",
+                "TargetArea" : "Data",
+                "TargetId" : "SplitAllOrder",
+                "TargetSection" : "Things_KBLocalOrderHelperThing"
+              }, {
+                "Id" : "ebe97338-b248-4d65-b8de-919ce1f94d1e",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "OrderType",
+                  "SourcePropertyBaseType" : "INTEGER",
+                  "TargetProperty" : "OrderType",
+                  "TargetPropertyBaseType" : "INTEGER",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetPlannedOrActualOrderInfoByStation",
+                "TargetSection" : "Things_KBLocalOrderHelperThing"
+              }, {
+                "Id" : "08723111-8cf1-4f55-8fe7-dd0156a3fc4b",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "UID",
+                  "SourcePropertyBaseType" : "INTEGER",
+                  "TargetProperty" : "UID",
+                  "TargetPropertyBaseType" : "INTEGER"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "mashupcontainer-42",
+                "TargetSection" : ""
+              }, {
+                "Id" : "7a1978a3-4d6c-4aa0-b803-43e377c26441",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "ShowMachineName",
+                  "SourcePropertyBaseType" : "STRING",
+                  "TargetProperty" : "ShowMachineName",
+                  "TargetPropertyBaseType" : "STRING"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "UI",
+                "TargetId" : "mashupcontainer-42",
+                "TargetSection" : ""
+              }, {
+                "Id" : "ad85127e-b3f1-4ecf-943b-14508f6896b8",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "UID",
+                  "SourcePropertyBaseType" : "INTEGER",
+                  "TargetProperty" : "UID",
+                  "TargetPropertyBaseType" : "INTEGER",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetPlannedOrActualOrderInfoByStation",
+                "TargetSection" : "Things_KBLocalOrderHelperThing"
+              }, {
+                "Id" : "8bf3ae8d-5300-4c54-a954-e0f385fb0438",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "ShowMachineName",
+                  "SourcePropertyBaseType" : "STRING",
+                  "TargetProperty" : "ShowMachineName",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetPlannedOrActualOrderInfoByStation",
+                "TargetSection" : "Things_KBLocalOrderHelperThing"
+              } ],
+              "DesignTimePermissions" : {
+                "Create" : [ ],
+                "Delete" : [ ],
+                "Metadata" : [ ],
+                "Read" : [ ],
+                "Update" : [ ]
+              },
+              "Events" : [ {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBLocalOrderHelperThing",
+                "EventHandlerService" : "GetPlannedOrActualOrderInfoByStation",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "Loaded",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "a19e8469-4bc7-4d12-9214-d6abd114ca98"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBLocalOrderHelperThing",
+                "EventHandlerService" : "GetPlannedOrActualOrderInfoByStation",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "RefreshRequested",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "fdea7f08-df02-4de8-9d99-c34e1654ca48"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBLocalOrderHelperThing",
+                "EventHandlerService" : "GetPlannedOrActualOrderInfoByStation",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "NextNweekChanged",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "1859712a-28f6-4e61-b4a9-a84a82d39b04"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBLocalOrderHelperThing",
+                "EventHandlerService" : "GetPlannedOrActualOrderInfoByStation",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "ActionTypeChanged",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "32adf2b3-11af-4e36-9092-0246e0a0a04b"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBLocalOrderHelperThing",
+                "EventHandlerService" : "SplitAllOrder",
+                "EventTriggerArea" : "Data",
+                "EventTriggerEvent" : "ServiceInvokeCompleted",
+                "EventTriggerId" : "GetPlannedOrActualOrderInfoByStation",
+                "EventTriggerSection" : "Things_KBLocalOrderHelperThing",
+                "Id" : "ea96fe75-8fc4-49ac-b5a8-4cb9d062f85a"
+              } ],
+              "RunTimePermissions" : {
+                "permissions" : [ {
+                  "EventInvoke" : [ ],
+                  "EventSubscribe" : [ ],
+                  "PropertyRead" : [ {
+                    "isPermitted" : true,
+                    "name" : "KBUserGroup",
+                    "type" : "Group"
+                  } ],
+                  "PropertyWrite" : [ ],
+                  "ServiceInvoke" : [ {
+                    "isPermitted" : true,
+                    "name" : "KBUserGroup",
+                    "type" : "Group"
+                  } ],
+                  "resourceName" : "*"
+                } ]
+              },
+              "UI" : {
+                "Properties" : {
+                  "AddToDashboardButton" : "SimplePlus",
+                  "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+                  "Area" : "Mashup",
+                  "BGImage" : "",
+                  "BGImageRepeat" : "no-repeat",
+                  "BGImageSize" : "auto",
+                  "Columns" : 0,
+                  "ConfigureGadgetButton" : "SimpleGear",
+                  "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+                  "DisplayName" : "Mashup",
+                  "EnableParameterEditing" : false,
+                  "Height" : 618,
+                  "Id" : "mashup-root",
+                  "IgnoreWarningsInViewMashup" : false,
+                  "IsPrintLayout" : false,
+                  "Left" : 0,
+                  "MashupToEditGadget" : "DefaultMashupToEditGadget",
+                  "MinHeight" : 0,
+                  "MinWidth" : 0,
+                  "ResponsiveLayout" : true,
+                  "Rows" : 0,
+                  "ShowDataLoading" : true,
+                  "Style" : "DefaultMashupStyle",
+                  "StyleTheme" : "Base Theme",
+                  "Title" : "",
+                  "TitleBar" : false,
+                  "TitleBarStyle" : "DefaultTitleBarStyle",
+                  "TitleBarText" : "Gadget Title Here",
+                  "Top" : 0,
+                  "Type" : "mashup",
+                  "UseTheme" : false,
+                  "UseThemeForHybrids" : false,
+                  "Visible" : true,
+                  "Width" : 1024,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Mashup",
+                  "_currentParameterDefs" : [ {
+                    "Aspects" : {
+                      "bindingDirection" : "IN",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "SAPMachineName"
+                  }, {
+                    "Aspects" : {
+                      "bindingDirection" : "IN",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "PlantCode"
+                  }, {
+                    "Aspects" : {
+                      "bindingDirection" : "IN",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "INTEGER",
+                    "Description" : "",
+                    "ParameterName" : "NextNweek"
+                  }, {
+                    "Aspects" : {
+                      "bindingDirection" : "IN",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "INTEGER",
+                    "Description" : "",
+                    "ParameterName" : "ActionType"
+                  }, {
+                    "Aspects" : {
+                      "bindingDirection" : "IN",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "MachineThingName"
+                  }, {
+                    "Aspects" : {
+                      "bindingDirection" : "IN",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "INTEGER",
+                    "Description" : "",
+                    "ParameterName" : "OrderType"
+                  }, {
+                    "Aspects" : {
+                      "bindingDirection" : "IN",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "ShowMachineName"
+                  }, {
+                    "Aspects" : {
+                      "bindingDirection" : "IN",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "INTEGER",
+                    "Description" : "",
+                    "ParameterName" : "UID"
+                  } ],
+                  "id_index" : 42,
+                  "supportsAutoResize" : true
+                },
+                "Widgets" : [ {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "ContainerClass" : "",
+                    "DisplayName" : "panel-2",
+                    "Height" : 200,
+                    "HideScrollbars" : false,
+                    "HorizontalAnchor" : "left",
+                    "Id" : "panel-2",
+                    "Left" : 55,
+                    "ResponsiveLayout" : true,
+                    "ShowDataLoading" : true,
+                    "Style" : "DefaultPanelStyle",
+                    "Top" : 70,
+                    "Type" : "panel",
+                    "VerticalAnchor" : "top",
+                    "Visible" : true,
+                    "Width" : 300,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Panel"
+                  },
+                  "Widgets" : [ {
+                    "Properties" : {
+                      "AllowSelection" : false,
+                      "AlwaysUseCustomScrollerOniOS" : true,
+                      "Area" : "UI",
+                      "AutoSelectFirstRow" : false,
+                      "BottomPadding" : 0,
+                      "CellActiveStyle" : "DefaultCollectionCellActiveStyle",
+                      "CellBorderRadius" : 0,
+                      "CellBoxShadow" : "",
+                      "CellHeightField" : "",
+                      "CellHoverStyle" : "DefaultCollectionCellHoverStyle",
+                      "CellMashupSelectedField" : "",
+                      "CellMenuStatesIconGravity" : "Left",
+                      "CellMenuStatesIconSize" : 16,
+                      "CellMenuStatesOrientation" : "Horizontal",
+                      "CellMenuStatesUseBuiltin" : false,
+                      "CellMultipleSelectionType" : "Disabled",
+                      "CellPointer" : "Auto",
+                      "CellSelectedStyle" : "DefaultCollectionCellSelectedStyle",
+                      "CellStyle" : "DefaultCollectionCellStyle",
+                      "CellWidthField" : "",
+                      "CustomClass" : "",
+                      "DisplayName" : "collection-39",
+                      "FlowLayoutAlignment" : "Top",
+                      "FlowLayoutContentGravity" : "Center",
+                      "FlowLayoutGravity" : "Spaced",
+                      "FooterHeight" : 6,
+                      "FooterSectionParam" : "",
+                      "HandleSelectionUpdates" : false,
+                      "HasSelectedCells" : false,
+                      "HeaderHeight" : 6,
+                      "HeaderSectionParam" : "",
+                      "Height" : 90,
+                      "Id" : "collection-39",
+                      "ItemLoadBehavior" : "loadAll",
+                      "Left" : 240,
+                      "LeftAlignFinalRow" : false,
+                      "Mashup" : "KBLocalMachineOrderInfoBarNewMashup",
+                      "MashupGlobalPropertyBinding" : "{}",
+                      "MashupHeight" : 30,
+                      "MashupNameField" : "",
+                      "MashupPropertyBinding" : "{\"UID\":\"UID\",\"LoopData\":\"LoopData\",\"T1\":\"T1\",\"T2\":\"T2\"}",
+                      "MashupWidth" : 240,
+                      "MinimumSpacing" : 0,
+                      "MultiSelect" : false,
+                      "OffScreenBufferFactor" : 0.1,
+                      "PinFootersToBottom" : false,
+                      "PinHeadersToTop" : false,
+                      "PlaysIntroAnimation" : false,
+                      "ResponsiveLayout" : false,
+                      "RippleEffectStyle" : "DefaultCollectionRippleStyle",
+                      "RowSpacing" : 0,
+                      "ScrollbarType" : "hover",
+                      "ScrollsToSelectedCell" : false,
+                      "SectionInsetBottom" : 0,
+                      "SectionInsetLeft" : 0,
+                      "SectionInsetRight" : 0,
+                      "SectionInsetTop" : 0,
+                      "SelectedCellsCount" : 0,
+                      "ShowDataLoading" : true,
+                      "ShowFooters" : false,
+                      "ShowHeaders" : false,
+                      "SortAscending" : true,
+                      "SortField" : "UID",
+                      "Top" : 0,
+                      "TopPadding" : 0,
+                      "Type" : "collection",
+                      "UIDField" : "UID",
+                      "UseCustomScrollerOnWindowsDesktops" : true,
+                      "UseMashupDimensions" : false,
+                      "UseRippleEffect" : false,
+                      "View" : "table",
+                      "Visible" : true,
+                      "Width" : 1300,
+                      "Z-index" : 10,
+                      "_CanDoubleClick" : false,
+                      "_EventDataShape" : "{\"LoopData\":{\"name\":\"LoopData\",\"aspects\":{\"isPrimaryKey\":false,\"dataShape\":\"KBLocalOrderInfoDataShape\"},\"description\":\"\",\"baseType\":\"INFOTABLE\",\"ordinal\":2,\"dataShape\":{\"fieldDefinitions\":{\"op\":{\"name\":\"op\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"STRING\",\"ordinal\":8},\"SAPMachineName\":{\"name\":\"SAPMachineName\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"STRING\",\"ordinal\":3},\"ScheduledFinishDate\":{\"name\":\"ScheduledFinishDate\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"DATETIME\",\"ordinal\":11},\"Label\":{\"name\":\"Label\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"STRING\",\"ordinal\":14},\"OrderNumber\":{\"name\":\"OrderNumber\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"STRING\",\"ordinal\":4},\"PlantCode\":{\"name\":\"PlantCode\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"STRING\",\"ordinal\":2},\"ScheduledStartDate\":{\"name\":\"ScheduledStartDate\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"DATETIME\",\"ordinal\":10},\"UpdateTime\":{\"name\":\"UpdateTime\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"DATETIME\",\"ordinal\":5},\"Id\":{\"name\":\"Id\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"INTEGER\",\"ordinal\":1},\"MaterialNumber\":{\"name\":\"MaterialNumber\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"STRING\",\"ordinal\":6},\"Operations\":{\"name\":\"Operations\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"STRING\",\"ordinal\":7},\"TotalOrderQuantity\":{\"name\":\"TotalOrderQuantity\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"INTEGER\",\"ordinal\":9},\"T1\":{\"name\":\"T1\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"Start time for Mashup data filter\",\"baseType\":\"DATETIME\",\"ordinal\":12},\"T2\":{\"name\":\"T2\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"end time for Mashup data filter\",\"baseType\":\"DATETIME\",\"ordinal\":13}}}},\"T1\":{\"name\":\"T1\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"DATETIME\",\"ordinal\":3},\"T2\":{\"name\":\"T2\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"DATETIME\",\"ordinal\":4},\"UID\":{\"name\":\"UID\",\"aspects\":{\"isPrimaryKey\":false},\"description\":\"\",\"baseType\":\"INTEGER\",\"ordinal\":1}}",
+                      "_GlobalDataShape" : "{}",
+                      "_MenuDefinition" : "[]",
+                      "__TypeDisplayName" : "Collection"
+                    },
+                    "Widgets" : [ ]
+                  }, {
+                    "Properties" : {
+                      "Area" : "UI",
+                      "DisplayName" : "mashupcontainer-42",
+                      "Height" : 90,
+                      "Id" : "mashupcontainer-42",
+                      "Left" : 0,
+                      "MashupParameters" : [ {
+                        "BaseType" : "INTEGER",
+                        "Description" : "",
+                        "ParameterName" : "UID",
+                        "ParmDef" : {
+                          "aspects" : {
+                            "bindingDirection" : "IN",
+                            "isMandatory" : "false",
+                            "ordinal" : "1"
+                          },
+                          "baseType" : "INTEGER",
+                          "description" : "",
+                          "name" : "UID",
+                          "ordinal" : 0
+                        }
+                      }, {
+                        "BaseType" : "STRING",
+                        "Description" : "",
+                        "ParameterName" : "ShowMachineName",
+                        "ParmDef" : {
+                          "aspects" : {
+                            "bindingDirection" : "IN",
+                            "isMandatory" : "false",
+                            "ordinal" : "0"
+                          },
+                          "baseType" : "STRING",
+                          "description" : "",
+                          "name" : "ShowMachineName",
+                          "ordinal" : 0
+                        }
+                      } ],
+                      "Name" : "KBLocalMachineNameBaseMashup",
+                      "ResponsiveLayout" : false,
+                      "ShowDataLoading" : true,
+                      "TabSequenceGroup" : 0,
+                      "Top" : 0,
+                      "Type" : "mashupcontainer",
+                      "Visible" : true,
+                      "Width" : 240,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Contained Mashup"
+                    },
+                    "Widgets" : [ ]
+                  } ]
+                } ]
+              },
+              "mashupType" : "mashup"
+            }
+            ]]>
+            </mashupContent>
+            <preview></preview>
+        </Mashup>
+    </Mashups>
+</Entities>

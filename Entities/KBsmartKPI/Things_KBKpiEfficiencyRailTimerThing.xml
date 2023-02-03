@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b167" majorVersion="8" minorVersion="2"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="2" schemaVersion="1020" universal="">
+	<Things>
+		<Thing description="***DEPRECATED***" documentationContent=""
+			effectiveThingPackage="TimerThing" enabled="false" homeMashup=""
+			identifier="" lastModifiedDate="2018-11-09T13:02:42.373+01:00"
+			name="DEPRECATED-KBKpiEfficiencyRailTimerThing" projectName="KBsmartKPI"
+			published="false"
+			tags="KBThingWorxInstallationVocabulary:ExtensionSmartKPI"
+			thingTemplate="Timer" valueStream="">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions />
+			<VisibilityPermissions>
+				<Visibility />
+			</VisibilityPermissions>
+			<ConfigurationTables>
+				<ConfigurationTable
+					description="General Settings" isMultiRow="false" name="Settings"
+					ordinal="0">
+					<DataShape>
+						<FieldDefinitions>
+							<FieldDefinition aspect.defaultValue="true"
+								baseType="BOOLEAN"
+								description="Automatically enable timer on startup"
+								name="enabled" ordinal="0" />
+							<FieldDefinition baseType="USERNAME"
+								description="User context in which to run event handlers"
+								name="runAsUser" ordinal="0" />
+							<FieldDefinition aspect.defaultValue="60000.0"
+								baseType="NUMBER" description="Update rate" name="updateRate"
+								ordinal="0" />
+						</FieldDefinitions>
+					</DataShape>
+					<Rows>
+						<Row>
+							<enabled>false</enabled>
+							<runAsUser>
+								<![CDATA[Administrator]]>
+							</runAsUser>
+							<updateRate>300000.0</updateRate>
+						</Row>
+					</Rows>
+				</ConfigurationTable>
+			</ConfigurationTables>
+			<ThingShape>
+				<PropertyDefinitions />
+				<ServiceDefinitions>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="SetTimerUpdateRate">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.isRequired="true"
+								baseType="NUMBER" description="Time in MilliSeconds"
+								name="UpdateRate" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="EfficiencyRail">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="EfficiencyRailPerDay">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="EfficiencyRailPerDayWithNumerOfCycles">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.defaultValue="1"
+								aspect.isRequired="true" baseType="INTEGER" description=""
+								name="NumerOfCycles" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="EfficiencyRailPerHour">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="EfficiencyRailPerHourWithNumerOfCycles">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.defaultValue="1"
+								aspect.isRequired="true" baseType="INTEGER" description=""
+								name="NumerOfCycles" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="EfficiencyRailPerMonth">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="EfficiencyRailPerMonthWithNumerOfCycles">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.defaultValue="1"
+								aspect.isRequired="true" baseType="INTEGER" description=""
+								name="NumerOfCycles" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="EfficiencyRailPerQuarter">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="EfficiencyRailPerQuarterWithNumerOfCycles">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.defaultValue="1"
+								aspect.isRequired="true" baseType="INTEGER" description=""
+								name="NumerOfCycles" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="EfficiencyRailPerWeek">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="EfficiencyRailPerWeekWithNumerOfCycles">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.defaultValue="1"
+								aspect.isRequired="true" baseType="INTEGER" description=""
+								name="NumerOfCycles" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="EfficiencyRailPerYear">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="EfficiencyRailPerYearWithNumerOfCycles">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.defaultValue="1"
+								aspect.isRequired="true" baseType="INTEGER" description=""
+								name="NumerOfCycles" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+				</ServiceDefinitions>
+				<EventDefinitions />
+				<ServiceMappings />
+				<ServiceImplementations>
+					<ServiceImplementation description=""
+						handlerName="Script" name="SetTimerUpdateRate">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code>
+											<![CDATA[
+var params = {
+	tableName: "Settings" /* STRING */
+};
+
+// result: INFOTABLE
+var table = me.GetConfigurationTable(params);
+
+table[0].updateRate = UpdateRate;
+
+
+
+var params = {
+	configurationTable: table /* INFOTABLE */,
+	persistent: true /* BOOLEAN */,
+	tableName: "Settings" /* STRING */
+};
+
+// no return
+me.SetConfigurationTable(params);
+
+
+]]>
+										</code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="EfficiencyRail">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+
+var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("EfficiencyRail, location = " + location);
+
+
+
+if (location == "MUC") {
+    // result: STRING
+    var DB = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+
+    
+     // result: NUMBER
+     var result = Things[DB].CalculateKpiEfficiencyRail();
+}
+
+
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="EfficiencyRailPerDay">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("EfficiencyRailPerDay, location = " + location);
+
+if (location == "MUC") {
+
+    var params = {
+        NumerOfCycles: 3 /* INTEGER */
+    };
+
+    me.EfficiencyRailPerDayWithNumerOfCycles(params);
+
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="EfficiencyRailPerDayWithNumerOfCycles">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("EfficiencyRailPerDayWithNumerOfCycles, location = " + location);
+
+if (location == "MUC") {
+    // result: STRING
+    var DB = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+
+    //Day
+    // result: DATETIME
+    var startTime = Things["KBTimeHelperThing"].GetCurrentDayStart();
+    var params = {
+        CalculationPeriodInMinutes: 1440 /* INTEGER */,
+        StartDateTime: startTime /* DATETIME */,
+        CalculateNumerOfCycles: NumerOfCycles /* INTEGER */,
+        CalculationBase: "Day"
+    };
+
+    // result: NUMBER
+    var result = Things[DB].CalculateEfficiencyRail(params);
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="EfficiencyRailPerHour">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("EfficiencyRailPerHour, location = " + location);
+
+if (location == "MUC") {
+
+    var params = {
+        NumerOfCycles: 12 /* INTEGER */
+    };
+
+    me.EfficiencyRailPerHourWithNumerOfCycles(params);
+
+
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="EfficiencyRailPerHourWithNumerOfCycles">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("EfficiencyRailPerHourWithNumerOfCycles, location = " + location);
+
+if (location == "MUC") {
+    // result: STRING
+    var DB = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+
+    //Hour
+    // result: DATETIME
+	var startTime = Things["KBTimeHelperThing"].GetCurrentHourStart();
+    var params = {
+        CalculationPeriodInMinutes: 60 /* INTEGER */,
+        StartDateTime: startTime /* DATETIME */,
+        CalculateNumerOfCycles: NumerOfCycles /* INTEGER */,
+        CalculationBase: "Hour"
+    };
+
+    // result: NUMBER
+    var result = Things[DB].CalculateEfficiencyRail(params);
+
+
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="EfficiencyRailPerMonth">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("EfficiencyRailPerMonth, location = " + location);
+
+if (location == "MUC") {
+
+    var params = {
+        NumerOfCycles: 3 /* INTEGER */
+    };
+
+    me.EfficiencyRailPerMonthWithNumerOfCycles(params);
+
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script"
+						name="EfficiencyRailPerMonthWithNumerOfCycles">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("EfficiencyRailPerMonthWithNumerOfCycles, location = " + location);
+
+
+
+if (location == "MUC") {
+    // result: STRING
+    var DB = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+
+    //Month
+    // result: DATETIME
+    var startMonthStart = Things["KBTimeHelperThing"].GetCurrentMonthStart();
+    var startMonthEnd = dateAddMilliseconds(Things["KBTimeHelperThing"].GetCurrentMonthEnd(), 1);
+
+    
+    for (var i = 0; i<NumerOfCycles; i++) {
+        
+        var currentMonthStart = dateAddMonths(startMonthStart, -1*i);
+        var currentMonthEnd = dateAddMonths(startMonthEnd, -1*i);
+        
+
+    
+        // dateDifference(date1:DATETIME,date2:DATETIME):NUMBER
+        var minutes = dateDifference(currentMonthEnd, currentMonthStart)/1000/60;
+        logger.debug("EfficiencyRailPerMonthWithNumerOfCycles: currentMonthStart = " + currentMonthStart);
+        logger.debug("EfficiencyRailPerMonthWithNumerOfCycles: currentMonthEnd = " + currentMonthEnd);
+        logger.debug("EfficiencyRailPerMonthWithNumerOfCycles: minutes = " + minutes);
+
+        var params = {
+            CalculationPeriodInMinutes: minutes /* INTEGER */,
+            StartDateTime: currentMonthStart /* DATETIME */,
+            CalculateNumerOfCycles: 1 /* INTEGER */,
+            CalculationBase: "Month"
+        };
+
+        // result: NUMBER
+        var result = Things[DB].CalculateEfficiencyRail(params);
+    }
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="EfficiencyRailPerQuarter">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("EfficiencyRailPerQuarter, location = " + location);
+
+if (location == "MUC") {
+
+    var params = {
+        NumerOfCycles: 50 /* INTEGER */
+    };
+
+    me.EfficiencyRailPerQuarterWithNumerOfCycles(params);
+
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script"
+						name="EfficiencyRailPerQuarterWithNumerOfCycles">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("EfficiencyRailPerQuarterWithNumerOfCycles, location = " + location);
+
+if (location == "MUC") {
+    // result: STRING
+    var DB = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+
+    //Quarter
+    // result: DATETIME
+    var startTime = Things["KBTimeHelperThing"].GetCurrentQuarterStart();
+    var params = {
+        CalculationPeriodInMinutes: 15 /* INTEGER */,
+        StartDateTime: startTime /* DATETIME */,
+        CalculateNumerOfCycles: NumerOfCycles /* INTEGER */,
+        CalculationBase: "Quarter"
+    };
+
+    // result: NUMBER
+    var result = Things[DB].CalculateEfficiencyRail(params);
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="EfficiencyRailPerWeek">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("EfficiencyRailPerWeek, location = " + location);
+
+if (location == "MUC") {
+
+    var params = {
+        NumerOfCycles: 3 /* INTEGER */
+    };
+
+    me.EfficiencyRailPerWeekWithNumerOfCycles(params);
+
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="EfficiencyRailPerWeekWithNumerOfCycles">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("EfficiencyRailPerWeekWithNumerOfCycles, location = " + location);
+
+
+
+if (location == "MUC") {
+    // result: STRING
+    var DB = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+
+    //Week
+    // result: DATETIME
+    var startWeekStart = Things["KBTimeHelperThing"].GetCurrentWeekStart();
+    var startWeekEnd = dateAddMilliseconds(Things["KBTimeHelperThing"].GetCurrentWeekEnd(), 1);
+
+    
+    for (var i = 0; i<NumerOfCycles; i++) {
+        
+        var currentWeekStart = dateAddDays(startWeekStart, -7*i);
+        var currentWeekEnd = dateAddDays(startWeekEnd, -7*i);
+
+
+    
+        // dateDifference(date1:DATETIME,date2:DATETIME):NUMBER
+        var minutes = dateDifference(currentWeekEnd, currentWeekStart)/1000/60;
+        logger.debug("EfficiencyRailPerWeekWithNumerOfCycles: currentWeekStart = " + currentWeekStart);
+        logger.debug("EfficiencyRailPerWeekWithNumerOfCycles: currentWeekEnd = " + currentWeekEnd);
+        logger.debug("EfficiencyRailPerWeekWithNumerOfCycles: minutes = " + minutes);
+
+        var params = {
+            CalculationPeriodInMinutes: minutes /* INTEGER */,
+            StartDateTime: currentWeekStart /* DATETIME */,
+            CalculateNumerOfCycles: 1 /* INTEGER */,
+            CalculationBase: "Week"
+        };
+
+        // result: NUMBER
+        var result = Things[DB].CalculateEfficiencyRail(params);
+    }
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="EfficiencyRailPerYear">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("EfficiencyRailPerYear, location = " + location);
+
+if (location == "MUC") {
+
+    var params = {
+        NumerOfCycles: 3 /* INTEGER */
+    };
+
+    me.EfficiencyRailPerYearWithNumerOfCycles(params);
+
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="EfficiencyRailPerYearWithNumerOfCycles">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("EfficiencyRailPerYearWithNumerOfCycles, location = " + location);
+
+
+
+if (location == "MUC") {
+    // result: STRING
+    var DB = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+
+    //Year
+    // result: DATETIME
+    var startYearStart = Things["KBTimeHelperThing"].GetCurrentYearStart();
+    var startYearEnd = dateAddMilliseconds(Things["KBTimeHelperThing"].GetCurrentYearEnd(), 1);
+
+    
+    for (var i = 0; i<NumerOfCycles; i++) {
+        
+        var currentYearStart = dateAddYears(startYearStart, -1*i);
+        var currentYearEnd = dateAddYears(startYearEnd, -1*i);
+        
+
+    
+        // dateDifference(date1:DATETIME,date2:DATETIME):NUMBER
+        var minutes = dateDifference(currentYearEnd, currentYearStart)/1000/60;
+        logger.debug("EfficiencyRailPerYearWithNumerOfCycles: currentYearStart = " + currentYearStart);
+        logger.debug("EfficiencyRailPerYearWithNumerOfCycles: currentYearEnd = " + currentYearEnd);
+        logger.debug("EfficiencyRailPerYearWithNumerOfCycles: minutes = " + minutes);
+
+        var params = {
+            CalculationPeriodInMinutes: minutes /* INTEGER */,
+            StartDateTime: currentYearStart /* DATETIME */,
+            CalculateNumerOfCycles: 1 /* INTEGER */,
+            CalculationBase: "Year"
+        };
+
+        // result: NUMBER
+        var result = Things[DB].CalculateEfficiencyRail(params);
+    }
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+				</ServiceImplementations>
+				<Subscriptions>
+					<Subscription enabled="false" eventName="Timer"
+						source="" sourceProperty="">
+						<ServiceImplementation description=""
+							handlerName="Script" name="Event.Timer">
+							<ConfigurationTables>
+								<ConfigurationTable description=""
+									isMultiRow="false" name="Script" ordinal="0">
+									<DataShape>
+										<FieldDefinitions>
+											<FieldDefinition baseType="STRING"
+												description="code" name="code" ordinal="0" />
+										</FieldDefinitions>
+									</DataShape>
+									<Rows>
+										<Row>
+											<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("Event.Timer, location = " + location);
+
+if (location == "MUC") {
+	me.EfficiencyRail();
+}]]></code>
+										</Row>
+									</Rows>
+								</ConfigurationTable>
+							</ConfigurationTables>
+						</ServiceImplementation>
+					</Subscription>
+				</Subscriptions>
+			</ThingShape>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations />
+			<ImplementedShapes />
+			<ThingProperties />
+			<ConfigurationChanges>
+			</ConfigurationChanges>
+		</Thing>
+	</Things>
+</Entities>

@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b167" majorVersion="8" minorVersion="2"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="2" schemaVersion="1020" universal="">
+	<ThingShapes>
+		<ThingShape className="" description=""
+			documentationContent="" homeMashup=""
+			lastModifiedDate="2018-11-21T12:40:52.863+01:00"
+			name="KBLocalAdgTestBenchConnectorShape" projectName="KBsmartKPI"
+			tags="KBThingWorxInstallationVocabulary:ExtensionSmartKPI">
+			<PropertyDefinitions />
+			<ServiceDefinitions>
+				<ServiceDefinition aspect.isAsync="false"
+					category="" description="" isAllowOverride="false"
+					isLocalOnly="false" isOpen="false" isPrivate="false"
+					name="SetPartDataPrePocessor">
+					<ResultType
+						aspect.dataShape="KBLocalStationDataReceiverPartDataShape"
+						baseType="INFOTABLE" description="" name="result" ordinal="0" />
+					<ParameterDefinitions>
+						<FieldDefinition
+							aspect.dataShape="KBLocalStationDataReceiverPartDataShape"
+							aspect.isRequired="true" baseType="INFOTABLE" description=""
+							name="partDataInfoTable" ordinal="1" />
+					</ParameterDefinitions>
+				</ServiceDefinition>
+			</ServiceDefinitions>
+			<EventDefinitions />
+			<ServiceMappings />
+			<ServiceImplementations>
+				<ServiceImplementation description=""
+					handlerName="Script" name="SetPartDataPrePocessor">
+					<ConfigurationTables>
+						<ConfigurationTable description="Script"
+							isMultiRow="false" name="Script" ordinal="0">
+							<DataShape>
+								<FieldDefinitions>
+									<FieldDefinition baseType="STRING"
+										description="code" name="code" ordinal="0" />
+								</FieldDefinitions>
+							</DataShape>
+							<Rows>
+								<Row>
+									<code><![CDATA[var params = {
+	infoTableName : "InfoTable",
+	dataShapeName : "KBLocalStationDataReceiverPartDataShape"
+};
+
+// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBLocalStationDataReceiverPartDataShape)
+var result = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+
+
+try {
+	logger.debug("Start SetPartDataPrePocessor Service");
+	logger.debug(partDataInfoTable.ToJSON());
+	
+	var tableLength = partDataInfoTable.rows.length;
+	logger.debug("Number of rows in Data Table: " + tableLength);
+    
+    var partNumber = "empty";
+    var orderNumber = "empty";
+    var orderStartDateChar = "empty";
+    var orderStartDate = new Date(1970, 0, 1, 0, 0, 0, 0);
+    var trackingCode = "empty";
+    var fileName = "empty";
+    var fileNameCounter = "empty";
+    var partCounter = -1;
+
+	for (var x = 0; x < tableLength; x++) {
+		
+        if (partNumber == "empty" && (partDataInfoTable.rows[x].ShortName == "Part Number" || partDataInfoTable.rows[x].ShortName == "Part Number; (GPD  4)") && partDataInfoTable.rows[x].Type == "PARTDATA") {
+            partNumber = partDataInfoTable.rows[x].Identifier;
+            partDataInfoTable.rows[x].ShortName = "Part Number";
+			//logger.debug("SetPartDataPrePocessor Service Loop1 - partNumber: " + partNumber);
+        }
+        if (orderNumber == "empty" && partDataInfoTable.rows[x].ShortName == "OrderNumber" && partDataInfoTable.rows[x].Type == "PARTDATA") {
+            orderNumber = partDataInfoTable.rows[x].Identifier;
+			//logger.debug("SetPartDataPrePocessor Service Loop1 - orderNumber: " + orderNumber);
+        }
+        if ((partDataInfoTable.rows[x].ShortName == "Order Start Time" || partDataInfoTable.rows[x].ShortName == "Order Start Time; (GPD  9)") && partDataInfoTable.rows[x].Type == "PARTDATA") {
+            orderStartDateChar = partDataInfoTable.rows[x].Identifier;
+            partDataInfoTable.rows[x].ShortName = "Order Start Time";
+			//logger.debug("SetPartDataPrePocessor Service Loop1 - orderStartDateChar: " + orderStartDateChar);
+            try {
+				var orderStartDateChar1 = orderStartDateChar.split(" ").join("");
+				//logger.debug("SetPartDataPrePocessor Service Loop1 - orderStartDateChar1: " + orderStartDateChar1);
+                orderStartDate = new Date(
+                    parseInt(orderStartDateChar1.substr(6,4), 10), 
+                    parseInt(orderStartDateChar1.substr(3,2), 10)-1, 
+                    parseInt(orderStartDateChar1.substr(0,2), 10), 
+                    parseInt(orderStartDateChar1.substr(11,2), 10), 
+                    parseInt(orderStartDateChar1.substr(14,2), 10), 
+                    0, 0);
+                //logger.debug("SetPartDataPrePocessor Service Loop1 - orderStartDate: " + orderStartDate);
+			} catch(err) {
+				logger.error("SetPartDataPrePocessor Service Loop1 - Error parsing fileName: " + fileName);
+            }
+        }
+        if (partDataInfoTable.rows[x].ShortName == "Tracking Bar Code" && partDataInfoTable.rows[x].Type == "PARTDATA") {
+            trackingCode = partDataInfoTable.rows[x].Identifier;
+			//logger.debug("SetPartDataPrePocessor Service Loop1 - trackingCode: " + trackingCode);
+        }
+        if ((partDataInfoTable.rows[x].ShortName == "File Name" || partDataInfoTable.rows[x].ShortName == "File Name; (GPD 20)") && partDataInfoTable.rows[x].Type == "PARTDATA") {
+            fileName = partDataInfoTable.rows[x].Identifier;
+            partDataInfoTable.rows[x].ShortName = "File Name";
+			//logger.debug("SetPartDataPrePocessor Service Loop1 - fileName: " + fileName);
+            try {
+	            fileNameCounter = fileName.substr(fileName.lastIndexOf("_")+3, 5);
+                partCounter = parseInt(fileNameCounter, 10);
+                //logger.debug("SetPartDataPrePocessor Service Loop1 - fileNameCounter: " + fileNameCounter);
+                //logger.debug("SetPartDataPrePocessor Service Loop1 - partCounter: " + partCounter);
+			} catch(err) {
+				logger.error("SetPartDataPrePocessor Service Loop1 - Error parsing fileName: " + fileName);
+            }
+        }
+
+
+        if (orderNumber == "empty" && partDataInfoTable.rows[x].OrderNumber != null && partDataInfoTable.rows[x].OrderNumber != "") {
+            orderNumber = partDataInfoTable.rows[x].OrderNumber;
+            //logger.debug("SetPartDataPrePocessor Service Loop1 - orderNumber: " + orderNumber);
+        }
+        if (partNumber == "empty" && partDataInfoTable.rows[x].PartNumber != null && partDataInfoTable.rows[x].PartNumber != "") {
+            partNumber = partDataInfoTable.rows[x].PartNumber;
+            //logger.debug("SetPartDataPrePocessor Service Loop1 - partNumber: " + partNumber);
+        }
+        if (trackingCode == "empty" && partDataInfoTable.rows[x].TrackingNumber != null && partDataInfoTable.rows[x].TrackingNumber != "") {
+            trackingCode = partDataInfoTable.rows[x].TrackingNumber;
+            //logger.debug("SetPartDataPrePocessor Service Loop1 - trackingCode: " + trackingCode);
+        }
+    }
+
+    
+    logger.info("SetPartDataPrePocessor Service Result - partNumber = " + partNumber);
+    logger.info("SetPartDataPrePocessor Service Result - orderNumber = " + orderNumber);
+    logger.info("SetPartDataPrePocessor Service Result - orderStartDateChar = " + orderStartDateChar);
+    logger.info("SetPartDataPrePocessor Service Result - trackingCode = " + trackingCode);
+    logger.info("SetPartDataPrePocessor Service Result - fileName = " + fileName);
+    
+    
+	for (var x = 0; x < tableLength; x++) {
+	
+		//logger.debug("SetPartDataPrePocessor Service Executing line: " + x);
+
+        var productiondate = partDataInfoTable.rows[x].DateTime;
+        if (productiondate == null || productiondate.getFullYear() == 1970) {
+        	if (orderStartDate.getFullYear() != 1970 && partCounter > -1) {
+	
+	            // dateAddSeconds(dateValue:DATETIME,amount:NUMBER):STRING
+	            productiondate = dateAddSeconds(orderStartDate, partCounter);
+			} else {
+				logger.error("SetPartDataPrePocessor Service - Production date not set (1970) = " + partDataInfoTable.rows[x].DateTime);
+			    logger.error("SetPartDataPrePocessor Service Result - partNumber = " + partNumber);
+			    logger.error("SetPartDataPrePocessor Service Result - orderNumber = " + orderNumber);
+			    logger.error("SetPartDataPrePocessor Service Result - orderStartDateChar = " + orderStartDateChar);
+			    logger.error("SetPartDataPrePocessor Service Result - trackingCode = " + trackingCode);
+			    logger.error("SetPartDataPrePocessor Service Result - fileName = " + fileName);
+			}
+		}
+        //logger.info("SetPartDataPrePocessor Service Loop2 - productiondate = " + productiondate);
+        
+        partDataInfoTable.rows[x].DateTime = productiondate;
+        if (partNumber != "empty") {partDataInfoTable.rows[x].PartNumber = partNumber;}
+        if (orderNumber != "empty") {partDataInfoTable.rows[x].OrderNumber = orderNumber;}
+        if (trackingCode != "empty") {partDataInfoTable.rows[x].TrackingNumber = trackingCode;}
+        if ((partDataInfoTable.rows[x].ShortName == "Test Result" || partDataInfoTable.rows[x].ShortName == "Test Result; (GPD 11)") && partDataInfoTable.rows[x].Type == "PARTDATA" && partDataInfoTable.rows[x].Identifier == "IO") {
+            partDataInfoTable.rows[x].Value = 1;
+            partDataInfoTable.rows[x].ShortName = "Test Result";
+        }
+        else if ((partDataInfoTable.rows[x].ShortName == "Test Result" || partDataInfoTable.rows[x].ShortName == "Test Result; (GPD 11)") && partDataInfoTable.rows[x].Type == "PARTDATA") {
+            partDataInfoTable.rows[x].Value = 0;
+            partDataInfoTable.rows[x].ShortName = "Test Result";
+        }
+        
+        var lineThingName = "";
+        if (me.KBLocalLineThing != "") {
+        	lineThingName = me.KBLocalLineThing;
+        } else {
+        	lineThingName = me.name;
+        }
+        
+        if (partDataInfoTable.rows[x].Station == "") {
+        	partDataInfoTable.rows[x].LocalStation = lineThingName;
+        } else {
+//        	var location = "KB"+Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+//			var lineThingName1 = me.KBLocalLineThing.replace(location, "");
+//			var lineThingName = lineThingName1.replace("Thing", "");
+
+//			var stationThingName1 = lineThingName + partDataInfoTable.rows[x].Station;
+//			var stationThingName2 = stationThingName1.replace(/[^\w]/gi, '');
+//			var stationThingName = stationThingName2.substring(0,100);
+			
+//			var params = {
+//				thingName: stationThingName /* STRING */
+//			};
+//			
+//			// result: BOOLEAN
+//			if (!Resources["PTC.Factory.CommonUtilities"].DoesThingExists(params)) {
+//				
+//				var params = {
+//					StationName: stationThingName /* STRING */,
+//					LineThingName: me.KBLocalLineThing /* THINGNAME */
+//				};
+//				
+//				// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+//				logger.info("Create new Thing: " + stationThingName + "/"+ me.KBLocalLineThing);
+//				var creatorResult = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);
+//				stationThingName = creatorResult.rows[0].Text;
+//				logger.info("New Thing created: " + stationThingName + "/"+ me.KBLocalLineThing);
+//				//Things[stationThingName].DisplayName = Things[me.KBLocalLineThing].DisplayName + " - " + partDataInfoTable.rows[x].Station;
+//			}
+			var stationThingName1 = lineThingName+"-" + partDataInfoTable.rows[x].Station;
+			var stationThingName = stationThingName1.substring(0,254);
+
+        	partDataInfoTable.rows[x].LocalStation = stationThingName;
+        }
+
+		//logger.info("SetPartDataPrePocessor Service Loop2 - Line: " + partDataInfoTable.rows[x].Line);
+		logger.info("SetPartDataPrePocessor Service Loop2 - Station: " + partDataInfoTable.rows[x].Station);
+		logger.info("SetPartDataPrePocessor Service Loop2 - LocalStation: " + partDataInfoTable.rows[x].LocalStation);
+		//logger.info("SetPartDataPrePocessor Service Loop2 - ShortName: " + partDataInfoTable.rows[x].ShortName);
+		//logger.info("SetPartDataPrePocessor Service Loop2 - PartNumber: " + partDataInfoTable.rows[x].PartNumber);
+		//logger.info("SetPartDataPrePocessor Service Loop2 - SerialNumber: " + partDataInfoTable.rows[x].SerialNumber);
+		//logger.info("SetPartDataPrePocessor Service Loop2 - Value: " + partDataInfoTable.rows[x].Value);
+		//logger.info("SetPartDataPrePocessor Service Loop2 - LowerLimit: " + partDataInfoTable.rows[x].LowerLimit);
+		//logger.info("SetPartDataPrePocessor Service Loop2 - OrderNumber: " + partDataInfoTable.rows[x].OrderNumber);
+		//logger.info("SetPartDataPrePocessor Service Loop2 - UpperLimit: " + partDataInfoTable.rows[x].UpperLimit);
+		//logger.info("SetPartDataPrePocessor Service Loop2 - DateTime: " + partDataInfoTable.rows[x].DateTime);
+		//logger.info("SetPartDataPrePocessor Service Loop2 - Description: " + partDataInfoTable.rows[x].Description);
+		//logger.info("SetPartDataPrePocessor Service Loop2 - Identifier: " + partDataInfoTable.rows[x].Identifier);
+		//logger.info("SetPartDataPrePocessor Service Loop2 - TrackingNumber: " + partDataInfoTable.rows[x].TrackingNumber);
+		//logger.info("SetPartDataPrePocessor Service Loop2 - Machine: " + me.name);
+		//logger.debug("SetPartDataPrePocessor Service Loop2 - SetPartDataForDevice: OK");
+		
+		
+		// KBLocalStationDataReceiverPartDataShape entry object
+		var newEntry = new Object();
+		newEntry.Description = partDataInfoTable.rows[x].Description; // STRING
+		newEntry.PartNumber = partDataInfoTable.rows[x].PartNumber; // STRING
+		newEntry.TrackingNumber = partDataInfoTable.rows[x].TrackingNumber; // STRING
+		newEntry.OrderNumber = partDataInfoTable.rows[x].OrderNumber; // STRING
+		newEntry.ShortName = partDataInfoTable.rows[x].ShortName; // STRING - isPrimaryKey = true
+		newEntry.Unit = partDataInfoTable.rows[x].Unit; // STRING
+		newEntry.UpperLimit = partDataInfoTable.rows[x].UpperLimit; // STRING
+		newEntry.DateTime = partDataInfoTable.rows[x].DateTime; // DATETIME - isPrimaryKey = true
+		newEntry.Line = partDataInfoTable.rows[x].Line; // STRING - isPrimaryKey = true
+		newEntry.Station = partDataInfoTable.rows[x].Station; // STRING - isPrimaryKey = true
+		newEntry.Type = partDataInfoTable.rows[x].Type; // STRING - isPrimaryKey = true
+		newEntry.Identifier = partDataInfoTable.rows[x].Identifier; // STRING
+		newEntry.SerialNumber = partDataInfoTable.rows[x].SerialNumber; // STRING
+		newEntry.LocalStation = partDataInfoTable.rows[x].LocalStation; // STRING - isPrimaryKey = true
+		newEntry.Value = partDataInfoTable.rows[x].Value; // STRING
+		newEntry.LowerLimit = partDataInfoTable.rows[x].LowerLimit; // STRING
+		
+		if (newEntry.TrackingNumber === undefined || newEntry.TrackingNumber === null) {
+			newEntry.TrackingNumber = "NULL";
+		}            
+		if (newEntry.Identifier === undefined || newEntry.Identifier === null) {
+			newEntry.Identifier = "NULL";
+		}            
+
+		result.AddRow(newEntry);
+		
+	}
+} catch(err) {
+	logger.error("SetPartDataPrePocessor Error: " + err);
+}
+
+
+
+
+]]></code>
+								</Row>
+							</Rows>
+						</ConfigurationTable>
+					</ConfigurationTables>
+				</ServiceImplementation>
+			</ServiceImplementations>
+			<Subscriptions />
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</PropertyRead>
+					<PropertyWrite />
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true" name="KBBackGroundWorker"
+						type="Organization" />
+					<Principal isPermitted="true" name="KBOrganization"
+						type="Organization" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTables />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="header : name : updated&#10;"
+					timestamp="2018-11-21T09:23:51.445+01:00" user="adm-flassakm" />
+			</ConfigurationChanges>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations />
+			<InstanceRunTimePermissions />
+		</ThingShape>
+	</ThingShapes>
+</Entities>

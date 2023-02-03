@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b2319" majorVersion="8" minorVersion="4"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="4" schemaVersion="1041" universal="">
+	<Things>
+		<Thing description="" documentationContent=""
+			effectiveThingPackage="SchedulerThing" enabled="true" homeMashup=""
+			identifier="" lastModifiedDate="2020-08-03T16:48:43.696+02:00"
+			name="KBDailyPurgingScheduler" projectName="KBsmartKPI"
+			published="false" tags="" thingTemplate="Scheduler" valueStream="">
+			<Owner name="adm-konasm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions />
+			<VisibilityPermissions>
+				<Visibility />
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables>
+				<ConfigurationTable
+					description="General Settings" isMultiRow="false" name="Settings"
+					ordinal="0">
+					<DataShape>
+						<FieldDefinitions>
+							<FieldDefinition aspect.defaultValue="true"
+								baseType="BOOLEAN"
+								description="Automatically enable scheduler on startup"
+								name="enabled" ordinal="0" />
+							<FieldDefinition baseType="USERNAME"
+								description="User context in which to run event handlers"
+								name="runAsUser" ordinal="0" />
+							<FieldDefinition
+								aspect.defaultValue="0 0/1 * * * ?" baseType="SCHEDULE"
+								description="Execution Schedule (Cron String)" name="schedule"
+								ordinal="0" />
+						</FieldDefinitions>
+					</DataShape>
+					<Rows>
+						<Row>
+							<enabled>true</enabled>
+							<runAsUser><![CDATA[Administrator]]></runAsUser>
+							<schedule><![CDATA[0 0 0 ? * * *]]></schedule>
+						</Row>
+					</Rows>
+				</ConfigurationTable>
+			</ConfigurationTables>
+			<ThingShape>
+				<PropertyDefinitions />
+				<ServiceDefinitions>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="PurgeOldFiles">
+						<ResultType baseType="INFOTABLE" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="PurgeValueStreamHistory">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+				</ServiceDefinitions>
+				<EventDefinitions />
+				<ServiceMappings />
+				<ServiceImplementations>
+					<ServiceImplementation description=""
+						handlerName="Script" name="PurgeOldFiles">
+						<ConfigurationTables>
+							<ConfigurationTable description=""
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[try {
+// result: INFOTABLE dataShape: "FileSystemFileWithLinks"
+var FileInfotable =  Things["ReportRepository"].GetFileListingWithLinks({
+	path: undefined /* STRING */,
+	nameMask: undefined /* STRING */
+});
+    var CurentDate=new Date();
+   	var CheckDate=new Date(CurentDate - 60*60*24*1000);
+	//var EndTime = new Date(StartTime.getTime() + (me.CurrentChangeTime2*1000));
+	logger.debug("KBPurgeRepositoryFilesScheduler, PurgeOldFiles: " + CheckDate);
+    for (var x = 0; x < FileInfotable.rows.length; x++) {
+         if (FileInfotable.rows[x].lastModifiedDate < CheckDate){
+          Things["ReportRepository"].DeleteFile({
+            	path: FileInfotable.rows[x].path /* STRING */
+            });
+             logger.debug("KBPurgeRepositoryFilesScheduler, deleted: " + FileInfotable.rows[x].path+" , date:" +FileInfotable.rows[x].lastModifiedDate );
+         }else
+         {
+             logger.debug("KBPurgeRepositoryFilesScheduler, skipped: " + FileInfotable.rows[x].path+" , date:" +FileInfotable.rows[x].lastModifiedDate );
+         }
+    }
+    result=FileInfotable;
+} catch(err) {
+		logger.error("KBPurgeRepositoryFilesScheduler, PurgeOldFiles error: " + err);
+}
+//]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="PurgeValueStreamHistory">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var params = {
+	maxItems: 999999 /* NUMBER */,
+	nameMask: undefined /* STRING */,
+	query: undefined /* QUERY */,
+	thingTemplate: "GenericThing" /* THINGTEMPLATENAME */,
+	tags: undefined /* TAGS */
+};
+
+// result: INFOTABLE dataShape: RootEntityList
+var things = Resources["SearchFunctions"].SearchThingsByTemplateWithPersistent(params);
+// dateValue:DATETIME
+var dateValue = new Date();
+
+// dateAddMonths(dateValue:DATETIME,amount:NUMBER):STRING
+var endDate = dateAddDays(dateValue, -14);
+var startDate = new Date(0);
+
+var tableLength = things.rows.length;
+
+
+for (var x = 0; x < tableLength; x++) {
+	var row = things.rows[x];
+	//Your code here
+    try {
+//        if (Things[row.name].thingTemplate == "KBLocalStationThingTemplate"
+//           || Things[row.name].thingTemplate == "KBLocalMachineThingTemplate"
+//           || Things[row.name].thingTemplate == "KBLocalDpmTestBenchThingTemplate"
+//           || Things[row.name].thingTemplate == "KBLocalPlantThingTemplate"
+//           || Things[row.name].thingTemplate == "KBLocalAreaThingTemplate"
+//           || Things[row.name].thingTemplate == "KBLocalCountryThingTemplate"
+//           || Things[row.name].thingTemplate == "KBLocalCompanyThingTemplate"
+//           || Things[row.name].thingTemplate == "KBLocalRegionThingTemplate"
+//           || Things[row.name].thingTemplate == "KBLocalDivisionThingTemplate"
+//           || Things[row.name].thingTemplate == "KBLocalExtensionThingTemplate"
+//           || Things[row.name].thingTemplate == "PTC.ISA95.PhysicalAssetThingTemplate"
+//           || Things[row.name].thingTemplate == "PTC.Factory.DeviceThingTemplate"
+//           || Things[row.name].thingTemplate == "PTC.Factory.KepServerThingTemplate"
+//           || Things[row.name].thingTemplate == "KBGlobalPlantThingTemplate"
+//           || Things[row.name].thingTemplate == "KBGlobalMachineThingTemplate"
+//           || Things[row.name].thingTemplate == "KBGlobalAreaThingTemplate"
+//           || Things[row.name].thingTemplate == "KBGlobalDevisionThingTemplate"
+//           || Things[row.name].thingTemplate == "KBGlobalCountryThingTemplate"
+//           || Things[row.name].thingTemplate == "KBGlobalRegionThingTemplate"
+//           || Things[row.name].thingTemplate == "KBGlobalCompanyThingTemplate"
+//           || Things[row.name].thingTemplate == "KBGenericThingTemplate"
+//           || Things[row.name].thingTemplate == "KBMesKitDeviceTemplate" ) {
+           
+            
+            
+            var params = {
+                endDate: endDate /* DATETIME */,
+                startDate: startDate /* DATETIME */
+            };
+			if(Resources["PTC.Factory.CommonUtilities"].DoesThingExists( {thingName: row.name})){
+                Things[row.name].PurgeAllPropertyHistory(params);
+            }
+//        }
+    } catch(err) {
+		logger.error("PurgeValueStreamHistory " + err);
+    }
+
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+				</ServiceImplementations>
+				<Subscriptions>
+					<Subscription description="" enabled="true"
+						eventName="ScheduledEvent" name="Event.ScheduledEvent" source=""
+						sourceProperty="" sourceType="Thing">
+						<ServiceImplementation description=""
+							handlerName="Script" name="Event.ScheduledEvent">
+							<ConfigurationTables>
+								<ConfigurationTable description=""
+									isMultiRow="false" name="Script" ordinal="0">
+									<DataShape>
+										<FieldDefinitions>
+											<FieldDefinition baseType="STRING"
+												description="code" name="code" ordinal="0" />
+										</FieldDefinitions>
+									</DataShape>
+									<Rows>
+										<Row>
+											<code><![CDATA[
+me.PurgeValueStreamHistory();
+me.PurgeOldFiles();
+]]></code>
+										</Row>
+									</Rows>
+								</ConfigurationTable>
+							</ConfigurationTables>
+						</ServiceImplementation>
+					</Subscription>
+				</Subscriptions>
+			</ThingShape>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations />
+			<ImplementedShapes />
+			<ThingProperties />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="header : name : updated&#10;"
+					timestamp="2020-08-03T16:47:06.541+02:00" user="adm-konasm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="subscriptions : Event.ScheduledEvent : code updated&#10;"
+					timestamp="2020-08-03T16:48:04.228+02:00" user="adm-konasm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2020-08-03T16:48:43.696+02:00"
+					user="adm-konasm" />
+			</ConfigurationChanges>
+		</Thing>
+	</Things>
+</Entities>

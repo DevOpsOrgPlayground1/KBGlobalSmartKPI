@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b2319"
+ majorVersion="8"
+ minorVersion="4"
+ modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+ revision="4"
+ schemaVersion="1041"
+ universal="password">
+    <Things>
+        <Thing
+         description=""
+         documentationContent=""
+         effectiveThingPackage="TimerThing"
+         enabled="true"
+         homeMashup=""
+         identifier=""
+         lastModifiedDate="2021-03-18T12:44:05.722+01:00"
+         name="KBsmartKPIUpdateOrdersFromGlobalToLocalTimer"
+         projectName="KBsmartKPI"
+         published="false"
+         tags="KBThingWorxInstallationVocabulary:ExtensionSmartKPI"
+         thingTemplate="Timer"
+         valueStream="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions></RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility></Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables>
+                <ConfigurationTable
+                 description="General Settings"
+                 isMultiRow="false"
+                 name="Settings"
+                 ordinal="0">
+                    <DataShape>
+                        <FieldDefinitions>
+                            <FieldDefinition
+                             aspect.defaultValue="true"
+                             baseType="BOOLEAN"
+                             description="Automatically enable timer on startup"
+                             name="enabled"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="USERNAME"
+                             description="User context in which to run event handlers"
+                             name="runAsUser"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="60000.0"
+                             baseType="NUMBER"
+                             description="Update rate"
+                             name="updateRate"
+                             ordinal="0"></FieldDefinition>
+                        </FieldDefinitions>
+                    </DataShape>
+                    <Rows>
+                        <Row>
+                            <enabled>true</enabled>
+                            <runAsUser>
+                            <![CDATA[
+                            Administrator
+                            ]]>
+                            </runAsUser>
+                            <updateRate>5000.0</updateRate>
+                        </Row>
+                    </Rows>
+                </ConfigurationTable>
+            </ConfigurationTables>
+            <ThingShape>
+                <PropertyDefinitions>
+                    <PropertyDefinition
+                     aspect.cacheTime="0.0"
+                     aspect.dataChangeType="VALUE"
+                     aspect.dataShape="KBsmartKPILocalToGlobalUpdateTimerMachineDataToTranferDataShape"
+                     aspect.isLogged="false"
+                     aspect.isPersistent="true"
+                     aspect.isReadOnly="false"
+                     baseType="INFOTABLE"
+                     category=""
+                     description=""
+                     isLocalOnly="false"
+                     name="MachineDataTypesToTransfer"
+                     ordinal="1"></PropertyDefinition>
+                    <PropertyDefinition
+                     aspect.cacheTime="0.0"
+                     aspect.dataChangeType="VALUE"
+                     aspect.isLogged="false"
+                     aspect.isPersistent="false"
+                     aspect.isReadOnly="false"
+                     baseType="BOOLEAN"
+                     category=""
+                     description=""
+                     isLocalOnly="false"
+                     name="OrderDataUpdateServiceIsRunning"
+                     ordinal="4"></PropertyDefinition>
+                    <PropertyDefinition
+                     aspect.cacheTime="0.0"
+                     aspect.dataChangeType="VALUE"
+                     aspect.isLogged="false"
+                     aspect.isPersistent="false"
+                     aspect.isReadOnly="false"
+                     baseType="BOOLEAN"
+                     category=""
+                     description=""
+                     isLocalOnly="false"
+                     name="QualityResultUpdateServiceIsRunning"
+                     ordinal="2"></PropertyDefinition>
+                </PropertyDefinitions>
+                <ServiceDefinitions>
+                    <ServiceDefinition
+                     aspect.isAsync="true"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="GlobalToLocalOrderDataUpdateService">
+                        <ResultType
+                         baseType="NOTHING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="true"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="DEPRECATED-LocalToGlobalQualityResultUpdateService">
+                        <ResultType
+                         baseType="NOTHING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                </ServiceDefinitions>
+                <EventDefinitions></EventDefinitions>
+                <ServiceMappings></ServiceMappings>
+                <ServiceImplementations>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="GlobalToLocalOrderDataUpdateService">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description="Script"
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        if (!me.OrderDataUpdateServiceIsRunning) {
+                                            me.OrderDataUpdateServiceIsRunning = true;
+                                        
+                                            try {
+                                        
+                                        
+                                                logger.debug("GlobalToLocalOrderDataUpdateService Start");
+                                                var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+                                        
+                                                logger.debug("GlobalToLocalOrderDataUpdateService, location = " + location);
+                                        
+                                                if (location != "MUC") {
+                                                    // result: STRING
+                                                    var localDB = Resources["KBThingWorxServerSystem"].GetKPILocalThingWorxDatabaseThing();
+                                                    logger.debug("GlobalToLocalOrderDataUpdateService, localDB = " + localDB);
+                                        
+                                                    // result: STRING
+                                                    var globalDB = Resources["KBThingWorxServerSystem"].GetKPIGlobalThingWorxDatabaseThing();
+                                                    logger.debug("GlobalToLocalOrderDataUpdateService, globalDB = " + globalDB);
+                                                    
+                                                    
+                                        			var params = {
+                                        				maxItems: 999999 /* NUMBER */,
+                                        				nameMask: undefined /* STRING */,
+                                        				query: undefined /* QUERY */,
+                                        				thingTemplate: "KBLocalPlantThingTemplate" /* THINGTEMPLATENAME */,
+                                        				tags: undefined /* TAGS */
+                                        			};
+                                        			
+                                        			// result: INFOTABLE dataShape: RootEntityList
+                                        			var plantDataToTransfer = Resources["SearchFunctions"].SearchThingsByTemplateWithPersistent(params);
+                                        
+                                                    if (plantDataToTransfer != null && plantDataToTransfer.rows.length > 0) {
+                                                        var tableLengthplantDataToTransfer = plantDataToTransfer.rows.length;
+                                                        for (var x = 0; x < tableLengthplantDataToTransfer; x++) {
+                                                            var rowplantDataToTransfer = plantDataToTransfer.rows[x];
+                                                            logger.debug("GlobalToLocalOrderDataUpdateService, plantDataToTransfer = " + Things[rowplantDataToTransfer.name].SAPPlantId);
+                                                            
+                                        					//********************************OrderData********************************
+                                                            var updateIdentifierOrderData = "OrderData" + Things[rowplantDataToTransfer.name].SAPPlantId;
+                                        
+                                        					var params = {
+                                        						Identifier: updateIdentifierOrderData /* STRING */
+                                        					};
+                                        					
+                                        					// result: INFOTABLE
+                                        					var updateIdOrderData = Things[localDB].GetSmartKPIKepwareConnectorPointer(params);
+                                        					var startDateMillis = updateIdOrderData.rows[0].UpdatedId;
+                                        					var startdate = new Date(startDateMillis);
+                                                            logger.debug("GlobalToLocalOrderDataUpdateService (OrderData), startDateMillis = " + startDateMillis);
+                                                            logger.debug("GlobalToLocalOrderDataUpdateService (OrderData), startdate = " + startdate);
+                                                            logger.debug("GlobalToLocalOrderDataUpdateService (OrderData), SAPPlantId = " + Things[rowplantDataToTransfer.name].SAPPlantId);
+                                        					var params = {
+                                        						StartDateTime: startdate /* DATETIME */,
+                                        						SAPPlantNumber: Things[rowplantDataToTransfer.name].SAPPlantId /* STRING */
+                                        					};
+                                        					
+                                        					// result: INFOTABLE
+                                        					var orderData = Things[globalDB].GetNewOrderData(params);
+                                        
+                                                            var tableLength = orderData.rows.length;
+                                                            logger.debug("GlobalToLocalOrderDataUpdateService (OrderData), # of Rows orderData = " + tableLength);
+                                        
+                                                            for (var y = 0; y < tableLength; y++) {
+                                                                var row = orderData.rows[y];
+                                        
+                                                                logger.debug("GlobalToLocalOrderDataUpdateService (OrderData), orderData Id = " + row.Id);
+                                                                
+                                        						var params = {
+                                        							OrderNumber: row.OrderNumber /* STRING */,
+                                        							System: row.System /* STRING */,
+                                        							isProductionStarted: row.isProductionStarted /* BOOLEAN */,
+                                        							PlantId: Things[rowplantDataToTransfer.name].SAPPlantId
+                                        						};
+                                        						
+                                        						// result: NUMBER
+                                        						Things[localDB].MergeOrderWithoutProductionStatusChange(params);
+                                                                
+                                        						var params = {
+                                        							Identifier: updateIdentifierOrderData /* STRING */,
+                                        							Id: row.UTCUpdateTime.getTime() /* LONG */
+                                        						};
+                                        						
+	                                                            logger.debug("GlobalToLocalOrderDataUpdateService (OrderData), endDateMillis = " + row.UTCUpdateTime.getTime());
+	                                                            logger.debug("GlobalToLocalOrderDataUpdateService (OrderData), enddate = " + row.UTCUpdateTime);
+	                                                            logger.debug("GlobalToLocalOrderDataUpdateService (OrderData), endId = " + row.Id);
+
+                                        						// result: NUMBER
+                                        						Things[localDB].SetSmartKPIKepwareConnectorPointer(params);
+                                        
+                                                            }
+                                        					//********************************OrderKeyValueData********************************
+                                                            var updateIdentifierOrderData = "OrderKeyValueData" + Things[rowplantDataToTransfer.name].SAPPlantId;
+                                        
+                                        					var params = {
+                                        						Identifier: updateIdentifierOrderData /* STRING */
+                                        					};
+                                        					
+                                        					// result: INFOTABLE
+                                        					var updateIdOrderData = Things[localDB].GetSmartKPIKepwareConnectorPointer(params);
+                                        					var startDateMillis = updateIdOrderData.rows[0].UpdatedId;
+                                        					var startdate = new Date(startDateMillis);
+                                                            logger.debug("GlobalToLocalOrderDataUpdateService (OrderKeyValueData), startDateMillis = " + startDateMillis);
+                                                            logger.debug("GlobalToLocalOrderDataUpdateService (OrderKeyValueData), startdate = " + startdate);
+                                                            logger.debug("GlobalToLocalOrderDataUpdateService (OrderKeyValueData), SAPPlantId = " + Things[rowplantDataToTransfer.name].SAPPlantId);
+                                        					var params = {
+                                        						StartDateTime: startdate /* DATETIME */,
+                                        						SAPPlantNumber: Things[rowplantDataToTransfer.name].SAPPlantId /* STRING */
+                                        					};
+                                        					
+                                        					// result: INFOTABLE
+                                        					var orderData = Things[globalDB].GetNewOrderKeyValueData(params);
+                                        
+                                                            var tableLength = orderData.rows.length;
+                                                            logger.debug("GlobalToLocalOrderDataUpdateService (OrderKeyValueData), # of Rows orderKeyValueData = " + tableLength);
+                                        
+                                                            for (var y = 0; y < tableLength; y++) {
+                                                                var row = orderData.rows[y];
+                                        
+                                                                logger.debug("GlobalToLocalOrderDataUpdateService (OrderKeyValueData), orderKeyValueData Id = " + row.Id);
+                                                                
+                                        						var params = {
+                                        							DateTimeValue: row.DateTimeValue /* DATETIME */,
+                                        							TextValue: row.TextValue /* STRING */,
+                                        							isTextValue: row.isTextValue /* BOOLEAN */,
+                                        							isFloatValue: row.isFloatValue /* BOOLEAN */,
+                                        							OrderNumber: row.OrderNumber /* STRING */,
+                                        							FloatValue: row.FloatValue /* NUMBER */,
+                                        							isDateTimeValue: row.isDateTimeValue /* BOOLEAN */,
+                                        							Key: row.PropertyKey /* STRING */,
+                                        							System: row.System /* STRING */,
+                                        							PlantId: Things[rowplantDataToTransfer.name].SAPPlantId,
+                                        							Key1: row.PropertyKey1,
+                                        							Key2: row.Operation
+                                        						};
+                                        						
+                                        						// result: NUMBER
+                                        						Things[localDB].MergeOrderKeyValueWithNonStandardKey(params);
+                                                                
+                                        						var params = {
+                                        							Identifier: updateIdentifierOrderData /* STRING */,
+                                        							Id: row.UTCUpdateTime.getTime() /* LONG */
+                                        						};
+                                        						logger.debug("GlobalToLocalOrderDataUpdateService (OrderKeyValueData), endDateMillis = " + row.UTCUpdateTime.getTime());
+	                                                            logger.debug("GlobalToLocalOrderDataUpdateService (OrderKeyValueData), enddate = " + row.UTCUpdateTime);
+	                                                            logger.debug("GlobalToLocalOrderDataUpdateService (OrderKeyValueData), endId = " + row.Id);
+                                        						
+                                        						// result: NUMBER
+                                        						Things[localDB].SetSmartKPIKepwareConnectorPointer(params);
+                                        
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                        
+                                                logger.debug("GlobalToLocalOrderDataUpdateService Finished");
+                                            } catch(err) {
+                                                logger.error("GlobalToLocalOrderDataUpdateService Error: " + err);
+                                            }
+                                        
+                                            me.OrderDataUpdateServiceIsRunning = false;
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="DEPRECATED-LocalToGlobalQualityResultUpdateService">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description="Script"
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                        <FieldDefinition
+                                         baseType="JSON"
+                                         description=""
+                                         name="editorSettings"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        if (!me.QualityResultUpdateServiceIsRunning) {
+                                            me.QualityResultUpdateServiceIsRunning = true;
+                                        
+                                        
+                                            try {
+                                        
+                                                logger.debug("DEPRECATED-LocalToGlobalQualityResultUpdateService Start");
+                                                var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+                                        
+                                                logger.debug("DEPRECATED-LocalToGlobalQualityResultUpdateService, location = " + location);
+                                        
+                                                if (location != "MUC") {
+                                                    // result: STRING
+                                                    var localDB = Resources["KBThingWorxServerSystem"].GetKPILocalThingWorxDatabaseThing();
+                                                    logger.debug("DEPRECATED-LocalToGlobalQualityResultUpdateService, localDB = " + localDB);
+                                        
+                                                    // result: STRING
+                                                    var globalDB = Resources["KBThingWorxServerSystem"].GetKPIGlobalThingWorxDatabaseThing();
+                                                    logger.debug("DEPRECATED-LocalToGlobalQualityResultUpdateService, globalDB = " + globalDB);
+                                        
+                                                    // result: INFOTABLE dataShape: KBSmartKPIDataFromDataTableDataShape
+                                                    var updatedSmartKPIData = Things[localDB].GetUpdatedSmartKPIDataFromDatabase();
+                                        
+                                                    var tableLength = updatedSmartKPIData.rows.length;
+                                                    logger.debug("DEPRECATED-LocalToGlobalQualityResultUpdateService, # of Rows updatedSmartKPIData = " + tableLength);
+                                        
+                                                    for (var x = 0; x < tableLength; x++) {
+                                                        var row = updatedSmartKPIData.rows[x];
+                                        
+                                                        logger.debug("DEPRECATED-LocalToGlobalQualityResultUpdateService, updatedSmartKPIData Id = " + row.Id);
+                                        
+                                                        var params = {
+                                                            isPartOK: row.isPartOK /* BOOLEAN */,
+                                                            PartNumber: row.PartNumber /* STRING */,
+                                                            SerialNumber: row.SerialNumber /* STRING */,
+                                                            ScrapReason: row.ScrapReason /* STRING */,
+                                                            OrderNumber: row.OrderNumber /* STRING */,
+                                                            DateTime: row.ProductionTime /* DATETIME */,
+                                                            Machine: row.Machine /* STRING */,
+                                                            Station: row.Station /* STRING */,
+                                                            NumberOfParts: row.numberOfParts, 
+                                                            confirmToSAP: row.confirmToSAP, 
+                                                            confirmedToSAP: row.confirmedToSAP, 
+                                                            SAPOperationNumber: row.SAPOperationNumber, 
+                                                            timePerPartSec: row.timePerPartSec,
+                                                            SAPconfirmationResult : row.SAPconfirmationResult
+                                                        };
+                                        
+                                                        // result: NUMBER
+                                                        var result = Things[globalDB].AddQualityResultToDataTable(params);
+                                        
+                                        
+                                                        var params = {
+                                                            Id: row.Id /* LONG */
+                                                        };
+                                        
+                                                        // result: NUMBER
+                                                        var result = Things[localDB].UpdateSmartKPIDatabase_RemoveUpdateIdentifier(params);
+                                        
+                                        
+                                                    }
+                                        
+                                        
+                                                }
+                                        
+                                                logger.debug("DEPRECATED-LocalToGlobalQualityResultUpdateService Finished");
+                                        
+                                            } catch(err) {
+                                        
+                                            }
+                                            me.QualityResultUpdateServiceIsRunning = false;
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                </ServiceImplementations>
+                <Subscriptions>
+                    <Subscription
+                     description=""
+                     enabled="true"
+                     eventName="Timer"
+                     name="Event.Timer"
+                     source=""
+                     sourceProperty=""
+                     sourceType="Thing">
+                        <ServiceImplementation
+                         description=""
+                         handlerName="Script"
+                         name="Event.Timer">
+                            <ConfigurationTables>
+                                <ConfigurationTable
+                                 description=""
+                                 isMultiRow="false"
+                                 name="Script"
+                                 ordinal="0">
+                                    <DataShape>
+                                        <FieldDefinitions>
+                                            <FieldDefinition
+                                             baseType="STRING"
+                                             description="code"
+                                             name="code"
+                                             ordinal="0"></FieldDefinition>
+                                            <FieldDefinition
+                                             baseType="JSON"
+                                             description=""
+                                             name="editorSettings"
+                                             ordinal="0"></FieldDefinition>
+                                        </FieldDefinitions>
+                                    </DataShape>
+                                    <Rows>
+                                        <Row>
+                                            <code>
+                                            <![CDATA[
+                                            var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+                                            
+                                            logger.debug("KBsmartKPIUpdateOrdersFromGlobalToLocalTimer Event.Timer, location = " + location);
+                                            
+                                            if (location != "MUC") {
+                                            	//me.DEPRECATED-LocalToGlobalQualityResultUpdateService();
+                                            	me.GlobalToLocalOrderDataUpdateService();
+                                            }
+                                            ]]>
+                                            </code>
+                                        </Row>
+                                    </Rows>
+                                </ConfigurationTable>
+                            </ConfigurationTables>
+                        </ServiceImplementation>
+                    </Subscription>
+                </Subscriptions>
+            </ThingShape>
+            <PropertyBindings></PropertyBindings>
+            <RemotePropertyBindings></RemotePropertyBindings>
+            <RemoteServiceBindings></RemoteServiceBindings>
+            <RemoteEventBindings></RemoteEventBindings>
+            <AlertConfigurations>
+                <AlertDefinitions
+                 name="OrderDataUpdateServiceIsRunning"></AlertDefinitions>
+                <AlertDefinitions
+                 name="QualityResultUpdateServiceIsRunning"></AlertDefinitions>
+            </AlertConfigurations>
+            <ImplementedShapes></ImplementedShapes>
+            <ThingProperties>
+                <MachineDataTypesToTransfer>
+                    <Value>
+                        <infoTable>
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description=""
+                                     name="KPICalculationBase"
+                                     ordinal="3"></FieldDefinition>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description=""
+                                     name="KPIName"
+                                     ordinal="2"></FieldDefinition>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description=""
+                                     name="MachineDataType"
+                                     ordinal="1"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows></Rows>
+                        </infoTable>
+                    </Value>
+                    <Timestamp>1970-01-01T01:00:00.000+01:00</Timestamp>
+                    <Quality>UNKNOWN</Quality>
+                </MachineDataTypesToTransfer>
+            </ThingProperties>
+        </Thing>
+    </Things>
+</Entities>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b628"
+ majorVersion="9"
+ minorVersion="0"
+ modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+ revision="10"
+ schemaVersion="1109"
+ universal="password">
+    <ThingShapes>
+        <ThingShape
+         className=""
+         description=""
+         documentationContent=""
+         homeMashup=""
+         lastModifiedDate="2022-05-16T09:55:32.544Z"
+         name="KBBud2ChCtxProductiveCalculationThingShape"
+         projectName="KBsmartKPI"
+         tags="KBThingWorxAdministrationVocabulary:Administrated">
+            <PropertyDefinitions>
+                <PropertyDefinition
+                 aspect.cacheTime="0.0"
+                 aspect.dataChangeType="VALUE"
+                 aspect.isLogged="true"
+                 aspect.isPersistent="true"
+                 aspect.isReadOnly="false"
+                 baseType="BOOLEAN"
+                 category=""
+                 description=""
+                 isLocalOnly="false"
+                 name="Productive"
+                 ordinal="35"></PropertyDefinition>
+            </PropertyDefinitions>
+            <ServiceDefinitions>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category=""
+                 description=""
+                 isAllowOverride="false"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="CalculatingProductiveState">
+                    <ResultType
+                     baseType="NOTHING"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="DATETIME"
+                         description=""
+                         name="ProductionDate"
+                         ordinal="2"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="BOOLEAN"
+                         description=""
+                         name="Productive1"
+                         ordinal="3"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="BOOLEAN"
+                         description=""
+                         name="Productive2"
+                         ordinal="4"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+            </ServiceDefinitions>
+            <EventDefinitions></EventDefinitions>
+            <ServiceMappings></ServiceMappings>
+            <ServiceImplementations>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="CalculatingProductiveState">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description="Script"
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    //Calculating Productive State
+                                    var productive_mode = Productive1;
+                                    if (productive_mode === null) {
+                                    	productive_mode = false;
+                                    }
+                                    var productive_mode1 = Productive2;
+                                    if (productive_mode1 === null) {
+                                    	productive_mode1 = false;
+                                    }
+                                    
+                                    if (productive_mode || productive_mode1) {
+                                    	// result: BOOLEAN
+                                    	me.SetSingleDynamicStateWithDate({
+                                    		Status: 'ON' /* STRING */ ,
+                                    		EventName: 'PROGRAM_RUNNING_1_2' /* STRING */ ,
+                                    		ProductionDate: ProductionDate /* DATETIME */
+                                    	});
+                                    } else {
+                                    	me.SetSingleDynamicStateWithDate({
+                                    		Status: 'OFF' /* STRING */ ,
+                                    		EventName: 'PROGRAM_RUNNING_1_2' /* STRING */ ,
+                                    		ProductionDate: ProductionDate /* DATETIME */
+                                    	});
+                                    }
+                                    
+                                    var productive_mode_final;
+                                    var write_status = false;
+                                    var status = "";
+                                    var substatus = "";
+                                    var machinedatavalue = -1;
+                                    		//0: Production
+                                    		//1: Planned shut down --> organizational
+                                    		//2: Machine Shut down --> technical
+                                    		//3: Speed losses --> speed
+                                    if ((productive_mode || productive_mode1) && !me.Productive){
+                                        write_status = true;
+                                        status = "KBMaschStatus.1.Productive";
+                                        substatus = "KBMaschStatus.2.Productive.Start";
+                                        machinedatavalue = 0;
+                                    	productive_mode_final=true;
+                                    } else if ((!productive_mode && !productive_mode1) && me.Productive){
+                                        write_status = true;
+                                        status = "KBMaschStatus.1.OI.AutoSet";
+                                        substatus = "KBMaschStatus.2.OI.AutoSet.Start";
+                                        machinedatavalue = 1;
+                                    	productive_mode_final=false;
+                                    }
+                                    
+                                    //OEE2.0 Handling:
+                                    try {
+                                    	if (write_status) {
+                                    	    me.Productive = productive_mode_final;
+                                    	}
+                                    	if (me.ImplementsShape({thingShapeName: "KBOperatorScreenRailV2StateThingShape" })) {
+                                    		write_status = me.CheckMachineStatus({StatusLevel1 : status, StatusLevel2 : substatus, WriteStatus : write_status});
+                                    		status = me.GetCurrentStatusLevel1();
+                                    		substatus = me.GetCurrentStatusLevel2();
+                                    	}
+                                    } catch(err) {
+                                    	logger.error(me.name+": Error OEE2.0 Handling: "+err);
+                                    }
+                                    
+                                    if (write_status) {
+                                        me.Productive = productive_mode_final;
+                                        
+                                        
+                                        var params = {
+                                            infoTableName : "InfoTable",
+                                            dataShapeName : "KBLocalStationDataReceiverStateDataShape"
+                                        };
+                                    
+                                        // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBLocalStationDataReceiverStateDataShape)
+                                        var infoTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                    
+                                        // dateValue:DATETIME
+                                        var dateValue = ProductionDate;
+                                        //dateValue.setMilliseconds(0);
+                                    
+                                        // KBLocalStationDataReceiverStateDataShape entry object
+                                        var newEntry = new Object();
+                                        newEntry.Line = me.KBLocalLineThing; // STRING - isPrimaryKey = true
+                                        newEntry.Station = me.name; // STRING - isPrimaryKey = true
+                                        newEntry.Type = "Operator Screen"; // STRING - isPrimaryKey = true
+                                        newEntry.Description = "Kepware"; // STRING
+                                        newEntry.Identifier = substatus; // STRING
+                                        newEntry.ShortName = status; // STRING - isPrimaryKey = true
+                                        newEntry.DateTime = dateValue; // DATETIME - isPrimaryKey = true
+                                        infoTable.AddRow(newEntry);
+                                    
+                                        var paramsL = {
+                                            stateInfoTable: infoTable /* INFOTABLE */
+                                        };
+                                    
+                                        // result: BOOLEAN
+                                        var result = me.SetState(paramsL);
+                                    
+                                    	var paramsM = {
+                                    		infoTableName : "InfoTable",
+                                    		dataShapeName : "KBLocalStationDataReceiverMachineDataShape"
+                                    	};
+                                    	
+                                    	// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBLocalStationDataReceiverMachineDataShape)
+                                    	var machinedata = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(paramsM);
+                                    		
+                                    	// KBLocalStationDataReceiverMachineDataShape entry object
+                                    	var newEntryM = new Object();
+                                    	newEntryM.Line = me.KBLocalLineThing; // STRING - isPrimaryKey = true
+                                    	newEntryM.Station = me.name; // STRING - isPrimaryKey = true
+                                    	newEntryM.Type = "MACHINEDATA"; // STRING - isPrimaryKey = true
+                                    	newEntryM.Description = "0: Production, 1: org. down, 2: tech. down 3: Speed losses"; // STRING
+                                    	newEntryM.Identifier = undefined; // STRING
+                                    	newEntryM.Value = machinedatavalue; // STRING
+                                    	newEntryM.LowerLimit = undefined; // STRING
+                                    	newEntryM.ShortName = "AutoCalculatedProductiveInfoFromMachine"; // STRING - isPrimaryKey = true
+                                    	newEntryM.Unit = undefined; // STRING
+                                    	newEntryM.UpperLimit = undefined; // STRING
+                                    	newEntryM.DateTime = dateValue; // DATETIME - isPrimaryKey = true
+                                    	machinedata.AddRow(newEntryM);
+                                    	
+                                    	var paramsS = {
+                                    		machineDataInfoTable: machinedata /* INFOTABLE */
+                                    	};
+                                    	
+                                    	// result: BOOLEAN
+                                    	var result = me.SetMachineData(paramsS);    
+                                    
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+            </ServiceImplementations>
+            <Subscriptions></Subscriptions>
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions></RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility></Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables></ConfigurationTables>
+            <PropertyBindings></PropertyBindings>
+            <RemotePropertyBindings></RemotePropertyBindings>
+            <RemoteServiceBindings></RemoteServiceBindings>
+            <RemoteEventBindings></RemoteEventBindings>
+            <AlertConfigurations></AlertConfigurations>
+            <InstanceRunTimePermissions></InstanceRunTimePermissions>
+        </ThingShape>
+    </ThingShapes>
+</Entities>

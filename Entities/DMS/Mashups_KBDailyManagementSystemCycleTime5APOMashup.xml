@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b2319" majorVersion="8" minorVersion="4"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="4" schemaVersion="1041" universal="">
+	<Mashups>
+		<Mashup aspect.isResponsive="true" aspect.mashupType="mashup"
+			columns="0.0" description="" documentationContent="" homeMashup=""
+			lastModifiedDate="2020-08-19T07:38:32.093+02:00"
+			name="KBDailyManagementSystemCycleTime5APOMashup"
+			projectName="KBsmartKPI" rows="0.0" tags="">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</PropertyRead>
+					<PropertyWrite />
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true" name="KBOrganization"
+						type="Organization" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables />
+			<ParameterDefinitions>
+				<FieldDefinition aspect.bindingDirection="IN"
+					aspect.isMandatory="false" aspect.ordinal="5" baseType="STRING"
+					description="" name="Division" ordinal="0" />
+				<FieldDefinition aspect.bindingDirection="IN"
+					aspect.isMandatory="false" aspect.ordinal="2" baseType="DATETIME"
+					description="" name="EndDate" ordinal="0" />
+				<FieldDefinition aspect.bindingDirection="IN"
+					aspect.isMandatory="false" aspect.ordinal="0" baseType="STRING"
+					description="" name="Machine" ordinal="0" />
+				<FieldDefinition aspect.bindingDirection="IN"
+					aspect.isMandatory="false" aspect.ordinal="3" baseType="INTEGER"
+					description="" name="MaxTimeInSec" ordinal="0" />
+				<FieldDefinition aspect.bindingDirection="IN"
+					aspect.isMandatory="false" aspect.ordinal="4" baseType="INTEGER"
+					description="" name="MinTimeInSec" ordinal="0" />
+				<FieldDefinition aspect.bindingDirection="IN"
+					aspect.isMandatory="false" aspect.ordinal="1" baseType="DATETIME"
+					description="" name="StartDate" ordinal="0" />
+			</ParameterDefinitions>
+			<Things>
+				<Thing>KBKPILocalThingWorxDatabaseThing</Thing>
+			</Things>
+			<ThingShapes />
+			<ThingTemplates />
+			<mashupContent><![CDATA[{
+  "CustomMashupCss" : "",
+  "Data" : {
+    "Session" : {
+      "DataName" : "Session",
+      "EntityName" : "",
+      "EntityType" : "Session",
+      "Id" : "session",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "SessionInterface",
+        "Name" : "GetGlobalSessionValues",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetGlobalSessionValues"
+      } ]
+    },
+    "Things_KBKPILocalThingWorxDatabaseThing" : {
+      "DataName" : "Things_KBKPILocalThingWorxDatabaseThing",
+      "EntityName" : "KBKPILocalThingWorxDatabaseThing",
+      "EntityType" : "Things",
+      "Id" : "004fdf7a-8ed6-4b78-9efb-e40f538b4ca2",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "652053e1-69fb-4169-89e8-9d09e29d463a",
+        "Name" : "GetCVSTimeLossRawDataPartial",
+        "Parameters" : {
+          "PartName" : "Part5"
+        },
+        "RefreshInterval" : 0,
+        "Target" : "GetCVSTimeLossRawDataPartial"
+      } ]
+    },
+    "UserExtensions" : {
+      "DataName" : "UserExtensions",
+      "EntityName" : "",
+      "EntityType" : "UserExtensions",
+      "Id" : "UserExtensions",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "UserExtensionInterface",
+        "Name" : "GetCurrentUserExtensionProperties",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetCurrentUserExtensionProperties"
+      } ]
+    }
+  },
+  "DataBindings" : [ {
+    "Id" : "05abe379-1b5c-460d-8d22-c00ac13c58e4",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Machine",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "Machine",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetCVSTimeLossRawDataPartial",
+    "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+  }, {
+    "Id" : "4cca46bf-a05f-474f-b2e3-87102ebaa5a1",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "EndDate",
+      "SourcePropertyBaseType" : "DATETIME",
+      "TargetProperty" : "EndDate",
+      "TargetPropertyBaseType" : "DATETIME",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetCVSTimeLossRawDataPartial",
+    "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+  }, {
+    "Id" : "d4a88442-00ca-4b6b-8c07-5ec4ebbfa64b",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "StartDate",
+      "SourcePropertyBaseType" : "DATETIME",
+      "TargetProperty" : "StartDate",
+      "TargetPropertyBaseType" : "DATETIME",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetCVSTimeLossRawDataPartial",
+    "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+  }, {
+    "Id" : "7a4d72df-3fea-4ef6-b1fa-6676125e81cf",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "InfoTable",
+      "TargetProperty" : "Data",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetCVSTimeLossRawDataPartial",
+    "SourceSection" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "TargetArea" : "UI",
+    "TargetId" : "timeserieschart-6",
+    "TargetSection" : ""
+  }, {
+    "Id" : "df4bdd76-31fd-4bfa-bd6c-032c928c3675",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "StartDate",
+      "SourcePropertyBaseType" : "DATETIME",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "XAxisMinimum",
+      "TargetPropertyBaseType" : "DATETIME",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "timeserieschart-6",
+    "TargetSection" : ""
+  }, {
+    "Id" : "c044fd41-3160-4273-b504-8ab352339680",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "EndDate",
+      "SourcePropertyBaseType" : "DATETIME",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "XAxisMaximum",
+      "TargetPropertyBaseType" : "DATETIME",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "timeserieschart-6",
+    "TargetSection" : ""
+  }, {
+    "Id" : "45f09477-d548-4d16-807d-4d6ca4c1ed70",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "MaxTimeInSec",
+      "SourcePropertyBaseType" : "INTEGER",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "YAxisMaximum",
+      "TargetPropertyBaseType" : "NUMBER",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "timeserieschart-6",
+    "TargetSection" : ""
+  }, {
+    "Id" : "7a065388-75f6-40f6-b865-c59e415bef21",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "MinTimeInSec",
+      "SourcePropertyBaseType" : "INTEGER",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "YAxisMinimum",
+      "TargetPropertyBaseType" : "NUMBER",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "timeserieschart-6",
+    "TargetSection" : ""
+  } ],
+  "DesignTimePermissions" : {
+    "Create" : [ ],
+    "Delete" : [ ],
+    "Metadata" : [ ],
+    "Read" : [ ],
+    "Update" : [ ]
+  },
+  "Events" : [ {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "EventHandlerService" : "GetCVSTimeLossRawDataPartial",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "550c5f8d-fc34-403e-849a-549f3e37814a"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "EventHandlerService" : "GetCVSTimeLossRawDataPartial",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "RefreshRequested",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "1064e7e1-874e-4965-81aa-72b0095ce18f"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "EventHandlerService" : "GetCVSTimeLossRawDataPartial",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "MachineChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "f18ddd2f-8803-40ba-a83e-f1ef523097f6"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "EventHandlerService" : "GetCVSTimeLossRawDataPartial",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "StartDateChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "2fa4d94d-936d-4cf3-b05e-e8a84fa259c9"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+    "EventHandlerService" : "GetCVSTimeLossRawDataPartial",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "EndDateChanged",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "30fb95bb-34a3-423c-bc1d-e9e833b8709e"
+  } ],
+  "RunTimePermissions" : {
+    "permissions" : [ {
+      "EventInvoke" : [ ],
+      "EventSubscribe" : [ ],
+      "PropertyRead" : [ {
+        "isPermitted" : true,
+        "name" : "KBUserGroup",
+        "type" : "Group"
+      } ],
+      "PropertyWrite" : [ ],
+      "ServiceInvoke" : [ {
+        "isPermitted" : true,
+        "name" : "KBUserGroup",
+        "type" : "Group"
+      } ],
+      "resourceName" : "*"
+    } ]
+  },
+  "UI" : {
+    "Properties" : {
+      "AddToDashboardButton" : "SimplePlus",
+      "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+      "Area" : "Mashup",
+      "BGImage" : "",
+      "BGImageRepeat" : "no-repeat",
+      "BGImageSize" : "auto",
+      "Columns" : 0,
+      "ConfigureGadgetButton" : "SimpleGear",
+      "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+      "DisplayName" : "Mashup",
+      "EnableParameterEditing" : false,
+      "Height" : 618,
+      "Id" : "mashup-root",
+      "IgnoreWarningsInViewMashup" : false,
+      "IsPrintLayout" : false,
+      "Left" : 0,
+      "MashupToEditGadget" : "DefaultMashupToEditGadget",
+      "MaxTimeInSec" : 300,
+      "MinHeight" : 0,
+      "MinTimeInSec" : 0,
+      "MinWidth" : 0,
+      "ResponsiveLayout" : true,
+      "Rows" : 0,
+      "ShowDataLoading" : true,
+      "Style" : "DefaultMashupStyle",
+      "StyleTheme" : "Base Theme",
+      "Title" : "",
+      "TitleBar" : false,
+      "TitleBarStyle" : "DefaultTitleBarStyle",
+      "TitleBarText" : "Gadget Title Here",
+      "Top" : 0,
+      "Type" : "mashup",
+      "UseTheme" : false,
+      "UseThemeForHybrids" : false,
+      "Visible" : true,
+      "Width" : 1024,
+      "Z-index" : 10,
+      "__TypeDisplayName" : "Mashup",
+      "_currentParameterDefs" : [ {
+        "Aspects" : {
+          "bindingDirection" : "IN",
+          "isMandatory" : false
+        },
+        "BaseType" : "STRING",
+        "Description" : "",
+        "ParameterName" : "Machine"
+      }, {
+        "Aspects" : {
+          "bindingDirection" : "IN",
+          "isMandatory" : false
+        },
+        "BaseType" : "DATETIME",
+        "Description" : "",
+        "ParameterName" : "StartDate"
+      }, {
+        "Aspects" : {
+          "bindingDirection" : "IN",
+          "isMandatory" : false
+        },
+        "BaseType" : "DATETIME",
+        "Description" : "",
+        "ParameterName" : "EndDate"
+      }, {
+        "Aspects" : {
+          "bindingDirection" : "IN",
+          "isMandatory" : false
+        },
+        "BaseType" : "INTEGER",
+        "DefaultValue" : 300,
+        "Description" : "",
+        "ParameterName" : "MaxTimeInSec"
+      }, {
+        "Aspects" : {
+          "bindingDirection" : "IN",
+          "isMandatory" : false
+        },
+        "BaseType" : "INTEGER",
+        "DefaultValue" : 0,
+        "Description" : "",
+        "ParameterName" : "MinTimeInSec"
+      }, {
+        "Aspects" : {
+          "bindingDirection" : "IN",
+          "isMandatory" : false
+        },
+        "BaseType" : "STRING",
+        "Description" : "",
+        "ParameterName" : "Division"
+      } ],
+      "id_index" : 42,
+      "supportsAutoResize" : true
+    },
+    "Widgets" : [ {
+      "Properties" : {
+        "AllowSelection" : true,
+        "AllowXAxisZoom" : true,
+        "AllowYAxisZoom" : true,
+        "Area" : "UI",
+        "AxisAutoscale1" : true,
+        "AxisAutoscale10" : true,
+        "AxisAutoscale11" : true,
+        "AxisAutoscale12" : true,
+        "AxisAutoscale13" : true,
+        "AxisAutoscale14" : true,
+        "AxisAutoscale15" : true,
+        "AxisAutoscale16" : true,
+        "AxisAutoscale2" : true,
+        "AxisAutoscale3" : true,
+        "AxisAutoscale4" : true,
+        "AxisAutoscale5" : true,
+        "AxisAutoscale6" : true,
+        "AxisAutoscale7" : true,
+        "AxisAutoscale8" : true,
+        "AxisAutoscale9" : true,
+        "AxisFormat1" : "0000.0",
+        "AxisFormat10" : "0000.0",
+        "AxisFormat11" : "0000.0",
+        "AxisFormat12" : "0000.0",
+        "AxisFormat13" : "0000.0",
+        "AxisFormat14" : "0000.0",
+        "AxisFormat15" : "0000.0",
+        "AxisFormat16" : "0000.0",
+        "AxisFormat2" : "0000.0",
+        "AxisFormat3" : "0000.0",
+        "AxisFormat4" : "0000.0",
+        "AxisFormat5" : "0000.0",
+        "AxisFormat6" : "0000.0",
+        "AxisFormat7" : "0000.0",
+        "AxisFormat8" : "0000.0",
+        "AxisFormat9" : "0000.0",
+        "AxisMaximum1" : 100,
+        "AxisMaximum10" : 100,
+        "AxisMaximum11" : 100,
+        "AxisMaximum12" : 100,
+        "AxisMaximum13" : 100,
+        "AxisMaximum14" : 100,
+        "AxisMaximum15" : 100,
+        "AxisMaximum16" : 100,
+        "AxisMaximum2" : 100,
+        "AxisMaximum3" : 100,
+        "AxisMaximum4" : 100,
+        "AxisMaximum5" : 100,
+        "AxisMaximum6" : 100,
+        "AxisMaximum7" : 100,
+        "AxisMaximum8" : 100,
+        "AxisMaximum9" : 100,
+        "AxisMinimum1" : 0,
+        "AxisMinimum10" : 0,
+        "AxisMinimum11" : 0,
+        "AxisMinimum12" : 0,
+        "AxisMinimum13" : 0,
+        "AxisMinimum14" : 0,
+        "AxisMinimum15" : 0,
+        "AxisMinimum16" : 0,
+        "AxisMinimum2" : 0,
+        "AxisMinimum3" : 0,
+        "AxisMinimum4" : 0,
+        "AxisMinimum5" : 0,
+        "AxisMinimum6" : 0,
+        "AxisMinimum7" : 0,
+        "AxisMinimum8" : 0,
+        "AxisMinimum9" : 0,
+        "AxisZeroscale1" : false,
+        "AxisZeroscale10" : false,
+        "AxisZeroscale11" : false,
+        "AxisZeroscale12" : false,
+        "AxisZeroscale13" : false,
+        "AxisZeroscale14" : false,
+        "AxisZeroscale15" : false,
+        "AxisZeroscale16" : false,
+        "AxisZeroscale2" : false,
+        "AxisZeroscale3" : false,
+        "AxisZeroscale4" : false,
+        "AxisZeroscale5" : false,
+        "AxisZeroscale6" : false,
+        "AxisZeroscale7" : false,
+        "AxisZeroscale8" : false,
+        "AxisZeroscale9" : false,
+        "ChartAreaStyle" : "DefaultChartAreaStyle",
+        "ChartLegendStyle" : "DefaultChartLegendStyle",
+        "ChartOrientation" : "vertical",
+        "ChartStyle" : "DefaultChartStyle",
+        "ChartTitle" : "",
+        "ChartTitleStyle" : "DefaultChartTitleStyle",
+        "ChartType" : "line",
+        "DataField1" : "Duration_in_sec",
+        "DataField2" : "DurationAveragePerOrder_in_sec",
+        "DataField3" : "ProcessingTimeInSecCOTotal",
+        "DataField4" : "ProcessingTimeInSecAPOTotal",
+        "DataField5" : "tgMaxTimeInSecTotal",
+        "DataField6" : "PlannedNumberOfWorkers",
+        "DataField7" : "NumberOfParts",
+        "DataLabel1" : "Production Time",
+        "DataLabel2" : "Average Production Time per Order",
+        "DataLabel3" : "SAP Processing Time CO",
+        "DataLabel4" : "SAP Processing Time APO",
+        "DataLabel5" : "SAP tg Max",
+        "DataLabel6" : "SAP Planned Number of Workers",
+        "DataLabel7" : "Number of parts",
+        "DisplayName" : "timeserieschart-6",
+        "EnableHover" : true,
+        "GridStyle" : "DefaultChartGridStyle",
+        "Height" : 240,
+        "Id" : "timeserieschart-6",
+        "Left" : 380,
+        "LegendLocation" : "top",
+        "LegendOrientation" : "vertical",
+        "LegendWidth" : 0,
+        "MarkerSize" : 3,
+        "MarkerType" : "circle",
+        "NumberOfSeries" : 5,
+        "ResponsiveLayout" : true,
+        "SecondaryYAxisAutoscale" : true,
+        "SecondaryYAxisFormat" : "0000.0",
+        "SecondaryYAxisMaximum" : 100,
+        "SecondaryYAxisMinimum" : 0,
+        "SecondaryYAxisZeroscale" : false,
+        "SelectedItemStyle" : "DefaultChartSelectionStyle",
+        "SeriesDataStyle10_StateParameters" : [ ],
+        "SeriesDataStyle11_StateParameters" : [ ],
+        "SeriesDataStyle12_StateParameters" : [ ],
+        "SeriesDataStyle13_StateParameters" : [ ],
+        "SeriesDataStyle14_StateParameters" : [ ],
+        "SeriesDataStyle15_StateParameters" : [ ],
+        "SeriesDataStyle16_StateParameters" : [ ],
+        "SeriesDataStyle1_StateParameters" : [ ],
+        "SeriesDataStyle2_StateParameters" : [ ],
+        "SeriesDataStyle3_StateParameters" : [ ],
+        "SeriesDataStyle4_StateParameters" : [ ],
+        "SeriesDataStyle5_StateParameters" : [ ],
+        "SeriesDataStyle6_StateParameters" : [ ],
+        "SeriesDataStyle7_StateParameters" : [ ],
+        "SeriesDataStyle8_StateParameters" : [ ],
+        "SeriesDataStyle9_StateParameters" : [ ],
+        "SeriesMarkerType1" : "chart",
+        "SeriesMarkerType10" : "chart",
+        "SeriesMarkerType11" : "chart",
+        "SeriesMarkerType12" : "chart",
+        "SeriesMarkerType13" : "chart",
+        "SeriesMarkerType14" : "chart",
+        "SeriesMarkerType15" : "chart",
+        "SeriesMarkerType16" : "chart",
+        "SeriesMarkerType2" : "chart",
+        "SeriesMarkerType3" : "chart",
+        "SeriesMarkerType4" : "chart",
+        "SeriesMarkerType5" : "chart",
+        "SeriesMarkerType6" : "chart",
+        "SeriesMarkerType7" : "chart",
+        "SeriesMarkerType8" : "chart",
+        "SeriesMarkerType9" : "chart",
+        "SeriesStyle1" : "DefaultChartStyle1",
+        "SeriesStyle10" : "DefaultChartStyle10",
+        "SeriesStyle11" : "DefaultChartStyle11",
+        "SeriesStyle12" : "DefaultChartStyle12",
+        "SeriesStyle13" : "DefaultChartStyle13",
+        "SeriesStyle14" : "DefaultChartStyle14",
+        "SeriesStyle15" : "DefaultChartStyle15",
+        "SeriesStyle16" : "DefaultChartStyle16",
+        "SeriesStyle2" : "DefaultChartStyle6",
+        "SeriesStyle3" : "DefaultChartStyle3",
+        "SeriesStyle4" : "DefaultChartStyle4",
+        "SeriesStyle5" : "DefaultChartStyle2",
+        "SeriesStyle6" : "DefaultChartStyle6",
+        "SeriesStyle7" : "DefaultChartStyle7",
+        "SeriesStyle8" : "DefaultChartStyle8",
+        "SeriesStyle9" : "DefaultChartStyle9",
+        "SeriesType1" : "chart",
+        "SeriesType10" : "chart",
+        "SeriesType11" : "chart",
+        "SeriesType12" : "chart",
+        "SeriesType13" : "chart",
+        "SeriesType14" : "chart",
+        "SeriesType15" : "chart",
+        "SeriesType16" : "chart",
+        "SeriesType2" : "chart",
+        "SeriesType3" : "chart",
+        "SeriesType4" : "chart",
+        "SeriesType5" : "chart",
+        "SeriesType6" : "chart",
+        "SeriesType7" : "chart",
+        "SeriesType8" : "chart",
+        "SeriesType9" : "chart",
+        "ShowDataLoading" : true,
+        "ShowLegend" : true,
+        "ShowXAxis" : true,
+        "ShowXAxisGrid" : true,
+        "ShowXAxisLabels" : true,
+        "ShowXAxisTicks" : true,
+        "ShowYAxis" : true,
+        "ShowYAxisGrid" : true,
+        "ShowYAxisLabels" : true,
+        "ShowYAxisTicks" : true,
+        "SingleDataSource" : true,
+        "Smoothing" : false,
+        "ToolTipStyle" : "DefaultTooltipStyle",
+        "Top" : 30,
+        "TruncateX-AxisLabels" : 0,
+        "TruncateY-AxisLabels" : 0,
+        "Type" : "timeserieschart",
+        "UseSecondaryAxis1" : false,
+        "UseSecondaryAxis10" : false,
+        "UseSecondaryAxis11" : false,
+        "UseSecondaryAxis12" : false,
+        "UseSecondaryAxis13" : false,
+        "UseSecondaryAxis14" : false,
+        "UseSecondaryAxis15" : false,
+        "UseSecondaryAxis16" : false,
+        "UseSecondaryAxis2" : false,
+        "UseSecondaryAxis3" : false,
+        "UseSecondaryAxis4" : false,
+        "UseSecondaryAxis5" : false,
+        "UseSecondaryAxis6" : true,
+        "UseSecondaryAxis7" : true,
+        "UseSecondaryAxis8" : false,
+        "UseSecondaryAxis9" : false,
+        "Visible" : true,
+        "Width" : 640,
+        "XAxisAutoscale" : false,
+        "XAxisField" : "StatusTime",
+        "XAxisFormat" : "HH:mm",
+        "XAxisIntervals" : 10,
+        "XAxisLabels" : 2,
+        "XAxisMinorTicks" : 1,
+        "XAxisSmoothScaling" : true,
+        "XAxisStyle" : "DefaultChartAxisStyle",
+        "XAxisZeroscale" : false,
+        "YAxisAutoscale" : true,
+        "YAxisFormat" : "0000.0",
+        "YAxisIntervals" : 10,
+        "YAxisLabels" : 2,
+        "YAxisMaximum" : 100,
+        "YAxisMinimum" : 0,
+        "YAxisMinorTicks" : 1,
+        "YAxisMode" : "single",
+        "YAxisStyle" : "DefaultChartAxisStyle",
+        "YAxisZeroscale" : false,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Zeitreihendiagramm",
+        "__supportsTooltip" : true
+      },
+      "Widgets" : [ ]
+    } ]
+  },
+  "mashupType" : "mashup"
+}]]></mashupContent>
+			<preview />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="" timestamp="2020-08-19T07:38:02.904+02:00"
+					user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2020-08-19T07:38:32.093+02:00" user="adm-flassakm" />
+			</ConfigurationChanges>
+		</Mashup>
+	</Mashups>
+</Entities>

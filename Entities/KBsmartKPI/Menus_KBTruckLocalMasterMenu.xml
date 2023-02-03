@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b52" majorVersion="8" minorVersion="0"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="3" schemaVersion="1000">
+	<Menus>
+		<Menu aspect.isEditableExtensionObject="true" description=""
+			documentationContent="" homeMashup="" imageURL=""
+			lastModifiedDate="2018-02-20T16:19:34.875+01:00"
+			menuLabel="Knorr-Bremse smart Production"
+			name="KBTruckLocalMasterMenu" projectName="KBsmartKPI"
+			tags="KBThingWorxInstallationVocabulary:ExtensionLocalSmartKPIConfiguration;KBThingWorxAdministrationVocabulary:Administrated">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="GetEffectiveMenu">
+					<PropertyRead />
+					<PropertyWrite />
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</PropertyRead>
+					<PropertyWrite />
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group" />
+					</ServiceInvoke>
+					<EventInvoke />
+					<EventSubscribe />
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true" name="KBOrganization"
+						type="Organization" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTables />
+			<MenuItems>
+				<MenuItem description=""
+					imageURL="/Thingworx/MediaEntities/KBKPSLogo" isDefault="false"
+					linkDestination="http://smartproduction" linkTarget="New"
+					linkType="Hyperlink" title="smartKPI@CVS">
+					<GroupReferences>
+						<Members>
+							<Member name="KBTruckUserGroup" type="Group" />
+							<Member name="KBServicesUserGroup" type="Group" />
+						</Members>
+					</GroupReferences>
+				</MenuItem>
+				<MenuItem description=""
+					imageURL="/Thingworx/MediaEntities/PTC.Asset.disconnected_icon"
+					isDefault="false" linkDestination="PTC.FactoryConsole"
+					linkTarget="New" linkType="Mashup" title="Manufacturing Apps">
+					<GroupReferences>
+						<Members>
+							<Member name="KBServicesUserGroup" type="Group" />
+							<Member name="KBTruckUserGroup" type="Group" />
+						</Members>
+					</GroupReferences>
+				</MenuItem>
+				<MenuItem description=""
+					imageURL="/Thingworx/MediaEntities/PerformanceMetricsIcon"
+					isDefault="false"
+					linkDestination="KBLocalSmartKPIMachineLevelLossesFrameMashup"
+					linkTarget="New" linkType="Mashup" title="Pareto for Losses">
+					<GroupReferences>
+						<Members>
+							<Member name="KBTruckUserGroup" type="Group" />
+							<Member name="KBServicesUserGroup" type="Group" />
+						</Members>
+					</GroupReferences>
+				</MenuItem>
+				<MenuItem description=""
+					imageURL="/Thingworx/MediaEntities/AcknowledgeAlertIcon"
+					isDefault="false"
+					linkDestination="KBLocalSmartKPIMachineLevelOrderandShiftInfoFrameMashup"
+					linkTarget="New" linkType="Mashup" title="Order and Shift Info">
+					<GroupReferences>
+						<Members>
+							<Member name="KBTruckUserGroup" type="Group" />
+							<Member name="KBServicesUserGroup" type="Group" />
+						</Members>
+					</GroupReferences>
+				</MenuItem>
+				<MenuItem description=""
+					imageURL="/Thingworx/MediaEntities/SimpleGear" isDefault="false"
+					linkDestination="KBLocalSmartKPIMachineLevelProcessDataFrameMashup"
+					linkTarget="New" linkType="Mashup" title="Process Data">
+					<GroupReferences>
+						<Members>
+							<Member name="KBTruckUserGroup" type="Group" />
+							<Member name="KBServicesUserGroup" type="Group" />
+						</Members>
+					</GroupReferences>
+				</MenuItem>
+				<MenuItem description=""
+					imageURL="/Thingworx/MediaEntities/LogApplicationIcon"
+					isDefault="false"
+					linkDestination="KBLocalSmartKPIMachineLevelIChartFrameMashup"
+					linkTarget="New" linkType="Mashup" title="I-Chart">
+					<GroupReferences>
+						<Members>
+							<Member name="KBTruckUserGroup" type="Group" />
+							<Member name="KBServicesUserGroup" type="Group" />
+						</Members>
+					</GroupReferences>
+				</MenuItem>
+			</MenuItems>
+			<GroupReferences>
+				<Members />
+			</GroupReferences>
+			<effectiveMenu>
+				<DataShape>
+					<FieldDefinitions>
+						<FieldDefinition baseType="STRING"
+							description="Description for tooltip" name="description"
+							ordinal="0" />
+						<FieldDefinition baseType="IMAGELINK"
+							description="Optional image URL" name="imageURL" ordinal="0" />
+						<FieldDefinition aspect.defaultValue="false"
+							baseType="BOOLEAN" description="Is a default menu item"
+							name="isDefault" ordinal="0" />
+						<FieldDefinition aspect.isPrimaryKey="true"
+							baseType="STRING" description="Link destination"
+							name="linkDestination" ordinal="0" />
+						<FieldDefinition baseType="STRING"
+							description="Link target (Popup, Mashup, New)" name="linkTarget"
+							ordinal="0" />
+						<FieldDefinition aspect.isPrimaryKey="true"
+							baseType="STRING"
+							description="Link type (Mashup, Hyperlink, or Menu)"
+							name="linkType" ordinal="0" />
+						<FieldDefinition baseType="STRING"
+							description="Menu entry id" name="menuId" ordinal="0" />
+						<FieldDefinition baseType="STRING"
+							description="Menu entry parent id" name="parentMenuId"
+							ordinal="0" />
+						<FieldDefinition baseType="STRING"
+							description="Menu entry title" name="title" ordinal="0" />
+					</FieldDefinitions>
+				</DataShape>
+				<Rows>
+					<Row>
+						<linkPriority>0.0</linkPriority>
+						<parentMenuId />
+						<imageURL />
+						<description />
+						<menuId><![CDATA[KBTruckLocalMasterMenuCopy]]></menuId>
+						<linkType><![CDATA[Menu]]></linkType>
+						<title><![CDATA[Knorr-Bremse smart Production]]></title>
+					</Row>
+					<Row>
+						<linkDestination><![CDATA[http://smartproduction]]></linkDestination>
+						<isDefault>false</isDefault>
+						<parentMenuId><![CDATA[KBTruckLocalMasterMenuCopy]]></parentMenuId>
+						<linkTarget><![CDATA[New]]></linkTarget>
+						<imageURL><![CDATA[/Thingworx/MediaEntities/KBKPSLogo]]></imageURL>
+						<description />
+						<menuId><![CDATA[KBTruckLocalMasterMenuCopy_0]]></menuId>
+						<linkType><![CDATA[Hyperlink]]></linkType>
+						<title><![CDATA[smartKPI@CVS]]></title>
+					</Row>
+					<Row>
+						<linkDestination><![CDATA[PTC.FactoryConsole]]></linkDestination>
+						<isDefault>false</isDefault>
+						<parentMenuId><![CDATA[KBTruckLocalMasterMenuCopy]]></parentMenuId>
+						<linkTarget><![CDATA[New]]></linkTarget>
+						<imageURL><![CDATA[/Thingworx/MediaEntities/PTC.Asset.disconnected_icon]]></imageURL>
+						<description />
+						<menuId><![CDATA[KBTruckLocalMasterMenuCopy_1]]></menuId>
+						<linkType><![CDATA[Mashup]]></linkType>
+						<title><![CDATA[Manufacturing Apps]]></title>
+					</Row>
+					<Row>
+						<linkDestination><![CDATA[KBLocalSmartKPIMachineLevelLossesFrameMashup]]></linkDestination>
+						<isDefault>false</isDefault>
+						<parentMenuId><![CDATA[KBTruckLocalMasterMenuCopy]]></parentMenuId>
+						<linkTarget><![CDATA[New]]></linkTarget>
+						<imageURL><![CDATA[/Thingworx/MediaEntities/PerformanceMetricsIcon]]></imageURL>
+						<description />
+						<menuId><![CDATA[KBTruckLocalMasterMenuCopy_2]]></menuId>
+						<linkType><![CDATA[Mashup]]></linkType>
+						<title><![CDATA[Pareto for Losses]]></title>
+					</Row>
+					<Row>
+						<linkDestination><![CDATA[KBLocalSmartKPIMachineLevelOrderandShiftInfoFrameMashup]]></linkDestination>
+						<isDefault>false</isDefault>
+						<parentMenuId><![CDATA[KBTruckLocalMasterMenuCopy]]></parentMenuId>
+						<linkTarget><![CDATA[New]]></linkTarget>
+						<imageURL><![CDATA[/Thingworx/MediaEntities/AcknowledgeAlertIcon]]></imageURL>
+						<description />
+						<menuId><![CDATA[KBTruckLocalMasterMenuCopy_3]]></menuId>
+						<linkType><![CDATA[Mashup]]></linkType>
+						<title><![CDATA[Order and Shift Info]]></title>
+					</Row>
+					<Row>
+						<linkDestination><![CDATA[KBLocalSmartKPIMachineLevelProcessDataFrameMashup]]></linkDestination>
+						<isDefault>false</isDefault>
+						<parentMenuId><![CDATA[KBTruckLocalMasterMenuCopy]]></parentMenuId>
+						<linkTarget><![CDATA[New]]></linkTarget>
+						<imageURL><![CDATA[/Thingworx/MediaEntities/SimpleGear]]></imageURL>
+						<description />
+						<menuId><![CDATA[KBTruckLocalMasterMenuCopy_4]]></menuId>
+						<linkType><![CDATA[Mashup]]></linkType>
+						<title><![CDATA[Process Data]]></title>
+					</Row>
+					<Row>
+						<linkDestination><![CDATA[KBLocalSmartKPIMachineLevelIChartFrameMashup]]></linkDestination>
+						<isDefault>false</isDefault>
+						<parentMenuId><![CDATA[KBTruckLocalMasterMenuCopy]]></parentMenuId>
+						<linkTarget><![CDATA[New]]></linkTarget>
+						<imageURL><![CDATA[/Thingworx/MediaEntities/LogApplicationIcon]]></imageURL>
+						<description />
+						<menuId><![CDATA[KBTruckLocalMasterMenuCopy_5]]></menuId>
+						<linkType><![CDATA[Mashup]]></linkType>
+						<title><![CDATA[I-Chart]]></title>
+					</Row>
+				</Rows>
+			</effectiveMenu>
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="header : name : updated&#10;"
+					timestamp="2018-02-20T16:18:14.062+01:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="" timestamp="2018-02-20T16:19:34.875+01:00"
+					user="adm-flassakm" />
+			</ConfigurationChanges>
+		</Menu>
+	</Menus>
+</Entities>

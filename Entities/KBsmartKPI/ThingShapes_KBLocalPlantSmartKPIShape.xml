@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b97"
+ majorVersion="8"
+ minorVersion="4"
+ modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+ revision="11"
+ schemaVersion="1044"
+ universal="password">
+    <ThingShapes>
+        <ThingShape
+         className=""
+         description=""
+         documentationContent=""
+         homeMashup=""
+         lastModifiedDate="2021-04-30T09:45:59.532+02:00"
+         name="KBLocalPlantSmartKPIShape"
+         projectName="KBsmartKPI"
+         tags="KBThingWorxInstallationVocabulary:ExtensionSmartKPI">
+            <PropertyDefinitions>
+                <PropertyDefinition
+                 aspect.cacheTime="0.0"
+                 aspect.dataChangeType="VALUE"
+                 aspect.isLogged="false"
+                 aspect.isPersistent="true"
+                 aspect.isReadOnly="false"
+                 baseType="STRING"
+                 category=""
+                 description="Name for Visualizations"
+                 isLocalOnly="false"
+                 name="DisplayName"
+                 ordinal="51"></PropertyDefinition>
+                <PropertyDefinition
+                 aspect.cacheTime="0.0"
+                 aspect.dataChangeType="VALUE"
+                 aspect.isLogged="false"
+                 aspect.isPersistent="true"
+                 aspect.isReadOnly="false"
+                 baseType="STRING"
+                 category=""
+                 description="Full Division Name"
+                 isLocalOnly="false"
+                 name="FullName"
+                 ordinal="50"></PropertyDefinition>
+                <PropertyDefinition
+                 aspect.cacheTime="0.0"
+                 aspect.dataChangeType="VALUE"
+                 aspect.defaultValue="true"
+                 aspect.isLogged="false"
+                 aspect.isPersistent="true"
+                 aspect.isReadOnly="false"
+                 baseType="BOOLEAN"
+                 category=""
+                 description=""
+                 isLocalOnly="false"
+                 name="getShiftCalendarFromSAP"
+                 ordinal="5"></PropertyDefinition>
+                <PropertyDefinition
+                 aspect.cacheTime="0.0"
+                 aspect.dataChangeType="VALUE"
+                 aspect.defaultValue="true"
+                 aspect.isLogged="false"
+                 aspect.isPersistent="true"
+                 aspect.isReadOnly="false"
+                 baseType="BOOLEAN"
+                 category=""
+                 description=""
+                 isLocalOnly="false"
+                 name="isActive"
+                 ordinal="49"></PropertyDefinition>
+                <PropertyDefinition
+                 aspect.cacheTime="0.0"
+                 aspect.dataChangeType="VALUE"
+                 aspect.isLogged="false"
+                 aspect.isPersistent="true"
+                 aspect.isReadOnly="false"
+                 aspect.thingTemplate="KBLocalCompanyThingTemplate"
+                 baseType="THINGNAME"
+                 category=""
+                 description=""
+                 isLocalOnly="false"
+                 name="KBCompanyThing"
+                 ordinal="47"></PropertyDefinition>
+                <PropertyDefinition
+                 aspect.cacheTime="0.0"
+                 aspect.dataChangeType="VALUE"
+                 aspect.isLogged="false"
+                 aspect.isPersistent="true"
+                 aspect.isReadOnly="false"
+                 aspect.thingTemplate="KBLocalCountryThingTemplate"
+                 baseType="THINGNAME"
+                 category=""
+                 description=""
+                 isLocalOnly="false"
+                 name="KBCountryThing"
+                 ordinal="46"></PropertyDefinition>
+                <PropertyDefinition
+                 aspect.cacheTime="0.0"
+                 aspect.dataChangeType="VALUE"
+                 aspect.isLogged="false"
+                 aspect.isPersistent="true"
+                 aspect.isReadOnly="false"
+                 aspect.thingTemplate="KBLocalDivisionThingTemplate"
+                 baseType="THINGNAME"
+                 category=""
+                 description=""
+                 isLocalOnly="false"
+                 name="KBDivisionThing"
+                 ordinal="45"></PropertyDefinition>
+                <PropertyDefinition
+                 aspect.cacheTime="0.0"
+                 aspect.dataChangeType="VALUE"
+                 aspect.isLogged="true"
+                 aspect.isPersistent="true"
+                 baseType="NUMBER"
+                 category=""
+                 description=""
+                 isLocalOnly="false"
+                 name="OverlapSingOnTime"
+                 ordinal="11"></PropertyDefinition>
+                <PropertyDefinition
+                 aspect.cacheTime="0.0"
+                 aspect.dataChangeType="VALUE"
+                 aspect.isLogged="false"
+                 aspect.isPersistent="true"
+                 aspect.isReadOnly="false"
+                 baseType="STRING"
+                 category=""
+                 description=""
+                 isLocalOnly="false"
+                 name="PlantIdForNonSAPShiftCalendar"
+                 ordinal="6"></PropertyDefinition>
+                <PropertyDefinition
+                 aspect.cacheTime="0.0"
+                 aspect.dataChangeType="VALUE"
+                 aspect.isLogged="false"
+                 aspect.isPersistent="true"
+                 aspect.isReadOnly="false"
+                 baseType="STRING"
+                 category=""
+                 description=""
+                 isLocalOnly="false"
+                 name="SAPPlantId"
+                 ordinal="1"></PropertyDefinition>
+            </PropertyDefinitions>
+            <ServiceDefinitions>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category=""
+                 description=""
+                 isAllowOverride="false"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="GetPlantActiveMachines">
+                    <ResultType
+                     aspect.dataShape="GenericStringList"
+                     baseType="INFOTABLE"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         aspect.thingTemplate="KBLocalPlantThingTemplate"
+                         baseType="THINGNAME"
+                         description=""
+                         name="Plant"
+                         ordinal="1"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category=""
+                 description=""
+                 isAllowOverride="false"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="GetPlantActiveStations">
+                    <ResultType
+                     aspect.dataShape="GenericStringList"
+                     baseType="INFOTABLE"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         aspect.thingTemplate="KBLocalPlantThingTemplate"
+                         baseType="THINGNAME"
+                         description=""
+                         name="Plant"
+                         ordinal="1"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category=""
+                 description=""
+                 isAllowOverride="false"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="SetAndontextToAllStations">
+                    <ResultType
+                     baseType="NOTHING"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         aspect.thingTemplate="KBLocalPlantThingTemplate"
+                         baseType="THINGNAME"
+                         description=""
+                         name="Plant"
+                         ordinal="1"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="TextString"
+                         ordinal="2"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+            </ServiceDefinitions>
+            <EventDefinitions></EventDefinitions>
+            <ServiceMappings></ServiceMappings>
+            <ServiceImplementations>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="GetPlantActiveMachines">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    try{
+                                        if(Plant==="" ||Plant===undefined || Plant=== null){Plant=me.name;}
+                                    	var StationInfotable =  Resources["SearchFunctions"].SearchThingsByTemplateWithPersistent({
+                                        	maxItems: 1000 /* NUMBER */,
+                                        	nameMask: undefined /* STRING */,
+                                        	thingTemplate: "KBLocalStationThingTemplate" /* THINGTEMPLATENAME */
+                                        });
+                                        var params = {
+                                                infoTableName : "InfoTable",
+                                                dataShapeName : "GenericStringList"
+                                        };
+                                        var PlantMachinesList = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                            
+                                    	for(x=0;x<StationInfotable.rows.length;x++){
+                                    		if(Things[StationInfotable.rows[x].name].KBLocalLineThing!=="" && Things[StationInfotable.rows[x].name].KBLocalLineThing!==undefined && Things[StationInfotable.rows[x].name].isActive){
+                                        		if (Things[Things[StationInfotable.rows[x].name].KBLocalLineThing]!==null) {
+                                                	if(Things[Things[StationInfotable.rows[x].name].KBLocalLineThing].isActive && Things[Things[StationInfotable.rows[x].name].KBLocalLineThing].KBPlantThing==Plant){
+                                                    // GenericStringList entry object
+                                                    
+                                                    	var newEntry = new Object();
+                                    	                newEntry.item = Things[StationInfotable.rows[x].name].KBLocalLineThing; // STRING [Primary Key]
+                                        	            PlantMachinesList.AddRow(newEntry);
+                                            		}
+                                                }
+                                            }
+                                        }
+                                         var params2 = {
+                                        	t: PlantMachinesList /* INFOTABLE */,
+                                        	columns: "item" /* STRING */,
+                                        	aggregates: "COUNT" /* STRING */,
+                                        	groupByColumns: "item"  /* STRING */
+                                        };
+                                        
+                                        // result: INFOTABLE
+                                        var result = Resources["InfoTableFunctions"].Aggregate(params2);
+                                    }catch(err){
+                                    	logger.error("GetPlantActiveMachines Error: " + err+ " on thing: " + me.name + " at: " + err.lineNumber+", station: "+StationInfotable.rows[x].name);
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="GetPlantActiveStations">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    try{
+                                        if(Plant==="" ||Plant===undefined || Plant=== null){Plant=me.name;}
+                                        // result: INFOTABLE dataShape: "SpotlightSearchWithPersistent"
+                                        var StationInfotable =  Resources["SearchFunctions"].SearchThingsByTemplateWithPersistent({
+                                        	maxItems: 1000 /* NUMBER */,
+                                        	nameMask: undefined /* STRING */,
+                                        	thingTemplate: "KBLocalStationThingTemplate" /* THINGTEMPLATENAME */
+                                        });
+                                        var params = {
+                                                infoTableName : "InfoTable",
+                                                dataShapeName : "GenericStringList"
+                                        };
+                                        var PlantStationsList = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                            
+                                    	for(x=0;x<StationInfotable.rows.length;x++){
+                                    		if(Things[StationInfotable.rows[x].name].KBLocalLineThing!=="" && Things[StationInfotable.rows[x].name].KBLocalLineThing!==undefined && Things[StationInfotable.rows[x].name].isActive){
+                                                 var entity = Things[Things[StationInfotable.rows[x].name].KBLocalLineThing];
+                                        		if (entity!==null) {
+                                                	if(Things[Things[StationInfotable.rows[x].name].KBLocalLineThing].isActive && Things[Things[StationInfotable.rows[x].name].KBLocalLineThing].KBPlantThing==Plant){
+                                                    // GenericStringList entry object
+                                                    
+                                                    	var newEntry = new Object();
+                                    	                newEntry.item = StationInfotable.rows[x].name; // STRING [Primary Key]
+                                        	            PlantStationsList.AddRow(newEntry);
+                                            		}
+                                                }
+                                            }
+                                        }
+                                        var params2 = {
+                                        	t: PlantStationsList /* INFOTABLE */,
+                                        	columns: "item" /* STRING */,
+                                        	aggregates: "COUNT" /* STRING */,
+                                        	groupByColumns: "item"  /* STRING */
+                                        };
+                                        
+                                        // result: INFOTABLE
+                                        var result = Resources["InfoTableFunctions"].Aggregate(params2);
+                                    }catch(err){
+                                    	logger.error("GetPlantActiveStations Error: " + err+ " on thing: " + me.name + " at: " + err.lineNumber+", station: "+StationInfotable.rows[x].name);
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="SetAndontextToAllStations">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    try{
+                                    	if(Plant==="" ||Plant===undefined || Plant=== null){Plant=me.name;}
+                                        var PlantStationList =  me.GetPlantActiveStations({
+                                        	Plant: Plant /* THINGNAME */
+                                        });
+                                        
+                                    	for(x=0;x<PlantStationList.rows.length;x++){
+                                    		Things[PlantStationList.rows[x].item].AndonText = TextString;
+                                            }
+                                      
+                                    }catch(err){
+                                    	logger.error("SetAndontextToAllStations Error: " + err+ " on thing: " + me.name + " at: " + err.lineNumber +", station:"+PlantStationList.rows[x].item);
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+            </ServiceImplementations>
+            <Subscriptions></Subscriptions>
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions>
+                <Permissions
+                 resourceName="*">
+                    <PropertyRead>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                    </PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="KBUserGroup"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+            </RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility>
+                    <Principal
+                     isPermitted="true"
+                     name="KBOrganization"
+                     type="Organization"></Principal>
+                </Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables></ConfigurationTables>
+            <PropertyBindings></PropertyBindings>
+            <RemotePropertyBindings></RemotePropertyBindings>
+            <RemoteServiceBindings></RemoteServiceBindings>
+            <RemoteEventBindings></RemoteEventBindings>
+            <AlertConfigurations>
+                <AlertDefinitions
+                 name="OverlapSingOnTime"></AlertDefinitions>
+            </AlertConfigurations>
+            <InstanceRunTimePermissions></InstanceRunTimePermissions>
+        </ThingShape>
+    </ThingShapes>
+</Entities>

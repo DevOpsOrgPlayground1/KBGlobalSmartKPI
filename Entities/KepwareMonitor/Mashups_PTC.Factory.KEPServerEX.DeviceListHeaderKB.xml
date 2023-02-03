@@ -1,0 +1,2961 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b527" majorVersion="9" minorVersion="0"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="8" schemaVersion="1107" universal="">
+	<Mashups>
+		<Mashup aspect.isResponsive="true" aspect.mashupType="mashup"
+			columns="0.0"
+			description="Creates, edits, and deletes devices in a KEP Server {PTC.Factory.KEPServerEX.DeviceListHeader}"
+			documentationContent="" homeMashup=""
+			lastModifiedDate="2021-08-23T13:51:59.152Z"
+			name="PTC.Factory.KEPServerEX.DeviceListHeaderKB"
+			projectName="KBsmartKPI" rows="0.0"
+			tags="">
+			<Owner name="adm-kumar2a" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions />
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true"
+						name="PTC.Factory.MachineVisibility:KEPServerMonitoring"
+						type="OrganizationalUnit" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables>
+				<ConfigurationTable
+					description="Mashup Mobile Settings" isHidden="true"
+					isMultiRow="false" name="MobileSettings" ordinal="0">
+					<DataShape>
+						<FieldDefinitions>
+							<FieldDefinition aspect.defaultValue="false"
+								baseType="BOOLEAN" description="" name="disableZoom" ordinal="0" />
+							<FieldDefinition aspect.defaultValue="true"
+								baseType="BOOLEAN" description="" name="fullScreenMode"
+								ordinal="0" />
+							<FieldDefinition baseType="STRING" description=""
+								name="height" ordinal="0" />
+							<FieldDefinition
+								aspect.defaultValue="device-height" baseType="STRING"
+								description="" name="heightType" ordinal="0" />
+							<FieldDefinition aspect.defaultValue="1.0"
+								baseType="NUMBER" description="" name="initialScale" ordinal="0" />
+							<FieldDefinition baseType="STRING" description=""
+								name="iosShortcutIconTitle" ordinal="0" />
+							<FieldDefinition
+								aspect.defaultValue="black-translucent" baseType="STRING"
+								description="" name="iosStatusBarAppearance" ordinal="0" />
+							<FieldDefinition aspect.defaultValue="10.0"
+								baseType="NUMBER" description="" name="maximumScale" ordinal="0" />
+							<FieldDefinition aspect.defaultValue="0.1"
+								baseType="NUMBER" description="" name="minimumScale" ordinal="0" />
+							<FieldDefinition baseType="STRING" description=""
+								name="width" ordinal="0" />
+							<FieldDefinition
+								aspect.defaultValue="device-width" baseType="STRING"
+								description="" name="widthType" ordinal="0" />
+						</FieldDefinitions>
+					</DataShape>
+					<Rows>
+						<Row>
+							<disableZoom>false</disableZoom>
+							<fullScreenMode>true</fullScreenMode>
+							<height />
+							<heightType><![CDATA[device-height]]></heightType>
+							<initialScale>1.0</initialScale>
+							<iosShortcutIconTitle />
+							<iosStatusBarAppearance><![CDATA[black-translucent]]></iosStatusBarAppearance>
+							<maximumScale>10.0</maximumScale>
+							<minimumScale>0.1</minimumScale>
+							<width />
+							<widthType><![CDATA[device-width]]></widthType>
+						</Row>
+					</Rows>
+				</ConfigurationTable>
+			</ConfigurationTables>
+			<ParameterDefinitions>
+				<FieldDefinition baseType="STRING" description=""
+					name="OPCDAThingName" ordinal="0" />
+				<FieldDefinition baseType="STRING" description=""
+					name="ServerName" ordinal="0" />
+			</ParameterDefinitions>
+			<Things />
+			<ThingShapes />
+			<ThingTemplates />
+			<mashupContent><![CDATA[{
+  "CustomMashupCss" : "",
+  "Data" : {
+    "Resources_PTC.Resource.Factory.MessageFormatUtilities" : {
+      "DataName" : "Resources_PTC.Resource.Factory.MessageFormatUtilities",
+      "EntityName" : "PTC.Resource.Factory.MessageFormatUtilities",
+      "EntityType" : "Resources",
+      "Id" : "a3273be9-6523-4310-a867-91848be8bb9f",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "f6e7700e-62d3-4f8b-8522-7fabde1a6389",
+        "Name" : "GetLocalizedMessageOneParam",
+        "Parameters" : {
+          "label" : "PTC.Factory.DeleteDevices.TITLE"
+        },
+        "RefreshInterval" : 0,
+        "Target" : "GetLocalizedMessageOneParam"
+      }, {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "feb8f119-ca07-44c5-aa8d-07421a1b6c6c",
+        "Name" : "GetLocalizedMessageOneParam1",
+        "Parameters" : {
+          "label" : "PTC.Factory.DeleteDevices.CONFIRM"
+        },
+        "RefreshInterval" : 0,
+        "Target" : "GetLocalizedMessageOneParam"
+      } ]
+    },
+    "Session" : {
+      "DataName" : "Session",
+      "EntityName" : "",
+      "EntityType" : "Session",
+      "Id" : "session",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "SessionInterface",
+        "Name" : "GetGlobalSessionValues",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetGlobalSessionValues"
+      } ]
+    },
+    "Things_PTC.Factory.DeviceUtils" : {
+      "DataName" : "Things_PTC.Factory.DeviceUtils",
+      "EntityName" : "PTC.Factory.DeviceUtils",
+      "EntityType" : "Things",
+      "Id" : "a1b7cd78-e769-4e13-b280-e44a33d9b1f7",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "fe28b4ac-866a-4fc5-8fa4-200f9b73ea1a",
+        "Name" : "isServerCustom",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "isServerCustom"
+      }, {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "6338efa8-f5ba-442e-8664-028c92655596",
+        "Name" : "DeleteDevice",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "DeleteDevice"
+      } ]
+    },
+    "Things_PTC.Factory.LaunchPointConfigurationThing" : {
+      "DataName" : "Things_PTC.Factory.LaunchPointConfigurationThing",
+      "EntityName" : "PTC.Factory.LaunchPointConfigurationThing",
+      "EntityType" : "Things",
+      "Id" : "bdd698f8-471b-4c46-a576-73deef8c4de0",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "883cf6aa-dfbf-4594-852e-2c8a0b41869c",
+        "Name" : "GetLaunchPointEntityName",
+        "Parameters" : {
+          "launchPointDescription" : "DeviceListMashup"
+        },
+        "RefreshInterval" : 0,
+        "Target" : "GetLaunchPointEntityName"
+      } ]
+    },
+    "Things_PTC.SCA.SCO.ControlsAdvisorUtils" : {
+      "DataName" : "Things_PTC.SCA.SCO.ControlsAdvisorUtils",
+      "EntityName" : "PTC.SCA.SCO.ControlsAdvisorUtils",
+      "EntityType" : "Things",
+      "Id" : "0416e95b-d8f8-4130-bcd0-a3f3414d7e83",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "0065c472-14a8-4553-8e3d-73ec1ad58924",
+        "Name" : "CalculateStatus",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "CalculateStatus"
+      } ]
+    },
+    "UserExtensions" : {
+      "DataName" : "UserExtensions",
+      "EntityName" : "",
+      "EntityType" : "UserExtensions",
+      "Id" : "UserExtensions",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "UserExtensionInterface",
+        "Name" : "GetCurrentUserExtensionProperties",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetCurrentUserExtensionProperties"
+      } ]
+    }
+  },
+  "DataBindings" : [ {
+    "Id" : "ceddb6cb-4245-4c13-8c4e-658b75187389",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "OPCDAThingName",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "OPCDAThingName",
+      "TargetPropertyBaseType" : "TEXT"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "ContainedMashup-183",
+    "TargetSection" : ""
+  }, {
+    "Id" : "b419040c-10ad-42f8-8144-717ab7ee08d7",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "OPCDAThingName",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "sourceName",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "navigation-190",
+    "TargetSection" : ""
+  }, {
+    "Id" : "08e6e7ba-0b72-44fc-b10b-047c8c746daa",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "OPCDAThingName",
+      "SourcePropertyBaseType" : "TEXT",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "sourceName",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "ContainedMashup-183",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "navigation-195",
+    "TargetSection" : ""
+  }, {
+    "Id" : "24e2271b-f9a1-4517-8511-95ae823bf1fd",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "selectedDevice",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "deviceName",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "ContainedMashup-183",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "navigation-195",
+    "TargetSection" : ""
+  }, {
+    "Id" : "b9a273a4-bd61-4b65-a469-2be011da0875",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "OPCDAThingName",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "serverName",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "Parameter"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "isServerCustom",
+    "TargetSection" : "Things_PTC.Factory.DeviceUtils"
+  }, {
+    "Id" : "516eb78c-3367-4458-8137-85b21a47cc65",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "createdDevice",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "createdDevice",
+      "TargetPropertyBaseType" : "STRING",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "navigation-195",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "ContainedMashup-183",
+    "TargetSection" : ""
+  }, {
+    "Id" : "aedfba04-4097-480a-84d5-5127dbbe480d",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "result",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Field",
+      "TargetProperty" : "Name",
+      "TargetPropertyBaseType" : "MASHUPNAME",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetLaunchPointEntityName",
+    "SourceSection" : "Things_PTC.Factory.LaunchPointConfigurationThing",
+    "TargetArea" : "UI",
+    "TargetId" : "ContainedMashup-183",
+    "TargetSection" : ""
+  }, {
+    "Id" : "314c5976-291e-45ef-ba93-317682d1dc78",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "okClicked",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "TargetProperty" : "okClicked",
+      "TargetPropertyBaseType" : ""
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "navigation-200",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "validator-201",
+    "TargetSection" : ""
+  }, {
+    "Id" : "ffeef5a8-18a3-4bbe-b3d5-69bbb58a3248",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "result",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Data",
+      "TargetProperty" : "title",
+      "TargetPropertyBaseType" : "STRING"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetLocalizedMessageOneParam",
+    "SourceSection" : "Resources_PTC.Resource.Factory.MessageFormatUtilities",
+    "TargetArea" : "UI",
+    "TargetId" : "navigation-200",
+    "TargetSection" : ""
+  }, {
+    "Id" : "3f559aa6-e9fa-4303-b46e-5c5f2eb7e0b4",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "result",
+      "SourcePropertyBaseType" : "STRING",
+      "SourcePropertyType" : "Data",
+      "TargetProperty" : "message",
+      "TargetPropertyBaseType" : "STRING"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetLocalizedMessageOneParam1",
+    "SourceSection" : "Resources_PTC.Resource.Factory.MessageFormatUtilities",
+    "TargetArea" : "UI",
+    "TargetId" : "navigation-200",
+    "TargetSection" : ""
+  }, {
+    "Id" : "1db004e1-c8bd-4097-b9c5-f67106ab1f19",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "selectedDevice",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "value",
+      "TargetPropertyBaseType" : "STRING"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "ContainedMashup-183",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "GetLocalizedMessageOneParam1",
+    "TargetSection" : "Resources_PTC.Resource.Factory.MessageFormatUtilities"
+  }, {
+    "Id" : "5a8bbe34-9a47-4eb8-bbe4-7dfc955edaa0",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "State",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "TargetProperty" : "okClicked",
+      "TargetPropertyBaseType" : "BOOLEAN"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "checkbox-203",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "navigation-200",
+    "TargetSection" : ""
+  }, {
+    "Id" : "fcb4caaa-d370-4470-be9d-d02a08268279",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "selectedDeviceThingName",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "title",
+      "TargetPropertyBaseType" : "STRING"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "ContainedMashup-183",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "DeleteDevice",
+    "TargetSection" : "Things_PTC.Factory.DeviceUtils"
+  }, {
+    "Id" : "ca77450a-0f5c-4a6a-ae23-ea05da78c2af",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "selectedDeviceThingName",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "deviceName",
+      "TargetPropertyBaseType" : "STRING"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "ContainedMashup-183",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "navigation-190",
+    "TargetSection" : ""
+  }, {
+    "Id" : "7d275f0e-210b-441a-b0b2-9d659219df4c",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "selectedDevice",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "selectedDevice",
+      "TargetPropertyBaseType" : ""
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "ContainedMashup-183",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "expression-204",
+    "TargetSection" : ""
+  }, {
+    "Id" : "98765739-0c63-47ad-9d9e-3f11d67496cc",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Output",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "createdDevice",
+      "TargetPropertyBaseType" : "STRING"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "expression-204",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "navigation-195",
+    "TargetSection" : ""
+  }, {
+    "Id" : "e7ddd30a-c204-4483-80e3-77e84edfd044",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "noRowSelected",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "TargetProperty" : "Disabled",
+      "TargetPropertyBaseType" : "BOOLEAN"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "ContainedMashup-183",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "button-198",
+    "TargetSection" : ""
+  }, {
+    "Id" : "fa9b3d08-5133-4ea2-9e35-da699cfa96ba",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "noRowSelected",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "TargetProperty" : "Disabled",
+      "TargetPropertyBaseType" : "BOOLEAN"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "ContainedMashup-183",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "button-191",
+    "TargetSection" : ""
+  }, {
+    "Id" : "279e97ec-2fa5-48b1-a34e-4fc99a0f4f95",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Result",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "SourcePropertyType" : "Data",
+      "TargetProperty" : "isServerCustom",
+      "TargetPropertyBaseType" : "BOOLEAN"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "isServerCustom",
+    "SourceSection" : "Things_PTC.Factory.DeviceUtils",
+    "TargetArea" : "UI",
+    "TargetId" : "expression-205",
+    "TargetSection" : ""
+  }, {
+    "Id" : "85104e6c-b682-43f2-9b9e-9c009fd56602",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "Output",
+      "SourcePropertyBaseType" : "BOOLEAN",
+      "TargetProperty" : "Disabled",
+      "TargetPropertyBaseType" : "BOOLEAN"
+    } ],
+    "SourceArea" : "UI",
+    "SourceId" : "expression-205",
+    "SourceSection" : "",
+    "TargetArea" : "UI",
+    "TargetId" : "button-193",
+    "TargetSection" : ""
+  }, {
+    "Id" : "fe448340-491b-4862-a0f2-6e0330ccba6d",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "OPCDAThingName",
+      "SourcePropertyBaseType" : "STRING",
+      "TargetProperty" : "thingName",
+      "TargetPropertyBaseType" : "THINGNAME"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "CalculateStatus",
+    "TargetSection" : "Things_PTC.SCA.SCO.ControlsAdvisorUtils"
+  } ],
+  "DesignTimePermissions" : {
+    "Create" : [ ],
+    "Delete" : [ ],
+    "Metadata" : [ ],
+    "Read" : [ ],
+    "Update" : [ ]
+  },
+  "Events" : [ {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "navigation-190",
+    "EventHandlerService" : "Navigate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Clicked",
+    "EventTriggerId" : "button-191",
+    "EventTriggerSection" : "",
+    "Id" : "ff3abf5a-3f97-43a7-b7bf-d560d8e43651"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "navigation-195",
+    "EventHandlerService" : "Navigate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Clicked",
+    "EventTriggerId" : "button-193",
+    "EventTriggerSection" : "",
+    "Id" : "da0c4301-d3d2-4ef8-8b61-931af60ef101"
+  }, {
+    "EventHandlerArea" : "Mashup",
+    "EventHandlerId" : "mashup-root",
+    "EventHandlerService" : "Refresh",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "PopupClosed",
+    "EventTriggerId" : "navigation-190",
+    "EventTriggerSection" : "",
+    "Id" : "1b161706-e938-40e3-a365-17bed255fed5"
+  }, {
+    "EventHandlerArea" : "Mashup",
+    "EventHandlerId" : "mashup-root",
+    "EventHandlerService" : "Refresh",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "PopupClosed",
+    "EventTriggerId" : "navigation-195",
+    "EventTriggerSection" : "",
+    "Id" : "aa264b08-bd10-4535-97e6-b7a23736a273"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "ContainedMashup-183",
+    "EventHandlerService" : "Refresh",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "PopupClosed",
+    "EventTriggerId" : "navigation-195",
+    "EventTriggerSection" : "",
+    "Id" : "c5147623-3a37-4f56-afad-3c347b8d503c"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "ContainedMashup-183",
+    "EventHandlerService" : "Refresh",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "PopupClosed",
+    "EventTriggerId" : "navigation-190",
+    "EventTriggerSection" : "",
+    "Id" : "38fffe45-3946-4cf5-865f-f5ed28d711dd"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_PTC.Factory.DeviceUtils",
+    "EventHandlerService" : "isServerCustom",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "4f9f6417-4a19-43f4-aa6e-76c92fbac106"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_PTC.Factory.LaunchPointConfigurationThing",
+    "EventHandlerService" : "GetLaunchPointEntityName",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "f5fa7bed-fc8b-4a9b-a195-e1229f3f4e43"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_PTC.Factory.DeviceUtils",
+    "EventHandlerService" : "DeleteDevice",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "True",
+    "EventTriggerId" : "validator-201",
+    "EventTriggerSection" : "",
+    "Id" : "ea2588b4-000f-4374-98f5-b55693ceec15"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "validator-201",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "PopupClosed",
+    "EventTriggerId" : "navigation-200",
+    "EventTriggerSection" : "",
+    "Id" : "1fab5791-b897-4e98-a630-dbf978d0b5bd"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Resources_PTC.Resource.Factory.MessageFormatUtilities",
+    "EventHandlerService" : "GetLocalizedMessageOneParam",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Clicked",
+    "EventTriggerId" : "button-198",
+    "EventTriggerSection" : "",
+    "Id" : "c6990536-3ab5-4d24-a916-15f03f5ab078"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "navigation-200",
+    "EventHandlerService" : "Navigate",
+    "EventTriggerArea" : "Data",
+    "EventTriggerEvent" : "ServiceInvokeCompleted",
+    "EventTriggerId" : "GetLocalizedMessageOneParam",
+    "EventTriggerSection" : "Resources_PTC.Resource.Factory.MessageFormatUtilities",
+    "Id" : "f22df75b-20ae-4877-aa89-d2af0db96190"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Resources_PTC.Resource.Factory.MessageFormatUtilities",
+    "EventHandlerService" : "GetLocalizedMessageOneParam1",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Clicked",
+    "EventTriggerId" : "button-198",
+    "EventTriggerSection" : "",
+    "Id" : "db0a11f2-e8df-475d-956d-9ff90f4585bf"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "ContainedMashup-183",
+    "EventHandlerService" : "Refresh",
+    "EventTriggerArea" : "Data",
+    "EventTriggerEvent" : "ServiceInvokeCompleted",
+    "EventTriggerId" : "DeleteDevice",
+    "EventTriggerSection" : "Things_PTC.Factory.DeviceUtils",
+    "Id" : "21b2f61d-ded7-411c-a2b6-8b130ab5eebd"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "checkbox-203",
+    "EventHandlerService" : "ResetToDefaultValue",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "PopupClosed",
+    "EventTriggerId" : "navigation-200",
+    "EventTriggerSection" : "",
+    "Id" : "8c17cb83-1708-46bd-8cc7-773d8204d4d7"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "expression-204",
+    "EventHandlerService" : "Evaluate",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Clicked",
+    "EventTriggerId" : "button-193",
+    "EventTriggerSection" : "",
+    "Id" : "65ea6079-4e01-41c2-8e50-120fe260c338"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_PTC.SCA.SCO.ControlsAdvisorUtils",
+    "EventHandlerService" : "CalculateStatus",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Clicked",
+    "EventTriggerId" : "backButton-189",
+    "EventTriggerSection" : "",
+    "Id" : "b942c313-3578-45c9-996b-daaa31f676e5"
+  } ],
+  "RunTimePermissions" : {
+    "permissions" : [ ]
+  },
+  "UI" : {
+    "Properties" : {
+      "AddToDashboardButton" : "SimplePlus",
+      "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+      "Area" : "Mashup",
+      "BGImage" : "",
+      "BGImageRepeat" : "no-repeat",
+      "BGImageSize" : "auto",
+      "Columns" : 0,
+      "ConfigureGadgetButton" : "SimpleGear",
+      "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+      "Description" : "Device list header",
+      "DisplayName" : "MainMashup",
+      "EnableParameterEditing" : false,
+      "Height" : 618,
+      "Id" : "mashup-root",
+      "IgnoreWarningsInViewMashup" : false,
+      "IsPrintLayout" : false,
+      "Left" : 0,
+      "MashupToEditGadget" : "DefaultMashupToEditGadget",
+      "Master" : "KBSmartProductionMaster1Mashup",
+      "MinHeight" : 0,
+      "MinWidth" : 0,
+      "OPCDAThingName" : "",
+      "ResponsiveLayout" : true,
+      "Rows" : 0,
+      "ServerName" : "",
+      "ShowDataLoading" : true,
+      "Style" : "PTC.SCA.SCO.Core.MashupStyle",
+      "StyleTheme" : "PTC Convergence Theme",
+      "Title" : "",
+      "TitleBar" : false,
+      "TitleBarStyle" : "DefaultTitleBarStyle",
+      "TitleBarText" : "Gadget Title Here",
+      "Top" : 0,
+      "Type" : "mashup",
+      "UseMasterTheme" : false,
+      "UseTheme" : false,
+      "Visible" : true,
+      "Width" : 1024,
+      "Z-index" : 10,
+      "__TypeDisplayName" : "Mashup",
+      "_currentParameterDefs" : [ {
+        "BaseType" : "STRING",
+        "DefaultValue" : "",
+        "Description" : "",
+        "ParameterName" : "OPCDAThingName"
+      }, {
+        "BaseType" : "STRING",
+        "DefaultValue" : "",
+        "Description" : "",
+        "ParameterName" : "ServerName"
+      } ],
+      "id_index" : 209,
+      "supportsAutoResize" : true
+    },
+    "Widgets" : [ {
+      "Properties" : {
+        "Area" : "UI",
+        "Columns" : 0,
+        "DisplayName" : "MainLayout",
+        "Footer" : false,
+        "FooterHeight" : 0,
+        "Header" : true,
+        "HeaderHeight" : 48,
+        "Id" : "Layout-1",
+        "IncludeSpacingInFixedAreas" : false,
+        "IsPrintLayout" : false,
+        "LastContainer" : false,
+        "Left" : 245,
+        "LeftSidebar" : false,
+        "LeftSidebarWidth" : 0,
+        "Orientation" : "vertical",
+        "PctColumn1" : 50,
+        "PctColumn2" : 50,
+        "PctColumn3" : 1,
+        "PctColumn4" : 1,
+        "PctColumn5" : 1,
+        "PctColumn6" : 1,
+        "PctColumn7" : 1,
+        "PctColumn8" : 1,
+        "PctRow1" : 100,
+        "PctRow2" : 0,
+        "PctRow3" : 0,
+        "PctRow4" : 0,
+        "PctRow5" : 0,
+        "PctRow6" : 0,
+        "PctRow7" : 0,
+        "PctRow8" : 0,
+        "PrintMarginLeftRight" : 0.5,
+        "PrintMarginTopBottom" : 0.5,
+        "PrintWidth" : 650,
+        "ResponsiveLayout" : true,
+        "RightSidebar" : false,
+        "RightSidebarWidth" : 0,
+        "Rows" : 1,
+        "ShowDataLoading" : true,
+        "Spacing" : 0,
+        "Top" : 75,
+        "Type" : "layout",
+        "Visible" : true,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Layout"
+      },
+      "Widgets" : [ {
+        "Properties" : {
+          "AnimateExpandCollapse" : true,
+          "Area" : "UI",
+          "BGImageRepeat" : "no-repeat",
+          "BGImageSize" : "auto",
+          "DisplayName" : "HeaderCotnainer",
+          "ExpandCollapseTabLocation" : "outside",
+          "Expanded" : true,
+          "Id" : "container-76",
+          "LastContainer" : false,
+          "MinHeight" : 0,
+          "MinWidth" : 0,
+          "Overlay" : false,
+          "OverlayIsTransparent" : false,
+          "ResponsiveLayout" : true,
+          "ShowDataLoading" : true,
+          "ShowExpandCollapseTab" : false,
+          "Style" : "PTC.Factory.Generic.ToolBar",
+          "TabCollapseStyle" : "DefaultTabCollapseStyle",
+          "TabExpandStyle" : "DefaultTabExpandStyle",
+          "TabHeight" : 36,
+          "TabLocation" : "center",
+          "TabOffset" : 0,
+          "TabWidth" : 36,
+          "Type" : "container",
+          "Visible" : true,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Container",
+          "userCannotRemove" : true
+        },
+        "Widgets" : [ {
+          "Properties" : {
+            "Area" : "UI",
+            "Columns" : 1,
+            "DisplayName" : "HeaderLayout",
+            "Footer" : false,
+            "FooterHeight" : 0,
+            "Header" : false,
+            "HeaderHeight" : 0,
+            "Id" : "Layout-86",
+            "IncludeSpacingInFixedAreas" : false,
+            "IsPrintLayout" : false,
+            "LastContainer" : false,
+            "Left" : 295,
+            "LeftSidebar" : true,
+            "LeftSidebarWidth" : 1100,
+            "Orientation" : "horizontal",
+            "PctColumn1" : 100,
+            "PctColumn2" : 0,
+            "PctColumn3" : 1,
+            "PctColumn4" : 1,
+            "PctColumn5" : 1,
+            "PctColumn6" : 1,
+            "PctColumn7" : 1,
+            "PctColumn8" : 1,
+            "PctRow1" : 90,
+            "PctRow2" : 10,
+            "PctRow3" : 0,
+            "PctRow4" : 0,
+            "PctRow5" : 0,
+            "PctRow6" : 0,
+            "PctRow7" : 0,
+            "PctRow8" : 0,
+            "PrintMarginLeftRight" : 0.5,
+            "PrintMarginTopBottom" : 0.5,
+            "PrintWidth" : 650,
+            "ResponsiveLayout" : true,
+            "RightSidebar" : false,
+            "RightSidebarWidth" : 0,
+            "Rows" : 0,
+            "ShowDataLoading" : true,
+            "Spacing" : 0,
+            "Top" : 20,
+            "Type" : "layout",
+            "Visible" : true,
+            "Z-index" : 10,
+            "__TypeDisplayName" : "Layout"
+          },
+          "Widgets" : [ {
+            "Properties" : {
+              "AnimateExpandCollapse" : true,
+              "Area" : "UI",
+              "BGImageRepeat" : "no-repeat",
+              "BGImageSize" : "auto",
+              "DisplayName" : "LeftContainer",
+              "ExpandCollapseTabLocation" : "outside",
+              "Expanded" : true,
+              "Id" : "container-87",
+              "LastContainer" : false,
+              "MinHeight" : 0,
+              "MinWidth" : 0,
+              "Overlay" : false,
+              "OverlayIsTransparent" : false,
+              "ResponsiveLayout" : true,
+              "ShowDataLoading" : true,
+              "ShowExpandCollapseTab" : false,
+              "Style" : "DefaultContainerStyle",
+              "TabCollapseStyle" : "DefaultTabCollapseStyle",
+              "TabExpandStyle" : "DefaultTabExpandStyle",
+              "TabHeight" : 36,
+              "TabLocation" : "center",
+              "TabOffset" : 0,
+              "TabWidth" : 36,
+              "Type" : "container",
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Container",
+              "userCannotRemove" : true
+            },
+            "Widgets" : [ {
+              "Properties" : {
+                "Area" : "UI",
+                "ContainerClass" : "",
+                "Description" : "",
+                "DisplayName" : "HeaderLeftPanel",
+                "Height" : 200,
+                "HideScrollbars" : false,
+                "HorizontalAnchor" : "left",
+                "Id" : "Panel-10",
+                "LastContainer" : false,
+                "Left" : 365,
+                "ResponsiveLayout" : true,
+                "ShowDataLoading" : true,
+                "Style" : "PTC.Factory.ToolBar.Color",
+                "Top" : 15,
+                "Type" : "panel",
+                "VerticalAnchor" : "top",
+                "Visible" : true,
+                "Width" : 300,
+                "Z-index" : 10,
+                "__TypeDisplayName" : "Panel"
+              },
+              "Widgets" : [ {
+                "Properties" : {
+                  "ActiveStyle" : "PTC.SCA.SCO.NoStyle",
+                  "Area" : "UI",
+                  "ContextId" : "",
+                  "Disabled" : false,
+                  "DisabledStyle" : "PTC.SCA.SCO.Factory.BackToOverviewBTN_Disabled",
+                  "DisplayName" : "btnBack",
+                  "FocusStyle" : "PTC.SCA.SCO.NoStyle",
+                  "Height" : 35,
+                  "HoverStyle" : "PTC.SCA.SCO.NoStyle",
+                  "IconAlignment" : "left",
+                  "Id" : "backButton-189",
+                  "Label" : "",
+                  "LastContainer" : false,
+                  "Left" : 20,
+                  "ResponsiveLayout" : false,
+                  "RoundedCorners" : true,
+                  "ShowDataLoading" : false,
+                  "Style" : "PTC.Factory.BackToOverviewBTN",
+                  "TabSequence" : 0,
+                  "ToolTipField" : "[[PTC.SCA.SCO.BackButtonTooltipText]]",
+                  "ToolTipStyle" : "DefaultTooltipStyle",
+                  "Top" : 7,
+                  "Type" : "backButton",
+                  "Visible" : true,
+                  "Width" : 32,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Back Button",
+                  "__supportsTooltip" : true
+                },
+                "Widgets" : [ ]
+              }, {
+                "Properties" : {
+                  "Alignment" : "left",
+                  "Area" : "UI",
+                  "ClickOutsideToClose" : false,
+                  "DisplayName" : "editOPCDeviceNav",
+                  "FixedPopupHeight" : 0,
+                  "FixedPopupWidth" : 0,
+                  "Height" : 35,
+                  "Icon" : "",
+                  "IconAlignment" : "left",
+                  "Id" : "navigation-190",
+                  "LastContainer" : false,
+                  "Left" : 1010,
+                  "MashupName" : "PTC.SCA.Mfg.KepServerMonitor.CreateEditOPCDeviceMashup",
+                  "MashupParameters" : [ {
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "createdDevice",
+                    "ParmDef" : {
+                      "aspects" : {
+                        "ordinal" : "3"
+                      },
+                      "baseType" : "STRING",
+                      "description" : "",
+                      "name" : "createdDevice",
+                      "ordinal" : 0
+                    }
+                  }, {
+                    "BaseType" : "BOOLEAN",
+                    "Description" : "",
+                    "ParameterName" : "isEdit",
+                    "ParmDef" : {
+                      "aspects" : {
+                        "ordinal" : "1"
+                      },
+                      "baseType" : "BOOLEAN",
+                      "description" : "",
+                      "name" : "isEdit",
+                      "ordinal" : 0
+                    }
+                  }, {
+                    "BaseType" : "BOOLEAN",
+                    "Description" : "",
+                    "ParameterName" : "isConnected",
+                    "ParmDef" : {
+                      "aspects" : {
+                        "ordinal" : "4"
+                      },
+                      "baseType" : "BOOLEAN",
+                      "description" : "",
+                      "name" : "isConnected",
+                      "ordinal" : 0
+                    }
+                  }, {
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "sourceName",
+                    "ParmDef" : {
+                      "aspects" : {
+                        "ordinal" : "0"
+                      },
+                      "baseType" : "STRING",
+                      "description" : "",
+                      "name" : "sourceName",
+                      "ordinal" : 0
+                    }
+                  }, {
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "deviceName",
+                    "ParmDef" : {
+                      "aspects" : {
+                        "ordinal" : "2"
+                      },
+                      "baseType" : "STRING",
+                      "description" : "",
+                      "name" : "deviceName",
+                      "ordinal" : 0
+                    }
+                  } ],
+                  "MessageToShow" : "Mashup must be selected",
+                  "ModalPopupOpacity" : 0.5,
+                  "NavigationActiveStyle" : "DefaultNavigationActiveStyle",
+                  "NavigationFocusStyle" : "DefaultNavigationFocusStyle",
+                  "NavigationHoverStyle" : "DefaultNavigationHoverStyle",
+                  "PopupScrolling" : "auto",
+                  "PopupTitle" : "",
+                  "PopupTitleStyle" : "DefaultPopupTitleStyle",
+                  "ReloadOnReplace" : false,
+                  "ResponsiveLayout" : false,
+                  "RoundedCorners" : true,
+                  "ShowCloseButton" : true,
+                  "ShowDataLoading" : true,
+                  "ShowMessageIfNoMashup" : false,
+                  "SingleClickSelectOnTablets" : true,
+                  "Style" : "DefaultNavigationStyle",
+                  "TabSequence" : 0,
+                  "TargetWindow" : "modal-popup",
+                  "Text" : "",
+                  "ToolTipField" : "",
+                  "ToolTipStyle" : "DefaultTooltipStyle",
+                  "Top" : 5,
+                  "Transparent" : false,
+                  "Type" : "navigation",
+                  "Visible" : false,
+                  "Width" : 70,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Navigation",
+                  "__supportsTooltip" : true,
+                  "isEdit" : true
+                },
+                "Widgets" : [ ]
+              }, {
+                "Properties" : {
+                  "ActiveStyle" : "PTC.Factory.EditCustomerBTN",
+                  "Area" : "UI",
+                  "CancelConfirmationButton" : "button2",
+                  "ConfirmationButton1Label" : "[[PTC.SCA.SCO.Core.Yes]]",
+                  "ConfirmationButton2Label" : "[[PTC.SCA.SCO.Core.No]]",
+                  "ConfirmationPrompt" : "[[PTC.SCA.SCO.Core.Do Action?]]",
+                  "ConfirmationRequired" : false,
+                  "ConfirmationTitle" : "[[PTC.SCA.SCO.Core.Confirm Action]]",
+                  "ContextId" : "",
+                  "DefaultConfirmationButton" : "button1",
+                  "Disabled" : false,
+                  "DisabledStyle" : "PTC.Factory.EditCustomerBTNDisabled",
+                  "DisplayName" : "btnEditOPCDevice",
+                  "FocusStyle" : "PTC.Factory.EditCustomerBTN",
+                  "Height" : 35,
+                  "HoverStyle" : "PTC.Factory.EditCustomerBTN",
+                  "IconAlignment" : "left",
+                  "Id" : "button-191",
+                  "Label" : "",
+                  "LastContainer" : false,
+                  "Left" : 140,
+                  "ResponsiveLayout" : false,
+                  "RoundedCorners" : true,
+                  "ShowDataLoading" : false,
+                  "SingleClickSelectOnTablets" : true,
+                  "Style" : "PTC.Factory.EditCustomerBTN",
+                  "TabSequence" : 0,
+                  "ToolTipField" : "[[PTC.SCA.Mfg.KepServerMonitor.EditDevice]]",
+                  "ToolTipStyle" : "DefaultTooltipStyle",
+                  "Top" : 7,
+                  "Type" : "button",
+                  "Visible" : true,
+                  "Width" : 32,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Button",
+                  "__supportsTooltip" : true
+                },
+                "Widgets" : [ ]
+              }, {
+                "Properties" : {
+                  "ActiveStyle" : "PTC.SCA.SCO.CreateDeviceIconStyle",
+                  "Area" : "UI",
+                  "CancelConfirmationButton" : "button2",
+                  "ConfirmationButton1Label" : "[[PTC.SCA.SCO.Core.Yes]]",
+                  "ConfirmationButton2Label" : "[[PTC.SCA.SCO.Core.No]]",
+                  "ConfirmationPrompt" : "[[PTC.SCA.SCO.Core.Do Action?]]",
+                  "ConfirmationRequired" : false,
+                  "ConfirmationTitle" : "[[PTC.SCA.SCO.Core.Confirm Action]]",
+                  "ContextId" : "",
+                  "DefaultConfirmationButton" : "button1",
+                  "Disabled" : false,
+                  "DisabledStyle" : "PTC.SCA.SCO.CreateDeviceDisableIconStyle",
+                  "DisplayName" : "btnCreateDevice",
+                  "FocusStyle" : "PTC.SCA.SCO.CreateDeviceIconStyle",
+                  "Height" : 35,
+                  "HoverStyle" : "PTC.SCA.SCO.CreateDeviceIconStyle",
+                  "IconAlignment" : "left",
+                  "Id" : "button-193",
+                  "Label" : "",
+                  "LastContainer" : false,
+                  "Left" : 80,
+                  "ResponsiveLayout" : false,
+                  "RoundedCorners" : true,
+                  "ShowDataLoading" : false,
+                  "SingleClickSelectOnTablets" : true,
+                  "Style" : "PTC.SCA.SCO.CreateDeviceIconStyle",
+                  "TabSequence" : 0,
+                  "ToolTipField" : "[[PTC.SCA.Mfg.KepServerMonitor.CreateDevice]]",
+                  "ToolTipStyle" : "DefaultTooltipStyle",
+                  "Top" : 7,
+                  "Type" : "button",
+                  "Visible" : true,
+                  "Width" : 32,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Button",
+                  "__supportsTooltip" : true
+                },
+                "Widgets" : [ ]
+              }, {
+                "Properties" : {
+                  "Alignment" : "left",
+                  "Area" : "UI",
+                  "ClickOutsideToClose" : false,
+                  "Description" : "",
+                  "DisplayName" : "createDevNav",
+                  "FixedPopupHeight" : 0,
+                  "FixedPopupWidth" : 0,
+                  "Height" : 30,
+                  "Icon" : "",
+                  "IconAlignment" : "left",
+                  "Id" : "navigation-195",
+                  "LastContainer" : false,
+                  "Left" : 500,
+                  "MashupName" : "PTC.SCA.Mfg.KepServerMonitor.CreateEditOPCDeviceMashup",
+                  "MashupParameters" : [ {
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "createdDevice",
+                    "ParmDef" : {
+                      "aspects" : {
+                        "ordinal" : "3"
+                      },
+                      "baseType" : "STRING",
+                      "description" : "",
+                      "name" : "createdDevice",
+                      "ordinal" : 0
+                    }
+                  }, {
+                    "BaseType" : "BOOLEAN",
+                    "Description" : "",
+                    "ParameterName" : "isEdit",
+                    "ParmDef" : {
+                      "aspects" : {
+                        "ordinal" : "1"
+                      },
+                      "baseType" : "BOOLEAN",
+                      "description" : "",
+                      "name" : "isEdit",
+                      "ordinal" : 0
+                    }
+                  }, {
+                    "BaseType" : "BOOLEAN",
+                    "Description" : "",
+                    "ParameterName" : "isConnected",
+                    "ParmDef" : {
+                      "aspects" : {
+                        "ordinal" : "4"
+                      },
+                      "baseType" : "BOOLEAN",
+                      "description" : "",
+                      "name" : "isConnected",
+                      "ordinal" : 0
+                    }
+                  }, {
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "sourceName",
+                    "ParmDef" : {
+                      "aspects" : {
+                        "ordinal" : "0"
+                      },
+                      "baseType" : "STRING",
+                      "description" : "",
+                      "name" : "sourceName",
+                      "ordinal" : 0
+                    }
+                  }, {
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "deviceName",
+                    "ParmDef" : {
+                      "aspects" : {
+                        "ordinal" : "2"
+                      },
+                      "baseType" : "STRING",
+                      "description" : "",
+                      "name" : "deviceName",
+                      "ordinal" : 0
+                    }
+                  } ],
+                  "MessageToShow" : "Mashup must be selected",
+                  "ModalPopupOpacity" : 0.5,
+                  "NavigationActiveStyle" : "DefaultNavigationActiveStyle",
+                  "NavigationFocusStyle" : "DefaultNavigationFocusStyle",
+                  "NavigationHoverStyle" : "DefaultNavigationHoverStyle",
+                  "PopupScrolling" : "auto",
+                  "PopupTitle" : "",
+                  "PopupTitleStyle" : "DefaultPopupTitleStyle",
+                  "ReloadOnReplace" : false,
+                  "ResponsiveLayout" : false,
+                  "RoundedCorners" : true,
+                  "ShowCloseButton" : true,
+                  "ShowDataLoading" : true,
+                  "ShowMessageIfNoMashup" : false,
+                  "SingleClickSelectOnTablets" : true,
+                  "Style" : "DefaultNavigationStyle",
+                  "TabSequence" : 0,
+                  "TargetWindow" : "modal-popup",
+                  "Text" : "",
+                  "ToolTipField" : "",
+                  "ToolTipStyle" : "DefaultTooltipStyle",
+                  "Top" : 8,
+                  "Transparent" : false,
+                  "Type" : "navigation",
+                  "Visible" : false,
+                  "Width" : 50,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Navigation",
+                  "__supportsTooltip" : true,
+                  "isEdit" : false
+                },
+                "Widgets" : [ ]
+              }, {
+                "Properties" : {
+                  "ActiveStyle" : "PTC.Factory.TrashCustomerBTN",
+                  "Area" : "UI",
+                  "CancelConfirmationButton" : "button2",
+                  "ConfirmationButton1Label" : "[[PTC.SCA.SCO.Core.Yes]]",
+                  "ConfirmationButton2Label" : "[[PTC.SCA.SCO.Core.No]]",
+                  "ConfirmationPrompt" : "[[PTC.SCA.SCO.Core.Do Action?]]",
+                  "ConfirmationRequired" : false,
+                  "ConfirmationTitle" : "[[PTC.SCA.SCO.Core.Confirm Action]]",
+                  "ContextId" : "",
+                  "DefaultConfirmationButton" : "button1",
+                  "Disabled" : false,
+                  "DisabledStyle" : "PTC.Factory.TrashCustomerBTNDisabled",
+                  "DisplayName" : "btnDeleteDevice",
+                  "FocusStyle" : "PTC.Factory.TrashCustomerBTN",
+                  "Height" : 35,
+                  "HoverStyle" : "PTC.Factory.TrashCustomerBTN",
+                  "IconAlignment" : "left",
+                  "Id" : "button-198",
+                  "Label" : "",
+                  "LastContainer" : false,
+                  "Left" : 200,
+                  "ResponsiveLayout" : false,
+                  "RoundedCorners" : true,
+                  "ShowDataLoading" : false,
+                  "SingleClickSelectOnTablets" : true,
+                  "Style" : "PTC.Factory.TrashCustomerBTN",
+                  "TabSequence" : 0,
+                  "ToolTipField" : "[[PTC.SCA.Mfg.KepServerMonitor.DeleteDevice]]",
+                  "ToolTipStyle" : "DefaultTooltipStyle",
+                  "Top" : 7,
+                  "Type" : "button",
+                  "Visible" : true,
+                  "Width" : 32,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Button",
+                  "__supportsTooltip" : true
+                },
+                "Widgets" : [ ]
+              }, {
+                "Properties" : {
+                  "Alignment" : "left",
+                  "Area" : "UI",
+                  "ClickOutsideToClose" : false,
+                  "Description" : "",
+                  "DisplayName" : "deleteConfirmationNav",
+                  "FixedPopupHeight" : 0,
+                  "FixedPopupWidth" : 0,
+                  "Height" : 30,
+                  "Icon" : "",
+                  "IconAlignment" : "left",
+                  "Id" : "navigation-200",
+                  "LastContainer" : false,
+                  "Left" : 500,
+                  "MashupName" : "PTC.Factory.GenericConfirmation",
+                  "MashupParameters" : [ {
+                    "BaseType" : "BOOLEAN",
+                    "Description" : "",
+                    "ParameterName" : "okClicked",
+                    "ParmDef" : {
+                      "aspects" : {
+                        "ordinal" : "2"
+                      },
+                      "baseType" : "BOOLEAN",
+                      "description" : "",
+                      "name" : "okClicked",
+                      "ordinal" : 0
+                    }
+                  }, {
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "message",
+                    "ParmDef" : {
+                      "aspects" : {
+                        "ordinal" : "1"
+                      },
+                      "baseType" : "STRING",
+                      "description" : "",
+                      "name" : "message",
+                      "ordinal" : 0
+                    }
+                  }, {
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "title",
+                    "ParmDef" : {
+                      "aspects" : {
+                        "ordinal" : "0"
+                      },
+                      "baseType" : "STRING",
+                      "description" : "",
+                      "name" : "title",
+                      "ordinal" : 0
+                    }
+                  } ],
+                  "MessageToShow" : "Mashup must be selected",
+                  "ModalPopupOpacity" : 0.5,
+                  "NavigationActiveStyle" : "DefaultNavigationActiveStyle",
+                  "NavigationFocusStyle" : "DefaultNavigationFocusStyle",
+                  "NavigationHoverStyle" : "DefaultNavigationHoverStyle",
+                  "PopupScrolling" : "auto",
+                  "PopupTitle" : "",
+                  "PopupTitleStyle" : "DefaultPopupTitleStyle",
+                  "ReloadOnReplace" : false,
+                  "ResponsiveLayout" : false,
+                  "RoundedCorners" : true,
+                  "ShowCloseButton" : true,
+                  "ShowDataLoading" : true,
+                  "ShowMessageIfNoMashup" : false,
+                  "SingleClickSelectOnTablets" : true,
+                  "Style" : "DefaultNavigationStyle",
+                  "TabSequence" : 0,
+                  "TargetWindow" : "modal-popup",
+                  "Text" : "[[PTC.Factory.DiscoverDevices.TITLE]]",
+                  "ToolTipField" : "",
+                  "ToolTipStyle" : "DefaultTooltipStyle",
+                  "Top" : 10,
+                  "Transparent" : false,
+                  "Type" : "navigation",
+                  "Visible" : false,
+                  "Width" : 50,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Navigation",
+                  "__supportsTooltip" : true,
+                  "isEdit" : false,
+                  "message" : ""
+                },
+                "Widgets" : [ ]
+              }, {
+                "Properties" : {
+                  "Area" : "UI",
+                  "AutoEvaluate" : false,
+                  "DisplayName" : "deleteConfirmationValidator",
+                  "Expression" : "okClicked == true",
+                  "Height" : 28,
+                  "Id" : "validator-201",
+                  "LastContainer" : false,
+                  "Left" : 585,
+                  "Output" : false,
+                  "ResponsiveLayout" : false,
+                  "ShowDataLoading" : true,
+                  "Top" : 0,
+                  "Type" : "validator",
+                  "Visible" : true,
+                  "Width" : 200,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Validator",
+                  "_currentParameterDefs" : [ {
+                    "BaseType" : "BOOLEAN",
+                    "Description" : "",
+                    "ParameterName" : "okClicked"
+                  } ]
+                },
+                "Widgets" : [ ]
+              }, {
+                "Properties" : {
+                  "Area" : "UI",
+                  "Disabled" : false,
+                  "DisplayName" : "resetToFalse-checkboxOkClicked",
+                  "FocusStyle" : "DefaultFocusStyle",
+                  "Height" : 20,
+                  "Id" : "checkbox-203",
+                  "LastContainer" : false,
+                  "Left" : 500,
+                  "Prompt" : "Check this box",
+                  "ResponsiveLayout" : false,
+                  "ShowDataLoading" : true,
+                  "State" : false,
+                  "Style" : "DefaultCheckboxStyle",
+                  "TabSequence" : 0,
+                  "ToolTipField" : "",
+                  "ToolTipStyle" : "DefaultTooltipStyle",
+                  "Top" : 10,
+                  "Type" : "checkbox",
+                  "Visible" : false,
+                  "Width" : 125,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Checkbox",
+                  "__supportsTooltip" : true
+                },
+                "Widgets" : [ ]
+              }, {
+                "Properties" : {
+                  "Area" : "UI",
+                  "AutoEvaluate" : false,
+                  "DataChangeType" : "VALUE",
+                  "DisplayName" : "CopySelectedDeviceToCreatedDevice",
+                  "Expression" : "selectedDevice",
+                  "FireOnFirstValue" : false,
+                  "Height" : 28,
+                  "Id" : "expression-204",
+                  "LastContainer" : false,
+                  "Left" : 805,
+                  "OutputBaseType" : "STRING",
+                  "ResponsiveLayout" : false,
+                  "ShowDataLoading" : true,
+                  "Top" : 0,
+                  "Type" : "expression",
+                  "Visible" : true,
+                  "Width" : 200,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Expression",
+                  "_currentParameterDefs" : [ {
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "selectedDevice"
+                  } ]
+                },
+                "Widgets" : [ ]
+              }, {
+                "Properties" : {
+                  "Area" : "UI",
+                  "AutoEvaluate" : true,
+                  "DataChangeType" : "ALWAYS",
+                  "DisplayName" : "disableCreateDevice",
+                  "Expression" : "!isServerCustom",
+                  "FireOnFirstValue" : false,
+                  "Height" : 13,
+                  "Id" : "expression-205",
+                  "LastContainer" : false,
+                  "Left" : 285,
+                  "OutputBaseType" : "BOOLEAN",
+                  "ResponsiveLayout" : false,
+                  "ShowDataLoading" : false,
+                  "Top" : 10,
+                  "Type" : "expression",
+                  "Visible" : true,
+                  "Width" : 185,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Expression",
+                  "_currentParameterDefs" : [ {
+                    "BaseType" : "BOOLEAN",
+                    "Description" : "",
+                    "ParameterName" : "isServerCustom"
+                  } ]
+                },
+                "Widgets" : [ ]
+              } ]
+            } ]
+          }, {
+            "Properties" : {
+              "AnimateExpandCollapse" : true,
+              "Area" : "UI",
+              "BGImageRepeat" : "no-repeat",
+              "BGImageSize" : "auto",
+              "Description" : "",
+              "DisplayName" : "RightHeaderContainer",
+              "ExpandCollapseTabLocation" : "outside",
+              "Expanded" : true,
+              "Id" : "container-88",
+              "LastContainer" : false,
+              "MinHeight" : 0,
+              "MinWidth" : 0,
+              "Overlay" : false,
+              "OverlayIsTransparent" : false,
+              "ResponsiveLayout" : true,
+              "ShowDataLoading" : true,
+              "ShowExpandCollapseTab" : false,
+              "Style" : "PTC.Factory.ToolBar.Color",
+              "TabCollapseStyle" : "DefaultTabCollapseStyle",
+              "TabExpandStyle" : "DefaultTabExpandStyle",
+              "TabHeight" : 36,
+              "TabLocation" : "center",
+              "TabOffset" : 0,
+              "TabWidth" : 36,
+              "Type" : "container",
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Container",
+              "userCannotRemove" : true
+            },
+            "Widgets" : [ ]
+          } ]
+        } ]
+      }, {
+        "Properties" : {
+          "AnimateExpandCollapse" : true,
+          "Area" : "UI",
+          "BGImageRepeat" : "no-repeat",
+          "BGImageSize" : "auto",
+          "DisplayName" : "MiddleContaienr",
+          "ExpandCollapseTabLocation" : "outside",
+          "Expanded" : true,
+          "Id" : "container-3",
+          "LastContainer" : false,
+          "MinHeight" : 0,
+          "MinWidth" : 0,
+          "Overlay" : false,
+          "OverlayIsTransparent" : false,
+          "ResponsiveLayout" : true,
+          "ShowDataLoading" : true,
+          "ShowExpandCollapseTab" : false,
+          "Style" : "PTC.SCA.SCO.Core.ContainerStyle",
+          "TabCollapseStyle" : "DefaultTabCollapseStyle",
+          "TabExpandStyle" : "DefaultTabExpandStyle",
+          "TabHeight" : 36,
+          "TabLocation" : "center",
+          "TabOffset" : 0,
+          "TabWidth" : 36,
+          "Type" : "container",
+          "Visible" : true,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Container",
+          "userCannotRemove" : true
+        },
+        "Widgets" : [ {
+          "Properties" : {
+            "Area" : "UI",
+            "Columns" : 1,
+            "DisplayName" : "layout-206",
+            "Footer" : false,
+            "FooterHeight" : 0,
+            "Header" : false,
+            "HeaderHeight" : 0,
+            "Id" : "layout-206",
+            "IncludeSpacingInFixedAreas" : false,
+            "IsPrintLayout" : false,
+            "LastContainer" : false,
+            "Left" : 115,
+            "LeftSidebar" : true,
+            "LeftSidebarWidth" : 15,
+            "Orientation" : "horizontal",
+            "PctColumn1" : 100,
+            "PctColumn2" : 0,
+            "PctColumn3" : 1,
+            "PctColumn4" : 1,
+            "PctColumn5" : 1,
+            "PctColumn6" : 1,
+            "PctColumn7" : 1,
+            "PctColumn8" : 1,
+            "PctRow1" : 50,
+            "PctRow2" : 50,
+            "PctRow3" : 0,
+            "PctRow4" : 0,
+            "PctRow5" : 0,
+            "PctRow6" : 0,
+            "PctRow7" : 0,
+            "PctRow8" : 0,
+            "PrintMarginLeftRight" : 0.5,
+            "PrintMarginTopBottom" : 0.5,
+            "PrintWidth" : 650,
+            "ResponsiveLayout" : true,
+            "RightSidebar" : true,
+            "RightSidebarWidth" : 20,
+            "Rows" : 0,
+            "ShowDataLoading" : true,
+            "Spacing" : 2,
+            "Top" : 50,
+            "Type" : "layout",
+            "Visible" : true,
+            "Z-index" : 10,
+            "__TypeDisplayName" : "Layout"
+          },
+          "Widgets" : [ {
+            "Properties" : {
+              "AnimateExpandCollapse" : true,
+              "Area" : "UI",
+              "BGImageRepeat" : "no-repeat",
+              "BGImageSize" : "auto",
+              "DisplayName" : "Left Sidebar",
+              "ExpandCollapseTabLocation" : "outside",
+              "Expanded" : true,
+              "Id" : "container-207",
+              "LastContainer" : false,
+              "MinHeight" : 0,
+              "MinWidth" : 0,
+              "Overlay" : false,
+              "OverlayIsTransparent" : false,
+              "ResponsiveLayout" : true,
+              "ShowDataLoading" : true,
+              "ShowExpandCollapseTab" : false,
+              "Style" : "DefaultContainerStyle",
+              "TabCollapseStyle" : "DefaultTabCollapseStyle",
+              "TabExpandStyle" : "DefaultTabExpandStyle",
+              "TabHeight" : 36,
+              "TabLocation" : "center",
+              "TabOffset" : 0,
+              "TabWidth" : 36,
+              "Type" : "container",
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Container",
+              "userCannotRemove" : true
+            },
+            "Widgets" : [ ]
+          }, {
+            "Properties" : {
+              "AnimateExpandCollapse" : true,
+              "Area" : "UI",
+              "BGImageRepeat" : "no-repeat",
+              "BGImageSize" : "auto",
+              "DisplayName" : "Column 1",
+              "ExpandCollapseTabLocation" : "outside",
+              "Expanded" : true,
+              "Id" : "container-208",
+              "LastContainer" : false,
+              "MinHeight" : 0,
+              "MinWidth" : 0,
+              "Overlay" : false,
+              "OverlayIsTransparent" : false,
+              "ResponsiveLayout" : true,
+              "ShowDataLoading" : true,
+              "ShowExpandCollapseTab" : false,
+              "Style" : "DefaultContainerStyle",
+              "TabCollapseStyle" : "DefaultTabCollapseStyle",
+              "TabExpandStyle" : "DefaultTabExpandStyle",
+              "TabHeight" : 36,
+              "TabLocation" : "center",
+              "TabOffset" : 0,
+              "TabWidth" : 36,
+              "Type" : "container",
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Container",
+              "userCannotRemove" : true
+            },
+            "Widgets" : [ {
+              "Properties" : {
+                "Area" : "UI",
+                "Columns" : 0,
+                "DisplayName" : "MiddleLayout",
+                "Footer" : false,
+                "FooterHeight" : 0,
+                "Header" : false,
+                "HeaderHeight" : 0,
+                "Id" : "Layout-4",
+                "IncludeSpacingInFixedAreas" : false,
+                "IsPrintLayout" : false,
+                "LastContainer" : false,
+                "Left" : 110,
+                "LeftSidebar" : false,
+                "LeftSidebarWidth" : 0,
+                "Orientation" : "vertical",
+                "PctColumn1" : 50,
+                "PctColumn2" : 50,
+                "PctColumn3" : 1,
+                "PctColumn4" : 1,
+                "PctColumn5" : 1,
+                "PctColumn6" : 1,
+                "PctColumn7" : 1,
+                "PctColumn8" : 1,
+                "PctRow1" : 100,
+                "PctRow2" : 0,
+                "PctRow3" : 0,
+                "PctRow4" : 0,
+                "PctRow5" : 0,
+                "PctRow6" : 0,
+                "PctRow7" : 0,
+                "PctRow8" : 0,
+                "PrintMarginLeftRight" : 0.5,
+                "PrintMarginTopBottom" : 0.5,
+                "PrintWidth" : 650,
+                "ResponsiveLayout" : true,
+                "RightSidebar" : false,
+                "RightSidebarWidth" : 0,
+                "Rows" : 1,
+                "ShowDataLoading" : true,
+                "Spacing" : 0,
+                "Top" : 140,
+                "Type" : "layout",
+                "Visible" : true,
+                "Z-index" : 10,
+                "__TypeDisplayName" : "Layout"
+              },
+              "Widgets" : [ {
+                "Properties" : {
+                  "AnimateExpandCollapse" : true,
+                  "Area" : "UI",
+                  "BGImageRepeat" : "no-repeat",
+                  "BGImageSize" : "auto",
+                  "DisplayName" : "Row",
+                  "ExpandCollapseTabLocation" : "outside",
+                  "Expanded" : true,
+                  "Id" : "container-6",
+                  "LastContainer" : false,
+                  "MinHeight" : 0,
+                  "MinWidth" : 0,
+                  "Overlay" : false,
+                  "OverlayIsTransparent" : false,
+                  "ResponsiveLayout" : true,
+                  "ShowDataLoading" : true,
+                  "ShowExpandCollapseTab" : false,
+                  "Style" : "PTC.SCA.SCO.Core.ContainerStyle",
+                  "TabCollapseStyle" : "DefaultTabCollapseStyle",
+                  "TabExpandStyle" : "DefaultTabExpandStyle",
+                  "TabHeight" : 36,
+                  "TabLocation" : "center",
+                  "TabOffset" : 0,
+                  "TabWidth" : 36,
+                  "Type" : "container",
+                  "Visible" : true,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Container",
+                  "userCannotRemove" : true
+                },
+                "Widgets" : [ {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "Columns" : 0,
+                    "DisplayName" : "ContentLayout",
+                    "Footer" : false,
+                    "FooterHeight" : 0,
+                    "Header" : false,
+                    "HeaderHeight" : 0,
+                    "Id" : "Layout-7",
+                    "IncludeSpacingInFixedAreas" : false,
+                    "IsPrintLayout" : false,
+                    "LastContainer" : false,
+                    "Left" : 245,
+                    "LeftSidebar" : false,
+                    "LeftSidebarWidth" : 0,
+                    "Orientation" : "vertical",
+                    "PctColumn1" : 50,
+                    "PctColumn2" : 50,
+                    "PctColumn3" : 1,
+                    "PctColumn4" : 1,
+                    "PctColumn5" : 1,
+                    "PctColumn6" : 1,
+                    "PctColumn7" : 1,
+                    "PctColumn8" : 1,
+                    "PctRow1" : 100,
+                    "PctRow2" : 0,
+                    "PctRow3" : 0,
+                    "PctRow4" : 0,
+                    "PctRow5" : 0,
+                    "PctRow6" : 0,
+                    "PctRow7" : 0,
+                    "PctRow8" : 0,
+                    "PrintMarginLeftRight" : 0.5,
+                    "PrintMarginTopBottom" : 0.5,
+                    "PrintWidth" : 650,
+                    "ResponsiveLayout" : true,
+                    "RightSidebar" : false,
+                    "RightSidebarWidth" : 0,
+                    "Rows" : 1,
+                    "ShowDataLoading" : true,
+                    "Spacing" : 4,
+                    "Top" : 125,
+                    "Type" : "layout",
+                    "Visible" : true,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Layout"
+                  },
+                  "Widgets" : [ {
+                    "Properties" : {
+                      "AnimateExpandCollapse" : true,
+                      "Area" : "UI",
+                      "BGImageRepeat" : "no-repeat",
+                      "BGImageSize" : "auto",
+                      "Description" : "",
+                      "DisplayName" : "SubContainer",
+                      "ExpandCollapseTabLocation" : "outside",
+                      "Expanded" : true,
+                      "Id" : "container-9",
+                      "LastContainer" : false,
+                      "MinHeight" : 0,
+                      "MinWidth" : 0,
+                      "Overlay" : false,
+                      "OverlayIsTransparent" : false,
+                      "ResponsiveLayout" : true,
+                      "ShowDataLoading" : true,
+                      "ShowExpandCollapseTab" : false,
+                      "Style" : "PTC.SCA.SCO.Core.ContainerStyle",
+                      "TabCollapseStyle" : "DefaultTabCollapseStyle",
+                      "TabExpandStyle" : "DefaultTabExpandStyle",
+                      "TabHeight" : 36,
+                      "TabLocation" : "center",
+                      "TabOffset" : 0,
+                      "TabWidth" : 36,
+                      "Type" : "container",
+                      "Visible" : true,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Container",
+                      "userCannotRemove" : true
+                    },
+                    "Widgets" : [ {
+                      "Properties" : {
+                        "Area" : "UI",
+                        "Columns" : 0,
+                        "DisplayName" : "SubContentLayout",
+                        "Footer" : true,
+                        "FooterHeight" : 5,
+                        "Header" : false,
+                        "HeaderHeight" : 0,
+                        "Id" : "Layout-16",
+                        "IncludeSpacingInFixedAreas" : false,
+                        "IsPrintLayout" : false,
+                        "LastContainer" : false,
+                        "Left" : 160,
+                        "LeftSidebar" : false,
+                        "LeftSidebarWidth" : 0,
+                        "Orientation" : "vertical",
+                        "PctColumn1" : 50,
+                        "PctColumn2" : 50,
+                        "PctColumn3" : 1,
+                        "PctColumn4" : 1,
+                        "PctColumn5" : 1,
+                        "PctColumn6" : 1,
+                        "PctColumn7" : 1,
+                        "PctColumn8" : 1,
+                        "PctRow1" : 100,
+                        "PctRow2" : 50,
+                        "PctRow3" : 0,
+                        "PctRow4" : 0,
+                        "PctRow5" : 0,
+                        "PctRow6" : 0,
+                        "PctRow7" : 0,
+                        "PctRow8" : 0,
+                        "PrintMarginLeftRight" : 0.5,
+                        "PrintMarginTopBottom" : 0.5,
+                        "PrintWidth" : 650,
+                        "ResponsiveLayout" : true,
+                        "RightSidebar" : false,
+                        "RightSidebarWidth" : 0,
+                        "Rows" : 1,
+                        "ShowDataLoading" : true,
+                        "Spacing" : 0,
+                        "Top" : 105,
+                        "Type" : "layout",
+                        "Visible" : true,
+                        "Z-index" : 10,
+                        "__TypeDisplayName" : "Layout"
+                      },
+                      "Widgets" : [ {
+                        "Properties" : {
+                          "AnimateExpandCollapse" : true,
+                          "Area" : "UI",
+                          "BGImageRepeat" : "no-repeat",
+                          "BGImageSize" : "auto",
+                          "DisplayName" : "SubContentContainer",
+                          "ExpandCollapseTabLocation" : "outside",
+                          "Expanded" : true,
+                          "Id" : "container-17",
+                          "LastContainer" : false,
+                          "MinHeight" : 0,
+                          "MinWidth" : 0,
+                          "Overlay" : false,
+                          "OverlayIsTransparent" : false,
+                          "ResponsiveLayout" : true,
+                          "ShowDataLoading" : true,
+                          "ShowExpandCollapseTab" : false,
+                          "Style" : "DefaultContainerStyle",
+                          "TabCollapseStyle" : "DefaultTabCollapseStyle",
+                          "TabExpandStyle" : "DefaultTabExpandStyle",
+                          "TabHeight" : 36,
+                          "TabLocation" : "center",
+                          "TabOffset" : 0,
+                          "TabWidth" : 36,
+                          "Type" : "container",
+                          "Visible" : true,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Container",
+                          "userCannotRemove" : true
+                        },
+                        "Widgets" : [ {
+                          "Properties" : {
+                            "Area" : "UI",
+                            "DisplayName" : "DeviceListContainedMashup",
+                            "Height" : 300,
+                            "Id" : "ContainedMashup-183",
+                            "LastContainer" : false,
+                            "Left" : 0,
+                            "MashupParameters" : [ {
+                              "BaseType" : "STRING",
+                              "Description" : "",
+                              "ParameterName" : "createdDevice",
+                              "ParmDef" : {
+                                "aspects" : { },
+                                "baseType" : "STRING",
+                                "description" : "",
+                                "name" : "createdDevice",
+                                "ordinal" : 0
+                              }
+                            }, {
+                              "BaseType" : "TEXT",
+                              "Description" : "",
+                              "ParameterName" : "OPCDAThingName",
+                              "ParmDef" : {
+                                "aspects" : { },
+                                "baseType" : "TEXT",
+                                "description" : "",
+                                "name" : "OPCDAThingName",
+                                "ordinal" : 0
+                              }
+                            }, {
+                              "BaseType" : "BOOLEAN",
+                              "Description" : "",
+                              "ParameterName" : "noRowSelected",
+                              "ParmDef" : {
+                                "aspects" : { },
+                                "baseType" : "BOOLEAN",
+                                "description" : "",
+                                "name" : "noRowSelected",
+                                "ordinal" : 0
+                              }
+                            }, {
+                              "BaseType" : "STRING",
+                              "Description" : "",
+                              "ParameterName" : "selectedDeviceThingName",
+                              "ParmDef" : {
+                                "aspects" : { },
+                                "baseType" : "STRING",
+                                "description" : "",
+                                "name" : "selectedDeviceThingName",
+                                "ordinal" : 0
+                              }
+                            }, {
+                              "BaseType" : "BOOLEAN",
+                              "Description" : "",
+                              "ParameterName" : "rowSelected",
+                              "ParmDef" : {
+                                "aspects" : { },
+                                "baseType" : "BOOLEAN",
+                                "description" : "",
+                                "name" : "rowSelected",
+                                "ordinal" : 0
+                              }
+                            }, {
+                              "BaseType" : "STRING",
+                              "Description" : "",
+                              "ParameterName" : "selectedDevice",
+                              "ParmDef" : {
+                                "aspects" : { },
+                                "baseType" : "STRING",
+                                "description" : "",
+                                "name" : "selectedDevice",
+                                "ordinal" : 0
+                              }
+                            } ],
+                            "Name" : "PTC.Factory.KEPServerEX.DeviceList",
+                            "ResizeToContent" : false,
+                            "ResponsiveLayout" : true,
+                            "ShowDataLoading" : true,
+                            "TabSequenceGroup" : 0,
+                            "Top" : 0,
+                            "Type" : "mashupcontainer",
+                            "Visible" : true,
+                            "Width" : 400,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Contained Mashup"
+                          },
+                          "Widgets" : [ ]
+                        } ]
+                      }, {
+                        "Properties" : {
+                          "AnimateExpandCollapse" : true,
+                          "Area" : "UI",
+                          "BGImageRepeat" : "no-repeat",
+                          "BGImageSize" : "auto",
+                          "DisplayName" : "Footer",
+                          "ExpandCollapseTabLocation" : "outside",
+                          "Expanded" : true,
+                          "Id" : "container-18",
+                          "LastContainer" : false,
+                          "MinHeight" : 0,
+                          "MinWidth" : 0,
+                          "Overlay" : false,
+                          "OverlayIsTransparent" : false,
+                          "ResponsiveLayout" : true,
+                          "ShowDataLoading" : true,
+                          "ShowExpandCollapseTab" : false,
+                          "Style" : "DefaultContainerStyle",
+                          "TabCollapseStyle" : "DefaultTabCollapseStyle",
+                          "TabExpandStyle" : "DefaultTabExpandStyle",
+                          "TabHeight" : 16,
+                          "TabLocation" : "center",
+                          "TabOffset" : 0,
+                          "TabWidth" : 16,
+                          "Type" : "container",
+                          "Visible" : true,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Container",
+                          "userCannotRemove" : true
+                        },
+                        "Widgets" : [ ]
+                      } ]
+                    } ]
+                  } ]
+                } ]
+              } ]
+            } ]
+          }, {
+            "Properties" : {
+              "AnimateExpandCollapse" : true,
+              "Area" : "UI",
+              "BGImageRepeat" : "no-repeat",
+              "BGImageSize" : "auto",
+              "DisplayName" : "Right Sidebar",
+              "ExpandCollapseTabLocation" : "outside",
+              "Expanded" : true,
+              "Id" : "container-209",
+              "LastContainer" : false,
+              "MinHeight" : 0,
+              "MinWidth" : 0,
+              "Overlay" : false,
+              "OverlayIsTransparent" : false,
+              "ResponsiveLayout" : true,
+              "ShowDataLoading" : true,
+              "ShowExpandCollapseTab" : false,
+              "Style" : "DefaultContainerStyle",
+              "TabCollapseStyle" : "DefaultTabCollapseStyle",
+              "TabExpandStyle" : "DefaultTabExpandStyle",
+              "TabHeight" : 36,
+              "TabLocation" : "center",
+              "TabOffset" : 0,
+              "TabWidth" : 36,
+              "Type" : "container",
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Container",
+              "userCannotRemove" : true
+            },
+            "Widgets" : [ ]
+          } ]
+        } ]
+      } ]
+    } ]
+  },
+  "mashupType" : "mashup"
+}]]></mashupContent>
+			<preview><![CDATA[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
+ZoSNp92c2VbPn59Tx2cLuxnznglCdjrhBrFYo+7mH5KyRoIorJI6hy9bGfnfvQ79uhr1KkfIzfTZ
+kuk2rJsmph12TSxP9TrF5auaIgYVUlQQBEEQBEEQBEEQBEEQBEEQhBzxICx/AsZJJAgYIwurVgt/
+2bGKAeJw2/gd5GHy2spTqcVEEWSaE4CQSFVqOmqlSSX3qKtsxFIyz5B/v5WxlpWxaooUrF6nXuUs
+X5oo/C30qJO+jspcPkEQBEEQBEEQBEEQBEEQBEEQRBBWKEH4G8n0m+cZHoO1U6iVQk331KrElete
+c6WhUpevbm6Xb6e1lk8KRBAEQRAEQRAEQRAEQRAEQRCEnCQIFfdZaXM1reIRK63SKq3Saq5WWs23
+Squ0Squ0mm+VVvOt0iqt0iqt0mq+VVrN1Uq7hZ5B+LdDDwt/2Hob89xLnrUmCIIgCIIgCIIgCIIg
+CIIgCIIgCEJuwQjCAw4+JPzvP/3ZwiZy5pogCIIgCIIgCIIgCIIgCIIgCIIgCLkJIwhn7Ltf2Gqr
+rcKftt8h/N9tt8vAtqX8v22W/ytD2u2UVmkrcf9VWqVVWqXdVnO10mq+VVqlVVqlVVrNt0qrvq+0
+Squ0Sqv5Vmk1Vyut0q53f95q5cqV4aGHHwkXXXppuOraa8OV12TimlL+vybL/5Uh7bVKq7SVuP8q
+rdIqrdJeo7laaTXfKq3SKq3SKq3mW6VV31dapVVapdV8q7Saq5VWade7P2+1fPnyIJFIJBKJRCKR
+SCQSiUQikUgkEolEIpFItgzZ6uuvvw4//vhjWL16tSAIgiAIgiAIgiAIgiAIgiAIgiAIOQ4jCH/6
+6afw66+/hl9DiH8z8Wsp//+a5f/KkDYordJW4v6rtEqrtEr7q+ZqpdV8q7RKq7RKq7Sab5VWfV9p
+lVZplVbzrdJqrlZapV3v/pwmCCUSiUQikUgkEolEIpFIJBKJRCKRSCQSSe6LCEKJRCKRSCQSiUQi
+kUgkEolEIpFIJBKJZAsSEYQSiUQikUgkEolEIpFIJBKJRCKRSCRboBB2UrJp6n1T170IQolEIpFI
+JBKJRCKRSCQSiUQikeScYHxfvXp1TkFkjkQiKS8RQSiRSCQSiUQikUgkEolEIpFIJBKJRLKFCaTz
+ypU/2F9JxcrPP/0cfvjhx02aBxGEEolEIpFIJBKJRCKRSCQSiUQiySnB0w7b9/vvvx/efffdCsfH
+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
+zlvPFzembo/0Y+KZLbcn8r7y8eTtc5r062Sbl1PjMdSPkf6xbl5vm/z+8dNc9mz9HukPSMgIkJcn
+zjOlMlbn3350fInjv7j++uHfzM/HnH6G4Obl4pbL4d18zPTLnf49vDaed/Tbb/n/nKb573x/9dNi
+Y+p6cz8/7s8Uz2k5nB9Pfj9fx5xmeT/9GBuOhX49ffw7/UEk/Xx8+ljcept3OB+bnE793+jnZRWv
+k0+fp/fTb/q4Hb6PxvOD4+P5bP+9lfH0XBnPR/tpMP292U/fZ6Yugze/z3NdZ7zs6ecZm+czk99/
+Zjzd8jbTt9Xyby5tua46/Tn1+yy2nu6bx8f4e/n3pm/v9ffdj4+NLbftTne5J0mSJO24gXD6Zemm
+O9c/mxlfrnTr3z/d257L+zzd+9n8/6mP+3Tv40z/zhnf31n+fe3+l2Hcevqfy/Fztrf5Sd/X1t9z
+GulSH+vn9GdT5+1nO17P53z1+d5PpeP/fE+bcz3/eb7zl936rJXnfG6n+1qc4/F71ve7C79uZ/q9
+M16mnefxdbqv69k+hnP5HjiX0+xsl8lbH7iQV5vIS9nlmTJ9+OzXb/P/eaZ0Xub03+6//8cevOb8
+6vyvU13Ida1zPa8833/vbJ/38CMQMghMjoM8q23Pnj3Dy8znGUQZJzIQ5hmoeWnajM0ZDvJMucq3
+N873cutiXgd/vuvX53q8VL4+fq7nu+d62v6k3+cXcgyc722/Cz2O3OaQJEnSjh8IJUmSpGr1Z7jk
+Z2XlpZn7M5/7nb7587w0fl7iPv/tZ0zVG0v6K67k5eDzkoMZBYdXm5j8Xl5uMANzXuKyj4mOD0mS
+JEmSgVCSJEnaAeWZhGd6me88K2x4WUrjT+mhcHipy/FlnTd/FMPkmFgbX+bQjyuQJEmSJBkIJUmS
+pJ00AG15yfyt45DrzsoxkpcP3Xos5P8dH5IkSZIkA6EkSZIkSZIkSZIkA6EkSZIkSZIkSZJkIDQQ
+SpIkSZIkSZIkSQZCA6EkSZIkSZIkSZJkIDQQSpIkSZIkSZIkSQZCA6EkSZIkSZIkSZJkIDyLjRMn
+2tHJBzW7uChJkiRJkiRJkiTpEpQ9bmV9fXsMhKtra+3pQ4fa4ZkZSZIkSZIkSZIkSZeg7HELS0vb
+YyBcWFho33/kkfb4449LkiRJkiRJkiRJusg98cQTwx43MzOzPQbCkydPtuXl5ba6uipJkiRJkiRJ
+kiTpEpQ97vjx49tjIAQAAAAAAAB2FgMhAAAAAAAAFGIgBAAAAAAAgEIMhAAAAAAAAFCIgRAAAAAA
+AAAKMRACAAAAAABAIQZCAAAAAAAAKMRACAAAAAAAAIUYCAEAAAAAAKAQAyEAAAAAAAAUYiAEAAAA
+AACAQgyEAAAAAAAAUIiBEAAAAAAAAAoxEAIAAAAAAEAhBkIAAAAAAAAoxEAIAAAAAAAAhRgIAQAA
+AAAAoBADIQAAAAAAABRiIAQAAAAAAIBCDIQAAAAAAABQiIEQAAAAAAAACjEQAgAAAAAAQCEGQgAA
+AAAAACjEQAgAAAAAAACFGAgBAAAAAACgEAMhAAAAAAAAFGIgBAAAAAAAgEIMhAAAAAAAAFCIgRAA
+AAAAAAAKMRACAAAAAABAIQZCAAAAAAAAKMRACAAAAAAAAIUYCAEAAAAAAKAQAyEAAAAAAAAUYiAE
+AAAAAACAQgyEAAAAAAAAUIiBEAAAAAAAAAoxEAIAAAAAAEAhBkIAAAAAAAAoxEAIAAAAAAAAhRgI
+AQAAAAAAoBADIQAAAAAAABRiIAQAAAAAAIBCDIQAAAAAAABQiIEQAAAAAAAACjEQAgAAAAAAQCEG
+QgAAAAAAACjEQAgAAAAAAACFGAgBAAAAAACgEAMhAAAAAAAAFGIgBAAAAAAAgEIMhAAAAAAAAFCI
+gRAAAAAAAAAKMRACAAAAAABAIQZCAAAAAAAAKMRACAAAAAAAAIUYCAEAAAAAAKAQAyEAAAAAAAAU
+YiAEAAAAAACAQgyEAAAAAAAAUIiBEAAAAAAAAAoxEAIAAAAAAEAhBkIAAAAAAAAoxEAIAAAAAAAA
+hRgIAQAAAAAAoBADIQAAAAAAABRiIAQAAAAAAIBCDIQAAAAAAABQiIEQAAAAAAAACjEQAgAAAAAA
+QCEGQgAAAAAAACjEQAgAAAAAAACFGAgBAAAAAACgEAMhAAAAAAAAFGIgBAAAAAAAgEIMhAAAAAAA
+AFCIgRAAAAAAAAAKMRACAAAAAABAIQZCAAAAAAAAKMRACAAAAAAAAIUYCAEAAAAAAKAQAyEAAAAA
+AAAUYiAEAAAAAACAQgyEAAAAAAAAUIiBEAAAAAAAAAoxEAIAAAAAAEAhBkIAAAAAAAAoxEAIAAAA
+AAAAhRgIAQAAAAAAoBADIQAAAAAAABRiIAQAAAAAAIBCDIQAAAAAAABQiIEQAAAAAAAACjEQAgAA
+AAAAQCEGQgAAAAAAACjEQAgAAAAAAACFGAgBAAAAAACgEAMhAAAAAAAAFGIgBAAAAAAAgEIMhAAA
+AAAAAFCIgRAAAAAAAAAKMRACAAAAAABAIQZCAAAAAAAAKMRACAAAAAAAAIUYCAEAAAAAAKAQAyEA
+AAAAAAAUYiAEAAAAAACAQgyEAAAAAAAAUIiBEAAAAAAAAAoxEAIAAAAAAEAhBkIAAAAAAAAoxEAI
+AAAAAAAAhRgIAQAAAAAAoBADIQAAAAAAABRiIAQAAAAAAIBCDIQAAAAAAABQiIEQAAAAAAAACjEQ
+AgAAAAAAQCEGQgAAAAAAACjEQAgAAAAAAACFGAgBAAAAAACgEAMhAAAAAAAAFGIgBAAAAAAAgEIM
+hAAAAAAAAFCIgRAAAAAAAAAKMRACAAAAAABAIQZCAAAAAAAAKMRACAAAAAAAAIUYCAEAAAAAAKAQ
+AyEAAAAAAAAUYiAEAAAAAACAQgyEAAAAAAAAUIiBEAAAAAAAAAoxEAIAAAAAAEAhBkIAAAAAAAAo
+xEAIAAAAAAAAhRgIAQAAAAAAoBADIQAAAAAAABRiIAQAAAAAAIBCDIQAAAAAAABQiIEQAAAAAAAA
+CjEQAgAAAAAAQCEGQgAAAAAAACjEQAgAAAAAAACFGAgBAAAAAACgEAMhAAAAAAAAFGIgBAAAAAAA
+gEIMhAAAAAAAAFCIgRAAAAAAAAAKMRACAAAAAABAIQZCAAAAAAAAKMRACAAAAAAAAIUYCAEAAAAA
+AKAQAyEAAAAAAAAUYiAEAAAAAACAQgyEAAAAAAAAUIiBEAAAAAAAAAoxEAIAAAAAAEAhBkIAAAAA
+AAAoxEAIAAAAAAAAhRgIAQAAAAAAoBADIQAAAAAAABRiIAQAAAAAAIBCDIQAAAAAAABQiIEQAAAA
+AAAACjEQAgAAAAAAQCEGQgAAAAAAACjEQAgAAAAAAACFGAgBAAAAAACgEAMhAAAAAAAAFGIgBAAA
+AAAAgEIMhAAAAAAAAFCIgRAAAAAAAAAKMRACAAAAAABAIQZCAAAAAAAAKMRACAAAAAAAAIUYCAEA
+AAAAAKAQAyEAAAAAAAAUYiAEAAAAAACAQgyEAAAAAAAAUIiBEAAAAAAAAAoxEAIAAAAAAEAhBkIA
+AAAAAAAoxEAIAAAAAAAAhRgIAQAAAAAAoBADIQAAAAAAABRiIAQAAAAAAIBCDIQAAAAAAABQiIEQ
+AAAAAAAACjEQAgAAAAAAQCEGQgAAAAAAACjEQAgAAAAAAACFGAgBAAAAAACgEAMhAAAAAAAAFGIg
+BAAAAAAAgEIMhAAAAAAAAFCIgRAAAAAAAAAKMRACAAAAAABAIQZCAAAAAAAAKMRACAAAAAAAAIUY
+CAEAAAAAAKAQAyEAAAAAAAAUYiAEAAAAAACAQgyEAAAAAAAAUIiBEAAAAAAAAAoxEAIAAAAAAEAh
+BkIAAAAAAAAoxEAIAAAAAAAAhRgIAQAAAAAAoBADIQAAAAAAABRiIAQAAAAAAIBCDIQAAAAAAABQ
+iIEQAAAAAAAACjEQAgAAAAAAQCEGQgAAAAAAACjEQAgAAAAAAACFGAgBAAAAAACgEAMhAAAAAAAA
+FGIgBAAAAAAAgEIMhAAAAAAAAFCIgRAAAAAAAAAKMRACAAAAAABAIQZCAAAAAAAAKMRACAAAAAAA
+AIUYCAEAAAAAAKAQAyEAAAAAAAAUYiAEAAAAAACAQgyEAAAAAAAAUIiBEAAAAAAAAAoxEAIAAAAA
+AEAhBkIAAAAAAAAoxEAIAAAAAAAAhRgIAQAAAAAAoBADIQAAAAAAABRiIAQAAAAAAIBCDIQAAAAA
+AABQiIEQAAAAAAAACjEQAgAAAAAAQCEGQgAAAAAAACjEQAgAAAAAAACFGAgBAAAAAACgEAMhAAAA
+AAAAFGIgBAAAAAAAgEIMhAAAAAAAAFCIgRAAAAAAAAAKMRACAAAAAABAIQZCAAAAAAAAKMRACAAA
+AAAAAIUYCAEAAAAAAKAQAyEAAAAAAAAUYiAEAAAAAACAQgyEAAAAAAAAUIiBEAAAAAAAAAoxEAIA
+AAAAAEAhBkIAAAAAAAAoxEAIAAAAAAAAhRgIAQAAAAAAoBADIQAAAAAAABRiIAQAAAAAAIBCDIQA
+AAAAAABQiIEQAAAAAAAACjEQAgAAAAAAQCEGQgAAAAAAACjEQAgAAAAAAACFGAgBAAAAAACgEAMh
+AAAAAAAAFGIgBAAAAAAAgEIMhAAAAAAAAFCIgRAAAAAAAAAKMRACAAAAAABAIQZCAAAAAAAAKMRA
+CAAAAAAAAIUYCAEAAAAAAKAQAyEAAAAAAAAUYiAEAAAAAACAQgyEAAAAAAAAUIiBEAAAAAAAAAox
+EAIAAAAAAEAhBkIAAAAAAAAoxEAIAAAAAAAAhRgIAQAAACNzlWwAAEEwSURBVAAAoBADIQAAAAAA
+ABRiIAQAAAAAAIBCDIQAAAAAAABQiIEQAAAAAAAACjEQAgAAAAAAQCEGQgAAAAAAACjEQAgAAAAA
+AACFGAgBAAAAAACgEAMhAAAAAAAAFGIgBAAAAAAAgEIMhAAAAAAAAFCIgRAAAAAAAAAKMRACAAAA
+AABAIQZCAAAAAAAAKMRACAAAAAAAAIUYCAEAAAAAAKAQAyEAAAAAAAAUYiAEAAAAAACAQgyEAAAA
+AAAAUIiBEAAAAAAAAAoxEAIAAAAAAEAhBkIAAAAAAAAoxEAIAAAAAAAAhRgIAQAAAAAAoBADIQAA
+AAAAABRiIAQAAAAAAIBCDIQAAAAAAABQiIEQAAAAAAAACjEQAgAAAAAAQCEGQgAAAAAAACjEQAgA
+AAAAAACFGAgBAAAAAACgEAMhAAAAAAAAFGIgBAAAAAAAgEIMhAAAAAAAAFCIgRAAAAAAAAAKMRAC
+AAAAAABAIQZCAAAAAAAAKMRACAAAAAAAAIUYCAEAAAAAAKAQAyEAAAAAAAAUYiAEAAAAAACAQgyE
+AAAAAAAAUIiBEAAAAAAAAAoxEAIAAAAAAEAhBkIAAAAAAAAoxEAIAAAAAAAAhRgIAQAAAAAAoBAD
+IQAAAAAAABRiIAQAAAAAAIBCDIQAAAAAAABQiIEQAAAAAAAACjEQAgAAAAAAQCEGQgAAAAAAACjE
+QAgAAAAAAACFGAgBAAAAAACgEAMhAAAAAAAAFGIgBAAAAAAAgEIMhAAAAAAAAFCIgRAAAAAAAAAK
+MRACAAAAAABAIQZCAAAAAAAAKMRACAAAAAAAAIUYCAEAAAAAAKAQAyEAAAAAAAAUYiAEAAAAAACA
+QgyEAAAAAAAAUIiBEAAAAAAAAAoxEAIAAAAAAEAhBkIAAAAAAAAoxEAIAAAAAAAAhRgIAQAAAAAA
+oBADIQAAAAAAABRiIAQAAAAAAIBCDIQAAAAAAABQiIEQAAAAAAAACjEQAgAAAAAAQCEGQgAAAAAA
+ACjEQAgAAAAAAACFGAgBAAAAAACgEAMhAAAAAAAAFGIgBAAAAAAAgEIMhAAAAAAAAFCIgRAAAAAA
+AAAKMRACAAAAAABAIQZCAAAAAAAAKMRACAAAAAAAAIUYCAEAAAAAAKAQAyEAAAAAAAAUYiAEAAAA
+AACAQgyEAAAAAAAAUIiBEAAAAAAAAAoxEAIAAAAAAEAhBkIAAAAAAAAoxEAIAAAAAAAAhRgIAQAA
+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]]></preview>
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="header : name : updated&#10;"
+					timestamp="2021-08-23T13:50:52.898Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Mashup : design : updated&#10;"
+					timestamp="2021-08-23T13:51:59.152Z" user="adm-kumar2a" />
+			</ConfigurationChanges>
+		</Mashup>
+	</Mashups>
+</Entities>

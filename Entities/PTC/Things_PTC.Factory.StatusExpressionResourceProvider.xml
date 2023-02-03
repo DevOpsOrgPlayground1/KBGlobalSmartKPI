@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b167" majorVersion="8" minorVersion="2"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="2" schemaVersion="1020" universal="">
+	<Things>
+		<Thing aspect.isEditableExtensionObject="true"
+			aspect.isExtension="true" description="" documentationContent=""
+			effectiveThingPackage="PTC.Factory.StatusExpressionResourceProviderPackage"
+			enabled="true" homeMashup="" identifier=""
+			lastModifiedDate="2018-06-18T08:58:44.274+02:00"
+			name="PTC.Factory.StatusExpressionResourceProvider"
+			projectName="PTC.KinexManufacturing" published="false"
+			tags="PTC:factory-mv;PTC:FactoryPlantStatus"
+			thingTemplate="PTC.Factory.StatusExpressionResourceProviderTemplate"
+			valueStream="">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true" name="Controls Engineer"
+							type="Group" />
+						<Principal isPermitted="true"
+							name="Maintenance Engineer" type="Group" />
+						<Principal isPermitted="true" name="Maintenance Manager"
+							type="Group" />
+						<Principal isPermitted="true" name="Production Manager"
+							type="Group" />
+					</PropertyRead>
+					<PropertyWrite>
+						<Principal isPermitted="true" name="Controls Engineer"
+							type="Group" />
+						<Principal isPermitted="true"
+							name="Maintenance Engineer" type="Group" />
+						<Principal isPermitted="true" name="Maintenance Manager"
+							type="Group" />
+						<Principal isPermitted="true" name="Production Manager"
+							type="Group" />
+					</PropertyWrite>
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="Controls Engineer"
+							type="Group" />
+						<Principal isPermitted="true"
+							name="Maintenance Engineer" type="Group" />
+						<Principal isPermitted="true" name="Maintenance Manager"
+							type="Group" />
+						<Principal isPermitted="true" name="Production Manager"
+							type="Group" />
+					</ServiceInvoke>
+					<EventInvoke>
+						<Principal isPermitted="true" name="Controls Engineer"
+							type="Group" />
+						<Principal isPermitted="true"
+							name="Maintenance Engineer" type="Group" />
+						<Principal isPermitted="true" name="Maintenance Manager"
+							type="Group" />
+						<Principal isPermitted="true" name="Production Manager"
+							type="Group" />
+					</EventInvoke>
+					<EventSubscribe>
+						<Principal isPermitted="true" name="Controls Engineer"
+							type="Group" />
+						<Principal isPermitted="true"
+							name="Maintenance Engineer" type="Group" />
+						<Principal isPermitted="true" name="Maintenance Manager"
+							type="Group" />
+						<Principal isPermitted="true" name="Production Manager"
+							type="Group" />
+					</EventSubscribe>
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true"
+						name="PTC.Factory.MachineVisibility:ManageElements"
+						type="OrganizationalUnit" />
+					<Principal isPermitted="true"
+						name="PTC.Factory.MachineVisibility:PlantStatus"
+						type="OrganizationalUnit" />
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTables>
+				<ConfigurationTable
+					description="Resource Attribute Mapping Configuration"
+					isMultiRow="true" name="Attribute Mapping Configuration"
+					ordinal="0">
+					<DataShape>
+						<FieldDefinitions>
+							<FieldDefinition aspect.defaultValue="STRING"
+								baseType="BASETYPENAME"
+								description="The base type of the attribute (must be the same for normalized and originalattributes"
+								name="BaseType" ordinal="3" />
+							<FieldDefinition aspect.isPrimaryKey="true"
+								baseType="STRING"
+								description="The normalized attribute name of the resource"
+								name="Normalized" ordinal="1" />
+							<FieldDefinition baseType="STRING"
+								description="The original name of the attribute used in the business service for the resource"
+								name="Original" ordinal="2" />
+						</FieldDefinitions>
+					</DataShape>
+					<Rows>
+						<Row>
+							<BaseType>
+								<![CDATA[DATETIME]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[CreateTimestamp]]>
+							</Normalized>
+							<Original>
+								<![CDATA[CreateTimestamp]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[DATETIME]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[UpdateTimestamp]]>
+							</Normalized>
+							<Original>
+								<![CDATA[UpdateTimestamp]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[USERNAME]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[CreatedBy]]>
+							</Normalized>
+							<Original>
+								<![CDATA[CreatedBy]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[USERNAME]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[UpdatedBy]]>
+							</Normalized>
+							<Original>
+								<![CDATA[UpdatedBy]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[STRING]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[DetailsPageLink]]>
+							</Normalized>
+							<Original>
+								<![CDATA[DetailsPageLink]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[THINGTEMPLATENAME]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[AssetType]]>
+							</Normalized>
+							<Original>
+								<![CDATA[thingTemplate]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[IMAGE]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[Image]]>
+							</Normalized>
+							<Original>
+								<![CDATA[Image]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[BOOLEAN]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[IsConnected]]>
+							</Normalized>
+							<Original>
+								<![CDATA[isConnected]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[DATETIME]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[LastConnection]]>
+							</Normalized>
+							<Original>
+								<![CDATA[lastConnection]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[BOOLEAN]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[IsActive]]>
+							</Normalized>
+							<Original>
+								<![CDATA[enabled]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[STRING]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[Name]]>
+							</Normalized>
+							<Original>
+								<![CDATA[name]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[INTEGER]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[availability_MaxThreshold]]>
+							</Normalized>
+							<Original>
+								<![CDATA[availability_MaxThreshold]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[INTEGER]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[availability_MinThreshold]]>
+							</Normalized>
+							<Original>
+								<![CDATA[availability_MinThreshold]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[STRING]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[EXP_E_goodCount]]>
+							</Normalized>
+							<Original>
+								<![CDATA[EXP_E_goodCount]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[STRING]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[EXP_E_idealRunRate]]>
+							</Normalized>
+							<Original>
+								<![CDATA[EXP_E_idealRunRate]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[STRING]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[EXP_E_performanceTag]]>
+							</Normalized>
+							<Original>
+								<![CDATA[EXP_E_performanceTag]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[STRING]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[EXP_E_qualityTag]]>
+							</Normalized>
+							<Original>
+								<![CDATA[EXP_E_qualityTag]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[STRING]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[EXP_E_totalCount]]>
+							</Normalized>
+							<Original>
+								<![CDATA[EXP_E_totalCount]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[INTEGER]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[oEE_MaxThreshold]]>
+							</Normalized>
+							<Original>
+								<![CDATA[oEE_MaxThreshold]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[INTEGER]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[oEE_MinThreshold]]>
+							</Normalized>
+							<Original>
+								<![CDATA[oEE_MinThreshold]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[INTEGER]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[performance_MaxThreshold]]>
+							</Normalized>
+							<Original>
+								<![CDATA[performance_MaxThreshold]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[INTEGER]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[performance_MinThreshold]]>
+							</Normalized>
+							<Original>
+								<![CDATA[performance_MinThreshold]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[INTEGER]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[quality_MaxThreshold]]>
+							</Normalized>
+							<Original>
+								<![CDATA[quality_MaxThreshold]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[INTEGER]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[quality_MinThreshold]]>
+							</Normalized>
+							<Original>
+								<![CDATA[quality_MinThreshold]]>
+							</Original>
+						</Row>
+						<Row>
+							<BaseType>
+								<![CDATA[STRING]]>
+							</BaseType>
+							<Normalized>
+								<![CDATA[Id]]>
+							</Normalized>
+							<Original>
+								<![CDATA[name]]>
+							</Original>
+						</Row>
+					</Rows>
+				</ConfigurationTable>
+				<ConfigurationTable
+					description="Resource Provider Configuration" isMultiRow="false"
+					name="Resource Provider Configuration" ordinal="0">
+					<DataShape>
+						<FieldDefinitions>
+							<FieldDefinition baseType="THINGNAME"
+								description="The Thing name of the connector to a business service for the resource"
+								name="Connector" ordinal="0" />
+							<FieldDefinition baseType="MASHUPNAME"
+								description="The name of the mashup to create a new asset"
+								name="CreateMashup" ordinal="0" />
+							<FieldDefinition baseType="MASHUPNAME"
+								description="The name of the mashup to show the details of the resource"
+								name="DetailMashup" ordinal="0" />
+						</FieldDefinitions>
+					</DataShape>
+					<Rows>
+						<Row>
+							<Connector />
+							<CreateMashup>
+								<![CDATA[PTC.Factory.CreateMachine]]>
+							</CreateMashup>
+							<DetailMashup>
+								<![CDATA[PTC.Factory.MachineDetail]]>
+							</DetailMashup>
+						</Row>
+					</Rows>
+				</ConfigurationTable>
+				<ConfigurationTable
+					description="Thing Resource Provider Configuration"
+					isMultiRow="false" name="Thing Resource Provider Configuration"
+					ordinal="0">
+					<DataShape>
+						<FieldDefinitions>
+							<FieldDefinition baseType="THINGTEMPLATENAME"
+								description="ThingTemplate used by this provider when creating new Things when the resource data does not specify the ThingTemplate to use"
+								name="DefaultResourceTemplate" ordinal="0" />
+							<FieldDefinition baseType="THINGSHAPENAME"
+								description="ThingShape that denotes Things to be treated as resources by this provider"
+								name="ResourceThingShape" ordinal="0" />
+						</FieldDefinitions>
+					</DataShape>
+					<Rows>
+						<Row>
+							<DefaultResourceTemplate>
+								<![CDATA[GenericThing]]>
+							</DefaultResourceTemplate>
+							<ResourceThingShape>
+								<![CDATA[PTC.SCA.SCO.StatusThingShape]]>
+							</ResourceThingShape>
+						</Row>
+					</Rows>
+				</ConfigurationTable>
+			</ConfigurationTables>
+			<ThingShape>
+				<PropertyDefinitions />
+				<ServiceDefinitions />
+				<EventDefinitions />
+				<ServiceMappings />
+				<ServiceImplementations>
+					<ServiceImplementation description=""
+						handlerName="Script" name="CustomizedOEECalculation">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code>
+											<![CDATA[var result = 0;
+try {
+    var params = {
+        thingShapeName: "KBLocalManAppSmartKPIConnectorShape" /* THINGSHAPENAME */
+    };
+
+    if (Things[thingId].ImplementsShape(params)) {
+        var relatedThing = Things[thingId].SmartKPIThing;
+		result = Things[relatedThing].OEE2PerDay0/100;
+    }
+} catch(err) {
+
+}
+]]>
+										</code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="CustomizedQualityCalculation">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code>
+											<![CDATA[var result = 0;
+try {
+    var params = {
+        thingShapeName: "KBLocalManAppSmartKPIConnectorShape" /* THINGSHAPENAME */
+    };
+
+    if (Things[thingId].ImplementsShape(params)) {
+        var relatedThing = Things[thingId].SmartKPIThing;
+		result = Things[relatedThing].RqPerDay0/100;
+    }
+} catch(err) {
+
+}
+
+]]>
+										</code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+				</ServiceImplementations>
+				<Subscriptions />
+			</ThingShape>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations />
+			<ImplementedShapes />
+			<ThingProperties>
+				<ProviderIcon>
+					<Value>
+						<![CDATA[PTC.CRM.TWXCustomerProviderIcon]]>
+					</Value>
+					<Timestamp>2017-01-09T16:56:08.184+01:00</Timestamp>
+					<Quality>UNKNOWN</Quality>
+				</ProviderIcon>
+			</ThingProperties>
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2018-01-19T14:40:40.505+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : CustomizedQualityCalculation : Code Updated&#10;"
+					timestamp="2018-06-05T10:21:42.294+02:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : CustomizedQualityCalculation : Code Updated&#10;"
+					timestamp="2018-06-05T10:45:03.388+02:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : CustomizedQualityCalculation : Code Updated&#10;"
+					timestamp="2018-06-05T10:51:04.732+02:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : CustomizedOEECalculation : Code Updated&#10;"
+					timestamp="2018-06-05T12:52:33.326+02:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : CustomizedOEECalculation : Code Updated, CustomizedQualityCalculation : Code Updated&#10;"
+					timestamp="2018-06-18T08:58:44.274+02:00" user="adm-flassakm" />
+			</ConfigurationChanges>
+		</Thing>
+	</Things>
+</Entities>

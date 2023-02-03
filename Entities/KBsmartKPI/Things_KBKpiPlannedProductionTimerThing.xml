@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b167" majorVersion="8" minorVersion="2"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="2" schemaVersion="1020" universal="">
+	<Things>
+		<Thing description="***DEPRECATED***" documentationContent=""
+			effectiveThingPackage="TimerThing" enabled="false" homeMashup=""
+			identifier="" lastModifiedDate="2018-11-09T13:02:42.373+01:00"
+			name="DEPRECATED-KBKpiPlannedProductionTimerThing" projectName="KBsmartKPI"
+			published="false"
+			tags="KBThingWorxInstallationVocabulary:ExtensionSmartKPI"
+			thingTemplate="Timer" valueStream="">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions />
+			<VisibilityPermissions>
+				<Visibility />
+			</VisibilityPermissions>
+			<ConfigurationTables>
+				<ConfigurationTable
+					description="General Settings" isMultiRow="false" name="Settings"
+					ordinal="0">
+					<DataShape>
+						<FieldDefinitions>
+							<FieldDefinition aspect.defaultValue="true"
+								baseType="BOOLEAN"
+								description="Automatically enable timer on startup"
+								name="enabled" ordinal="0" />
+							<FieldDefinition baseType="USERNAME"
+								description="User context in which to run event handlers"
+								name="runAsUser" ordinal="0" />
+							<FieldDefinition aspect.defaultValue="60000.0"
+								baseType="NUMBER" description="Update rate" name="updateRate"
+								ordinal="0" />
+						</FieldDefinitions>
+					</DataShape>
+					<Rows>
+						<Row>
+							<enabled>false</enabled>
+							<runAsUser>
+								<![CDATA[Administrator]]>
+							</runAsUser>
+							<updateRate>300000.0</updateRate>
+						</Row>
+					</Rows>
+				</ConfigurationTable>
+			</ConfigurationTables>
+			<ThingShape>
+				<PropertyDefinitions />
+				<ServiceDefinitions>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="SetTimerUpdateRate">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.isRequired="true"
+								baseType="NUMBER" description="Time in MilliSeconds"
+								name="UpdateRate" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="PlannedProduction">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="PlannedProductionPerDay">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="PlannedProductionPerDayWithNumerOfCycles">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.defaultValue="1"
+								aspect.isRequired="true" baseType="INTEGER" description=""
+								name="NumerOfCycles" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="PlannedProductionPerHour">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="PlannedProductionPerHourWithNumerOfCycles">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.defaultValue="1"
+								aspect.isRequired="true" baseType="INTEGER" description=""
+								name="NumerOfCycles" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="PlannedProductionPerMonth">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="PlannedProductionPerMonthWithNumerOfCycles">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.defaultValue="1"
+								aspect.isRequired="true" baseType="INTEGER" description=""
+								name="NumerOfCycles" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="PlannedProductionPerQuarter">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="PlannedProductionPerQuarterWithNumerOfCycles">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.defaultValue="1"
+								aspect.isRequired="true" baseType="INTEGER" description=""
+								name="NumerOfCycles" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="PlannedProductionPerWeek">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="PlannedProductionPerWeekWithNumerOfCycles">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.defaultValue="1"
+								aspect.isRequired="true" baseType="INTEGER" description=""
+								name="NumerOfCycles" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="PlannedProductionPerYear">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="PlannedProductionPerYearWithNumerOfCycles">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.defaultValue="1"
+								aspect.isRequired="true" baseType="INTEGER" description=""
+								name="NumerOfCycles" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+				</ServiceDefinitions>
+				<EventDefinitions />
+				<ServiceMappings />
+				<ServiceImplementations>
+					<ServiceImplementation description=""
+						handlerName="Script" name="SetTimerUpdateRate">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code>
+											<![CDATA[
+var params = {
+	tableName: "Settings" /* STRING */
+};
+
+// result: INFOTABLE
+var table = me.GetConfigurationTable(params);
+
+table[0].updateRate = UpdateRate;
+
+
+
+var params = {
+	configurationTable: table /* INFOTABLE */,
+	persistent: true /* BOOLEAN */,
+	tableName: "Settings" /* STRING */
+};
+
+// no return
+me.SetConfigurationTable(params);
+
+
+]]>
+										</code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="PlannedProduction">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+
+var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("PlannedProduction, location = " + location);
+
+
+
+if (location == "MUC") {
+    // result: STRING
+    var DB = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+
+    
+     // result: NUMBER
+     var result = Things[DB].CalculateKpiPlannedProduction();
+}
+
+
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="PlannedProductionPerDay">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("PlannedProductionPerDay, location = " + location);
+
+if (location == "MUC") {
+
+    var params = {
+        NumerOfCycles: 3 /* INTEGER */
+    };
+
+    me.PlannedProductionPerDayWithNumerOfCycles(params);
+
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script"
+						name="PlannedProductionPerDayWithNumerOfCycles">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("PlannedProductionPerDayWithNumerOfCycles, location = " + location);
+
+if (location == "MUC") {
+    // result: STRING
+    var DB = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+
+    //Day
+    // result: DATETIME
+    var startTime = Things["KBTimeHelperThing"].GetCurrentDayStart();
+    var params = {
+        CalculationPeriodInMinutes: 1440 /* INTEGER */,
+        StartDateTime: startTime /* DATETIME */,
+        CalculateNumerOfCycles: NumerOfCycles /* INTEGER */,
+        CalculationBase: "Day"
+    };
+
+    // result: NUMBER
+    var result = Things[DB].CalculatePlannedProduction(params);
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="PlannedProductionPerHour">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("PlannedProductionPerHour, location = " + location);
+
+if (location == "MUC") {
+
+    var params = {
+        NumerOfCycles: 12 /* INTEGER */
+    };
+
+    me.PlannedProductionPerHourWithNumerOfCycles(params);
+
+
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script"
+						name="PlannedProductionPerHourWithNumerOfCycles">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("PlannedProductionPerHourWithNumerOfCycles, location = " + location);
+
+if (location == "MUC") {
+    // result: STRING
+    var DB = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+
+    //Hour
+    // result: DATETIME
+	var startTime = Things["KBTimeHelperThing"].GetCurrentHourStart();
+    var params = {
+        CalculationPeriodInMinutes: 60 /* INTEGER */,
+        StartDateTime: startTime /* DATETIME */,
+        CalculateNumerOfCycles: NumerOfCycles /* INTEGER */,
+        CalculationBase: "Hour"
+    };
+
+    // result: NUMBER
+    var result = Things[DB].CalculatePlannedProduction(params);
+
+
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="PlannedProductionPerMonth">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("PlannedProductionPerMonth, location = " + location);
+
+if (location == "MUC") {
+
+    var params = {
+        NumerOfCycles: 3 /* INTEGER */
+    };
+
+    me.PlannedProductionPerMonthWithNumerOfCycles(params);
+
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script"
+						name="PlannedProductionPerMonthWithNumerOfCycles">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("PlannedProductionPerMonthWithNumerOfCycles, location = " + location);
+
+
+
+if (location == "MUC") {
+    // result: STRING
+    var DB = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+
+    //Month
+    // result: DATETIME
+    var startMonthStart = Things["KBTimeHelperThing"].GetCurrentMonthStart();
+    var startMonthEnd = dateAddMilliseconds(Things["KBTimeHelperThing"].GetCurrentMonthEnd(), 1);
+
+    
+    for (var i = 0; i<NumerOfCycles; i++) {
+        
+        var currentMonthStart = dateAddMonths(startMonthStart, -1*i);
+        var currentMonthEnd = dateAddMonths(startMonthEnd, -1*i);
+        
+
+    
+        // dateDifference(date1:DATETIME,date2:DATETIME):NUMBER
+        var minutes = dateDifference(currentMonthEnd, currentMonthStart)/1000/60;
+        logger.debug("PlannedProductionPerMonthWithNumerOfCycles: currentMonthStart = " + currentMonthStart);
+        logger.debug("PlannedProductionPerMonthWithNumerOfCycles: currentMonthEnd = " + currentMonthEnd);
+        logger.debug("PlannedProductionPerMonthWithNumerOfCycles: minutes = " + minutes);
+
+        var params = {
+            CalculationPeriodInMinutes: minutes /* INTEGER */,
+            StartDateTime: currentMonthStart /* DATETIME */,
+            CalculateNumerOfCycles: 1 /* INTEGER */,
+            CalculationBase: "Month"
+        };
+
+        // result: NUMBER
+        var result = Things[DB].CalculatePlannedProduction(params);
+    }
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="PlannedProductionPerQuarter">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("PlannedProductionPerQuarter, location = " + location);
+
+if (location == "MUC") {
+
+    var params = {
+        NumerOfCycles: 50 /* INTEGER */
+    };
+
+    me.PlannedProductionPerQuarterWithNumerOfCycles(params);
+
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script"
+						name="PlannedProductionPerQuarterWithNumerOfCycles">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("PlannedProductionPerQuarterWithNumerOfCycles, location = " + location);
+
+if (location == "MUC") {
+    // result: STRING
+    var DB = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+
+    //Quarter
+    // result: DATETIME
+    var startTime = Things["KBTimeHelperThing"].GetCurrentQuarterStart();
+    var params = {
+        CalculationPeriodInMinutes: 15 /* INTEGER */,
+        StartDateTime: startTime /* DATETIME */,
+        CalculateNumerOfCycles: NumerOfCycles /* INTEGER */,
+        CalculationBase: "Quarter"
+    };
+
+    // result: NUMBER
+    var result = Things[DB].CalculatePlannedProduction(params);
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="PlannedProductionPerWeek">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("PlannedProductionPerWeek, location = " + location);
+
+if (location == "MUC") {
+
+    var params = {
+        NumerOfCycles: 3 /* INTEGER */
+    };
+
+    me.PlannedProductionPerWeekWithNumerOfCycles(params);
+
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script"
+						name="PlannedProductionPerWeekWithNumerOfCycles">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("PlannedProductionPerWeekWithNumerOfCycles, location = " + location);
+
+
+
+if (location == "MUC") {
+    // result: STRING
+    var DB = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+
+    //Week
+    // result: DATETIME
+    var startWeekStart = Things["KBTimeHelperThing"].GetCurrentWeekStart();
+    var startWeekEnd = dateAddMilliseconds(Things["KBTimeHelperThing"].GetCurrentWeekEnd(), 1);
+
+    
+    for (var i = 0; i<NumerOfCycles; i++) {
+        
+        var currentWeekStart = dateAddDays(startWeekStart, -7*i);
+        var currentWeekEnd = dateAddDays(startWeekEnd, -7*i);
+
+
+    
+        // dateDifference(date1:DATETIME,date2:DATETIME):NUMBER
+        var minutes = dateDifference(currentWeekEnd, currentWeekStart)/1000/60;
+        logger.debug("PlannedProductionPerWeekWithNumerOfCycles: currentWeekStart = " + currentWeekStart);
+        logger.debug("PlannedProductionPerWeekWithNumerOfCycles: currentWeekEnd = " + currentWeekEnd);
+        logger.debug("PlannedProductionPerWeekWithNumerOfCycles: minutes = " + minutes);
+
+        var params = {
+            CalculationPeriodInMinutes: minutes /* INTEGER */,
+            StartDateTime: currentWeekStart /* DATETIME */,
+            CalculateNumerOfCycles: 1 /* INTEGER */,
+            CalculationBase: "Week"
+        };
+
+        // result: NUMBER
+        var result = Things[DB].CalculatePlannedProduction(params);
+    }
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="PlannedProductionPerYear">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("PlannedProductionPerYear, location = " + location);
+
+if (location == "MUC") {
+
+    var params = {
+        NumerOfCycles: 3 /* INTEGER */
+    };
+
+    me.PlannedProductionPerYearWithNumerOfCycles(params);
+
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script"
+						name="PlannedProductionPerYearWithNumerOfCycles">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("PlannedProductionPerYearWithNumerOfCycles, location = " + location);
+
+
+
+if (location == "MUC") {
+    // result: STRING
+    var DB = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+
+    //Year
+    // result: DATETIME
+    var startYearStart = Things["KBTimeHelperThing"].GetCurrentYearStart();
+    var startYearEnd = dateAddMilliseconds(Things["KBTimeHelperThing"].GetCurrentYearEnd(), 1);
+
+    
+    for (var i = 0; i<NumerOfCycles; i++) {
+        
+        var currentYearStart = dateAddYears(startYearStart, -1*i);
+        var currentYearEnd = dateAddYears(startYearEnd, -1*i);
+        
+
+    
+        // dateDifference(date1:DATETIME,date2:DATETIME):NUMBER
+        var minutes = dateDifference(currentYearEnd, currentYearStart)/1000/60;
+        logger.debug("PlannedProductionPerYearWithNumerOfCycles: currentYearStart = " + currentYearStart);
+        logger.debug("PlannedProductionPerYearWithNumerOfCycles: currentYearEnd = " + currentYearEnd);
+        logger.debug("PlannedProductionPerYearWithNumerOfCycles: minutes = " + minutes);
+
+        var params = {
+            CalculationPeriodInMinutes: minutes /* INTEGER */,
+            StartDateTime: currentYearStart /* DATETIME */,
+            CalculateNumerOfCycles: 1 /* INTEGER */,
+            CalculationBase: "Year"
+        };
+
+        // result: NUMBER
+        var result = Things[DB].CalculatePlannedProduction(params);
+    }
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+				</ServiceImplementations>
+				<Subscriptions>
+					<Subscription enabled="false" eventName="Timer"
+						source="" sourceProperty="">
+						<ServiceImplementation description=""
+							handlerName="Script" name="Event.Timer">
+							<ConfigurationTables>
+								<ConfigurationTable description=""
+									isMultiRow="false" name="Script" ordinal="0">
+									<DataShape>
+										<FieldDefinitions>
+											<FieldDefinition baseType="STRING"
+												description="code" name="code" ordinal="0" />
+										</FieldDefinitions>
+									</DataShape>
+									<Rows>
+										<Row>
+											<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+logger.debug("Event.Timer, location = " + location);
+
+if (location == "MUC") {
+	me.PlannedProduction();
+}]]></code>
+										</Row>
+									</Rows>
+								</ConfigurationTable>
+							</ConfigurationTables>
+						</ServiceImplementation>
+					</Subscription>
+				</Subscriptions>
+			</ThingShape>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations />
+			<ImplementedShapes />
+			<ThingProperties />
+			<ConfigurationChanges>
+			</ConfigurationChanges>
+		</Thing>
+	</Things>
+</Entities>

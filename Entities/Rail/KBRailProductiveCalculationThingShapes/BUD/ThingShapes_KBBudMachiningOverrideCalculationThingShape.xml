@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b2319" majorVersion="8" minorVersion="4"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="4" schemaVersion="1041" universal="">
+	<ThingShapes>
+		<ThingShape aspect.isExtension="true" className=""
+			description="" documentationContent="" homeMashup=""
+			lastModifiedDate="2020-02-21T11:26:02.660+01:00"
+			name="KBBudMachiningOverrideCalculationThingShape"
+			projectName="KBsmartKPI"
+			tags="KBThingWorxAdministrationVocabulary:Administrated">
+			<PropertyDefinitions>
+				<PropertyDefinition aspect.cacheTime="0.0"
+					aspect.dataChangeType="VALUE" aspect.isLogged="true"
+					aspect.isPersistent="true" aspect.isReadOnly="false"
+					baseType="BOOLEAN" category="" description="" isLocalOnly="false"
+					name="Productive" ordinal="35" />
+			</PropertyDefinitions>
+			<ServiceDefinitions>
+				<ServiceDefinition aspect.isAsync="false"
+					category="" description="" isAllowOverride="false"
+					isLocalOnly="false" isOpen="false" isPrivate="false"
+					name="CalculateOverride">
+					<ResultType baseType="BOOLEAN" description=""
+						name="result" ordinal="0" />
+					<ParameterDefinitions>
+						<FieldDefinition aspect.isRequired="true"
+							baseType="BOOLEAN" description="" name="Feed_Override_A"
+							ordinal="1" />
+						<FieldDefinition aspect.isRequired="true"
+							baseType="BOOLEAN" description="" name="Feed_Override_B"
+							ordinal="2" />
+						<FieldDefinition aspect.isRequired="true"
+							baseType="BOOLEAN" description="" name="Feed_Override_C"
+							ordinal="3" />
+						<FieldDefinition aspect.isRequired="true"
+							baseType="BOOLEAN" description="" name="Feed_Override_D"
+							ordinal="4" />
+						<FieldDefinition aspect.isRequired="true"
+							baseType="BOOLEAN" description="" name="Feed_Override_E"
+							ordinal="9" />
+						<FieldDefinition aspect.isRequired="true"
+							baseType="BOOLEAN" description="" name="Spindle_Override_A"
+							ordinal="5" />
+						<FieldDefinition aspect.isRequired="true"
+							baseType="BOOLEAN" description="" name="Spindle_Override_B"
+							ordinal="6" />
+						<FieldDefinition aspect.isRequired="true"
+							baseType="BOOLEAN" description="" name="Spindle_Override_C"
+							ordinal="7" />
+						<FieldDefinition aspect.isRequired="true"
+							baseType="BOOLEAN" description="" name="Spindle_Override_D"
+							ordinal="8" />
+					</ParameterDefinitions>
+				</ServiceDefinition>
+				<ServiceDefinition aspect.isAsync="false"
+					category="" description="" isAllowOverride="false"
+					isLocalOnly="false" isOpen="false" isPrivate="false"
+					name="CalculatingProductiveState">
+					<ResultType baseType="NOTHING" description=""
+						name="result" ordinal="0" />
+					<ParameterDefinitions>
+						<FieldDefinition aspect.isRequired="false"
+							baseType="BOOLEAN" description="" name="CycleActive" ordinal="1" />
+						<FieldDefinition baseType="BOOLEAN" description=""
+							name="NcStarted" ordinal="2" />
+						<FieldDefinition aspect.isRequired="true"
+							baseType="DATETIME" description="" name="ProductionDate"
+							ordinal="3" />
+					</ParameterDefinitions>
+				</ServiceDefinition>
+			</ServiceDefinitions>
+			<EventDefinitions />
+			<ServiceMappings />
+			<ServiceImplementations>
+				<ServiceImplementation description=""
+					handlerName="Script" name="CalculateOverride">
+					<ConfigurationTables>
+						<ConfigurationTable description="Script"
+							isMultiRow="false" name="Script" ordinal="0">
+							<DataShape>
+								<FieldDefinitions>
+									<FieldDefinition baseType="STRING"
+										description="code" name="code" ordinal="0" />
+								</FieldDefinitions>
+							</DataShape>
+							<Rows>
+								<Row>
+									<code><![CDATA[
+var text_performance = "PERFORMANCE";
+var text_override_feed = "OVERRIDE_FEED";
+var text_override_spindle = "OVERRIDE_SPINDLE";
+
+var value_override_feed = 0;
+var value_override_spindle = 0;
+
+if (Feed_Override_A == null || Feed_Override_A == undefined) {Feed_Override_A = false;}
+if (Feed_Override_B == null || Feed_Override_B == undefined) {Feed_Override_B = false;}
+if (Feed_Override_C == null || Feed_Override_C == undefined) {Feed_Override_C = false;}
+if (Feed_Override_D == null || Feed_Override_D == undefined) {Feed_Override_D = false;}
+if (Feed_Override_E == null || Feed_Override_E == undefined) {Feed_Override_E = false;}
+if (Spindle_Override_A == null || Spindle_Override_A == undefined) {Spindle_Override_A = false;}
+if (Spindle_Override_B == null || Spindle_Override_B == undefined) {Spindle_Override_B = false;}
+if (Spindle_Override_C == null || Spindle_Override_C == undefined) {Spindle_Override_C = false;}
+if (Spindle_Override_D == null || Spindle_Override_D == undefined) {Spindle_Override_D = false;}
+
+if ( Feed_Override_A && !Feed_Override_B && !Feed_Override_C && !Feed_Override_D && !Feed_Override_E) {value_override_feed =   0;}
+if ( Feed_Override_A &&  Feed_Override_B && !Feed_Override_C && !Feed_Override_D && !Feed_Override_E) {value_override_feed =   1;}
+if (!Feed_Override_A &&  Feed_Override_B && !Feed_Override_C && !Feed_Override_D && !Feed_Override_E) {value_override_feed =   2;}
+if (!Feed_Override_A &&  Feed_Override_B &&  Feed_Override_C && !Feed_Override_D && !Feed_Override_E) {value_override_feed =   4;}
+if ( Feed_Override_A &&  Feed_Override_B &&  Feed_Override_C && !Feed_Override_D && !Feed_Override_E) {value_override_feed =   6;}
+if ( Feed_Override_A && !Feed_Override_B &&  Feed_Override_C && !Feed_Override_D && !Feed_Override_E) {value_override_feed =   8;}
+if (!Feed_Override_A && !Feed_Override_B &&  Feed_Override_C && !Feed_Override_D && !Feed_Override_E) {value_override_feed =  10;}
+if (!Feed_Override_A && !Feed_Override_B &&  Feed_Override_C &&  Feed_Override_D && !Feed_Override_E) {value_override_feed =  20;}
+if ( Feed_Override_A && !Feed_Override_B &&  Feed_Override_C &&  Feed_Override_D && !Feed_Override_E) {value_override_feed =  30;}
+if ( Feed_Override_A &&  Feed_Override_B &&  Feed_Override_C &&  Feed_Override_D && !Feed_Override_E) {value_override_feed =  40;}
+if (!Feed_Override_A &&  Feed_Override_B &&  Feed_Override_C &&  Feed_Override_D && !Feed_Override_E) {value_override_feed =  50;}
+if (!Feed_Override_A &&  Feed_Override_B && !Feed_Override_C &&  Feed_Override_D && !Feed_Override_E) {value_override_feed =  60;}
+if ( Feed_Override_A &&  Feed_Override_B && !Feed_Override_C &&  Feed_Override_D && !Feed_Override_E) {value_override_feed =  70;}
+if ( Feed_Override_A && !Feed_Override_B && !Feed_Override_C &&  Feed_Override_D && !Feed_Override_E) {value_override_feed =  75;}
+if (!Feed_Override_A && !Feed_Override_B && !Feed_Override_C &&  Feed_Override_D && !Feed_Override_E) {value_override_feed =  80;}
+if (!Feed_Override_A && !Feed_Override_B && !Feed_Override_C &&  Feed_Override_D &&  Feed_Override_E) {value_override_feed =  85;}
+if ( Feed_Override_A && !Feed_Override_B && !Feed_Override_C &&  Feed_Override_D &&  Feed_Override_E) {value_override_feed =  90;}
+if ( Feed_Override_A &&  Feed_Override_B && !Feed_Override_C &&  Feed_Override_D &&  Feed_Override_E) {value_override_feed =  95;}
+if (!Feed_Override_A &&  Feed_Override_B && !Feed_Override_C &&  Feed_Override_D &&  Feed_Override_E) {value_override_feed = 100;}
+if (!Feed_Override_A &&  Feed_Override_B &&  Feed_Override_C &&  Feed_Override_D &&  Feed_Override_E) {value_override_feed = 105;}
+if ( Feed_Override_A &&  Feed_Override_B &&  Feed_Override_C &&  Feed_Override_D &&  Feed_Override_E) {value_override_feed = 110;}
+if ( Feed_Override_A && !Feed_Override_B &&  Feed_Override_C &&  Feed_Override_D &&  Feed_Override_E) {value_override_feed = 115;}
+if (!Feed_Override_A && !Feed_Override_B &&  Feed_Override_C &&  Feed_Override_D &&  Feed_Override_E) {value_override_feed = 120;}
+
+if ( Spindle_Override_A && !Spindle_Override_B && !Spindle_Override_C && !Spindle_Override_D) {value_override_spindle =  50;}
+if ( Spindle_Override_A &&  Spindle_Override_B && !Spindle_Override_C && !Spindle_Override_D) {value_override_spindle =  55;}
+if (!Spindle_Override_A &&  Spindle_Override_B && !Spindle_Override_C && !Spindle_Override_D) {value_override_spindle =  60;}
+if (!Spindle_Override_A &&  Spindle_Override_B &&  Spindle_Override_C && !Spindle_Override_D) {value_override_spindle =  65;}
+if ( Spindle_Override_A &&  Spindle_Override_B &&  Spindle_Override_C && !Spindle_Override_D) {value_override_spindle =  70;}
+if ( Spindle_Override_A && !Spindle_Override_B &&  Spindle_Override_C && !Spindle_Override_D) {value_override_spindle =  75;}
+if (!Spindle_Override_A && !Spindle_Override_B &&  Spindle_Override_C && !Spindle_Override_D) {value_override_spindle =  80;}
+if (!Spindle_Override_A && !Spindle_Override_B &&  Spindle_Override_C &&  Spindle_Override_D) {value_override_spindle =  85;}
+if ( Spindle_Override_A && !Spindle_Override_B &&  Spindle_Override_C &&  Spindle_Override_D) {value_override_spindle =  90;}
+if ( Spindle_Override_A &&  Spindle_Override_B &&  Spindle_Override_C &&  Spindle_Override_D) {value_override_spindle =  95;}
+if (!Spindle_Override_A &&  Spindle_Override_B &&  Spindle_Override_C &&  Spindle_Override_D) {value_override_spindle = 100;}
+if (!Spindle_Override_A &&  Spindle_Override_B && !Spindle_Override_C &&  Spindle_Override_D) {value_override_spindle = 105;}
+if ( Spindle_Override_A &&  Spindle_Override_B && !Spindle_Override_C &&  Spindle_Override_D) {value_override_spindle = 110;}
+if ( Spindle_Override_A && !Spindle_Override_B && !Spindle_Override_C &&  Spindle_Override_D) {value_override_spindle = 115;}
+if (!Spindle_Override_A && !Spindle_Override_B && !Spindle_Override_C &&  Spindle_Override_D) {value_override_spindle = 120;}
+
+
+var params = {
+	infoTableName : "InfoTable",
+	dataShapeName : "KBLocalStationDataReceiverMachineDataShape"
+};
+
+// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBLocalStationDataReceiverMachineDataShape)
+var machineDataInfoTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+
+// KBLocalStationDataReceiverMachineDataShape entry object
+var newEntry = new Object();
+newEntry.Line = me.KBLocalLineThing; // STRING - isPrimaryKey = true
+newEntry.Station = me.name; // STRING - isPrimaryKey = true
+newEntry.Type = "MACHINEDATA"; // STRING - isPrimaryKey = true
+newEntry.Description = undefined; // STRING
+newEntry.Identifier = undefined; // STRING
+newEntry.Value = value_override_feed; // STRING
+newEntry.LowerLimit = "0"; // STRING
+newEntry.ShortName = text_performance; // STRING - isPrimaryKey = true
+newEntry.Unit = "%"; // STRING
+newEntry.UpperLimit = "120"; // STRING
+newEntry.DateTime = new Date(); // DATETIME - isPrimaryKey = true
+
+machineDataInfoTable.AddRow(newEntry);
+
+// KBLocalStationDataReceiverMachineDataShape entry object
+var newEntry = new Object();
+newEntry.Line = me.KBLocalLineThing; // STRING - isPrimaryKey = true
+newEntry.Station = me.name; // STRING - isPrimaryKey = true
+newEntry.Type = "MACHINEDATA"; // STRING - isPrimaryKey = true
+newEntry.Description = undefined; // STRING
+newEntry.Identifier = undefined; // STRING
+newEntry.Value = value_override_feed; // STRING
+newEntry.LowerLimit = "0"; // STRING
+newEntry.ShortName = text_override_feed; // STRING - isPrimaryKey = true
+newEntry.Unit = "%"; // STRING
+newEntry.UpperLimit = "120"; // STRING
+newEntry.DateTime = new Date(); // DATETIME - isPrimaryKey = true
+
+machineDataInfoTable.AddRow(newEntry);
+
+// KBLocalStationDataReceiverMachineDataShape entry object
+var newEntry = new Object();
+newEntry.Line = me.KBLocalLineThing; // STRING - isPrimaryKey = true
+newEntry.Station = me.name; // STRING - isPrimaryKey = true
+newEntry.Type = "MACHINEDATA"; // STRING - isPrimaryKey = true
+newEntry.Description = undefined; // STRING
+newEntry.Identifier = undefined; // STRING
+newEntry.Value = value_override_spindle; // STRING
+newEntry.LowerLimit = "0"; // STRING
+newEntry.ShortName = text_override_spindle; // STRING - isPrimaryKey = true
+newEntry.Unit = "%"; // STRING
+newEntry.UpperLimit = "120"; // STRING
+newEntry.DateTime = new Date(); // DATETIME - isPrimaryKey = true
+
+machineDataInfoTable.AddRow(newEntry);
+
+
+var params = {
+	machineDataInfoTable: machineDataInfoTable /* INFOTABLE */
+};
+
+// result: BOOLEAN
+var result = me.SetMachineData(params);
+
+
+]]></code>
+								</Row>
+							</Rows>
+						</ConfigurationTable>
+					</ConfigurationTables>
+				</ServiceImplementation>
+				<ServiceImplementation description=""
+					handlerName="Script" name="CalculatingProductiveState">
+					<ConfigurationTables>
+						<ConfigurationTable description="Script"
+							isMultiRow="false" name="Script" ordinal="0">
+							<DataShape>
+								<FieldDefinitions>
+									<FieldDefinition baseType="STRING"
+										description="code" name="code" ordinal="0" />
+								</FieldDefinitions>
+							</DataShape>
+							<Rows>
+								<Row>
+									<code><![CDATA[//Calculating Productive State
+var cycle_active = CycleActive;
+var nc_start = NcStarted;
+if (cycle_active == null) {cycle_active = false};
+if (nc_start == null) {nc_start = false};
+
+var write_status = false;
+var status = "";
+var substatus = "";
+var machinedatavalue = -1;
+		//0: Production
+		//1: Planned shut down --> organizational
+		//2: Machine Shut down --> technical
+		//3: Speed losses --> speed
+
+if (cycle_active && nc_start && !me.Productive){
+    write_status = true;
+    status = "KBMaschStatus.1.Productive";
+    substatus = "KBMaschStatus.2.Productive.Start";
+    machinedatavalue = 0;
+} else if (!(cycle_active && nc_start) && me.Productive){
+    write_status = true;
+    status = "KBMaschStatus.1.OI.AutoSet";
+    substatus = "KBMaschStatus.2.OI.AutoSet.Start";
+    machinedatavalue = 1;
+}
+
+//OEE2.0 Handling:
+try {
+	if (write_status) {
+	    me.Productive = cycle_active && nc_start;
+	}
+	if (me.ImplementsShape({thingShapeName: "KBOperatorScreenRailV2StateThingShape" })) {
+		write_status = me.CheckMachineStatus({StatusLevel1 : status, StatusLevel2 : substatus, WriteStatus : write_status});
+		status = me.GetCurrentStatusLevel1();
+		substatus = me.GetCurrentStatusLevel2();
+	}
+} catch(err) {
+	logger.error(me.name+": Error OEE2.0 Handling: "+err);
+}
+
+
+if (write_status) {
+    me.Productive = cycle_active && nc_start;
+    
+    var params = {
+        infoTableName : "InfoTable",
+        dataShapeName : "KBLocalStationDataReceiverStateDataShape"
+    };
+
+    // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBLocalStationDataReceiverStateDataShape)
+    var infoTable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+
+    // dateValue:DATETIME
+    var dateValue = ProductionDate;
+    //dateValue.setMilliseconds(0);
+
+    // KBLocalStationDataReceiverStateDataShape entry object
+    var newEntry = new Object();
+    newEntry.Line = me.KBLocalLineThing; // STRING - isPrimaryKey = true
+    newEntry.Station = me.name; // STRING - isPrimaryKey = true
+    newEntry.Type = "Operator Screen"; // STRING - isPrimaryKey = true
+    newEntry.Description = "Kepware"; // STRING
+    newEntry.Identifier = substatus; // STRING
+    newEntry.ShortName = status; // STRING - isPrimaryKey = true
+    newEntry.DateTime = dateValue; // DATETIME - isPrimaryKey = true
+
+    infoTable.AddRow(newEntry);
+
+    var params = {
+        stateInfoTable: infoTable /* INFOTABLE */
+    };
+
+    // result: BOOLEAN
+    var result = me.SetState(params);
+    
+    
+    
+    
+    
+    
+	var params = {
+		infoTableName : "InfoTable",
+		dataShapeName : "KBLocalStationDataReceiverMachineDataShape"
+	};
+	
+	// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBLocalStationDataReceiverMachineDataShape)
+	var machinedata = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+	
+	
+	// KBLocalStationDataReceiverMachineDataShape entry object
+	var newEntry = new Object();
+	newEntry.Line = me.KBLocalLineThing; // STRING - isPrimaryKey = true
+	newEntry.Station = me.name; // STRING - isPrimaryKey = true
+	newEntry.Type = "MACHINEDATA"; // STRING - isPrimaryKey = true
+	newEntry.Description = "0: Production, 1: org. down, 2: tech. down 3: Speed losses"; // STRING
+	newEntry.Identifier = undefined; // STRING
+	newEntry.Value = machinedatavalue; // STRING
+	newEntry.LowerLimit = undefined; // STRING
+	newEntry.ShortName = "AutoCalculatedProductiveInfoFromMachine"; // STRING - isPrimaryKey = true
+	newEntry.Unit = undefined; // STRING
+	newEntry.UpperLimit = undefined; // STRING
+	newEntry.DateTime = dateValue; // DATETIME - isPrimaryKey = true
+	
+	machinedata.AddRow(newEntry);
+	
+	
+	
+	var params = {
+		machineDataInfoTable: machinedata /* INFOTABLE */
+	};
+	
+	// result: BOOLEAN
+	var result = me.SetMachineData(params);    
+
+}
+]]></code>
+								</Row>
+							</Rows>
+						</ConfigurationTable>
+					</ConfigurationTables>
+				</ServiceImplementation>
+			</ServiceImplementations>
+			<Subscriptions />
+			<Owner name="SuperUser" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions />
+			<VisibilityPermissions>
+				<Visibility />
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables />
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations />
+			<InstanceRunTimePermissions />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="header : name : updated, projectName : updated&#10;documentation : updated&#10;"
+					timestamp="2018-10-22T08:10:50.228+02:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services :  : Input parameter Feed_Override_A Added, Input parameter Feed_Override_B Added, Input parameter Feed_Override_C Added, Input parameter Feed_Override_D Added, Input parameter Spindle_Override_A Added, Input parameter Spindle_Override_B Added, Input parameter Spindle_Override_C Added, Input parameter Spindle_Override_D Added, Input parameter Feed_Override_E Added, CalculateOverride : Inputs updated, Code Updated, Service Added&#10;"
+					timestamp="2018-10-22T08:50:06.408+02:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : CalculateOverride : Code Updated&#10;"
+					timestamp="2018-10-22T09:02:40.873+02:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : CalculateOverride : Output Updated&#10;"
+					timestamp="2018-10-22T09:03:21.835+02:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="header : tags : updated&#10;"
+					timestamp="2018-10-30T14:58:05.083+01:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : CalculateOverride : Code Updated&#10;"
+					timestamp="2018-10-30T15:01:22.199+01:00" user="adm-flassakm" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2018-11-07T15:55:55.010+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-03-06T11:43:44.106+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-03-06T12:06:40.826+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-03-07T13:35:56.690+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-03-07T14:11:14.346+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-08-28T13:06:11.944+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-08-29T13:17:01.357+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-08-29T14:02:04.887+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-08-29T15:18:13.995+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-13T07:10:13.102+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-13T08:23:02.227+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-13T09:12:04.656+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-19T15:59:00.763+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-19T16:30:43.858+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-19T16:38:06.307+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-19T16:45:09.369+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-19T16:55:00.044+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-09-26T14:13:21.218+02:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-10-28T08:06:44.760+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-11-12T15:39:32.403+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-11-12T16:05:31.993+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-11-12T16:17:24.327+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-11-12T16:23:16.666+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-11-13T15:38:14.379+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-11-14T10:39:28.334+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-11-14T10:58:12.908+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2019-12-17T11:18:31.293+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2020-02-12T14:49:41.536+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2020-02-15T10:49:48.419+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2020-02-18T10:27:33.957+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2020-02-21T11:03:33.125+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2020-02-21T11:19:51.947+01:00" user="SuperUser" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="Importing Extension Package Metadata"
+					timestamp="2020-02-21T11:26:02.660+01:00" user="SuperUser" />
+			</ConfigurationChanges>
+		</ThingShape>
+	</ThingShapes>
+</Entities>

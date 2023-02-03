@@ -1,0 +1,1333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b628"
+ majorVersion="9"
+ minorVersion="0"
+ modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+ revision="10"
+ schemaVersion="1109"
+ universal="password">
+    <Things>
+        <Thing
+         description=""
+         documentationContent=""
+         effectiveThingPackage="ConfiguredThing"
+         enabled="true"
+         homeMashup=""
+         identifier=""
+         inheritedValueStream=""
+         lastModifiedDate="2022-10-19T02:57:52.255Z"
+         name="KBManualPartDataAdministrationHelperThing"
+         projectName="KBsmartKPI"
+         published="false"
+         tags=""
+         thingTemplate="GenericThing"
+         valueStream="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions>
+                <Permissions
+                 resourceName="*">
+                    <PropertyRead>
+                        <Principal
+                         isPermitted="true"
+                         name="KBManualPartDataAdminUserGroup"
+                         type="Group"></Principal>
+                        <Principal
+                         isPermitted="true"
+                         name="KBManualPartDataAdminUserGroup_V1"
+                         type="Group"></Principal>
+                    </PropertyRead>
+                    <PropertyWrite>
+                        <Principal
+                         isPermitted="true"
+                         name="KBManualPartDataAdminUserGroup"
+                         type="Group"></Principal>
+                        <Principal
+                         isPermitted="true"
+                         name="KBManualPartDataAdminUserGroup_V1"
+                         type="Group"></Principal>
+                    </PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="KBManualPartDataAdminUserGroup"
+                         type="Group"></Principal>
+                        <Principal
+                         isPermitted="true"
+                         name="KBManualPartDataAdminUserGroup_V1"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="KBManualPartDataAdminUserGroup"
+                         type="Group"></Principal>
+                        <Principal
+                         isPermitted="true"
+                         name="KBManualPartDataAdminUserGroup_V1"
+                         type="Group"></Principal>
+                    </EventInvoke>
+                    <EventSubscribe>
+                        <Principal
+                         isPermitted="true"
+                         name="KBManualPartDataAdminUserGroup"
+                         type="Group"></Principal>
+                        <Principal
+                         isPermitted="true"
+                         name="KBManualPartDataAdminUserGroup_V1"
+                         type="Group"></Principal>
+                    </EventSubscribe>
+                </Permissions>
+            </RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility>
+                    <Principal
+                     isPermitted="true"
+                     name="KBBackGroundWorker"
+                     type="Organization"></Principal>
+                    <Principal
+                     isPermitted="true"
+                     name="KBOrganization"
+                     type="Organization"></Principal>
+                </Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables></ConfigurationTables>
+            <ThingShape>
+                <PropertyDefinitions>
+                    <PropertyDefinition
+                     aspect.cacheTime="0.0"
+                     aspect.dataChangeType="VALUE"
+                     aspect.isPersistent="true"
+                     baseType="DATETIME"
+                     category=""
+                     description=""
+                     isLocalOnly="false"
+                     name="UpdatedDate"
+                     ordinal="2"></PropertyDefinition>
+                </PropertyDefinitions>
+                <ServiceDefinitions>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="checkIfPartNumberAvailalable">
+                        <ResultType
+                         baseType="BOOLEAN"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="PartNumber"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="dateTime">
+                        <ResultType
+                         baseType="DATETIME"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="dateTimeBeforeUpdateFunction">
+                        <ResultType
+                         baseType="DATETIME"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="deletePartNumber">
+                        <ResultType
+                         baseType="NOTHING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="PartNumber"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="getAllPropertyKeys">
+                        <ResultType
+                         aspect.dataShape="KBManualPartDataAdministrationGridDS"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="language"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="OrderNumber"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="getListofPropertyKeys">
+                        <ResultType
+                         aspect.dataShape="KBManualPartDataAdministrationInfoDS"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="GetLocation">
+                        <ResultType
+                         baseType="BOOLEAN"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="GetPartNumber">
+                        <ResultType
+                         aspect.dataShape="KBManualPartDataAdministrationPartNumberDS"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="PartNumber"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="ImportSirioData">
+                        <ResultType
+                         baseType="NOTHING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="insertOrUpdateOrder">
+                        <ResultType
+                         baseType="STRING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             aspect.isRequired="false"
+                             baseType="STRING"
+                             description=""
+                             name="PartNumber"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="ManualPartData"
+                             baseType="STRING"
+                             description=""
+                             name="System"
+                             ordinal="2"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="PopupClosedFalseEvent">
+                        <ResultType
+                         baseType="BOOLEAN"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="PopupClosedTrueEvent">
+                        <ResultType
+                         baseType="BOOLEAN"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="TestEdit">
+                        <ResultType
+                         aspect.dataShape="TestSelectedPartNumberDataShape"
+                         baseType="NOTHING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="OrderNumber"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.dataShape="KBManualPartDataAdministrationPartNumberDS"
+                             baseType="INFOTABLE"
+                             description=""
+                             name="PartNumberKeyValue"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="System"
+                             ordinal="3"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="TestValidate">
+                        <ResultType
+                         baseType="BOOLEAN"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="PartNumber"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                </ServiceDefinitions>
+                <EventDefinitions></EventDefinitions>
+                <ServiceMappings></ServiceMappings>
+                <ServiceImplementations>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="checkIfPartNumberAvailalable">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        // result: INFOTABLE dataShape: "KBManualPartDataAdministrationPartNumberDS"
+                                        var PartNumberInfotable =  me.GetPartNumber({
+                                        	PartNumber: PartNumber /* STRING */
+                                        });
+                                        if(PartNumberInfotable.rows.length>=1){
+                                            result = true;
+                                        }else{
+                                            result = false;
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="dateTime">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        me.UpdatedDate = new Date();
+                                        var result = me.UpdatedDate;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="dateTimeBeforeUpdateFunction">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var result = me.UpdatedDate;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="deletePartNumber">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        // result: NUMBER
+                                        var result =  Things["KBKPILocalThingWorxDatabaseThing"].DeleteManualPartDataPartNumber({
+                                        	PartNumberToDelete: PartNumber /* STRING */
+                                        });
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="getAllPropertyKeys">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var result_for_description_column =  Things["KBKPILocalThingWorxDatabaseThing"].GetOrderData({
+                                        	OrderNumber: "%"/* STRING */,
+                                        	PropertyKey: "Description" /* STRING */,
+                                        	System: "ManualPartDataTemplate" /* STRING */
+                                        });
+                                        
+                                        var result_for_one_part_number =  Things["KBKPILocalThingWorxDatabaseThing"].GetOrderData({
+                                        	OrderNumber: OrderNumber /* STRING */,
+                                        	PropertyKey: "%" /* STRING */,
+                                        	System: "ManualPartData" /* STRING */
+                                        });
+                                        
+                                        var params = {
+                                        	infoTableName: infotable1 /* STRING */,
+                                        	dataShapeName: "KBManualPartDataAdministrationInfoDS" /* DATASHAPENAME */
+                                        };
+                                        
+                                        // result: INFOTABLE
+                                        var infotable1 = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        	var tableLength = result_for_one_part_number.length;
+                                        //	logger.error("Length"+tableLength);
+                                        json = {};
+                                        for (var x=0; x < tableLength; x++) {
+                                            var row = result_for_one_part_number.rows[x];
+                                            //Your code here
+                                            json.PropertyKey = row.PropertyKey;
+                                            json.TextValue = row.TextValue;
+                                        //    logger.error("TextValue"+ json.TextValue);
+                                            
+                                            infotable1.AddRow(json);
+                                        }
+                                        
+                                        var params1 = {
+                                        	infoTableName: infotable2 /* STRING */,
+                                        	dataShapeName: "KBManualPartDataAdministrationDescriptionDS" /* DATASHAPENAME */
+                                        };
+                                        
+                                        // result: INFOTABLE
+                                        var infotable2 = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params1);
+                                        	var tableLength2 = result_for_description_column.length;
+                                        	
+                                        json1 = {};
+                                        for (var i=0; i < tableLength2; i++) {
+                                            var row = result_for_description_column.rows[i];
+                                            //Your code here
+                                            json1.OrderNumber = row.OrderNumber;
+                                            json1.Description = row.TextValue;
+                                            
+                                            
+                                            infotable2.AddRow(json1);
+                                        }
+                                        
+                                        
+                                        var params = {
+                                        	columns2: "Description" /* STRING */,
+                                        	columns1: "PropertyKey,TextValue" /* STRING */,
+                                        	joinType: "INNER" /* STRING */,
+                                        	t1: infotable1 /* INFOTABLE */,
+                                        	t2: infotable2 /* INFOTABLE */,
+                                        	joinColumns1: "PropertyKey" /* STRING */,
+                                        	joinColumns2: "OrderNumber" /* STRING */
+                                        };
+                                        
+                                        // result: INFOTABLE
+                                        var data = Resources["InfoTableFunctions"].Intersect(params);
+                                        
+                                        var paramsD = {
+                                        	infoTableName: "InfoTable",
+                                        	dataShapeName: "KBManualPartDataAdministrationGridDS"
+                                        };
+                                        
+                                        // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBManualPartDataAdministrationGridDS)
+                                        var result = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(paramsD);
+                                        
+                                        try{
+                                        if (data.rows.length > 0) {
+                                        	for (var k = 0; k < data.rows.length; k++) {
+                                        		// KBManualPartDataAdministrationGridDS entry object
+                                        		var newEntry = new Object();
+                                        		newEntry.PropertyKey = data.rows[k].PropertyKey; // STRING
+                                        		var value;
+                                        		// value: STRING
+                                        		if (data.rows[k].PropertyKey == 'AUX_VOLTAGE') {
+                                        			if (language !== '' && language !== undefined) {
+                                        				value = LocalizationTables[language].GetToken({
+                                        					name: 'KBManualPartDataAdministrationMainMashup.auxVoltage' /* STRING */
+                                        				});
+                                        			} else {
+                                        				value = LocalizationTables["Default"].GetToken({
+                                        					name: 'KBManualPartDataAdministrationMainMashup.auxVoltage' /* STRING */
+                                        				});
+                                        			}
+                                        		} else if (data.rows[k].PropertyKey == 'CUSTOMER_SPECIFICATION') {
+                                        			if (language !== '' && language !== undefined) {
+                                        				value = LocalizationTables[language].GetToken({
+                                        					name: 'KBManualPartDataAdministrationMainMashup.customerSpecification' /* STRING */
+                                        				});
+                                        			} else {
+                                        				value = LocalizationTables["Default"].GetToken({
+                                        					name: 'KBManualPartDataAdministrationMainMashup.customerSpecification' /* STRING */
+                                        				});
+                                        			}
+                                        		} else if (data.rows[k].PropertyKey == 'DIMENSION_DRAWING_NUMBER') {
+                                        			if (language !== '' && language !== undefined) {
+                                        				value = LocalizationTables[language].GetToken({
+                                        					name: 'KBManualPartDataAdministrationMainMashup.dimensionDrawingNumber' /* STRING */
+                                        				});
+                                        			} else {
+                                        				value = LocalizationTables["Default"].GetToken({
+                                        					name: 'KBManualPartDataAdministrationMainMashup.dimensionDrawingNumber' /* STRING */
+                                        				});
+                                        			}
+                                        		} else if (data.rows[k].PropertyKey == 'NOMINAL_VOLTAGE') {
+                                        			if (language !== '' && language !== undefined) {
+                                        				value = LocalizationTables[language].GetToken({
+                                        					name: 'KBManualPartDataAdministrationMainMashup.nominalVoltage' /* STRING */
+                                        				});
+                                        			} else {
+                                        				value = LocalizationTables["Default"].GetToken({
+                                        					name: 'KBManualPartDataAdministrationMainMashup.nominalVoltage' /* STRING */
+                                        				});
+                                        			}
+                                        			//        value = LocalizationTables["it-IT"].GetToken({
+                                        			//			name: 'KBManualPartDataAdministrationMainMashup.nominalVoltage' /* STRING */
+                                        			//		});    
+                                        		} else if (data.rows[k].PropertyKey == 'Part_Name') {
+                                        			if (language !== '' && language !== undefined) {
+                                        				value = LocalizationTables[language].GetToken({
+                                        					name: 'KBManualPartDataAdministrationMainMashup.nameOrDescriptionOfThePart' /* STRING */
+                                        				});
+                                        			} else {
+                                        				value = LocalizationTables["Default"].GetToken({
+                                        					name: 'KBManualPartDataAdministrationMainMashup.nameOrDescriptionOfThePart' /* STRING */
+                                        				});
+                                        			}
+                                        		} else if (data.rows[k].PropertyKey == 'THERMAL_CURRENT') {
+                                        			if (language !== '' && language !== undefined) {
+                                        				value = LocalizationTables[language].GetToken({
+                                        					name: 'KBManualPartDataAdministrationMainMashup.thermalCurrent' /* STRING */
+                                        				});
+                                        			} else{
+                                                       value = LocalizationTables["Default"].GetToken({
+                                        				name: 'KBManualPartDataAdministrationMainMashup.thermalCurrent' /* STRING */
+                                        			}); 
+                                                    }
+                                                } else if (data.rows[k].PropertyKey == 'AUTOMATED_ANSI_PRINTING') {
+                                        			if (language !== '' && language !== undefined) {
+                                        				value = LocalizationTables[language].GetToken({
+                                        					name: 'KBManualPartDataAdministrationMainMashup.automatedAnsi' /* STRING */
+                                        				});
+                                        			} else{
+                                                       value = LocalizationTables["Default"].GetToken({
+                                        				name: 'KBManualPartDataAdministrationMainMashup.automatedAnsi' /* STRING */
+                                        			}); 
+                                                    }
+                                                } else if (data.rows[k].PropertyKey == 'PROTOCOL_PRINTING') {
+                                        			if (language !== '' && language !== undefined) {
+                                        				value = LocalizationTables[language].GetToken({
+                                        					name: 'KBManualPartDataAdministrationMainMashup.protocolPrinting' /* STRING */
+                                        				});
+                                        			} else{
+                                                       value = LocalizationTables["Default"].GetToken({
+                                        				name: 'KBManualPartDataAdministrationMainMashup.protocolPrinting' /* STRING */
+                                        			}); 
+                                                    }
+                                                } else {
+                                                    value = data.rows[k].Description;
+                                                }
+                                        			newEntry.TextValue = data.rows[k].TextValue; // STRING
+                                        			newEntry.Description = value; // STRING [Primary Key]
+                                        			result.AddRow(newEntry);
+                                        		}
+                                        	}
+                                        } catch(e){
+                                         logger.error('error in getAllPropertyKeys service of KBManualPartDataAdministrationHelperThing: ' + e);  
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="getListofPropertyKeys">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var result_ProperyKeyList =  Things["KBKPILocalThingWorxDatabaseThing"].GetOrderData({
+                                        	OrderNumber: "%"/* STRING */,
+                                        	PropertyKey: "Description" /* STRING */,
+                                        	System: "ManualPartDataTemplate" /* STRING */
+                                        });
+                                        
+                                        var params = {
+                                        	infoTableName: "testInfotable" /* STRING */,
+                                        	dataShapeName: "KBManualPartDataHandlingListDS" /* DATASHAPENAME */
+                                        };
+                                        
+                                        // result: INFOTABLE
+                                        var infotable1 = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+                                        
+                                        var tableLength = result_ProperyKeyList.rows.length;
+                                        for (var x=0; x < tableLength; x++) {
+                                            obj = {};
+                                            var row = result_ProperyKeyList.rows[x];
+                                            //Your code here
+                                            obj.Key = row.OrderNumber;
+                                            obj.isTextValue = true;
+                                            obj.isFloatValue = false;
+                                            obj.isDateTimeValue = false;
+                                           infotable1.AddRow(obj);
+                                        }
+                                        result = infotable1;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="GetLocation">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        // result: STRING
+                                        var text = Resources["KBThingWorxServerSystem"].GetHostName();
+                                        var location = text.substring(0, 4);
+                                        var result;
+                                        if(location == 'MILS'){
+                                            result = true;
+                                        } else {
+                                            result = false;
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="GetPartNumber">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var result =  Things["KBKPILocalThingWorxDatabaseThing"].GetOrderData({
+                                        	OrderNumber: PartNumber+"%" /* STRING */,
+                                        	PropertyKey: "Part_Name" /* STRING */,
+                                        	System: "ManualPartData"/* STRING */
+                                        });
+                                        
+                                        //var params = {
+                                        //	sortColumn: "OrderCreationTime" /* STRING */,
+                                        //	t: rawOutput /* INFOTABLE */,
+                                        //	ascending: false /* BOOLEAN */
+                                        //};
+                                        //
+                                        //// result: INFOTABLE
+                                        //var result = Resources["InfoTableFunctions"].Sort(params);
+                                        //
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="ImportSirioData">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        try {
+                                        	var system = "ManualPartData";
+                                        	// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBManualPartDataAdministrationPartNumberDS)
+                                        	
+                                        
+                                        	// result: INFOTABLE dataShape: ""
+                                        	var sirioData = Things["KB_MS_SirioDatabaseThing_V1"].GetSirioData();
+                                        
+                                        	var tableLength = sirioData.rows.length;
+                                        	for (var x = 0; x < tableLength; x++) {
+                                        		var row = sirioData.rows[x];
+                                        		var partNumberKeyValue = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape({
+                                        		infoTableName: "InfoTable",
+                                        		dataShapeName: "KBManualPartDataAdministrationPartNumberDS"
+                                        		});										
+                                        		var thermalCurrent = row.THERMAL_CURRENT;
+                                        		var tCurrent = thermalCurrent.trim();
+                                        		var partName = row.ORDERNUMBER;
+                                        		var pName = partName.trim();
+                                        		var customerSpec = row.CUSTOMER_SPECIFICATION;
+                                        		var custSpec = customerSpec.trim();
+                                        		var nominalVoltage = row.NOMINAL_VOLTAGE;
+                                        		var nominalVolt = nominalVoltage.trim();
+                                        		var auxVoltage = row.AUX_VOLTAGE;
+                                        		var aVoltage = auxVoltage.trim();
+                                        //		logger.error('Following row entered in ImportSirioData Service: ' + x + ' partNumber: ' + pName);
+                                        												
+                                        		var partExist = me.checkIfPartNumberAvailalable({
+                                        			PartNumber: pName /* STRING */
+                                        		});
+                                        
+                                        		if (partExist == true) {
+                                        //			logger.error('Following row entered in ImportSirioData partExist part: ' + x + ' partNumber: ' + pName);
+                                        			// KBManualPartDataAdministrationPartNumberDS entry object
+                                        			var newEntry = new Object();
+                                        			newEntry.isTextValue = true; // BOOLEAN
+                                        			newEntry.isFloatValue = false; // BOOLEAN
+                                        			newEntry.isDateTimeValue = false; // BOOLEAN
+                                        			newEntry.TextValue = tCurrent; // STRING
+                                        			newEntry.PropertyKey = "THERMAL_CURRENT"; // STRING
+                                        			newEntry.OrderNumber = pName; // STRING
+                                        			newEntry.System = system; // STRING
+                                        			partNumberKeyValue.AddRow(newEntry);
+                                        
+                                        			newEntry.TextValue = custSpec; // STRING
+                                        			newEntry.PropertyKey = "CUSTOMER_SPECIFICATION"; // STRING
+                                        			partNumberKeyValue.AddRow(newEntry);
+                                        
+                                        			newEntry.TextValue = nominalVolt; // STRING
+                                        			newEntry.PropertyKey = "NOMINAL_VOLTAGE"; // STRING
+                                        			partNumberKeyValue.AddRow(newEntry);
+                                        
+                                        			newEntry.TextValue = aVoltage; // STRING
+                                        			newEntry.PropertyKey = "AUX_VOLTAGE"; // STRING
+                                        			partNumberKeyValue.AddRow(newEntry);
+                                        
+                                        			newEntry.TextValue = pName; // STRING
+                                        			newEntry.PropertyKey = "Part_Name"; // STRING
+                                        			partNumberKeyValue.AddRow(newEntry);
+                                        //													logger.error('Following row entered in ImportSirioData Service before MergeOrderKeyValue DB Service: ' + x + ' partNumber: ' + pName);
+                                        			me.TestEdit({
+                                        				PartNumberKeyValue: partNumberKeyValue /* INFOTABLE */ ,
+                                        				OrderNumber: pName /* STRING */ ,
+                                        				System: system /* STRING */
+                                        			});
+                                        //													logger.error('Following row entered in ImportSirioData Service after MergeOrderKeyValue DB Service: ' + x + ' partNumber: ' + pName);
+                                        		} else {
+                                        			var insertData = me.insertOrUpdateOrder({
+                                        				PartNumber: pName /* STRING */ ,
+                                        				System: 'ManualPartData' /* STRING */
+                                        			});
+                                        //		    logger.error('Following row entered in ImportSirioData insertData part: ' + x + ' partNumber: ' + pName);
+                                        			// KBManualPartDataAdministrationPartNumberDS entry object
+                                        			var newEntry1 = new Object();
+                                        			newEntry1.isTextValue = true; // BOOLEAN
+                                        			newEntry1.isFloatValue = false; // BOOLEAN
+                                        			newEntry1.isDateTimeValue = false; // BOOLEAN
+                                        			newEntry1.TextValue = tCurrent; // STRING
+                                        			newEntry1.PropertyKey = "THERMAL_CURRENT"; // STRING
+                                        			newEntry1.OrderNumber = pName; // STRING
+                                        			newEntry1.System = system; // STRING
+                                        			partNumberKeyValue.AddRow(newEntry1);
+                                        
+                                        			newEntry1.TextValue = custSpec; // STRING
+                                        			newEntry1.PropertyKey = "CUSTOMER_SPECIFICATION"; // STRING
+                                        			partNumberKeyValue.AddRow(newEntry1);
+                                        
+                                        			newEntry1.TextValue = nominalVolt; // STRING
+                                        			newEntry1.PropertyKey = "NOMINAL_VOLTAGE"; // STRING
+                                        			partNumberKeyValue.AddRow(newEntry1);
+                                        
+                                        			newEntry1.TextValue = aVoltage; // STRING
+                                        			newEntry1.PropertyKey = "AUX_VOLTAGE"; // STRING
+                                        			partNumberKeyValue.AddRow(newEntry1);
+                                        
+                                        			newEntry1.TextValue = pName; // STRING
+                                        			newEntry1.PropertyKey = "Part_Name"; // STRING
+                                        			partNumberKeyValue.AddRow(newEntry1);
+                                        //													logger.error('Following row entered in ImportSirioData Service before MergeOrderKeyValue DB Service: ' + x + ' partNumber: ' + pName);
+                                        			me.TestEdit({
+                                        				PartNumberKeyValue: partNumberKeyValue /* INFOTABLE */ ,
+                                        				OrderNumber: pName /* STRING */ ,
+                                        				System: system /* STRING */
+                                        			});
+                                        //													logger.error('Following row entered in ImportSirioData Service after MergeOrderKeyValue DB Service: ' + x + ' partNumber: ' + pName);
+                                        		}
+                                        	}
+                                        
+                                        Things["KBKPILocalThingWorxDatabaseThing"].FillManualPartDataPropertyKeys();
+                                        } catch (e){
+                                            logger.error('error in ImportSirioData service: ' + e);
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="insertOrUpdateOrder">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        // result: INFOTABLE dataShape: "KBManualPartDataAdministrationInfoDS"
+                                        var infotable1 =  me.getListofPropertyKeys();
+                                        
+                                        if(!(PartNumber)){
+                                         result = "Please Enter Part Number";
+                                        }else{
+                                        // result: INTEGER
+                                        var result =  Things["KBKPILocalThingWorxDatabaseThing"].InsertOrUpdateOrderData({
+                                        	updateDataIfProductionStarted: undefined /* BOOLEAN */,
+                                        	OrderNumber: PartNumber /* STRING */,
+                                        	OrderKeyValues: infotable1 /* INFOTABLE */,
+                                        	PlantId: undefined /* STRING */,
+                                        	System: System /* STRING */,
+                                        	isProductionStarted: undefined /* BOOLEAN */
+                                        });
+                                            result = "Part Successfully Created";
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="PopupClosedFalseEvent">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var result = false;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="PopupClosedTrueEvent">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var result  = true;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="TestEdit">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var editTable = PartNumberKeyValue;
+                                        var tableLength = editTable.rows.length;
+                                        for (var x = 0; x < tableLength; x++) {
+                                        	var row = editTable.rows[x];
+                                        //											logger.error('OrderNumber info before updating propertykey: ' + OrderNumber);
+                                        	//Your code here
+                                        	var params = {
+                                        		Key: editTable.rows[x].PropertyKey /* STRING */ ,
+                                        		TextValue: editTable.rows[x].TextValue /* STRING */ ,
+                                        		System: System,
+                                        		OrderNumber: OrderNumber
+                                        	};
+                                        	// result: NUMBER
+                                        	Things["KBKPILocalThingWorxDatabaseThing"].MergeOrderKeyValue(params);
+                                        //											logger.error('OrderNumber info after updating propertykey: ' + OrderNumber + '' + editTable.rows[x].PropertyKey);
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="TestValidate">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var result;
+                                        if (PartNumber === ""){
+                                             result = true;
+                                        }else{ result = false;}
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                </ServiceImplementations>
+                <Subscriptions>
+                    <Subscription
+                     description=""
+                     enabled="true"
+                     eventName="ThingStart"
+                     name="ThingStart"
+                     source=""
+                     sourceProperty=""
+                     sourceType="Thing">
+                        <ServiceImplementation
+                         description=""
+                         handlerName="Script"
+                         name="ThingStart">
+                            <ConfigurationTables>
+                                <ConfigurationTable
+                                 dataShapeName=""
+                                 description=""
+                                 isMultiRow="false"
+                                 name="Script"
+                                 ordinal="0">
+                                    <DataShape>
+                                        <FieldDefinitions>
+                                            <FieldDefinition
+                                             baseType="STRING"
+                                             description="code"
+                                             name="code"
+                                             ordinal="0"></FieldDefinition>
+                                        </FieldDefinitions>
+                                    </DataShape>
+                                    <Rows>
+                                        <Row>
+                                            <code>
+                                            <![CDATA[
+                                            try 
+                                            {
+                                            	var values = Things["KB.LocalAdministration.TileConsole.DataTable"].CreateValues();
+                                            	
+                                            	values.Context = "PTC:factory-mv;PTC:FactoryAdministration"; //TAGS
+                                            	values.TileBackground = "PTC.DarkBlue"; //STRING
+                                            	values.InAppSwitcher = false; //BOOLEAN
+                                            	values.TileIcon = "KB.AdministrationLevel2.Icon"; //STRING
+                                            	values.LocalizedLabel = "Manual Part Data Administration"; //TEXT
+                                            	values.InConvergeConsole = false; //BOOLEAN
+                                            	values.TileMashupOrURL = "KBManualPartDataAdministrationMainMashup"; //STRING
+                                            	values.TileTooltip = ""; //
+                                            	values.TileLabel = "Manual Part Data Administration";
+                                            	values.TileOrder = 410; //INTEGER [Primary Key]
+                                            	values.IsMashup = true; //BOOLEAN
+                                            	values.OpenInNewWindow = false;
+                                            	values.key = 410; //STRING
+                                            	
+                                            	//	logger.warn("before " + Things["KB.LocalAdministration.TileConsole.DataTable"].GetDataTableEntryCount());
+                                            	// result: STRING
+                                            	var id = Things["KB.LocalAdministration.TileConsole.DataTable"].AddOrUpdateDataTableEntry({
+                                            	    sourceType: undefined /* STRING */,
+                                            	    values: values /* INFOTABLE*/,
+                                            	    location: undefined /* LOCATION */,
+                                            	    source: undefined /* STRING */,
+                                            	    tags: undefined /* TAGS */
+                                            	});
+                                            } catch(err) {
+                                            
+                                            }
+                                            ]]>
+                                            </code>
+                                        </Row>
+                                    </Rows>
+                                </ConfigurationTable>
+                            </ConfigurationTables>
+                        </ServiceImplementation>
+                    </Subscription>
+                </Subscriptions>
+            </ThingShape>
+            <PropertyBindings></PropertyBindings>
+            <RemotePropertyBindings></RemotePropertyBindings>
+            <RemoteServiceBindings></RemoteServiceBindings>
+            <RemoteEventBindings></RemoteEventBindings>
+            <AlertConfigurations>
+                <AlertDefinitions
+                 name="UpdatedDate"></AlertDefinitions>
+            </AlertConfigurations>
+            <ImplementedShapes></ImplementedShapes>
+            <ThingProperties>
+                <UpdatedDate>
+                    <Value>2022-01-05T02:53:00.000Z</Value>
+                    <Timestamp>2022-10-19T02:57:50.958Z</Timestamp>
+                    <Quality>GOOD</Quality>
+                </UpdatedDate>
+            </ThingProperties>
+        </Thing>
+    </Things>
+</Entities>

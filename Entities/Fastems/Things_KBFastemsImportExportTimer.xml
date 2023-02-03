@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b243" majorVersion="9" minorVersion="0"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="3" schemaVersion="1102" universal="">
+	<Things>
+		<Thing description="" documentationContent=""
+			effectiveThingPackage="TimerThing" enabled="true" homeMashup=""
+			identifier="" 
+			lastModifiedDate="2021-04-01T07:57:01.766+02:00"
+			name="KBFastemsImportExportTimer" projectName="KBsmartKPI" published="false"
+			tags="" thingTemplate="Timer" valueStream="">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions />
+			<VisibilityPermissions>
+				<Visibility />
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables>
+				<ConfigurationTable 
+					description="General Settings" isHidden="true" isMultiRow="false"
+					name="Settings" ordinal="0">
+					<DataShape>
+						<FieldDefinitions>
+							<FieldDefinition aspect.defaultValue="true"
+								baseType="BOOLEAN"
+								description="Automatically enable timer on startup"
+								name="enabled" ordinal="0" />
+							<FieldDefinition baseType="USERNAME"
+								description="User context in which to run event handlers"
+								name="runAsUser" ordinal="0" />
+							<FieldDefinition aspect.defaultValue="60000.0"
+								baseType="NUMBER" description="Update rate" name="updateRate"
+								ordinal="0" />
+						</FieldDefinitions>
+					</DataShape>
+					<Rows>
+						<Row>
+							<enabled>true</enabled>
+							<runAsUser><![CDATA[Administrator]]></runAsUser>
+							<updateRate>3600000.0</updateRate>
+						</Row>
+					</Rows>
+				</ConfigurationTable>
+			</ConfigurationTables>
+			<ThingShape>
+				<PropertyDefinitions>
+                    <PropertyDefinition
+                     aspect.cacheTime="0.0"
+                     aspect.dataChangeType="VALUE"
+                     aspect.isLogged="false"
+                     aspect.isPersistent="false"
+                     aspect.isReadOnly="false"
+                     baseType="BOOLEAN"
+                     category=""
+                     description=""
+                     isLocalOnly="false"
+                     name="FastemsImportServiceIsRunning"
+                     ordinal="1"></PropertyDefinition>
+                    <PropertyDefinition
+                     aspect.cacheTime="0.0"
+                     aspect.dataChangeType="VALUE"
+                     aspect.isLogged="false"
+                     aspect.isPersistent="false"
+                     aspect.isReadOnly="false"
+                     baseType="BOOLEAN"
+                     category=""
+                     description=""
+                     isLocalOnly="false"
+                     name="FastemsExportServiceIsRunning"
+                     ordinal="1"></PropertyDefinition>
+				</PropertyDefinitions>
+				<ServiceDefinitions>
+					<ServiceDefinition aspect.isAsync="true"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="FastemsMessageImport">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="true"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="FastemsTransferOrder">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+				</ServiceDefinitions>
+				<EventDefinitions />
+				<ServiceMappings />
+				<ServiceImplementations>
+					<ServiceImplementation description=""
+						handlerName="Script" name="FastemsTransferOrder">
+						<ConfigurationTables>
+							<ConfigurationTable 
+								description="" isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+
+if (!me.FastemsExportServiceIsRunning) {
+    me.FastemsExportServiceIsRunning = true;
+  	try {
+		logger.debug("FastemsTransferOrder Start");
+		
+		var params = {
+			thingShape: "KBFastemsThingShape" /* THINGSHAPENAME */,
+			maxItems: undefined /* NUMBER */,
+			nameMask: undefined /* STRING */,
+			query: undefined /* QUERY */,
+			tags: undefined /* TAGS */
+		};
+		
+		// result: INFOTABLE dataShape: RootEntityList
+		var fastemsMachines = Resources["SearchFunctions"].SearchThingsByShape(params);
+		
+		var tableLength = fastemsMachines.rows.length;
+		for (var x=0; x < tableLength; x++) {
+		    var fastemsMachine = fastemsMachines.rows[x];
+		    //Your code here
+			logger.debug("FastemsTransferOrder for Machine "+fastemsMachine.name);
+		    // Result: BOOLEAN
+		    try {
+				Things[fastemsMachine.name].ExportStatus="Started";
+				Things[fastemsMachine.name].LastExportStart=new Date();
+				if (Things[fastemsMachine.name].TransferOrders) {
+					logger.debug("FastemsTransferOrder for Machine "+fastemsMachine.name +" Transfer Orders");
+					var machine = Things[fastemsMachine.name].KBLocalLineThing;
+					logger.debug("FastemsTransferOrder for Machine "+fastemsMachine.name +" KBLocalLineThing "+machine);
+					var workcenter = Things[machine].SAPWorkcenterNumber;
+					logger.debug("FastemsTransferOrder for Machine "+fastemsMachine.name +" SAPWorkcenterNumber "+workcenter);
+					var fastemsorders = Things["KBKPILocalThingWorxDatabaseThing"].GetNewFastemsOrders({
+						SAPWorkcenterNumber: workcenter /* STRING */
+					});
+					var orderTableLength = fastemsorders.rows.length;
+					logger.debug("FastemsTransferOrder for Machine "+fastemsMachine.name +" orderTableLength "+orderTableLength);
+					for (var xx=0; xx < orderTableLength; xx++) {
+					    var fastemsorder = fastemsorders.rows[xx];
+					    var dateValue = new Date();
+						Things[fastemsMachine.name].ExportStatus="Running: "+fastemsorder.OrderNumber;
+
+						var path= Things[fastemsMachine.name].OrdersRepositoryPath+"TWX_"+dateValue.getTime()+"_"+fastemsorder.OrderNumber+"_"+fastemsorder.PropertyKey+".xml";
+						logger.debug("FastemsTransferOrder for Machine "+fastemsMachine.name +" path "+path);
+
+					    if (Things[fastemsMachine.name].OrdersRepositoryPath != "" && Things[fastemsMachine.name].OrdersRepositoryPath != null && Things[fastemsMachine.name].OrdersRepositoryPath != undefined) {
+
+							Things["KBFastemsFileRepository"].CreateTextFile({path: path, data: fastemsorder.TextValue, overwrite: true});
+							logger.debug("FastemsTransferOrder for Machine "+fastemsMachine.name +" data "+fastemsorder.TextValue);
+
+							Things["KBKPILocalThingWorxDatabaseThing"].MergeOrderKeyValueWithNonStandardKey({
+								DateTimeValue: fastemsorder.DateTimeValue /* DATETIME */,
+								TextValue: fastemsorder.TextValue /* STRING */,
+								isTextValue: fastemsorder.isTextValue /* BOOLEAN */,
+								isFloatValue: fastemsorder.isFloatValue /* BOOLEAN */,
+								OrderNumber: fastemsorder.OrderNumber /* STRING */,
+								FloatValue: fastemsorder.FloatValue /* NUMBER */,
+								isDateTimeValue: fastemsorder.isDateTimeValue /* BOOLEAN */,
+								Key: fastemsorder.PropertyKey /* STRING */,
+								System: fastemsorder.System /* STRING */,
+								PlantId: fastemsorder.PlantId,
+								Key1: "sent",
+								Key2: fastemsorder.Operation
+							});
+		
+							var infotable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape({
+							    infoTableName : "InfoTable",
+							    dataShapeName : "KBLocalStationDataReceiverMessageDataShape"
+							});
+		
+							var newEntry = new Object();
+							newEntry.Line = machine; // STRING [Primary Key]
+							newEntry.Station = fastemsMachine.name; // STRING [Primary Key]
+							newEntry.Description = fastemsorder.PropertyKey; // STRING
+							newEntry.Type = "FASTEMS-IN"; // STRING [Primary Key]
+							newEntry.DateTime = fastemsorder.DateTimeValue; // DATETIME [Primary Key]
+							newEntry.Identifier = fastemsorder.TextValue; // STRING
+							newEntry.ShortName = workcenter; // STRING [Primary Key]
+							infotable.AddRow(newEntry);
+							Things[fastemsMachine.name].SetMessage({
+								messageInfoTable: infotable /* INFOTABLE */
+							});					
+					    }
+					}
+				}    
+				logger.debug("FastemsTransferOrder for Machine "+fastemsMachine.name +" OK");
+				Things[fastemsMachine.name].ExportStatus="OK";
+				Things[fastemsMachine.name].LastExportEnd=new Date();
+		    } catch(err) {
+				Things[fastemsMachine.name].ExportStatus="Error: "+err;
+				logger.error("FastemsTransferOrder for Machine "+fastemsMachine.name+": "+err);
+		    }
+		
+		}
+		
+		logger.debug("FastemsTransferOrder End");
+    } catch (err) {
+        logger.error("KBFastemsImportExportTimer: Error "+err);
+    }
+	me.FastemsExportServiceIsRunning = false;
+}
+
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="FastemsMessageImport">
+						<ConfigurationTables>
+							<ConfigurationTable 
+								description="" isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+
+// ToDo: Switch to new copy functionality!
+
+										
+if (!me.FastemsImportServiceIsRunning) {
+    me.FastemsImportServiceIsRunning = true;
+  	try {
+		logger.debug("FastemsMessageImport Start");
+		
+
+		Things["KBFastemsFileRepository"].ProcessMessages();		
+		
+		
+		logger.debug("FastemsMessageImport End");
+    } catch (err) {
+        logger.error("KBFastemsImportExportTimer: Error "+err);
+    }
+	me.FastemsImportServiceIsRunning = false;
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+				</ServiceImplementations>
+				<Subscriptions>
+					<Subscription description="" enabled="true"
+						eventName="Timer" name="TimerTrigger" source="" sourceProperty=""
+						sourceType="Thing">
+						<ServiceImplementation description=""
+							handlerName="Script" name="TimerTrigger">
+							<ConfigurationTables>
+								<ConfigurationTable 
+									description="" isMultiRow="false" name="Script" ordinal="0">
+									<DataShape>
+										<FieldDefinitions>
+											<FieldDefinition baseType="STRING"
+												description="code" name="code" ordinal="0" />
+										</FieldDefinitions>
+									</DataShape>
+									<Rows>
+										<Row>
+											<code><![CDATA[
+		me.FastemsMessageImport();
+		me.FastemsTransferOrder();
+
+
+]]></code>
+										</Row>
+									</Rows>
+								</ConfigurationTable>
+							</ConfigurationTables>
+						</ServiceImplementation>
+					</Subscription>
+				</Subscriptions>
+			</ThingShape>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations />
+			<ImplementedShapes />
+			<ThingProperties />
+		</Thing>
+	</Things>
+</Entities>

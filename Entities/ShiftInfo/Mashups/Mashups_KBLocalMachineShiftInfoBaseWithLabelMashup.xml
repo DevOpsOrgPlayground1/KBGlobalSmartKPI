@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities build="b97" majorVersion="8" minorVersion="4"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="11" schemaVersion="1044" universal="password">
+	<Mashups>
+		<Mashup aspect.isResponsive="true" aspect.mashupType="mashup"
+			columns="0.0" description="" documentationContent="" homeMashup=""
+			lastModifiedDate="2020-11-06T02:29:51.360+01:00"
+			name="KBLocalMachineShiftInfoBaseWithLabelMashup"
+			projectName="KBLocalShiftInfo" rows="0.0" tags="">
+			<avatar></avatar>
+			<DesignTimePermissions>
+				<Create></Create>
+				<Read></Read>
+				<Update></Update>
+				<Delete></Delete>
+				<Metadata></Metadata>
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group"></Principal>
+							<Principal
+                         isPermitted="true"
+                         name="KBMesKitHelperUser"
+                         type="User"></Principal>
+					</PropertyRead>
+					<PropertyWrite></PropertyWrite>
+					<ServiceInvoke>
+						<Principal isPermitted="true" name="KBUserGroup"
+							type="Group"></Principal>
+							<Principal
+                         isPermitted="true"
+                         name="KBMesKitHelperUser"
+                         type="User"></Principal>
+					</ServiceInvoke>
+					<EventInvoke></EventInvoke>
+					<EventSubscribe></EventSubscribe>
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true" name="KBBackGroundWorker"
+						type="Organization"></Principal>
+					<Principal isPermitted="true" name="KBOrganization"
+						type="Organization"></Principal>
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+			<ConfigurationTables></ConfigurationTables>
+			<ParameterDefinitions>
+				<FieldDefinition aspect.bindingDirection="IN"
+					aspect.isMandatory="false" aspect.ordinal="2" baseType="INTEGER"
+					description="" name="NextNweek" ordinal="0"></FieldDefinition>
+				<FieldDefinition aspect.bindingDirection="IN"
+					aspect.isMandatory="false" aspect.ordinal="1" baseType="STRING"
+					description="" name="PlantCode" ordinal="0"></FieldDefinition>
+				<FieldDefinition aspect.bindingDirection="IN"
+					aspect.isMandatory="false" aspect.ordinal="0" baseType="STRING"
+					description="" name="SAPMachineName" ordinal="0"></FieldDefinition>
+			</ParameterDefinitions>
+			<Things>
+				<Thing>KBLocalShiftHelperThing</Thing>
+				<Thing>KBKPILocalThingWorxDatabaseThing</Thing>
+			</Things>
+			<ThingShapes></ThingShapes>
+			<ThingTemplates></ThingTemplates>
+			<mashupContent>
+            <![CDATA[
+            {
+              "CustomMashupCss" : "",
+              "Data" : {
+                "Session" : {
+                  "DataName" : "Session",
+                  "EntityName" : "",
+                  "EntityType" : "Session",
+                  "Id" : "session",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "SessionInterface",
+                    "Name" : "GetGlobalSessionValues",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetGlobalSessionValues"
+                  } ]
+                },
+                "Things_KBKPILocalThingWorxDatabaseThing" : {
+                  "DataName" : "Things_KBKPILocalThingWorxDatabaseThing",
+                  "EntityName" : "KBKPILocalThingWorxDatabaseThing",
+                  "EntityType" : "Things",
+                  "Id" : "f130b34e-c58f-4126-9302-7fa099ba93a4",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "aae38b69-635b-45ef-8b36-b08bd61b52e9",
+                    "Name" : "GetWorkBreakShiftInfoWithMachine",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetWorkBreakShiftInfoWithMachine"
+                  }, {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "56b423b4-bc3e-4ffd-90ad-692ceed66a8b",
+                    "Name" : "GetDownTimeShiftInfoWithMachine",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetDownTimeShiftInfoWithMachine"
+                  } ]
+                },
+                "Things_KBLocalShiftHelperThing" : {
+                  "DataName" : "Things_KBLocalShiftHelperThing",
+                  "EntityName" : "KBLocalShiftHelperThing",
+                  "EntityType" : "Things",
+                  "Id" : "082a921a-1e89-4da3-b2fb-edbdb9b3f48f",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "64b28984-c392-47ed-97d6-7058aa85c915",
+                    "Name" : "OutputShiftInfoWithLabel",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "OutputShiftInfoWithLabel"
+                  }, {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "91b971b5-f952-44f2-b202-7cc23034a12e",
+                    "Name" : "OutputShiftInfoWithLabel1",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "OutputShiftInfoWithLabel"
+                  } ]
+                },
+                "UserExtensions" : {
+                  "DataName" : "UserExtensions",
+                  "EntityName" : "",
+                  "EntityType" : "UserExtensions",
+                  "Id" : "UserExtensions",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "UserExtensionInterface",
+                    "Name" : "GetCurrentUserExtensionProperties",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetCurrentUserExtensionProperties"
+                  } ]
+                }
+              },
+              "DataBindings" : [ {
+                "Id" : "fc6c7c95-9def-41a2-88f3-ecc4b92b6474",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "SAPMachineName",
+                  "SourcePropertyBaseType" : "STRING",
+                  "TargetProperty" : "SAPMachineName",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetWorkBreakShiftInfoWithMachine",
+                "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+              }, {
+                "Id" : "4e554081-6116-4510-8dc2-b4a8757c5feb",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "PlantCode",
+                  "SourcePropertyBaseType" : "STRING",
+                  "TargetProperty" : "PlantCode",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetWorkBreakShiftInfoWithMachine",
+                "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+              }, {
+                "Id" : "7d8b2fa6-9366-4da1-b6cc-2fec66903467",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "NextNweek",
+                  "SourcePropertyBaseType" : "INTEGER",
+                  "TargetProperty" : "NextNweek",
+                  "TargetPropertyBaseType" : "INTEGER",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetWorkBreakShiftInfoWithMachine",
+                "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+              }, {
+                "Id" : "87f27d11-a360-4cfa-80a9-6dfa6f41e866",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "SAPMachineName",
+                  "SourcePropertyBaseType" : "STRING",
+                  "TargetProperty" : "SAPMachineName",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetDownTimeShiftInfoWithMachine",
+                "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+              }, {
+                "Id" : "984676bb-e03c-4249-9f1a-03af41074a79",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "PlantCode",
+                  "SourcePropertyBaseType" : "STRING",
+                  "TargetProperty" : "PlantCode",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetDownTimeShiftInfoWithMachine",
+                "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+              }, {
+                "Id" : "5ee21c53-6cdd-4e8f-9274-530ca3eae8af",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "NextNweek",
+                  "SourcePropertyBaseType" : "INTEGER",
+                  "TargetProperty" : "NextNweek",
+                  "TargetPropertyBaseType" : "INTEGER",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Mashup",
+                "SourceId" : "mashup-root",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "GetDownTimeShiftInfoWithMachine",
+                "TargetSection" : "Things_KBKPILocalThingWorxDatabaseThing"
+              }, {
+                "Id" : "bc8cb018-149e-4e83-962c-a874ee2269f0",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "",
+                  "SourcePropertyBaseType" : "INFOTABLE",
+                  "TargetProperty" : "oriData",
+                  "TargetPropertyBaseType" : "INFOTABLE",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "GetWorkBreakShiftInfoWithMachine",
+                "SourceSection" : "Things_KBKPILocalThingWorxDatabaseThing",
+                "TargetArea" : "Data",
+                "TargetId" : "OutputShiftInfoWithLabel",
+                "TargetSection" : "Things_KBLocalShiftHelperThing"
+              }, {
+                "Id" : "ca21b9cd-b635-4cd6-a87a-5f49ebabb78a",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "",
+                  "SourcePropertyBaseType" : "INFOTABLE",
+                  "SourcePropertyType" : "InfoTable",
+                  "TargetProperty" : "Data",
+                  "TargetPropertyBaseType" : "INFOTABLE",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "OutputShiftInfoWithLabel",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "UI",
+                "TargetId" : "eventchart-15",
+                "TargetSection" : ""
+              }, {
+                "Id" : "313cdd3a-6b00-45a4-9e02-b2d1178eaa50",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "T1",
+                  "SourcePropertyBaseType" : "DATETIME",
+                  "SourcePropertyType" : "Field",
+                  "TargetProperty" : "XAxisMinimum",
+                  "TargetPropertyBaseType" : "DATETIME",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "OutputShiftInfoWithLabel",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "UI",
+                "TargetId" : "eventchart-15",
+                "TargetSection" : ""
+              }, {
+                "Id" : "62754c07-b2f4-4399-9105-8886881e20e3",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "T2",
+                  "SourcePropertyBaseType" : "DATETIME",
+                  "SourcePropertyType" : "Field",
+                  "TargetProperty" : "XAxisMaximum",
+                  "TargetPropertyBaseType" : "DATETIME",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "OutputShiftInfoWithLabel",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "UI",
+                "TargetId" : "eventchart-15",
+                "TargetSection" : ""
+              }, {
+                "Id" : "2d9d20bc-5feb-4476-95cc-0d6ea73cb62c",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "",
+                  "SourcePropertyBaseType" : "INFOTABLE",
+                  "TargetProperty" : "oriData",
+                  "TargetPropertyBaseType" : "INFOTABLE",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "GetDownTimeShiftInfoWithMachine",
+                "SourceSection" : "Things_KBKPILocalThingWorxDatabaseThing",
+                "TargetArea" : "Data",
+                "TargetId" : "OutputShiftInfoWithLabel1",
+                "TargetSection" : "Things_KBLocalShiftHelperThing"
+              }, {
+                "Id" : "7a127cfe-b6b4-43c6-be3a-72f7d5641ee8",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "",
+                  "SourcePropertyBaseType" : "INFOTABLE",
+                  "SourcePropertyType" : "InfoTable",
+                  "TargetProperty" : "Data",
+                  "TargetPropertyBaseType" : "INFOTABLE",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "OutputShiftInfoWithLabel1",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "UI",
+                "TargetId" : "eventchart-21",
+                "TargetSection" : ""
+              }, {
+                "Id" : "1f451678-c5de-4ff9-9666-8097e0db23ff",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "T1",
+                  "SourcePropertyBaseType" : "DATETIME",
+                  "SourcePropertyType" : "Field",
+                  "TargetProperty" : "XAxisMinimum",
+                  "TargetPropertyBaseType" : "DATETIME",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "OutputShiftInfoWithLabel1",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "UI",
+                "TargetId" : "eventchart-21",
+                "TargetSection" : ""
+              }, {
+                "Id" : "33f02434-927b-4cc5-b3ea-af05a94edb62",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "T2",
+                  "SourcePropertyBaseType" : "DATETIME",
+                  "SourcePropertyType" : "Field",
+                  "TargetProperty" : "XAxisMaximum",
+                  "TargetPropertyBaseType" : "DATETIME",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "OutputShiftInfoWithLabel1",
+                "SourceSection" : "Things_KBLocalShiftHelperThing",
+                "TargetArea" : "UI",
+                "TargetId" : "eventchart-21",
+                "TargetSection" : ""
+              } ],
+              "DesignTimePermissions" : {
+                "Create" : [ ],
+                "Delete" : [ ],
+                "Metadata" : [ ],
+                "Read" : [ ],
+                "Update" : [ ]
+              },
+              "Events" : [ {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+                "EventHandlerService" : "GetWorkBreakShiftInfoWithMachine",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "Loaded",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "b8d33688-ec40-4d80-8974-b3daca7d92ae"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+                "EventHandlerService" : "GetWorkBreakShiftInfoWithMachine",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "RefreshRequested",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "38d2229c-2e01-482e-a12f-834c35147099"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+                "EventHandlerService" : "GetWorkBreakShiftInfoWithMachine",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "NextNweekChanged",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "4ef2bfee-b481-45af-bc21-29a1e6ed2e3b"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+                "EventHandlerService" : "GetDownTimeShiftInfoWithMachine",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "Loaded",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "03a757e5-c7cb-45df-ad11-86d20bc57d05"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+                "EventHandlerService" : "GetDownTimeShiftInfoWithMachine",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "RefreshRequested",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "d127e406-ee59-48ee-9bab-1140cf147262"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBKPILocalThingWorxDatabaseThing",
+                "EventHandlerService" : "GetDownTimeShiftInfoWithMachine",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "NextNweekChanged",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "c8dba7fb-ce31-482d-9718-34dbc95fbe4e"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBLocalShiftHelperThing",
+                "EventHandlerService" : "OutputShiftInfoWithLabel",
+                "EventTriggerArea" : "Data",
+                "EventTriggerEvent" : "ServiceInvokeCompleted",
+                "EventTriggerId" : "GetWorkBreakShiftInfoWithMachine",
+                "EventTriggerSection" : "Things_KBKPILocalThingWorxDatabaseThing",
+                "Id" : "2dd2d832-a349-4707-9164-839825b65c83"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_KBLocalShiftHelperThing",
+                "EventHandlerService" : "OutputShiftInfoWithLabel1",
+                "EventTriggerArea" : "Data",
+                "EventTriggerEvent" : "ServiceInvokeCompleted",
+                "EventTriggerId" : "GetDownTimeShiftInfoWithMachine",
+                "EventTriggerSection" : "Things_KBKPILocalThingWorxDatabaseThing",
+                "Id" : "8a14058a-f66a-4745-8e0d-e372d1b7e1ce"
+              } ],
+              "RunTimePermissions" : {
+                "permissions" : [ {
+                  "EventInvoke" : [ ],
+                  "EventSubscribe" : [ ],
+                  "PropertyRead" : [ {
+                    "isPermitted" : true,
+                    "name" : "KBUserGroup",
+                    "type" : "Group"
+                  } ],
+                  "PropertyWrite" : [ ],
+                  "ServiceInvoke" : [ {
+                    "isPermitted" : true,
+                    "name" : "KBUserGroup",
+                    "type" : "Group"
+                  } ],
+                  "resourceName" : "*"
+                } ]
+              },
+              "UI" : {
+                "Properties" : {
+                  "AddToDashboardButton" : "SimplePlus",
+                  "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+                  "Area" : "Mashup",
+                  "BGImage" : "",
+                  "BGImageRepeat" : "no-repeat",
+                  "BGImageSize" : "auto",
+                  "Columns" : 0,
+                  "ConfigureGadgetButton" : "SimpleGear",
+                  "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+                  "DisplayName" : "Mashup",
+                  "EnableParameterEditing" : false,
+                  "Height" : 618,
+                  "Id" : "mashup-root",
+                  "IgnoreWarningsInViewMashup" : false,
+                  "IsPrintLayout" : false,
+                  "Left" : 0,
+                  "MashupToEditGadget" : "DefaultMashupToEditGadget",
+                  "MinHeight" : 0,
+                  "MinWidth" : 0,
+                  "ResponsiveLayout" : true,
+                  "Rows" : 0,
+                  "ShowDataLoading" : true,
+                  "Style" : "DefaultMashupStyle",
+                  "StyleTheme" : "Base Theme",
+                  "Title" : "",
+                  "TitleBar" : false,
+                  "TitleBarStyle" : "DefaultTitleBarStyle",
+                  "TitleBarText" : "Gadget Title Here",
+                  "Top" : 0,
+                  "Type" : "mashup",
+                  "UseTheme" : false,
+                  "UseThemeForHybrids" : false,
+                  "Visible" : true,
+                  "Width" : 1024,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Mashup",
+                  "_currentParameterDefs" : [ {
+                    "Aspects" : {
+                      "bindingDirection" : "IN",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "SAPMachineName"
+                  }, {
+                    "Aspects" : {
+                      "bindingDirection" : "IN",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "STRING",
+                    "Description" : "",
+                    "ParameterName" : "PlantCode"
+                  }, {
+                    "Aspects" : {
+                      "bindingDirection" : "IN",
+                      "isMandatory" : false
+                    },
+                    "BaseType" : "INTEGER",
+                    "Description" : "",
+                    "ParameterName" : "NextNweek"
+                  } ],
+                  "id_index" : 21,
+                  "supportsAutoResize" : true
+                },
+                "Widgets" : [ {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "ContainerClass" : "",
+                    "DisplayName" : "panel-2",
+                    "Height" : 200,
+                    "HideScrollbars" : true,
+                    "HorizontalAnchor" : "left",
+                    "Id" : "panel-2",
+                    "Left" : 55,
+                    "ResponsiveLayout" : true,
+                    "ShowDataLoading" : true,
+                    "Style" : "DefaultPanelStyle",
+                    "Top" : 70,
+                    "Type" : "panel",
+                    "VerticalAnchor" : "top",
+                    "Visible" : true,
+                    "Width" : 300,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Panel"
+                  },
+                  "Widgets" : [ {
+                    "Properties" : {
+                      "AllowSelection" : false,
+                      "AllowXAxisZoom" : false,
+                      "Area" : "UI",
+                      "ChartAreaStyle" : "DefaultChartAreaStyle",
+                      "ChartLegendStyle" : "DefaultChartLegendStyle",
+                      "ChartOrientation" : "vertical",
+                      "ChartStyle" : "DefaultChartStyle",
+                      "ChartTitle" : "",
+                      "ChartTitleStyle" : "DefaultChartTitleStyle",
+                      "ChartType" : "flag",
+                      "DisplayName" : "eventchart-15",
+                      "EnableHover" : true,
+                      "EventDataStyle" : {
+                        "FieldName" : "Qualifier",
+                        "StateDefinition" : "KBLocalShiftTypeState",
+                        "StateDefinitionType" : "string",
+                        "StateFormats" : [ {
+                          "comparator" : "==",
+                          "state" : "DefaultChartStyle3",
+                          "stateName" : "1. Unplanned Downtime (D)",
+                          "value" : "D"
+                        }, {
+                          "comparator" : "==",
+                          "state" : "DefaultChartStyle14",
+                          "stateName" : "2. Planned Downtime (P)",
+                          "value" : "P"
+                        }, {
+                          "comparator" : "==",
+                          "state" : "DefaultChartStyle1",
+                          "stateName" : "3. Planned Downtime (M)",
+                          "value" : "M"
+                        }, {
+                          "comparator" : "==",
+                          "state" : "DefaultChartStyle2",
+                          "stateName" : "4. Planned Working Time",
+                          "value" : "W"
+                        }, {
+                          "comparator" : "==",
+                          "state" : "DefaultChartStyle4",
+                          "stateName" : "5. Planned Break",
+                          "value" : "B"
+                        }, {
+                          "comparator" : "==",
+                          "state" : "DefaultChartStyle8",
+                          "stateName" : "",
+                          "value" : "NA"
+                        }, {
+                          "state" : "DefaultChartStyle8",
+                          "stateName" : ""
+                        } ]
+                      },
+                      "EventDataStyle_StateParameters" : [ {
+                        "BaseType" : "STRING",
+                        "DefaultValue" : "D",
+                        "Description" : "1. Unplanned Downtime (D)",
+                        "ParameterName" : "EventDataStyle_1. Unplanned Downtime (D)"
+                      }, {
+                        "BaseType" : "STRING",
+                        "DefaultValue" : "P",
+                        "Description" : "2. Planned Downtime (P)",
+                        "ParameterName" : "EventDataStyle_2. Planned Downtime (P)"
+                      }, {
+                        "BaseType" : "STRING",
+                        "DefaultValue" : "M",
+                        "Description" : "3. Planned Downtime (M)",
+                        "ParameterName" : "EventDataStyle_3. Planned Downtime (M)"
+                      }, {
+                        "BaseType" : "STRING",
+                        "DefaultValue" : "W",
+                        "Description" : "4. Planned Working Time",
+                        "ParameterName" : "EventDataStyle_4. Planned Working Time"
+                      }, {
+                        "BaseType" : "STRING",
+                        "DefaultValue" : "B",
+                        "Description" : "5. Planned Break",
+                        "ParameterName" : "EventDataStyle_5. Planned Break"
+                      } ],
+                      "EventStyle" : "DefaultChartStyle1",
+                      "FlagHeight" : 30,
+                      "FlagTimeFormat" : "YYYY-MM-dd HH:mm:ss",
+                      "FlagWidth" : 120,
+                      "GridStyle" : "DefaultChartGridStyle",
+                      "Height" : 30,
+                      "Id" : "eventchart-15",
+                      "LabelField" : "Label",
+                      "LabelFormat" : "0000.0",
+                      "Left" : 0,
+                      "LegendLocation" : "right",
+                      "LegendOrientation" : "vertical",
+                      "LegendWidth" : 0,
+                      "MarkerSize" : 3,
+                      "MarkerType" : "flag",
+                      "ResponsiveLayout" : false,
+                      "SelectedItemStyle" : "DefaultChartSelectionStyle",
+                      "ShowDataLoading" : true,
+                      "ShowLegend" : false,
+                      "ShowTimeOnFlag" : false,
+                      "ShowXAxis" : true,
+                      "ShowXAxisGrid" : false,
+                      "ShowXAxisLabels" : false,
+                      "ShowXAxisTicks" : false,
+                      "SingleDataSource" : true,
+                      "StickEnd" : 100,
+                      "StickStart" : 0,
+                      "ToolTipStyle" : "DefaultTooltipStyle",
+                      "Top" : 0,
+                      "TruncateX-AxisLabels" : 0,
+                      "Type" : "eventchart",
+                      "Visible" : true,
+                      "Width" : 1320,
+                      "XAxisAutoscale" : true,
+                      "XAxisField" : "StartTime",
+                      "XAxisFormat" : "YYYY-MM-dd HH:mm:ss",
+                      "XAxisIntervals" : 10,
+                      "XAxisLabels" : 2,
+                      "XAxisMinorTicks" : 1,
+                      "XAxisSmoothScaling" : false,
+                      "XAxisStyle" : "DefaultChartAxisStyle",
+                      "XAxisZeroscale" : false,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Event Chart",
+                      "__supportsTooltip" : true
+                    },
+                    "Widgets" : [ ]
+                  }, {
+                    "Properties" : {
+                      "AllowSelection" : false,
+                      "AllowXAxisZoom" : false,
+                      "Area" : "UI",
+                      "ChartAreaStyle" : "DefaultChartAreaStyle",
+                      "ChartLegendStyle" : "DefaultChartLegendStyle",
+                      "ChartOrientation" : "vertical",
+                      "ChartStyle" : "DefaultChartStyle",
+                      "ChartTitle" : "",
+                      "ChartTitleStyle" : "DefaultChartTitleStyle",
+                      "ChartType" : "flag",
+                      "DisplayName" : "eventchart-21",
+                      "EnableHover" : true,
+                      "EventDataStyle" : {
+                        "FieldName" : "Qualifier",
+                        "StateDefinition" : "KBLocalShiftTypeState",
+                        "StateDefinitionType" : "string",
+                        "StateFormats" : [ {
+                          "comparator" : "==",
+                          "state" : "DefaultChartStyle3",
+                          "stateName" : "1. Unplanned Downtime (D)",
+                          "value" : "D"
+                        }, {
+                          "comparator" : "==",
+                          "state" : "DefaultChartStyle14",
+                          "stateName" : "2. Planned Downtime (P)",
+                          "value" : "P"
+                        }, {
+                          "comparator" : "==",
+                          "state" : "DefaultChartStyle1",
+                          "stateName" : "3. Planned Downtime (M)",
+                          "value" : "M"
+                        }, {
+                          "comparator" : "==",
+                          "state" : "DefaultChartStyle2",
+                          "stateName" : "4. Planned Working Time",
+                          "value" : "W"
+                        }, {
+                          "comparator" : "==",
+                          "state" : "DefaultChartStyle4",
+                          "stateName" : "5. Planned Break",
+                          "value" : "B"
+                        }, {
+                          "comparator" : "==",
+                          "state" : "DefaultChartStyle8",
+                          "stateName" : "",
+                          "value" : "NA"
+                        }, {
+                          "state" : "DefaultChartStyle8",
+                          "stateName" : ""
+                        } ]
+                      },
+                      "EventDataStyle_StateParameters" : [ {
+                        "BaseType" : "STRING",
+                        "DefaultValue" : "D",
+                        "Description" : "1. Unplanned Downtime (D)",
+                        "ParameterName" : "EventDataStyle_1. Unplanned Downtime (D)"
+                      }, {
+                        "BaseType" : "STRING",
+                        "DefaultValue" : "P",
+                        "Description" : "2. Planned Downtime (P)",
+                        "ParameterName" : "EventDataStyle_2. Planned Downtime (P)"
+                      }, {
+                        "BaseType" : "STRING",
+                        "DefaultValue" : "M",
+                        "Description" : "3. Planned Downtime (M)",
+                        "ParameterName" : "EventDataStyle_3. Planned Downtime (M)"
+                      }, {
+                        "BaseType" : "STRING",
+                        "DefaultValue" : "W",
+                        "Description" : "4. Planned Working Time",
+                        "ParameterName" : "EventDataStyle_4. Planned Working Time"
+                      }, {
+                        "BaseType" : "STRING",
+                        "DefaultValue" : "B",
+                        "Description" : "5. Planned Break",
+                        "ParameterName" : "EventDataStyle_5. Planned Break"
+                      } ],
+                      "EventStyle" : "DefaultChartStyle1",
+                      "FlagHeight" : 30,
+                      "FlagTimeFormat" : "YYYY-MM-dd HH:mm:ss",
+                      "FlagWidth" : 120,
+                      "GridStyle" : "DefaultChartGridStyle",
+                      "Height" : 30,
+                      "Id" : "eventchart-21",
+                      "LabelField" : "Label",
+                      "LabelFormat" : "0000.0",
+                      "Left" : 0,
+                      "LegendLocation" : "right",
+                      "LegendOrientation" : "vertical",
+                      "LegendWidth" : 0,
+                      "MarkerSize" : 3,
+                      "MarkerType" : "flag",
+                      "ResponsiveLayout" : false,
+                      "SelectedItemStyle" : "DefaultChartSelectionStyle",
+                      "ShowDataLoading" : true,
+                      "ShowLegend" : false,
+                      "ShowTimeOnFlag" : false,
+                      "ShowXAxis" : true,
+                      "ShowXAxisGrid" : false,
+                      "ShowXAxisLabels" : false,
+                      "ShowXAxisTicks" : false,
+                      "SingleDataSource" : true,
+                      "StickEnd" : 100,
+                      "StickStart" : 0,
+                      "ToolTipStyle" : "DefaultTooltipStyle",
+                      "Top" : 30,
+                      "TruncateX-AxisLabels" : 0,
+                      "Type" : "eventchart",
+                      "Visible" : true,
+                      "Width" : 1320,
+                      "XAxisAutoscale" : true,
+                      "XAxisField" : "StartTime",
+                      "XAxisFormat" : "YYYY-MM-dd HH:mm:ss",
+                      "XAxisIntervals" : 10,
+                      "XAxisLabels" : 2,
+                      "XAxisMinorTicks" : 1,
+                      "XAxisSmoothScaling" : false,
+                      "XAxisStyle" : "DefaultChartAxisStyle",
+                      "XAxisZeroscale" : false,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Event Chart",
+                      "__supportsTooltip" : true
+                    },
+                    "Widgets" : [ ]
+                  } ]
+                } ]
+              },
+              "mashupType" : "mashup"
+            }
+            ]]>
+			</mashupContent>
+			<preview></preview>
+		</Mashup>
+	</Mashups>
+</Entities>

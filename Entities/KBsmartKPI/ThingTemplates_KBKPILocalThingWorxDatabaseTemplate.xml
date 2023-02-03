@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b52"
+          majorVersion="8"
+          minorVersion="0"
+          modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+          revision="3"
+          schemaVersion="1000">
+	<ThingTemplates>
+		<ThingTemplate baseThingTemplate="KBKPIThingWorxDatabaseTemplate"
+		               description=""
+		               documentationContent=""
+		               effectiveThingPackage="DatabaseThing"
+		               homeMashup=""
+		               lastModifiedDate="2017-12-11T15:26:13.266+01:00"
+		               name="KBKPILocalThingWorxDatabaseTemplate"
+		               projectName="KBsmartKPI"
+		               tags="KBThingWorxInstallationVocabulary:ExtensionSmartKPI"
+		               thingPackage=""
+		               valueStream="">
+			<Owner name="adm-flassakm"
+			       type="User"/>
+			<avatar/>
+			<DesignTimePermissions>
+				<Create/>
+				<Read/>
+				<Update/>
+				<Delete/>
+				<Metadata/>
+			</DesignTimePermissions>
+			<RunTimePermissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true"
+						           name="KBUserGroup"
+						           type="Group"/>
+					</PropertyRead>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true"
+						           name="KBUserGroup"
+						           type="Group"/>
+					</PropertyRead>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+			</RunTimePermissions>
+			<VisibilityPermissions>
+				<Visibility>
+					<Principal isPermitted="true"
+					           name="KBOrganization"
+					           type="Organization"/>
+					<Principal isPermitted="true"
+					           name="KBBackGroundWorker"
+					           type="Organization"/>
+				</Visibility>
+			</VisibilityPermissions>
+			<ConfigurationTables>
+				<ConfigurationTable description="Field/Column Name Aliases"
+				                    isMultiRow="true"
+				                    name="ColumnAliases"
+				                    ordinal="1">
+					<DataShape>
+						<FieldDefinitions>
+							<FieldDefinition aspect.friendlyName="Database Column Name"
+							                 baseType="STRING"
+							                 description="Database column name"
+							                 name="columnName"
+							                 ordinal="0"/>
+							<FieldDefinition aspect.friendlyName="Thingworx Field Name"
+							                 baseType="STRING"
+							                 description="Thingworx field name"
+							                 name="fieldName"
+							                 ordinal="1"/>
+						</FieldDefinitions>
+					</DataShape>
+					<Rows/>
+				</ConfigurationTable>
+				<ConfigurationTable description="JDBC Settings"
+				                    isMultiRow="false"
+				                    name="ConnectionInfo"
+				                    ordinal="0">
+					<DataShape>
+						<FieldDefinitions>
+							<FieldDefinition aspect.defaultValue="SELECT NOW()"
+							                 baseType="STRING"
+							                 description="Connection test string/query"
+							                 name="connectionValidationString"
+							                 ordinal="2"/>
+							<FieldDefinition aspect.defaultValue="jdbc:mydb:/server:port/database?param=value"
+							                 aspect.friendlyName="JDBC Connection String"
+							                 baseType="STRING"
+							                 description="JDBC Connection URL"
+							                 name="jDBCConnectionURL"
+							                 ordinal="1"/>
+							<FieldDefinition aspect.defaultValue="com.yourdatabase.yourDriver"
+							                 aspect.friendlyName="JDBC Driver Class Name"
+							                 baseType="STRING"
+							                 description="JDBC Driver Class Name"
+							                 name="jDBCDriverClass"
+							                 ordinal="0"/>
+							<FieldDefinition aspect.defaultValue="5.0"
+							                 aspect.friendlyName="Maxium Number of Connections"
+							                 baseType="NUMBER"
+							                 description="Maximum number of connections in the pool"
+							                 name="maxConnections"
+							                 ordinal="3"/>
+							<FieldDefinition aspect.friendlyName="Database Password"
+							                 baseType="PASSWORD"
+							                 description="Database password"
+							                 name="password"
+							                 ordinal="5"/>
+							<FieldDefinition aspect.friendlyName="Database User Name"
+							                 baseType="STRING"
+							                 description="Database user name"
+							                 name="userName"
+							                 ordinal="4"/>
+						</FieldDefinitions>
+					</DataShape>
+					<Rows>
+						<Row>
+							<connectionValidationString><![CDATA[select GETDATE()]]></connectionValidationString>
+							<password/>
+							<jDBCConnectionURL><![CDATA[jdbc:sqlserver://host\\instance:1433;databaseName=name;applicationName=Thingworx;]]></jDBCConnectionURL>
+							<userName/>
+							<jDBCDriverClass><![CDATA[com.microsoft.sqlserver.jdbc.SQLServerDriver]]></jDBCDriverClass>
+							<maxConnections>5.0</maxConnections>
+						</Row>
+					</Rows>
+				</ConfigurationTable>
+				<ConfigurationTable description="Connection Monitoring Settings"
+				                    isMultiRow="false"
+				                    name="ConnectionMonitoring"
+				                    ordinal="0">
+					<DataShape>
+						<FieldDefinitions>
+							<FieldDefinition aspect.defaultValue="30000.0"
+							                 aspect.friendlyName="Monitor Rate (seconds)"
+							                 baseType="NUMBER"
+							                 description="Monitor rate in milliseconds"
+							                 name="connectionMonitorRate"
+							                 ordinal="1"/>
+							<FieldDefinition aspect.defaultValue="false"
+							                 aspect.friendlyName="Enable Monitoring"
+							                 baseType="BOOLEAN"
+							                 description="Enable connection monitoring"
+							                 name="enableMonitor"
+							                 ordinal="0"/>
+							<FieldDefinition aspect.defaultValue="1.0"
+							                 aspect.friendlyName="Number of Retries"
+							                 baseType="NUMBER"
+							                 description="Number of retries"
+							                 name="numberOfRetries"
+							                 ordinal="2"/>
+							<FieldDefinition aspect.defaultValue="2000.0"
+							                 aspect.friendlyName="Retry Delay (milliseconds)"
+							                 baseType="NUMBER"
+							                 description="Retry delay in milliseconds"
+							                 name="retryDelay"
+							                 ordinal="3"/>
+						</FieldDefinitions>
+					</DataShape>
+					<Rows>
+						<Row>
+							<retryDelay>2000.0</retryDelay>
+							<connectionMonitorRate>30000.0</connectionMonitorRate>
+							<numberOfRetries>1.0</numberOfRetries>
+							<enableMonitor>false</enableMonitor>
+						</Row>
+					</Rows>
+				</ConfigurationTable>
+			</ConfigurationTables>
+			<PropertyBindings/>
+			<RemotePropertyBindings/>
+			<RemoteServiceBindings/>
+			<RemoteEventBindings/>
+			<AlertConfigurations/>
+			<ThingShape>
+				<PropertyDefinitions/>
+				<ServiceDefinitions>
+					<ServiceDefinition aspect.isAsync="false"
+					                   category=""
+					                   description=""
+					                   isAllowOverride="false"
+					                   isLocalOnly="false"
+					                   isOpen="false"
+					                   isPrivate="false"
+					                   name="GetRailLocalKpisForMenue">
+						<ResultType aspect.dataShape="KBNameForMenuDataShape"
+						            baseType="INFOTABLE"
+						            description=""
+						            name="result"
+						            ordinal="0"/>
+						<ParameterDefinitions/>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+					                   category=""
+					                   description=""
+					                   isAllowOverride="false"
+					                   isLocalOnly="false"
+					                   isOpen="false"
+					                   isPrivate="false"
+					                   name="GetTruckLocalKpisForMenue">
+						<ResultType aspect.dataShape="KBNameForMenuDataShape"
+						            baseType="INFOTABLE"
+						            description=""
+						            name="result"
+						            ordinal="0"/>
+						<ParameterDefinitions/>
+					</ServiceDefinition>
+				</ServiceDefinitions>
+				<EventDefinitions/>
+				<ServiceMappings/>
+				<ServiceImplementations>
+					<ServiceImplementation description=""
+					                       handlerName="SQLQuery"
+					                       name="GetRailLocalKpisForMenue">
+						<ConfigurationTables>
+							<ConfigurationTable dataShapeName=""
+							                    description="SQLQuery"
+							                    isMultiRow="false"
+							                    name="Query"
+							                    ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="NUMBER"
+										                 description="maxItems"
+										                 name="maxItems"
+										                 ordinal="0"/>
+										<FieldDefinition baseType="STRING"
+										                 description="sql"
+										                 name="sql"
+										                 ordinal="0"/>
+										<FieldDefinition baseType="NUMBER"
+										                 description="timeout"
+										                 name="timeout"
+										                 ordinal="0"/>
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<maxItems>500.0</maxItems>
+										<sql><![CDATA[select distinct [KPIName] as DisplayName
+FROM smartKPIValues 
+where KPIName not like 'CVS%' 
+order by 1]]></sql>
+										<timeout>60.0</timeout>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+					                       handlerName="SQLQuery"
+					                       name="GetTruckLocalKpisForMenue">
+						<ConfigurationTables>
+							<ConfigurationTable dataShapeName=""
+							                    description="SQLQuery"
+							                    isMultiRow="false"
+							                    name="Query"
+							                    ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="NUMBER"
+										                 description="maxItems"
+										                 name="maxItems"
+										                 ordinal="0"/>
+										<FieldDefinition baseType="STRING"
+										                 description="sql"
+										                 name="sql"
+										                 ordinal="0"/>
+										<FieldDefinition baseType="NUMBER"
+										                 description="timeout"
+										                 name="timeout"
+										                 ordinal="0"/>
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<maxItems>500.0</maxItems>
+										<sql><![CDATA[select distinct [KPIName] as DisplayName
+FROM smartKPIValues 
+where KPIName not like 'CVS:%planned working time%' 
+order by 1]]></sql>
+										<timeout>60.0</timeout>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+				</ServiceImplementations>
+				<Subscriptions/>
+			</ThingShape>
+			<ImplementedShapes/>
+			<SharedConfigurationTables/>
+			<InstanceDesignTimePermissions>
+				<Create/>
+				<Read/>
+				<Update/>
+				<Delete/>
+				<Metadata/>
+			</InstanceDesignTimePermissions>
+			<InstanceRunTimePermissions>
+				<Permissions resourceName="GetTimeLossesLevel0">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="GetRQDowntimeList">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="GetLastMachineLocalizedStatusSelectedEntries">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="GetCVSOrderDataFromTimeLossRaw">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="GetSAPPMValueData">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="*">
+					<PropertyRead>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</PropertyRead>
+					<PropertyWrite/>
+					<ServiceInvoke/>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="GetTimeLossesFromDB">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="GetMESOrderData2">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="GetMachineDowntimeData">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="GetDowntimeTypesList">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="GetTimeLossesWithType">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="GetCVSTimeLossRawDataPartialConsolidated">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="GetOrderData">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="GetL1andL0FromL2Status">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="GetLastMachineStatusSelectedEntries">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="GetApoOrderGantData">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="GetSAPPMValueAllData">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+				<Permissions resourceName="GetSumOfPartsPerMachineAndTime">
+					<PropertyRead/>
+					<PropertyWrite/>
+					<ServiceInvoke>
+						<Principal isPermitted="true"
+						           name="KBMachineOperatorUserGroup"
+						           type="Group"/>
+					</ServiceInvoke>
+					<EventInvoke/>
+					<EventSubscribe/>
+				</Permissions>
+			</InstanceRunTimePermissions>
+			<InstanceVisibilityPermissions>
+			</InstanceVisibilityPermissions>
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+				                     changeReason="header : name : updated, baseThingTemplate : updated, projectName : updated, tags : updated&#10;documentation : updated&#10;"
+				                     timestamp="2017-12-11T13:18:00.237+01:00"
+				                     user="adm-flassakm"/>
+				<ConfigurationChange changeAction="MODIFY"
+				                     changeReason="services :  : Code Updated, ServiceType updated, Output Updated, Input parameter Machine Added, Input parameter DateStart Added, Input parameter DateStop Added, Input parameter Station Added, GetStationPartsWithRQ : Inputs updated, Service Added&#10;"
+				                     timestamp="2019-08-26T10:33:20.643+02:00"
+				                     user="adm-konasm"/>
+			</ConfigurationChanges>
+		</ThingTemplate>
+	</ThingTemplates>
+</Entities>

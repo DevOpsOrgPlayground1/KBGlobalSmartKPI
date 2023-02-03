@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b692"
+ majorVersion="9"
+ minorVersion="0"
+ modelPersistenceProviderPackage="AzuresqlPersistenceProviderPackage"
+ revision="11"
+ schemaVersion="1109"
+ universal="password">
+    <Things>
+        <Thing
+         description="**** DEPRECATED use KBKPILocalThingWorxDatabaseThing *****"
+         documentationContent=""
+         effectiveThingPackage="DatabaseThing"
+         enabled="true"
+         homeMashup=""
+         identifier=""
+         inheritedValueStream=""
+         lastModifiedDate="2022-04-27T06:50:59.412Z"
+         name="KBKPIThingWorxDatabaseThing"
+         projectName="KBsmartKPI"
+         published="false"
+         tags=""
+         thingTemplate="KBKPIGlobalThingWorxDatabaseTemplate"
+         valueStream="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions>
+                <Permissions
+                 resourceName="*">
+                    <PropertyRead>
+                        <Principal
+                         isPermitted="true"
+                         name="NagiosRead"
+                         type="User"></Principal>
+                    </PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke></ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+            </RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility>
+                    <Principal
+                     isPermitted="true"
+                     name="KBBackGroundWorker"
+                     type="Organization"></Principal>
+                    <Principal
+                     isPermitted="true"
+                     name="KBOrganization"
+                     type="Organization"></Principal>
+                </Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables>
+                <ConfigurationTable
+                 dataShapeName=""
+                 description="JDBC Settings"
+                 isMultiRow="false"
+                 name="ConnectionInfo"
+                 ordinal="0">
+                    <DataShape>
+                        <FieldDefinitions>
+                            <FieldDefinition
+                             aspect.defaultValue="SELECT NOW()"
+                             baseType="STRING"
+                             description="Connection test string/query"
+                             name="connectionValidationString"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="jdbc:mydb:/server:port/database?param=value"
+                             aspect.friendlyName="JDBC Connection String"
+                             baseType="STRING"
+                             description="JDBC Connection URL"
+                             name="jDBCConnectionURL"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="com.yourdatabase.yourDriver"
+                             aspect.friendlyName="JDBC Driver Class Name"
+                             baseType="STRING"
+                             description="JDBC Driver Class Name"
+                             name="jDBCDriverClass"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="5.0"
+                             aspect.friendlyName="Maxium Number of Connections"
+                             baseType="NUMBER"
+                             description="Maximum number of connections in the pool"
+                             name="maxConnections"
+                             ordinal="3"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.friendlyName="Database Password"
+                             baseType="PASSWORD"
+                             description="Database password"
+                             name="password"
+                             ordinal="5"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.friendlyName="Database User Name"
+                             baseType="STRING"
+                             description="Database user name"
+                             name="userName"
+                             ordinal="4"></FieldDefinition>
+                        </FieldDefinitions>
+                    </DataShape>
+                    <Rows>
+                        <Row>
+							<connectionValidationString><![CDATA[select GETDATE()]]></connectionValidationString>
+							<password />
+							<jDBCConnectionURL><![CDATA[jdbc:sqlserver://host\\instance:1433;databaseName=name;applicationName=Thingworx;]]></jDBCConnectionURL>
+							<userName />
+							<jDBCDriverClass><![CDATA[com.microsoft.sqlserver.jdbc.SQLServerDriver]]></jDBCDriverClass>
+							<maxConnections>5.0</maxConnections>
+                        </Row>
+                    </Rows>
+                </ConfigurationTable>
+                <ConfigurationTable
+                 dataShapeName=""
+                 description="Connection Monitoring Settings"
+                 isMultiRow="false"
+                 name="ConnectionMonitoring"
+                 ordinal="0">
+                    <DataShape>
+                        <FieldDefinitions>
+                            <FieldDefinition
+                             aspect.defaultValue="30000.0"
+                             aspect.friendlyName="Monitor Rate (seconds)"
+                             baseType="NUMBER"
+                             description="Monitor rate in milliseconds"
+                             name="connectionMonitorRate"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="false"
+                             aspect.friendlyName="Enable Monitoring"
+                             baseType="BOOLEAN"
+                             description="Enable connection monitoring"
+                             name="enableMonitor"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="1.0"
+                             aspect.friendlyName="Number of Retries"
+                             baseType="NUMBER"
+                             description="Number of retries"
+                             name="numberOfRetries"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="2000.0"
+                             aspect.friendlyName="Retry Delay (milliseconds)"
+                             baseType="NUMBER"
+                             description="Retry delay in milliseconds"
+                             name="retryDelay"
+                             ordinal="3"></FieldDefinition>
+                        </FieldDefinitions>
+                    </DataShape>
+                    <Rows>
+                        <Row>
+                            <connectionMonitorRate>30000.0</connectionMonitorRate>
+                            <enableMonitor>false</enableMonitor>
+                            <numberOfRetries>1.0</numberOfRetries>
+                            <retryDelay>2000.0</retryDelay>
+                        </Row>
+                    </Rows>
+                </ConfigurationTable>
+                <ConfigurationTable
+                 dataShapeName=""
+                 description="Field/Column Name Aliases"
+                 isMultiRow="true"
+                 name="ColumnAliases"
+                 ordinal="1">
+                    <DataShape>
+                        <FieldDefinitions>
+                            <FieldDefinition
+                             aspect.friendlyName="Database Column Name"
+                             baseType="STRING"
+                             description="Database column name"
+                             name="columnName"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.friendlyName="Thingworx Field Name"
+                             baseType="STRING"
+                             description="Thingworx field name"
+                             name="fieldName"
+                             ordinal="1"></FieldDefinition>
+                        </FieldDefinitions>
+                    </DataShape>
+                    <Rows></Rows>
+                </ConfigurationTable>
+            </ConfigurationTables>
+            <ThingShape>
+                <PropertyDefinitions></PropertyDefinitions>
+                <ServiceDefinitions>
+                </ServiceDefinitions>
+                <EventDefinitions></EventDefinitions>
+                <ServiceMappings></ServiceMappings>
+                <ServiceImplementations>
+                </ServiceImplementations>
+                <Subscriptions></Subscriptions>
+            </ThingShape>
+            <PropertyBindings></PropertyBindings>
+            <RemotePropertyBindings></RemotePropertyBindings>
+            <RemoteServiceBindings></RemoteServiceBindings>
+            <RemoteEventBindings></RemoteEventBindings>
+            <AlertConfigurations></AlertConfigurations>
+            <ImplementedShapes></ImplementedShapes>
+            <ThingProperties></ThingProperties>
+        </Thing>
+    </Things>
+</Entities>
+         

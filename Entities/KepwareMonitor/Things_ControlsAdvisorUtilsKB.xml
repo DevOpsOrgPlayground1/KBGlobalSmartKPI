@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b527" majorVersion="9" minorVersion="0"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="8" schemaVersion="1107" universal="">
+	<Things>
+		<Thing
+			description="Utility thing containing services used by the Controls Advisor. {PTC.SCA.SCO.ControlsAdvisorUtils}"
+			documentationContent="" effectiveThingPackage="ConfiguredThing"
+			enabled="true" homeMashup="" identifier=""
+			lastModifiedDate="2021-08-26T08:31:27.553Z"
+			name="ControlsAdvisorUtilsKB" projectName="KBsmartKPI" published="false"
+			tags="" thingTemplate="GenericThing" valueStream="">
+			<Owner name="adm-kumar2a" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions />
+			<VisibilityPermissions>
+				<Visibility />
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables />
+			<ThingShape>
+				<PropertyDefinitions />
+				<ServiceDefinitions>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="CalculateStatusKB">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition baseType="STRING" description=""
+								name="thingName" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="GetFooterMashupNameKB">
+						<ResultType baseType="MASHUPNAME" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition baseType="STRING" description=""
+								name="serverName" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="GetServerDetailMashupName">
+						<ResultType baseType="MASHUPNAME" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition baseType="STRING" description=""
+								name="serverName" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="GetServerList">
+						<ResultType
+							aspect.dataShape="PTC.SCA.SCO.RemoteConnectionServerListDataShapeKB"
+							baseType="INFOTABLE" description="Remote Connected Servers"
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition baseType="QUERY" description=""
+								name="filterQuery" ordinal="1" />
+							<FieldDefinition baseType="QUERY" description=""
+								name="sortQuery" ordinal="2" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="GetServerPropertiesDetailPageKB">
+						<ResultType
+							aspect.dataShape="PTC.Factory.KepServerProperties"
+							baseType="INFOTABLE" description="" name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition baseType="STRING" description=""
+								name="serverName" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="GetServerPropertiesKB">
+						<ResultType
+							aspect.dataShape="PTC.SCA.SCO.RemoteConnectionServerListDataShapeKB"
+							baseType="INFOTABLE"
+							description="An infotable contains returned property values"
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition baseType="STRING" description=""
+								name="ServerName" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="GetView">
+						<ResultType baseType="STRING" description="GetViewURL"
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition
+								aspect.defaultValue="KEPServerEX_ListServers_ViewLink"
+								baseType="STRING" description="" name="event" ordinal="2" />
+							<FieldDefinition baseType="STRING" description=""
+								name="parameter_1" ordinal="1" />
+							<FieldDefinition baseType="STRING" description=""
+								name="parameter_2" ordinal="3" />
+							<FieldDefinition baseType="STRING" description=""
+								name="parameter_3" ordinal="4" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="GetViewDetailPageMasterKB">
+						<ResultType baseType="STRING" description="ViewUrl"
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition baseType="STRING" description=""
+								name="event" ordinal="2" />
+							<FieldDefinition baseType="STRING" description=""
+								name="parameter_1" ordinal="1" />
+							<FieldDefinition baseType="STRING" description=""
+								name="parameter_2" ordinal="3" />
+							<FieldDefinition baseType="STRING" description=""
+								name="parameter_3" ordinal="4" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+				</ServiceDefinitions>
+				<EventDefinitions />
+				<ServiceMappings />
+				<ServiceImplementations>
+					<ServiceImplementation description=""
+						handlerName="Script" name="CalculateStatusKB">
+						<ConfigurationTables>
+							<ConfigurationTable
+								description="" isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[Things["PTC.SCA.SCO.ControlsAdvisorUtils"].CalculateStatus({
+	thingName: thingName /* THINGNAME */
+});]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="GetFooterMashupNameKB">
+						<ConfigurationTables>
+							<ConfigurationTable
+								description="" isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var result = 'PTC.SCA.Mfg.ControlsAdvisor.KEPServerFooterMashupKB';]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="GetServerDetailMashupName">
+						<ConfigurationTables>
+							<ConfigurationTable
+								description="" isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[result = "PTC.Factory.KEPServerEX.DetailPageKB";]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="GetServerList">
+						<ConfigurationTables>
+							<ConfigurationTable
+								description="" isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var infotableParams = {
+	infoTableName: "InfoTable",
+	dataShapeName: "PTC.SCA.SCO.RemoteConnectionServerListDataShapeKB"
+};
+
+// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING("PTC.SCA.SCO.RemoteConnectionServerListDataShapeKB")
+var result = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(infotableParams);
+
+try {
+	// result: INFOTABLE dataShape: "PTC.SCA.SCO.RemoteConnectionServerListDataShapeKB"
+	var data = Things["PTC.SCA.SCO.ControlsAdvisorUtils"].GetServerList({
+		filterQuery: filterQuery /* QUERY */ ,
+		sortQuery: sortQuery /* QUERY */
+	});
+
+	if (data.rows.length >= 1) {
+		for (var i = 0; i < data.rows.length; i++) {
+			// PTC.SCA.SCO.RemoteConnectionServerListDataShapeKB entry object
+			var newEntry = new Object();
+			newEntry.Name = data.rows[i].Name; // STRING [Primary Key]
+			newEntry.aggregateThing = data.rows[i].aggregateThing; // THINGNAME
+			//newEntry.AlertIcon = result1.rows[i].AlertIcon; // STRING
+			newEntry.AlertIcon = "<span ><a href='index.html#master=KBSmartProductionMaster1Mashup&mashup=PTC.Factory.AlertManager.AlertMonitorKB&source=" + data.rows[i].Name + "&OPCDAThingName=PTC.Factory.KEPServerEX.ListServersKB' ><img src='/Thingworx/MediaEntities/PTC.Factory.Bell_Alert_Grey' class='gridCellImage' ></a><span class='label-grid-text-url-hidden' >No Active Alerts</span></span>";
+			newEntry.ClientCount = data.rows[i].ClientCount; // INTEGER
+			newEntry.CurrentServerTime = data.rows[i].CurrentServerTime; // STRING
+			newEntry.Description = data.rows[i].Description; // STRING
+			//newEntry.DetailsPageLink = result1.rows[i].DetailsPageLink; // STRING
+			newEntry.DetailsPageLink = "<span ><a href='index.html#master=KBSmartProductionMaster1Mashup&mashup=PTC.Factory.KEPServerEX.DetailPageMasterKB&ServerName=" + data.rows[i].Name + "' ><img src='/Thingworx/MediaEntities/PTC.Factory.ViewIcon' class='gridCellImage' ></a><span class='label-grid-text-url-hidden' >View Server Details</span></span>";
+			// var test = "<span ><a href='index.html#master=KBSmartProductionMaster1Mashup&OPCDAThingName=" + result1.rows[i].Name + "&mashup=PTC.Factory.KEPServerEX.DeviceListHeaderKB' class='gridCellLink' ><img src='/Thingworx/MediaEntities/PTC.Factory.AlertStatus_Green' class='gridCellImage' >&nbsp;&nbsp;0&nbsp;</a><span class='label-grid-text-url-hidden' >In Error</span></span>";
+			//newEntry.displayDevicesStatus = result1.rows[i].displayDevicesStatus; // STRING
+			newEntry.displayDevicesStatus = "<span ><a href='index.html#master=KBSmartProductionMaster1Mashup&OPCDAThingName=" + data.rows[i].Name + "&mashup=PTC.Factory.KEPServerEX.DeviceListHeaderKB' class='gridCellLink' ><img src='/Thingworx/MediaEntities/PTC.Factory.AlertStatus_Green' class='gridCellImage' >&nbsp;&nbsp;0&nbsp;</a><span class='label-grid-text-url-hidden' >In Error</span></span>";
+			newEntry.isCustomRemoteOPCServer = data.rows[i].isCustomRemoteOPCServer; // BOOLEAN
+			newEntry.connectionType = data.rows[i].connectionType; // STRING
+			newEntry.isRemoteServer = data.rows[i].isRemoteServer; // BOOLEAN
+			newEntry.NumberOfDevices = data.rows[i].NumberOfDevices; // INTEGER
+			newEntry.serverStatusHTMLString = data.rows[i].serverStatusHTMLString; // STRING
+			newEntry.TagCount = data.rows[i].TagCount; // INTEGER
+			newEntry.hasAlert = data.rows[i].hasAlert; // BOOLEAN
+			newEntry.serverStatus = data.rows[i].serverStatus; // INTEGER
+			newEntry.devicesStatus = data.rows[i].devicesStatus; // INTEGER
+			result.AddRow(newEntry);
+		}
+	}
+} catch(e) {
+	logger.error('error in GetServerList service of ControlsAdvisorUtilsKB Thing: ' + e);
+}]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="GetServerPropertiesDetailPageKB">
+						<ConfigurationTables>
+							<ConfigurationTable
+								description="" isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var params = {
+	infoTableName: "InfoTable",
+	dataShapeName: "PTC.Factory.KepServerProperties"
+};
+
+// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(PTC.Factory.KepServerProperties)
+var result = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+
+try {
+	// Result: INFOTABLE dataShape: "PTC.Factory.KepServerProperties"
+	var data = Things["PTC.Factory.KepServerMonitorUtils"].GetServerProperties({
+		serverName: serverName /* STRING */
+	});
+
+	if (data.rows.length > 0) {
+		for (var i = 0; i < data.rows.length; i++) {
+			// PTC.Factory.KepServerProperties entry object
+			var newEntry = new Object();
+			newEntry.Host = data.rows[i].Host; // STRING
+			newEntry.Description = data.rows[i].Description; // STRING
+			newEntry.NumberOfDevices = data.rows[i].NumberOfDevices; // INTEGER
+			newEntry.NumberOfDevicesInError = data.rows[i].NumberOfDevicesInError; // INTEGER
+			newEntry.ClientCount = data.rows[i].ClientCount; // INTEGER
+			newEntry.TagCount = data.rows[i].TagCount; // INTEGER
+			newEntry.CurrentServerTime = data.rows[i].CurrentServerTime; // STRING
+			//newEntry.DetailsPageLink = data.rows[i].Host; // STRING
+            newEntry.DetailsPageLink = "<span ><a href='index.html#master=KBSmartProductionMaster1Mashup&mashup=PTC.Factory.KEPServerEX.DetailPageMasterKB&ServerName=" + serverName +"' ><img src='/Thingworx/MediaEntities/PTC.Factory.ViewIcon' class='gridCellImage' ></a><span class='label-grid-text-url-hidden' >View Server Details</span></span>";
+			newEntry.Name = data.rows[i].Name; // STRING [Primary Key]
+			newEntry.ServerName = data.rows[i].ServerName; // STRING
+			newEntry.FullServerName = data.rows[i].FullServerName; // STRING
+			newEntry.OPCDAThingName = data.rows[i].OPCDAThingName; // STRING
+			newEntry.Id = data.rows[i].Id; // STRING
+			newEntry.IsConnected = data.rows[i].IsConnected; // BOOLEAN
+			newEntry.PublishFloorMS = data.rows[i].PublishFloorMS; // INTEGER
+			newEntry.ServerInitialized = data.rows[i].ServerInitialized; // BOOLEAN
+			newEntry.LastCurrentServerTimeValueUpdate = data.rows[i].LastCurrentServerTimeValueUpdate; // DATETIME
+			newEntry.devicesStatus = data.rows[i].devicesStatus; // INTEGER
+			//newEntry.AlertIcon = data.rows[i].AlertIcon; // STRING
+            newEntry.AlertIcon = "<span ><a href='index.html#master=KBSmartProductionMaster1Mashup&mashup=PTC.Factory.AlertManager.AlertMonitorKB&source=" + serverName + "&OPCDAThingName=PTC.Factory.KEPServerEX.ListServersKB' ><img src='/Thingworx/MediaEntities/PTC.Factory.Bell_Alert_Grey' class='gridCellImage' ></a><span class='label-grid-text-url-hidden' >No Active Alerts</span></span>";
+			newEntry.LastDiscovery = data.rows[i].LastDiscovery; // DATETIME
+			newEntry.hasAlert = data.rows[i].hasAlert; // BOOLEAN
+			newEntry.NumberOfDevicesAdded = data.rows[i].NumberOfDevicesAdded; // INTEGER
+			newEntry.NumberOfDevicesRemoved = data.rows[i].NumberOfDevicesRemoved; // INTEGER
+			newEntry.NumberOfDevicesUpdated = data.rows[i].NumberOfDevicesUpdated; // BOOLEAN
+			//newEntry.displayDevicesStatus = data.rows[i].displayDevicesStatus; // STRING
+            newEntry.displayDevicesStatus = "<span ><a href='index.html#master=KBSmartProductionMaster1Mashup&OPCDAThingName=" + serverName + "&mashup=PTC.Factory.KEPServerEX.DeviceListHeaderKB' class='gridCellLink' ><img src='/Thingworx/MediaEntities/PTC.Factory.AlertStatus_Green' class='gridCellImage' >&nbsp;&nbsp;0&nbsp;</a><span class='label-grid-text-url-hidden' >In Error</span></span>";
+			newEntry.isAggregate = data.rows[i].isAggregate; // BOOLEAN
+			newEntry.isCustomRemoteOPCServer = data.rows[i].isCustomRemoteOPCServer; // BOOLEAN
+			newEntry.RebindTags = data.rows[i].RebindTags; // BOOLEAN
+			newEntry.isCustomRemoteOPCServerString = data.rows[i].isCustomRemoteOPCServerString; // STRING
+			newEntry.serverStatus = data.rows[i].serverStatus; // INTEGER
+			newEntry.isRemoteServer = data.rows[i].isRemoteServer; // BOOLEAN
+			newEntry.serverStatusHTMLString = data.rows[i].serverStatusHTMLString; // STRING
+			newEntry.aggregateThing = data.rows[i].aggregateThing; // THINGNAME
+			newEntry.connectionType = data.rows[i].connectionType; // STRING
+            result.AddRow(newEntry);
+		}
+	}
+} catch (e) {
+	logger.error('error in GetServerPropertiesDetailPageKB service of ControlsAdvisorUtilsKB Thing: ' + e);
+}]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="GetServerPropertiesKB">
+						<ConfigurationTables>
+							<ConfigurationTable
+								description="" isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var params = {
+	infoTableName: "InfoTable",
+	dataShapeName: "PTC.SCA.SCO.RemoteConnectionServerListDataShapeKB"
+};
+
+// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(PTC.SCA.SCO.RemoteConnectionServerListDataShapeKB)
+var result = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+
+try {
+	// result: INFOTABLE dataShape: "PTC.SCA.SCO.RemoteConnectionServerListDataShapeKB"
+	var data = Things["PTC.SCA.SCO.ControlsAdvisorUtils"].GetServerProperties({
+		serverName: ServerName /* STRING */
+	});
+
+	if (data.rows.length > 0) {
+		for (var i = 0; i < data.rows.length; i++) {
+			// PTC.SCA.SCO.RemoteConnectionServerListDataShapeKB entry object
+			var newEntry = new Object();
+			newEntry.Name = data.rows[i].Name; // STRING [Primary Key]
+			newEntry.aggregateThing = data.rows[i].aggregateThing; // THINGNAME
+			//newEntry.AlertIcon = data.rows[i].AlertIcon; // STRING
+            newEntry.AlertIcon = "<span ><a href='index.html#master=KBSmartProductionMaster1Mashup&mashup=PTC.Factory.AlertManager.AlertMonitorKB&source=" + ServerName + "&OPCDAThingName=PTC.Factory.KEPServerEX.ListServersKB' ><img src='/Thingworx/MediaEntities/PTC.Factory.Bell_Alert_Grey' class='gridCellImage' ></a><span class='label-grid-text-url-hidden' >No Active Alerts</span></span>";
+			newEntry.ClientCount = data.rows[i].ClientCount; // INTEGER
+			newEntry.CurrentServerTime = data.rows[i].CurrentServerTime; // STRING
+			newEntry.Description = data.rows[i].Description; // STRING
+			//newEntry.DetailsPageLink = data.rows[i].DetailsPageLink; // STRING
+            newEntry.DetailsPageLink = "<span ><a href='index.html#master=KBSmartProductionMaster1Mashup&mashup=PTC.Factory.KEPServerEX.DetailPageMasterKB&ServerName=" + ServerName + "' ><img src='/Thingworx/MediaEntities/PTC.Factory.ViewIcon' class='gridCellImage' ></a><span class='label-grid-text-url-hidden' >View Server Details</span></span>";
+			newEntry.displayDevicesStatus = data.rows[i].displayDevicesStatus; // STRING
+            newEntry.displayDevicesStatus = "<span ><a href='index.html#master=KBSmartProductionMaster1Mashup&OPCDAThingName=" + ServerName + "&mashup=PTC.Factory.KEPServerEX.DeviceListHeaderKB' class='gridCellLink' ><img src='/Thingworx/MediaEntities/PTC.Factory.AlertStatus_Green' class='gridCellImage' >&nbsp;&nbsp;0&nbsp;</a><span class='label-grid-text-url-hidden' >In Error</span></span>";
+			newEntry.isCustomRemoteOPCServer = data.rows[i].isCustomRemoteOPCServer; // BOOLEAN
+			newEntry.connectionType = data.rows[i].connectionType; // STRING
+			newEntry.isRemoteServer = data.rows[i].isRemoteServer; // BOOLEAN
+			newEntry.NumberOfDevices = data.rows[i].NumberOfDevices; // INTEGER
+			newEntry.serverStatusHTMLString = data.rows[i].serverStatusHTMLString; // STRING
+			newEntry.TagCount = data.rows[i].TagCount; // INTEGER
+			newEntry.hasAlert = data.rows[i].hasAlert; // BOOLEAN
+			newEntry.serverStatus = data.rows[i].serverStatus; // INTEGER
+			newEntry.devicesStatus = data.rows[i].devicesStatus; // INTEGER
+            result.AddRow(newEntry);
+		}
+	}
+} catch (e) {
+   logger.error('error in GetServerPropertiesKB service of ControlsAdvisorUtilsKB Thing :' + e);
+}]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="GetView">
+						<ConfigurationTables>
+							<ConfigurationTable
+								description="" isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var result = 'index.html#master=KBSmartProductionMaster1Mashup&mashup=PTC.Factory.KEPServerEX.DeviceListHeaderKB&OPCDAThingName=' + parameter_1 + '&ServerName=null';]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="GetViewDetailPageMasterKB">
+						<ConfigurationTables>
+							<ConfigurationTable
+								description="" isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var result = 'index.html#master=KBSmartProductionMaster1Mashup&mashup=PTC.Factory.AlertManager.AlertMonitorKB&source=' + parameter_1;
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+				</ServiceImplementations>
+				<Subscriptions />
+			</ThingShape>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations />
+			<ImplementedShapes />
+			<ThingProperties />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="header : name : updated, projectName : updated, tags : updated&#10;"
+					timestamp="2021-08-23T18:00:24.910Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerList : service added&#10;"
+					timestamp="2021-08-23T18:06:08.818Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerDetailMashupName : service added&#10;"
+					timestamp="2021-08-24T05:23:10.343Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetViewDetailPageMasterKB : service added&#10;"
+					timestamp="2021-08-24T05:47:04.774Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetViewDetailPageMasterKB : input parameter parameter_1 added, inputs updated, input parameter event added, inputs updated, input parameter parameter_2 added, inputs updated, input parameter parameter_3 added, inputs updated, output updated&#10;"
+					timestamp="2021-08-24T05:48:57.653Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetViewDetailPageMasterKB : service updated&#10;"
+					timestamp="2021-08-24T05:49:36.313Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetViewDetailPageMasterKB : service updated&#10;"
+					timestamp="2021-08-24T05:50:57.459Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetViewDetailPageMasterKB : service updated&#10;"
+					timestamp="2021-08-24T05:52:49.483Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetViewDetailPageMasterKB : service updated&#10;"
+					timestamp="2021-08-24T05:53:08.298Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetViewDetailPageMasterKB : service updated&#10;"
+					timestamp="2021-08-24T05:53:40.311Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="FORCEEDIT"
+					changeReason="ForceEdit" timestamp="2021-08-24T05:53:45.562Z"
+					user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetViewDetailPageMasterKB : service updated&#10;CalculateStatusKB : service added&#10;"
+					timestamp="2021-08-24T06:16:56.223Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : CalculateStatusKB : service updated&#10;GetServerPropertiesKB : service added&#10;"
+					timestamp="2021-08-24T06:21:38.998Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesKB : service updated&#10;"
+					timestamp="2021-08-24T06:26:17.867Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesKB : service updated&#10;"
+					timestamp="2021-08-24T06:29:41.940Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesKB : service updated&#10;"
+					timestamp="2021-08-24T06:30:03.664Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesKB : service updated&#10;"
+					timestamp="2021-08-24T08:02:36.556Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesKB : service updated&#10;"
+					timestamp="2021-08-24T08:04:40.200Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesKB : service updated&#10;"
+					timestamp="2021-08-24T08:06:44.616Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="FORCEEDIT"
+					changeReason="ForceEdit" timestamp="2021-08-24T08:07:02.388Z"
+					user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerDetailMashupName : service updated&#10;"
+					timestamp="2021-08-24T08:19:43.984Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerDetailMashupName : service updated&#10;GetServerPropertiesDetailPageKB : service added&#10;"
+					timestamp="2021-08-24T08:44:07.315Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesDetailPageKB : service updated&#10;"
+					timestamp="2021-08-24T08:45:11.168Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesDetailPageKB : input parameter serverName added, inputs updated&#10;"
+					timestamp="2021-08-24T08:45:34.221Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesDetailPageKB : service updated&#10;"
+					timestamp="2021-08-24T08:45:47.277Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesDetailPageKB : service updated&#10;"
+					timestamp="2021-08-24T08:46:12.330Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesDetailPageKB : service updated&#10;"
+					timestamp="2021-08-24T08:53:32.307Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesDetailPageKB : service updated&#10;"
+					timestamp="2021-08-24T09:00:42.784Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesDetailPageKB : service updated&#10;"
+					timestamp="2021-08-24T09:01:10.499Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesDetailPageKB : service updated&#10;"
+					timestamp="2021-08-24T09:04:28.683Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesDetailPageKB : service updated&#10;"
+					timestamp="2021-08-24T09:04:47.081Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesDetailPageKB : service updated&#10;"
+					timestamp="2021-08-24T09:07:48.640Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerListCopy : service deleted&#10;"
+					timestamp="2021-08-26T07:43:13.795Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetFooterMashupNameKB : service updated&#10;"
+					timestamp="2021-08-26T07:47:06.747Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerPropertiesKB : service updated&#10;"
+					timestamp="2021-08-26T07:48:47.399Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetViewDetailPageMasterKB : service updated&#10;"
+					timestamp="2021-08-26T07:51:05.233Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetView : service updated&#10;"
+					timestamp="2021-08-26T07:51:26.752Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerList : service updated&#10;"
+					timestamp="2021-08-26T07:59:12.523Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerList : service updated&#10;"
+					timestamp="2021-08-26T08:22:05.114Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerList : service updated&#10;"
+					timestamp="2021-08-26T08:24:04.777Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerList : service updated&#10;"
+					timestamp="2021-08-26T08:24:22.548Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerList : service updated&#10;"
+					timestamp="2021-08-26T08:25:11.946Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerList : service updated&#10;"
+					timestamp="2021-08-26T08:25:31.373Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerList : service updated&#10;"
+					timestamp="2021-08-26T08:26:48.221Z" user="adm-kumar2a" />
+				<ConfigurationChange changeAction="MODIFY"
+					changeReason="services : GetServerList : service updated&#10;"
+					timestamp="2021-08-26T08:31:27.553Z" user="adm-kumar2a" />
+			</ConfigurationChanges>
+		</Thing>
+	</Things>
+</Entities>

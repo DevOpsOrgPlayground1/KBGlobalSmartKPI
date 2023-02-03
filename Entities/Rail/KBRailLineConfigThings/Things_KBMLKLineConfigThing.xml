@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b2319" majorVersion="8" minorVersion="4"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="4" schemaVersion="1041" universal="">
+	<Things>
+		<Thing description="" documentationContent=""
+			effectiveThingPackage="ConfiguredThing" enabled="true" homeMashup=""
+			identifier="" lastModifiedDate="2019-03-29T11:40:26.022Z"
+			name="KBMLKLineConfigThing" projectName="" published="false"
+			tags="KBThingWorxAdministrationVocabulary:Administrated"
+			thingTemplate="GenericThing" valueStream="">
+			<Owner name="adm-abdurais" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions />
+			<VisibilityPermissions>
+				<Visibility />
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables />
+			<ThingShape>
+				<PropertyDefinitions />
+				<ServiceDefinitions>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="CreateLines">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+				</ServiceDefinitions>
+				<EventDefinitions />
+				<ServiceMappings />
+				<ServiceImplementations>
+					<ServiceImplementation description=""
+						handlerName="Script" name="CreateLines">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+var lineName = "400976Heller1";
+var stationNamePLC = lineName + "PLC";
+var stationNameDB = lineName + "SAP";
+var lineThingName = "KB" + location + lineName + "MachineThing";
+var params = {
+	MachineOrLineName: lineName /* STRING */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+Things["KBSmartKpiThingCreatorThing"].CreateLocalMachineOrLine(params);
+
+var params = {
+	StationName: stationNamePLC /* STRING */,
+	LineThingName: lineThingName /* THINGNAME */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+var result = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);
+
+var params = {
+	StationName: stationNameDB /* STRING */,
+	LineThingName: lineThingName /* THINGNAME */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+var result = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);
+
+
+
+var lineName = "401069Heller2";
+var stationNamePLC = lineName + "PLC";
+var stationNameDB = lineName + "SAP";
+var lineThingName = "KB" + location + lineName + "MachineThing";
+var params = {
+	MachineOrLineName: lineName /* STRING */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+Things["KBSmartKpiThingCreatorThing"].CreateLocalMachineOrLine(params);
+
+var params = {
+	StationName: stationNamePLC /* STRING */,
+	LineThingName: lineThingName /* THINGNAME */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+var result = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);
+
+var params = {
+	StationName: stationNameDB /* STRING */,
+	LineThingName: lineThingName /* THINGNAME */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+var result = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);
+
+
+var lineName = "401068Heller3";
+var stationNamePLC = lineName + "PLC";
+var stationNameDB = lineName + "SAP";
+var lineThingName = "KB" + location + lineName + "MachineThing";
+var params = {
+	MachineOrLineName: lineName /* STRING */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+Things["KBSmartKpiThingCreatorThing"].CreateLocalMachineOrLine(params);
+
+var params = {
+	StationName: stationNamePLC /* STRING */,
+	LineThingName: lineThingName /* THINGNAME */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+var result = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);
+
+var params = {
+	StationName: stationNameDB /* STRING */,
+	LineThingName: lineThingName /* THINGNAME */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+var result = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);
+
+
+var lineName = "400974Heller4";
+var stationNamePLC = lineName + "PLC";
+var stationNameDB = lineName + "SAP";
+var lineThingName = "KB" + location + lineName + "MachineThing";
+var params = {
+	MachineOrLineName: lineName /* STRING */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+Things["KBSmartKpiThingCreatorThing"].CreateLocalMachineOrLine(params);
+
+var params = {
+	StationName: stationNamePLC /* STRING */,
+	LineThingName: lineThingName /* THINGNAME */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+var result = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);
+
+var params = {
+	StationName: stationNameDB /* STRING */,
+	LineThingName: lineThingName /* THINGNAME */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+var result = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);
+
+
+var lineName = "401304Heller5";
+var stationNamePLC = lineName + "PLC";
+var stationNameDB = lineName + "SAP";
+var lineThingName = "KB" + location + lineName + "MachineThing";
+var params = {
+	MachineOrLineName: lineName /* STRING */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+Things["KBSmartKpiThingCreatorThing"].CreateLocalMachineOrLine(params);
+
+var params = {
+	StationName: stationNamePLC /* STRING */,
+	LineThingName: lineThingName /* THINGNAME */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+var result = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);
+
+var params = {
+	StationName: stationNameDB /* STRING */,
+	LineThingName: lineThingName /* THINGNAME */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+var result = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);
+
+
+var lineName = "300660Heller6";
+var stationNamePLC = lineName + "PLC";
+var stationNameDB = lineName + "SAP";
+var lineThingName = "KB" + location + lineName + "MachineThing";
+var params = {
+	MachineOrLineName: lineName /* STRING */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+Things["KBSmartKpiThingCreatorThing"].CreateLocalMachineOrLine(params);
+
+var params = {
+	StationName: stationNamePLC /* STRING */,
+	LineThingName: lineThingName /* THINGNAME */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+var result = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);
+
+var params = {
+	StationName: stationNameDB /* STRING */,
+	LineThingName: lineThingName /* THINGNAME */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+var result = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);
+
+var lineName = "400919Miyano1";
+var stationNamePLC = lineName + "PLC";
+var stationNameDB = lineName + "SAP";
+var lineThingName = "KB" + location + lineName + "MachineThing";
+var params = {
+	MachineOrLineName: lineName /* STRING */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+Things["KBSmartKpiThingCreatorThing"].CreateLocalMachineOrLine(params);
+
+var params = {
+	StationName: stationNamePLC /* STRING */,
+	LineThingName: lineThingName /* THINGNAME */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+var result = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);
+
+var params = {
+	StationName: stationNameDB /* STRING */,
+	LineThingName: lineThingName /* THINGNAME */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+var result = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);
+
+var lineName = "401377Miyano2";
+var stationNamePLC = lineName + "PLC";
+var stationNameDB = lineName + "SAP";
+var lineThingName = "KB" + location + lineName + "MachineThing";
+var params = {
+	MachineOrLineName: lineName /* STRING */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+Things["KBSmartKpiThingCreatorThing"].CreateLocalMachineOrLine(params);
+
+var params = {
+	StationName: stationNamePLC /* STRING */,
+	LineThingName: lineThingName /* THINGNAME */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+var result = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);
+
+var params = {
+	StationName: stationNameDB /* STRING */,
+	LineThingName: lineThingName /* THINGNAME */
+};
+
+// result: INFOTABLE dataShape: KBThingCreatorResponseDataShape
+var result = Things["KBSmartKpiThingCreatorThing"].CreateLocalStationWithLineAssignment(params);]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+				</ServiceImplementations>
+				<Subscriptions />
+			</ThingShape>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations />
+			<ImplementedShapes />
+			<ThingProperties />
+			<ConfigurationChanges>
+				<ConfigurationChange changeAction="CREATE"
+					changeReason="" timestamp="2019-03-29T11:40:26.007Z"
+					user="adm-abdurais" />
+			</ConfigurationChanges>
+		</Thing>
+	</Things>
+</Entities>

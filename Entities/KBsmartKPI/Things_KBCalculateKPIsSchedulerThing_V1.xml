@@ -1,0 +1,1976 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b2319" majorVersion="8" minorVersion="4"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="4" schemaVersion="1041" universal="">
+	<Things>
+		<Thing description="" documentationContent=""
+			effectiveThingPackage="SchedulerThing" enabled="true" homeMashup=""
+			identifier="" lastModifiedDate="2021-07-30T14:10:05.361+02:00"
+			name="KBCalculateKPIsSchedulerThing_V1" projectName=""
+			published="false" tags="" thingTemplate="Scheduler" valueStream="">
+			<Owner name="adm-flassakm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions />
+			<VisibilityPermissions>
+				<Visibility />
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables>
+				<ConfigurationTable
+					description="General Settings" isMultiRow="false" name="Settings"
+					ordinal="0">
+					<DataShape>
+						<FieldDefinitions>
+							<FieldDefinition aspect.defaultValue="true"
+								baseType="BOOLEAN"
+								description="Automatically enable scheduler on startup"
+								name="enabled" ordinal="0" />
+							<FieldDefinition baseType="USERNAME"
+								description="User context in which to run event handlers"
+								name="runAsUser" ordinal="0" />
+							<FieldDefinition
+								aspect.defaultValue="0 0/1 * * * ?" baseType="SCHEDULE"
+								description="Execution Schedule (Cron String)" name="schedule"
+								ordinal="0" />
+						</FieldDefinitions>
+					</DataShape>
+					<Rows>
+						<Row>
+							<enabled>true</enabled>
+							<runAsUser><![CDATA[Administrator]]></runAsUser>
+							<schedule><![CDATA[30 0/5 * * * ?]]></schedule>
+						</Row>
+					</Rows>
+				</ConfigurationTable>
+			</ConfigurationTables>
+			<ThingShape>
+				<PropertyDefinitions>
+					<PropertyDefinition aspect.cacheTime="0.0"
+						aspect.dataChangeType="VALUE" aspect.defaultValue="true"
+						baseType="BOOLEAN" category="" description="" isLocalOnly="false"
+						name="doMonthlyCalculation" ordinal="1" />
+					<PropertyDefinition aspect.cacheTime="0.0"
+						aspect.dataChangeType="VALUE" aspect.defaultValue="false"
+						baseType="BOOLEAN" category="" description="" isLocalOnly="false"
+						name="WriteDebugLogAsWarn" ordinal="1" />
+					<PropertyDefinition aspect.cacheTime="0.0"
+						aspect.dataChangeType="VALUE" aspect.defaultValue="false"
+						baseType="BOOLEAN" category="" description="" isLocalOnly="false"
+						name="IsCalculationRunningActualKPIs_Current" ordinal="1" />
+					<PropertyDefinition aspect.cacheTime="0.0"
+						aspect.dataChangeType="VALUE" aspect.defaultValue="false"
+						baseType="BOOLEAN" category="" description="" isLocalOnly="false"
+						name="IsCalculationRunningActualKPIs_Retrospective" ordinal="1" />
+					<PropertyDefinition aspect.cacheTime="0.0"
+						aspect.dataChangeType="VALUE" aspect.defaultValue="false"
+						baseType="BOOLEAN" category="" description="" isLocalOnly="false"
+						name="IsCalculationRunningYearKPIs" ordinal="2" />
+					<PropertyDefinition aspect.cacheTime="0.0"
+						aspect.dataChangeType="VALUE" aspect.isPersistent="true"
+						baseType="DATETIME" category="" description="" isLocalOnly="false"
+						name="LastCaclulationStartActualKPIs_Current" ordinal="3" />
+					<PropertyDefinition aspect.cacheTime="0.0"
+						aspect.dataChangeType="VALUE" aspect.isPersistent="true"
+						baseType="DATETIME" category="" description="" isLocalOnly="false"
+						name="LastCalculationEndActualKPIs_Current" ordinal="4" />
+					<PropertyDefinition aspect.cacheTime="0.0"
+						aspect.dataChangeType="VALUE" aspect.isPersistent="true"
+						baseType="DATETIME" category="" description="" isLocalOnly="false"
+						name="LastCaclulationStartActualKPIs_Retrospective" ordinal="3" />
+					<PropertyDefinition aspect.cacheTime="0.0"
+						aspect.dataChangeType="VALUE" aspect.isPersistent="true"
+						baseType="DATETIME" category="" description="" isLocalOnly="false"
+						name="LastCalculationEndActualKPIs_Retrospective" ordinal="4" />
+					<PropertyDefinition aspect.cacheTime="0.0"
+						aspect.dataChangeType="VALUE" aspect.isPersistent="true"
+						baseType="DATETIME" category="" description="" isLocalOnly="false"
+						name="LastCaclulationStartYearKPIs" ordinal="5" />
+					<PropertyDefinition aspect.cacheTime="0.0"
+						aspect.dataChangeType="VALUE" aspect.isPersistent="true"
+						baseType="DATETIME" category="" description="" isLocalOnly="false"
+						name="LastCalculationEndYearKPIs" ordinal="6" />
+					<PropertyDefinition aspect.cacheTime="0.0"
+						aspect.dataChangeType="VALUE" aspect.isPersistent="true"
+						baseType="STRING" category="" description="" isLocalOnly="false"
+						name="CalculationResultActualKPIs_Current" ordinal="7" />
+					<PropertyDefinition aspect.cacheTime="0.0"
+						aspect.dataChangeType="VALUE" aspect.isPersistent="true"
+						baseType="STRING" category="" description="" isLocalOnly="false"
+						name="CalculationResultActualKPIs_Retrospective" ordinal="7" />
+					<PropertyDefinition aspect.cacheTime="0.0"
+						aspect.dataChangeType="VALUE" aspect.isPersistent="true"
+						baseType="STRING" category="" description="" isLocalOnly="false"
+						name="CalculationResultYearKPIs" ordinal="8" />
+				</PropertyDefinitions>
+				<ServiceDefinitions>
+					<ServiceDefinition aspect.isAsync="false"
+						category="ActualKPIs" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="CalculateActualKPIs">
+						<ResultType baseType="STRING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="Type"
+								ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="true"
+						category="ActualKPIs" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="CalculateActualKPIs_Current">
+						<ResultType baseType="STRING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="true"
+						category="ActualKPIs" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="CalculateActualKPIs_Retrospective">
+						<ResultType baseType="STRING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="WriteDebugLog">
+						<ResultType baseType="STRING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="logText"
+								ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="CalculateSingleMachineAndSlot">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="CalculationBase"
+								ordinal="1" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="DATETIME" description="" name="EndDate" ordinal="2" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="Machine" ordinal="4" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="DATETIME" description="" name="StartDate" ordinal="3" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="CalculateSingleAreaAndSlot">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="CalculationBase"
+								ordinal="1" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="DATETIME" description="" name="EndDate" ordinal="2" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="Area" ordinal="4" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="Machines" ordinal="4" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="DATETIME" description="" name="StartDate" ordinal="3" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="ActualKPIs" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="CalculateSingleMachineForActualKPIs_Current">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="Machine" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="ActualKPIs" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="CalculateSingleMachineForActualKPIs_Retrospective">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="Machine" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="ActualKPIs" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="CalculateSingleAreaForActualKPIs_Current">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="Machines" ordinal="1" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="Area" ordinal="2" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="BOOLEAN" description="" name="isArea" ordinal="3" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="ActualKPIs" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="CalculateSingleAreaForActualKPIs_Retrospective">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="Machines" ordinal="1" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="Area" ordinal="2" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="BOOLEAN" description="" name="isArea" ordinal="3" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="YearKPIs" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="CalculateSingleMachineForYearKPIs">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="Machine" ordinal="1" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="NUMBER" description="" name="Year" ordinal="2" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="YearKPIs" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="CalculateSingleAreaForYearKPIs">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="Machines" ordinal="1" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="STRING" description="" name="Area" ordinal="2" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="BOOLEAN" description="" name="isArea" ordinal="3" />
+							<FieldDefinition aspect.isRequired="true"
+								baseType="NUMBER" description="" name="Year" ordinal="4" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="true"
+						category="YearKPIs" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="ReCalculateYearKPIs">
+						<ResultType baseType="STRING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions>
+							<FieldDefinition aspect.isRequired="true"
+								baseType="NUMBER" description="" name="Year" ordinal="1" />
+						</ParameterDefinitions>
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="false"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="setConfig">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+				</ServiceDefinitions>
+				<EventDefinitions />
+				<ServiceMappings />
+				<ServiceImplementations>
+					<ServiceImplementation description=""
+						handlerName="Script" name="CalculateActualKPIs">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+
+var servicename = "CalculateActualKPIs "+Type;
+
+if (Type == "Current" || Type == "Retrospective") {
+		me.WriteDebugLog({logText: servicename+" Machines Triggered"});
+        
+
+		// result: INFOTABLE dataShape: "SearchResults"
+		var searchResult =  Resources["SearchFunctions"].SearchThings({
+			maxItems: 999999 /* NUMBER */,
+			searchExpression: undefined /* STRING */,
+			types: undefined /* JSON */,
+			thingTemplates: { "items": ["KBLocalMachineThingTemplate"] } /* JSON */,
+			identifierSearchExpression: undefined /* STRING */,
+			modelTags: undefined /* TAGS */,
+			thingShapes: undefined /* JSON */,
+			query: undefined /* QUERY */,
+			aspects: undefined /* JSON */,
+			excludedAspects: undefined /* JSON */,
+			networks: undefined /* JSON */,
+			maxSearchItems: undefined /* NUMBER */
+		});
+		
+		var machines = searchResult[0].thingResults;
+
+         
+
+        var tableLength = machines.rows.length;
+		me.WriteDebugLog({logText: servicename+" Machines "+tableLength});
+        for (var x=0; x < tableLength; x++) {
+            var machine = machines.rows[x];
+		    me.WriteDebugLog({logText: servicename+" Machine "+machine.name});	                
+            //Your code here
+            if (Things[machine.name].ImplementsShape({
+                thingShapeName: "KBLocalMachineSmartKPIShape" /* THINGSHAPENAME */
+            }) && Things[machine.name].isActive){
+				 me.WriteDebugLog({logText: servicename+" Machine "+machine.name});
+                 Things[me.name]["CalculateSingleMachineForActualKPIs_"+Type]({
+                    Machine: machine.name /* STRING */
+                });
+            }
+        }
+
+
+		me.WriteDebugLog({logText: servicename+" Areas Triggered"});
+		// result: INFOTABLE dataShape: "SearchResults"
+		searchResult =  Resources["SearchFunctions"].SearchThings({
+			maxItems: 999999 /* NUMBER */,
+			searchExpression: undefined /* STRING */,
+			types: undefined /* JSON */,
+			thingTemplates: { "items": ["KBLocalAreaThingTemplate"] } /* JSON */,
+			identifierSearchExpression: undefined /* STRING */,
+			modelTags: undefined /* TAGS */,
+			thingShapes: undefined /* JSON */,
+			query: undefined /* QUERY */,
+			aspects: undefined /* JSON */,
+			excludedAspects: undefined /* JSON */,
+			networks: undefined /* JSON */,
+			maxSearchItems: undefined /* NUMBER */
+		});
+		
+		var areas = searchResult[0].thingResults;
+
+         
+		var xxx;
+        tableLength = areas.rows.length;
+		me.WriteDebugLog({logText: servicename+" Areas "+tableLength});
+        for (var x=0; x < tableLength; x++) {
+            var area = areas.rows[x];
+            me.WriteDebugLog({logText: servicename+" Area "+area.name});
+            //Your code here
+            if (Things[area.name].ImplementsShape({
+                thingShapeName: "KBLocalAreaSmartKPIShape" /* THINGSHAPENAME */
+            }) && Things[area.name].isActive){
+				var machinesInArea = "";
+				xxx=false;
+				var tableLengthMachines = Things[area.name].KBMachineThings.rows.length;
+				for (var xx=0; xx < tableLengthMachines; xx++) {
+				    var row = Things[area.name].KBMachineThings.rows[xx];
+		            if (Things[row.KBMachineThing].ImplementsShape({
+		                thingShapeName: "KBLocalMachineSmartKPIShape" /* THINGSHAPENAME */
+		            }) && Things[row.KBMachineThing].isActive){
+					    if (xxx===true) {machinesInArea += ',';}
+					    machinesInArea += "'"+row.KBMachineThing+"'";
+						xxx=true;
+					}
+				}
+				me.WriteDebugLog({logText: servicename+" Area "+area.name+" , Machines "+machinesInArea});
+
+
+                Things[me.name]["CalculateSingleAreaForActualKPIs_"+Type]({
+                    Area: area.name /* STRING */,
+                    isArea: true,
+                    Machines: machinesInArea
+                });
+            }
+        }
+
+		me.WriteDebugLog({logText: servicename+" Plants Triggered"});
+		// result: INFOTABLE dataShape: "SearchResults"
+		searchResult =  Resources["SearchFunctions"].SearchThings({
+			maxItems: 999999 /* NUMBER */,
+			searchExpression: undefined /* STRING */,
+			types: undefined /* JSON */,
+			thingTemplates: { "items": ["KBLocalPlantThingTemplate"] } /* JSON */,
+			identifierSearchExpression: undefined /* STRING */,
+			modelTags: undefined /* TAGS */,
+			thingShapes: undefined /* JSON */,
+			query: undefined /* QUERY */,
+			aspects: undefined /* JSON */,
+			excludedAspects: undefined /* JSON */,
+			networks: undefined /* JSON */,
+			maxSearchItems: undefined /* NUMBER */
+		});
+		
+		var plants = searchResult[0].thingResults;
+
+        tableLength = plants.rows.length;
+		me.WriteDebugLog({logText: servicename+" Plants "+tableLength});
+        for (var x=0; x < tableLength; x++) {
+            var plant = plants.rows[x];
+			me.WriteDebugLog({logText: servicename+" plant "+plant.name});		    
+            //Your code here
+            if (Things[plant.name].ImplementsShape({
+                thingShapeName: "KBLocalPlantSmartKPIShape" /* THINGSHAPENAME */
+            }) && Things[plant.name].isActive){
+				var machinesInPlant = "";
+				xxx=false;
+		        var tableLengthMachines = machines.rows.length;
+		        for (var xx=0; xx < tableLengthMachines; xx++) {
+		            var machine = machines.rows[xx];
+		            //Your code here
+		            if (Things[machine.name].ImplementsShape({
+		                thingShapeName: "KBLocalMachineSmartKPIShape" /* THINGSHAPENAME */
+		            }) && Things[machine.name].isActive && Things[machine.name].KBPlantThing == plant.name){
+					    if (xxx===true) {machinesInPlant += ',';}
+					    machinesInPlant += "'"+machine.name+"'";
+						xxx=true;
+		            }
+		        }
+				me.WriteDebugLog({logText: servicename+" plant "+plant.name+" , Machines "+machinesInPlant});
+                Things[me.name]["CalculateSingleAreaForActualKPIs_"+Type]({
+                    Area: plant.name /* STRING */,
+                    isArea: false,
+                    Machines: machinesInPlant
+                });
+            }
+        }
+
+		me.WriteDebugLog({logText: servicename+" OK"});
+}
+
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="CalculateActualKPIs_Current">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+var servicename = "CalculateActualKPIs_Current";
+
+var result = "OK";
+if (!me.IsCalculationRunningActualKPIs_Current) {
+	me.IsCalculationRunningActualKPIs_Current = true;
+    try {
+		me.WriteDebugLog({logText: servicename+" Machines Triggered"});
+		var currentDate = new Date();
+        me.LastCaclulationStartActualKPIs_Current = currentDate;
+
+
+		me.CalculateActualKPIs({Type: "Current"});
+
+
+	    me.LastCalculationEndActualKPIs_Current = new Date();
+    } catch(err) {
+        logger.error(me.name+" "+servicename+" "+servicename+": error "+err);	                
+		result = "Error: "+err;
+    }
+    me.WriteDebugLog({logText: servicename+" OK"});
+	me.IsCalculationRunningActualKPIs_Current = false;
+} else {
+	result = "Process is currently running, please try later again.";
+}
+
+me.CalculationResultActualKPIs_Current = result;
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="CalculateActualKPIs_Retrospective">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+var servicename = "CalculateActualKPIs_Retrospective";
+
+var result = "OK";
+if (!me.IsCalculationRunningActualKPIs_Retrospective) {
+	me.IsCalculationRunningActualKPIs_Retrospective = true;
+    try {
+		me.WriteDebugLog({logText: servicename+" Machines Triggered"});
+		var currentDate = new Date();
+        me.LastCaclulationStartActualKPIs_Retrospective = currentDate;
+        
+		me.CalculateActualKPIs({Type: "Retrospective"});
+
+
+	    me.LastCalculationEndActualKPIs_Retrospective = new Date();
+    } catch(err) {
+        logger.error(me.name+" "+servicename+" "+servicename+": error "+err);	                
+		result = "Error: "+err;
+    }
+    me.WriteDebugLog({logText: servicename+" OK"});
+	me.IsCalculationRunningActualKPIs_Retrospective = false;
+} else {
+	result = "Process is currently running, please try later again.";
+}
+
+me.CalculationResultActualKPIs_Retrospective = result;
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="CalculateSingleMachineAndSlot">
+						<ConfigurationTables>
+							<ConfigurationTable description=""
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[    
+var servicename = "CalculateSingleMachineAndSlot";										
+										    
+		me.WriteDebugLog({logText: servicename+" CalculateKPIs started for "+Machine+",CalculationBase "+CalculationBase+" Start "+StartDate+" End "+EndDate});
+        var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+        var DB = "";
+
+        if (location == "MUC") {
+            DB = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+        } else {
+            DB = Resources["KBThingWorxServerSystem"].GetKPILocalThingWorxDatabaseThing();
+        }
+
+        // result: NUMBER
+        var result =  Things[DB].CalulateKPIsForSingleMachine({
+            StartDate: StartDate /* DATETIME */,
+            CalculationBase: CalculationBase /* STRING */,
+            EndDate: EndDate /* DATETIME */,
+            Machine: Machine /* STRING */
+        });
+
+        // result: NUMBER
+        me.WriteDebugLog({logText: servicename+" CalculateKPIs finalized for "+Machine+",CalculationBase "+CalculationBase+" ("+result+")"});
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="WriteDebugLog">
+						<ConfigurationTables>
+							<ConfigurationTable description=""
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[        
+var servicename = "WriteDebugLog";
+										
+if (me.WriteDebugLogAsWarn){
+		logger.warn(me.name+": "+logText);
+} else {
+		logger.debug(me.name+": "+logText);
+}	                
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="CalculateSingleAreaAndSlot">
+						<ConfigurationTables>
+							<ConfigurationTable description=""
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[   
+var servicename = "CalculateSingleAreaAndSlot";										
+										     
+		me.WriteDebugLog({logText: servicename+" CalculateKPIs started for "+Area+",CalculationBase "+CalculationBase+" Start "+StartDate+" End "+EndDate});
+        var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+        var DB = "";
+
+        if (location == "MUC") {
+            DB = Resources["KBThingWorxServerSystem"].GetKPIThingWorxDatabaseThing();
+        } else {
+            DB = Resources["KBThingWorxServerSystem"].GetKPILocalThingWorxDatabaseThing();
+        }
+
+        // result: NUMBER
+        var result =  Things[DB].CalulateKPIsForSingleArea({
+            StartDate: StartDate /* DATETIME */,
+            CalculationBase: CalculationBase /* STRING */,
+            EndDate: EndDate /* DATETIME */,
+            Machines: Machines /* STRING */,
+            Area: Area /* STRING */
+        });
+
+        // result: NUMBER
+        me.WriteDebugLog({logText: servicename+" CalculateKPIs finalized for "+Area+",CalculationBase "+CalculationBase+" ("+result+")"});
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="CalculateSingleMachineForActualKPIs_Current">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+var servicename = "CalculateSingleMachineForActualKPIs_Current";
+										
+me.WriteDebugLog({logText: servicename+" START__START__START__"+servicename+"__START__START__START"});
+										
+var calculationBase = "";
+var startDate = new Date();
+var endDate = new Date();
+var currentDate = new Date();
+
+var timeoffset = 0;
+
+try {
+    var plant = Things[Machine].KBPlantThing;
+    if (plant !== "" && plant !== undefined){
+        timeoffset = Things[plant].CVS_DMS_Day_Offset_in_Minutes;
+    } 
+} catch(err) {
+	logger.error(me.name+" "+servicename+" "+servicename+": error for "+Machine+" calculating timeoffset");
+}
+
+
+me.WriteDebugLog({logText: servicename+" timeoffset "+timeoffset});
+
+
+
+me.WriteDebugLog({logText: servicename+" *********************************Current shift*********************************************"});
+try {
+    
+    // result: INFOTABLE dataShape: "KBShiftTimeDataShape"
+    var CurrentShiftTime =  Things["KBKPILocalThingWorxDatabaseThing"].GetFullShiftTime({
+        date: new Date() /* DATETIME */,
+        Machine: Machine /* STRING */
+    });
+    
+    calculationBase = "shift";
+    startDate = CurrentShiftTime[0].CurrentStartTime;
+    endDate = CurrentShiftTime[0].CurrentEndTime;
+
+    me.CalculateSingleMachineAndSlot({
+        CalculationBase: calculationBase /* STRING */,
+        EndDate: endDate /* DATETIME */,
+        StartDate: startDate /* DATETIME */,
+        Machine: Machine /* STRING */
+    });
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Machine+" calculationBase "+calculationBase+" "+err);
+}
+
+me.WriteDebugLog({logText: servicename+" *********************************Last shift*********************************************"});
+try {
+    // result: INFOTABLE dataShape: "KBShiftTimeDataShape"
+    var LastShiftTime =  Things["KBKPILocalThingWorxDatabaseThing"].GetFullShiftTimeMinus({
+        date: new Date() /* DATETIME */,
+        Iterations: 1 /* INTEGER */,
+        Machine: Machine /* STRING */
+    });
+    
+    calculationBase = "shift";
+    startDate = LastShiftTime[0].CurrentStartTime;
+    endDate = LastShiftTime[0].CurrentEndTime;
+
+    me.CalculateSingleMachineAndSlot({
+        CalculationBase: calculationBase /* STRING */,
+        EndDate: endDate /* DATETIME */,
+        StartDate: startDate /* DATETIME */,
+        Machine: Machine /* STRING */
+    });
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Machine+" calculationBase "+calculationBase+" "+err);
+}
+
+
+me.WriteDebugLog({logText: servicename+" *********************************day*********************************************"});
+try {
+    if (true){
+        calculationBase = "day";
+        startDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack:0, OffsetInMinutes:timeoffset});
+        endDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack:-1, OffsetInMinutes:timeoffset});
+
+        me.CalculateSingleMachineAndSlot({
+            CalculationBase: calculationBase /* STRING */,
+            EndDate: endDate /* DATETIME */,
+            StartDate: startDate /* DATETIME */,
+            Machine: Machine /* STRING */
+        });
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Machine+" calculationBase "+calculationBase+" "+err);
+}
+
+
+me.WriteDebugLog({logText: servicename+" END__END__END__"+servicename+"__END__END__END"});
+
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="CalculateSingleMachineForActualKPIs_Retrospective">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+var servicename = "CalculateSingleMachineForActualKPIs_Retrospective";
+										
+me.WriteDebugLog({logText: servicename+" START__START__START__"+servicename+"__START__START__START"});
+										
+var calculationBase = "";
+var startDate = new Date();
+var endDate = new Date();
+var currentDate = new Date();
+
+var timeoffset = 0;
+
+try {
+    var plant = Things[Machine].KBPlantThing;
+    if (plant !== "" && plant !== undefined){
+        timeoffset = Things[plant].CVS_DMS_Day_Offset_in_Minutes;
+    } 
+} catch(err) {
+	logger.error(me.name+" "+servicename+" "+servicename+": error for "+Machine+" calculating timeoffset");
+}
+
+
+me.WriteDebugLog({logText: servicename+" timeoffset "+timeoffset});
+
+
+
+me.WriteDebugLog({logText: servicename+" *********************************last day*********************************************"});
+me.WriteDebugLog({logText: servicename+" should run only once a day!!"});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset)});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset)});
+//
+try {
+    if (dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay() !== dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay()){
+        calculationBase = "day";
+        me.WriteDebugLog({logText: servicename+" Start "+calculationBase}); 
+        startDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack:1, OffsetInMinutes:timeoffset});
+        endDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack:0, OffsetInMinutes:timeoffset});
+
+        me.CalculateSingleMachineAndSlot({
+            CalculationBase: calculationBase /* STRING */,
+            EndDate: endDate /* DATETIME */,
+            StartDate: startDate /* DATETIME */,
+            Machine: Machine /* STRING */
+        });
+    } else {
+        me.WriteDebugLog({logText: servicename+" not started"}); 
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Machine+" calculationBase "+calculationBase+" "+err);
+}
+
+me.WriteDebugLog({logText: servicename+" *********************************week*********************************************"});
+me.WriteDebugLog({logText: servicename+" should run only once a day!!"});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset)});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset)});
+//
+try {
+    if (dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay() !== dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay()){
+        calculationBase = "week";
+        me.WriteDebugLog({logText: servicename+" Start "+calculationBase}); 
+        startDate = dateAddMinutes(Things["KBTimeHelperThing"].GetCurrentWeekStart(),timeoffset);
+        endDate = dateAddMinutes(Things["KBTimeHelperThing"].GetCurrentWeekEnd({
+            FullTimeSlot: true /* BOOLEAN */
+        }),timeoffset);
+
+        me.CalculateSingleMachineAndSlot({
+            CalculationBase: calculationBase /* STRING */,
+            EndDate: endDate /* DATETIME */,
+            StartDate: startDate /* DATETIME */,
+            Machine: Machine /* STRING */
+        });
+
+    } else {
+        me.WriteDebugLog({logText: servicename+" not started"}); 
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Machine+" calculationBase "+calculationBase+" "+err);
+}
+
+me.WriteDebugLog({logText: servicename+" *********************************last week*********************************************"});
+me.WriteDebugLog({logText: servicename+" should run only once a week!!"});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset)});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset)});
+me.WriteDebugLog({logText: servicename+" Check 3 "+Resources["KBThingWorxServerSystem"].GetUTCDayOfWeek()});
+//
+try {
+    if (dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay() !== dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay() && Resources["KBThingWorxServerSystem"].GetUTCDayOfWeek() == 0){
+        calculationBase = "week";
+        me.WriteDebugLog({logText: servicename+" Start "+calculationBase}); 
+        startDate = dateAddMinutes(Things["KBTimeHelperThing"].GetLastWeekStart(),timeoffset);
+        endDate = dateAddMinutes(Things["KBTimeHelperThing"].GetLastWeekEnd({
+            FullTimeSlot: true /* BOOLEAN */
+        }),timeoffset);
+
+        me.CalculateSingleMachineAndSlot({
+            CalculationBase: calculationBase /* STRING */,
+            EndDate: endDate /* DATETIME */,
+            StartDate: startDate /* DATETIME */,
+            Machine: Machine /* STRING */
+        });
+
+    } else {
+        me.WriteDebugLog({logText: servicename+" not started"}); 
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Machine+" calculationBase "+calculationBase+" "+err);
+}
+
+me.WriteDebugLog({logText: servicename+" *********************************month*********************************************"});
+me.WriteDebugLog({logText: servicename+" should run only once a day!!"});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset)});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset)});
+//
+try {
+    if (dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay() !== dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay()){
+        calculationBase = "month";
+        me.WriteDebugLog({logText: servicename+" Start "+calculationBase}); 
+		// Current Month
+        startDate = dateAddMinutes(Things["KBTimeHelperThing"].GetCurrentMonthStart(),timeoffset);
+        endDate = dateAddMinutes(Things["KBTimeHelperThing"].GetCurrentMonthEnd({
+            FullTimeSlot: true /* BOOLEAN */
+        }),timeoffset);
+
+        me.CalculateSingleMachineAndSlot({
+            CalculationBase: calculationBase /* STRING */,
+            EndDate: endDate /* DATETIME */,
+            StartDate: startDate /* DATETIME */,
+            Machine: Machine /* STRING */
+        });
+
+    } else {
+        me.WriteDebugLog({logText: servicename+" not started"}); 
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Machine+" calculationBase "+calculationBase+" "+err);
+}
+
+me.WriteDebugLog({logText: servicename+" *********************************last month*********************************************"});
+me.WriteDebugLog({logText: servicename+" should run only once a week!!"});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset)});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset)});
+me.WriteDebugLog({logText: servicename+" Check 3 "+Resources["KBThingWorxServerSystem"].GetUTCDayOfWeek()});
+//
+try {
+    if (dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay() !== dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay() && Resources["KBThingWorxServerSystem"].GetUTCDayOfWeek() == 0) {
+        calculationBase = "month";
+        me.WriteDebugLog({logText: servicename+" Start "+calculationBase}); 
+
+		// Last Month
+        startDate = dateAddMinutes(Things["KBTimeHelperThing"].GetLastMonthStart(),timeoffset);
+        endDate = dateAddMinutes(Things["KBTimeHelperThing"].GetLastMonthEnd({
+            FullTimeSlot: true /* BOOLEAN */
+        }),timeoffset);
+
+        me.CalculateSingleMachineAndSlot({
+            CalculationBase: calculationBase /* STRING */,
+            EndDate: endDate /* DATETIME */,
+            StartDate: startDate /* DATETIME */,
+            Machine: Machine /* STRING */
+        });
+    } else {
+        me.WriteDebugLog({logText: servicename+" not started"}); 
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Machine+" calculationBase "+calculationBase+" "+err);
+}
+
+me.WriteDebugLog({logText: servicename+" *********************************year*********************************************"});
+me.WriteDebugLog({logText: servicename+" should run only once a week!!"});
+me.WriteDebugLog({logText: servicename+" Check 1 "+me.LastCaclulationStartActualKPIs_Retrospective.getDay()});
+me.WriteDebugLog({logText: servicename+" Check 2 "+me.LastCalculationEndActualKPIs_Retrospective.getDay()});
+me.WriteDebugLog({logText: servicename+" Check 1 "+me.LastCaclulationStartActualKPIs_Retrospective});
+me.WriteDebugLog({logText: servicename+" Check 2 "+me.LastCalculationEndActualKPIs_Retrospective});
+me.WriteDebugLog({logText: servicename+" Check 3 "+Resources["KBThingWorxServerSystem"].GetUTCDayOfWeek()});
+//
+try {
+    if (me.LastCaclulationStartActualKPIs_Retrospective.getDay() !== me.LastCalculationEndActualKPIs_Retrospective.getDay()  && Resources["KBThingWorxServerSystem"].GetUTCDayOfWeek() == 0){
+        calculationBase = "year";
+        me.WriteDebugLog({logText: servicename+" Start "+calculationBase}); 
+        startDate = dateAddMinutes(Things["KBTimeHelperThing"].GetCurrentYearStart(),timeoffset);
+        endDate = dateAddMinutes(Things["KBTimeHelperThing"].GetCurrentYearEnd({
+            FullTimeSlot: true /* BOOLEAN */
+        }),timeoffset);
+
+        me.CalculateSingleMachineAndSlot({
+            CalculationBase: calculationBase /* STRING */,
+            EndDate: endDate /* DATETIME */,
+            StartDate: startDate /* DATETIME */,
+            Machine: Machine /* STRING */
+        });
+    } else {
+        me.WriteDebugLog({logText: servicename+" not started"}); 
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Machine+" calculationBase "+calculationBase+" "+err);
+}
+
+me.WriteDebugLog({logText: servicename+" END__END__END__"+servicename+"__END__END__END"});
+
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="CalculateSingleAreaForActualKPIs_Current">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+var servicename = "CalculateSingleAreaForActualKPIs_Current";
+										
+var calculationBase = "";
+var startDate = new Date();
+var endDate = new Date();
+var currentDate = new Date();
+
+var timeoffset = 0;
+
+
+try {
+	if (isArea){
+	    var plant = Things[Area].KBPlantThing;
+	    if (plant !== "" && plant !== undefined){
+	        timeoffset = Things[plant].CVS_DMS_Day_Offset_in_Minutes;
+	    } 
+	} else {
+        timeoffset = Things[Area].CVS_DMS_Day_Offset_in_Minutes;
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Area+" calculating timeoffset, isArea "+isArea);
+}
+
+
+
+me.WriteDebugLog({logText: servicename+" *********************************Current shift*********************************************"});
+me.WriteDebugLog({logText: servicename+" shift will not be calculated as there can different timeslots be defined..."});
+
+
+me.WriteDebugLog({logText: servicename+" *********************************day*********************************************"});
+try {
+    if (true){
+        calculationBase = "day";
+        startDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack:0, OffsetInMinutes:timeoffset});
+        endDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack:-1, OffsetInMinutes:timeoffset});
+
+        me.CalculateSingleAreaAndSlot({
+            CalculationBase: calculationBase /* STRING */,
+            EndDate: endDate /* DATETIME */,
+            StartDate: startDate /* DATETIME */,
+            Machines: Machines /* STRING */,
+            Area: Area /* STRING */
+        });
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Area+" calculationBase "+calculationBase+" "+err);
+}
+
+
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="CalculateSingleAreaForActualKPIs_Retrospective">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+var servicename = "CalculateSingleAreaForActualKPIs_Retrospective";
+										
+var calculationBase = "";
+var startDate = new Date();
+var endDate = new Date();
+var currentDate = new Date();
+
+var timeoffset = 0;
+
+
+try {
+	if (isArea){
+	    var plant = Things[Area].KBPlantThing;
+	    if (plant !== "" && plant !== undefined){
+	        timeoffset = Things[plant].CVS_DMS_Day_Offset_in_Minutes;
+	    } 
+	} else {
+        timeoffset = Things[Area].CVS_DMS_Day_Offset_in_Minutes;
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Area+" calculating timeoffset, isArea "+isArea);
+}
+
+
+
+me.WriteDebugLog({logText: servicename+" *********************************last day*********************************************"});
+me.WriteDebugLog({logText: servicename+" should run only once a day!!"});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset)});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset)});
+//
+try {
+    if (dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay() !== dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay()){
+        calculationBase = "day";
+        me.WriteDebugLog({logText: servicename+" Start "+calculationBase}); 
+        startDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack:1, OffsetInMinutes:timeoffset});
+        endDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack:0, OffsetInMinutes:timeoffset});
+
+        me.CalculateSingleAreaAndSlot({
+            CalculationBase: calculationBase /* STRING */,
+            EndDate: endDate /* DATETIME */,
+            StartDate: startDate /* DATETIME */,
+            Machines: Machines /* STRING */,
+            Area: Area /* STRING */
+        });
+    } else {
+        me.WriteDebugLog({logText: servicename+" not started"}); 
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Area+" calculationBase "+calculationBase+" "+err);
+}
+
+me.WriteDebugLog({logText: servicename+" *********************************week*********************************************"});
+me.WriteDebugLog({logText: servicename+" should run only once a day!!"});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset)});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset)});
+//
+try {
+    if (dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay() !== dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay()){
+        calculationBase = "week";
+        me.WriteDebugLog({logText: servicename+" Start "+calculationBase}); 
+        startDate = dateAddMinutes(Things["KBTimeHelperThing"].GetCurrentWeekStart(),timeoffset);
+        endDate = dateAddMinutes(Things["KBTimeHelperThing"].GetCurrentWeekEnd({
+            FullTimeSlot: true /* BOOLEAN */
+        }),timeoffset);
+
+        me.CalculateSingleAreaAndSlot({
+            CalculationBase: calculationBase /* STRING */,
+            EndDate: endDate /* DATETIME */,
+            StartDate: startDate /* DATETIME */,
+            Machines: Machines /* STRING */,
+            Area: Area /* STRING */
+        });
+
+    } else {
+        me.WriteDebugLog({logText: servicename+" not started"}); 
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Area+" calculationBase "+calculationBase+" "+err);
+}
+
+me.WriteDebugLog({logText: servicename+" *********************************last week*********************************************"});
+me.WriteDebugLog({logText: servicename+" should run only once a week!!"});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset)});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset)});
+me.WriteDebugLog({logText: servicename+" Check 3 "+Resources["KBThingWorxServerSystem"].GetUTCDayOfWeek()});
+//
+try {
+    if (dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay() !== dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay() && Resources["KBThingWorxServerSystem"].GetUTCDayOfWeek() == 0){
+        calculationBase = "week";
+        me.WriteDebugLog({logText: servicename+" Start "+calculationBase}); 
+        startDate = dateAddMinutes(Things["KBTimeHelperThing"].GetLastWeekStart(),timeoffset);
+        endDate = dateAddMinutes(Things["KBTimeHelperThing"].GetLastWeekEnd({
+            FullTimeSlot: true /* BOOLEAN */
+        }),timeoffset);
+
+        me.CalculateSingleAreaAndSlot({
+            CalculationBase: calculationBase /* STRING */,
+            EndDate: endDate /* DATETIME */,
+            StartDate: startDate /* DATETIME */,
+            Machines: Machines /* STRING */,
+            Area: Area /* STRING */
+        });
+
+    } else {
+        me.WriteDebugLog({logText: servicename+" not started"}); 
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Area+" calculationBase "+calculationBase+" "+err);
+}
+
+me.WriteDebugLog({logText: servicename+" *********************************month*********************************************"});
+me.WriteDebugLog({logText: servicename+" should run only once a day!!"});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset)});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset)});
+//
+try {
+    if (dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay() !== dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay()){
+        calculationBase = "month";
+        me.WriteDebugLog({logText: servicename+" Start "+calculationBase}); 
+		// Current Month
+        startDate = dateAddMinutes(Things["KBTimeHelperThing"].GetCurrentMonthStart(),timeoffset);
+        endDate = dateAddMinutes(Things["KBTimeHelperThing"].GetCurrentMonthEnd({
+            FullTimeSlot: true /* BOOLEAN */
+        }),timeoffset);
+
+        me.CalculateSingleAreaAndSlot({
+            CalculationBase: calculationBase /* STRING */,
+            EndDate: endDate /* DATETIME */,
+            StartDate: startDate /* DATETIME */,
+            Machines: Machines /* STRING */,
+            Area: Area /* STRING */
+        });
+
+    } else {
+        me.WriteDebugLog({logText: servicename+" not started"}); 
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Area+" calculationBase "+calculationBase+" "+err);
+}
+
+me.WriteDebugLog({logText: servicename+" *********************************last month*********************************************"});
+me.WriteDebugLog({logText: servicename+" should run only once a week!!"});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay()});
+me.WriteDebugLog({logText: servicename+" Check 1 "+dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset)});
+me.WriteDebugLog({logText: servicename+" Check 2 "+dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset)});
+me.WriteDebugLog({logText: servicename+" Check 2 "+Resources["KBThingWorxServerSystem"].GetUTCDayOfWeek()});
+//
+try {
+    if (dateAddMinutes(me.LastCaclulationStartActualKPIs_Retrospective,-timeoffset).getDay() !== dateAddMinutes(me.LastCalculationEndActualKPIs_Retrospective,-timeoffset).getDay() && Resources["KBThingWorxServerSystem"].GetUTCDayOfWeek() == 0) {
+        calculationBase = "month";
+        me.WriteDebugLog({logText: servicename+" Start "+calculationBase}); 
+
+		// Last Month
+        startDate = dateAddMinutes(Things["KBTimeHelperThing"].GetLastMonthStart(),timeoffset);
+        endDate = dateAddMinutes(Things["KBTimeHelperThing"].GetLastMonthEnd({
+            FullTimeSlot: true /* BOOLEAN */
+        }),timeoffset);
+
+        me.CalculateSingleAreaAndSlot({
+            CalculationBase: calculationBase /* STRING */,
+            EndDate: endDate /* DATETIME */,
+            StartDate: startDate /* DATETIME */,
+            Machines: Machines /* STRING */,
+            Area: Area /* STRING */
+        });
+    } else {
+        me.WriteDebugLog({logText: servicename+" not started"}); 
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Area+" calculationBase "+calculationBase+" "+err);
+}
+
+me.WriteDebugLog({logText: servicename+" *********************************year*********************************************"});
+me.WriteDebugLog({logText: servicename+" should run only once a week!!"});
+me.WriteDebugLog({logText: servicename+" Check 1 "+me.LastCaclulationStartActualKPIs_Retrospective.getDay()});
+me.WriteDebugLog({logText: servicename+" Check 2 "+me.LastCalculationEndActualKPIs_Retrospective.getDay()});
+me.WriteDebugLog({logText: servicename+" Check 1 "+me.LastCaclulationStartActualKPIs_Retrospective});
+me.WriteDebugLog({logText: servicename+" Check 2 "+me.LastCalculationEndActualKPIs_Retrospective});
+me.WriteDebugLog({logText: servicename+" Check 3 "+Resources["KBThingWorxServerSystem"].GetUTCDayOfWeek()});
+//
+try {
+    if (me.LastCaclulationStartActualKPIs_Retrospective.getDay() !== me.LastCalculationEndActualKPIs_Retrospective.getDay()  && Resources["KBThingWorxServerSystem"].GetUTCDayOfWeek() == 0){
+        calculationBase = "year";
+        me.WriteDebugLog({logText: servicename+" Start "+calculationBase}); 
+        startDate = dateAddMinutes(Things["KBTimeHelperThing"].GetCurrentYearStart(),timeoffset);
+        endDate = dateAddMinutes(Things["KBTimeHelperThing"].GetCurrentYearEnd({
+            FullTimeSlot: true /* BOOLEAN */
+        }),timeoffset);
+
+        me.CalculateSingleAreaAndSlot({
+            CalculationBase: calculationBase /* STRING */,
+            EndDate: endDate /* DATETIME */,
+            StartDate: startDate /* DATETIME */,
+            Machines: Machines /* STRING */,
+            Area: Area /* STRING */
+        });
+    } else {
+        me.WriteDebugLog({logText: servicename+" not started"}); 
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Area+" calculationBase "+calculationBase+" "+err);
+}
+
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script"
+						name="CalculateSingleMachineForYearKPIs">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+ var servicename = "CalculateSingleMachineForYearKPIs";
+ //This currently only works fully for current year!
+ //Others have to be done via snowflake!
+
+var calculationBase = "";
+var startDate = new Date();
+var endDate = new Date();
+var currentDate = new Date();
+var yearStartDate = new Date();
+var yearEndDate = new Date();
+var doCalculation = true;
+
+var timeoffset = 0;
+
+try {
+    var plant = Things[Machine].KBPlantThing;
+    if (plant !== "" && plant !== undefined){
+        timeoffset = Things[plant].CVS_DMS_Day_Offset_in_Minutes;
+    } 
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Machine+" calculating timeoffset");
+}
+
+        
+if (Year==Resources["KBThingWorxServerSystem"].GetUTCYear()){
+	yearStartDate = dateAddMinutes(Things["KBTimeHelperThing"].GetCurrentYearStart(),timeoffset);
+	yearEndDate = dateAddMinutes(Things["KBTimeHelperThing"].GetCurrentYearEnd({
+	            FullTimeSlot: true /* BOOLEAN */
+	        }),timeoffset);
+	doCalculation = true;
+} else if (Year+1==Resources["KBThingWorxServerSystem"].GetUTCYear()){
+	yearStartDate = dateAddMinutes(Things["KBTimeHelperThing"].GetLastYearStart(),timeoffset);
+	yearEndDate = dateAddMinutes(Things["KBTimeHelperThing"].GetLastYearEnd({
+	            FullTimeSlot: true /* BOOLEAN */
+	        }),timeoffset);
+	doCalculation = true;
+} else {
+	doCalculation = false;
+}				
+
+
+if (doCalculation){
+
+	me.WriteDebugLog({logText: servicename+" *********************************shift*********************************************"});
+	try {
+	    startDate = yearStartDate;
+	    endDate = yearEndDate;
+	
+	    // result: INFOTABLE dataShape: ""
+	    var shifts =  Things["KBKPILocalThingWorxDatabaseThing"].GetFullShifts({
+	        StartDate: startDate /* DATETIME */,
+	        EndDate: endDate /* DATETIME */,
+	        Machine: Machine /* STRING */
+	    });
+	    
+	    var shiftstableLength = shifts.rows.length;
+	    for (var shiftsx=0; shiftsx < shiftstableLength; shiftsx++) {
+	        var shift = shifts.rows[shiftsx];
+	        //Your code here
+	
+	        calculationBase = "shift";
+	        startDate = shift.CurrentStartTime;
+	        endDate = shift.CurrentEndTime;
+	
+	        me.CalculateSingleMachineAndSlot({
+	            CalculationBase: calculationBase /* STRING */,
+	            StartDate: startDate /* DATETIME */,
+	            EndDate: endDate /* DATETIME */,
+	            Machine: Machine /* STRING */
+	        });
+	    }
+	} catch(err) {
+		logger.error(me.name+" "+servicename+": error for "+Machine+" calculationBase "+calculationBase);
+	}
+	
+	me.WriteDebugLog({logText: servicename+" *********************************day*********************************************"});
+	try {
+	    var daycounter = 0;
+		var daystartDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack:daycounter, OffsetInMinutes:timeoffset});
+		var dayendDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack:daycounter-1, OffsetInMinutes:timeoffset});
+	    while (daystartDate >= yearStartDate){
+	        calculationBase = "day";
+	
+			if (daystartDate < yearEndDate) {
+		        me.CalculateSingleMachineAndSlot({
+		            CalculationBase: calculationBase /* STRING */,
+		            StartDate: daystartDate /* DATETIME */,
+		            EndDate: dayendDate /* DATETIME */,
+		            Machine: Machine /* STRING */
+		        });
+			}	
+	
+	        daycounter++;
+		    daystartDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack:daycounter, OffsetInMinutes:timeoffset});
+		    dayendDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack:daycounter-1, OffsetInMinutes:timeoffset});
+	    }
+	} catch(err) {
+		logger.error(me.name+" "+servicename+": error for "+Machine+" calculationBase "+calculationBase);
+	}
+	
+	
+	me.WriteDebugLog({logText: servicename+" *********************************week*********************************************"});
+	try {
+	    var weekcounter = 0;
+		var dayOfWeek = Resources["KBThingWorxServerSystem"].GetUTCDayOfWeek();
+	    var daysToStartOfWeek = dayOfWeek+(7*weekcounter);
+	    var daysToEndOfWeek = 7-dayOfWeek-(weekcounter*7);
+		var weekstartDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack: daysToStartOfWeek, OffsetInMinutes: timeoffset});
+		var weekendDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack: -1*daysToEndOfWeek, OffsetInMinutes: timeoffset});
+	    while (weekstartDate >= yearStartDate){
+	        calculationBase = "week";
+	
+			if (weekstartDate < yearEndDate) {
+		        me.CalculateSingleMachineAndSlot({
+		            CalculationBase: calculationBase /* STRING */,
+		            StartDate: weekstartDate /* DATETIME */,
+		            EndDate: weekendDate /* DATETIME */,
+		            Machine: Machine /* STRING */
+		        });
+			}	
+	
+	        weekcounter++;
+		    daysToStartOfWeek = dayOfWeek+(7*weekcounter);
+		    daysToEndOfWeek = 7-dayOfWeek-(weekcounter*7);
+			weekstartDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack: daysToStartOfWeek, OffsetInMinutes: timeoffset});
+			weekendDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack: -1*daysToEndOfWeek, OffsetInMinutes: timeoffset});
+	    }
+	} catch(err) {
+		logger.error(me.name+" "+servicename+": error for "+Machine+" calculationBase "+calculationBase);
+	}
+	
+	me.WriteDebugLog({logText: servicename+" *********************************month*********************************************"});
+	try {
+	
+	    var monthcounter = 0;
+		var monthstartDate = Things["KBTimeHelperThing"].GetMonthStart({MonthsBack: monthcounter, OffsetInMinutes: timeoffset});
+		var monthendDate = Things["KBTimeHelperThing"].GetMonthStart({MonthsBack: monthcounter-1, OffsetInMinutes: timeoffset});
+	    while (monthstartDate >= yearStartDate){
+	        calculationBase = "month";
+	
+	
+			if (monthstartDate < yearEndDate) {
+		        me.CalculateSingleMachineAndSlot({
+		            CalculationBase: calculationBase /* STRING */,
+		            StartDate: monthstartDate /* DATETIME */,
+		            EndDate: monthendDate /* DATETIME */,
+		            Machine: Machine /* STRING */
+		        });
+			}	
+	
+	        monthcounter++;
+			monthstartDate = Things["KBTimeHelperThing"].GetMonthStart({MonthsBack: monthcounter, OffsetInMinutes: timeoffset});
+			monthendDate = Things["KBTimeHelperThing"].GetMonthStart({MonthsBack: monthcounter-1, OffsetInMinutes: timeoffset});
+		}
+	} catch(err) {
+		logger.error(me.name+" "+servicename+": error for "+Machine+" calculationBase "+calculationBase);
+	}
+	
+	me.WriteDebugLog({logText: servicename+" *********************************year*********************************************"});
+	//Only current year is fully availabe!
+	if (Year==Resources["KBThingWorxServerSystem"].GetUTCYear()){										
+		try {
+		        calculationBase = "year";
+		        startDate = dateAddMinutes(yearStartDate,timeoffset);
+		        endDate = dateAddMinutes(yearEndDate,timeoffset);
+		
+		        me.CalculateSingleMachineAndSlot({
+		            CalculationBase: calculationBase /* STRING */,
+		            EndDate: endDate /* DATETIME */,
+		            StartDate: startDate /* DATETIME */,
+		            Machine: Machine /* STRING */
+		        });
+		} catch(err) {
+			logger.error(me.name+" "+servicename+": error for "+Machine+" calculationBase "+calculationBase);
+		}
+	}
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script"
+						name="CalculateSingleAreaForYearKPIs">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+  var servicename = "CalculateSingleAreaForYearKPIs";
+ //This currently only works fully for current year!
+ //Others have to be done via snowflake!
+
+var calculationBase = "";
+var startDate = new Date();
+var endDate = new Date();
+var currentDate = new Date();
+var yearStartDate = new Date();
+var yearEndDate = new Date();
+var doCalculation = true;
+
+var timeoffset = 0;
+
+try {
+	if (isArea){
+	    var plant = Things[Area].KBPlantThing;
+	    if (plant !== "" && plant !== undefined){
+	        timeoffset = Things[plant].CVS_DMS_Day_Offset_in_Minutes;
+	    } 
+	} else {
+        timeoffset = Things[Area].CVS_DMS_Day_Offset_in_Minutes;
+    }
+} catch(err) {
+	logger.error(me.name+" "+servicename+": error for "+Area+" calculating timeoffset, isArea "+isArea);
+}
+
+        
+if (Year==Resources["KBThingWorxServerSystem"].GetUTCYear()){
+	yearStartDate = dateAddMinutes(Things["KBTimeHelperThing"].GetCurrentYearStart(),timeoffset);
+	yearEndDate = dateAddMinutes(Things["KBTimeHelperThing"].GetCurrentYearEnd({
+	            FullTimeSlot: true /* BOOLEAN */
+	        }),timeoffset);
+	doCalculation = true;
+} else if (Year+1==Resources["KBThingWorxServerSystem"].GetUTCYear()){
+	yearStartDate = dateAddMinutes(Things["KBTimeHelperThing"].GetLastYearStart(),timeoffset);
+	yearEndDate = dateAddMinutes(Things["KBTimeHelperThing"].GetLastYearEnd({
+	            FullTimeSlot: true /* BOOLEAN */
+	        }),timeoffset);
+	doCalculation = true;
+} else {
+	doCalculation = false;
+}				
+
+
+if (doCalculation){
+
+	me.WriteDebugLog({logText: servicename+" *********************************shift*********************************************"});
+	me.WriteDebugLog({logText: servicename+" shift will not be calculated as there can different timeslots be defined..."});
+		
+	me.WriteDebugLog({logText: servicename+" *********************************day*********************************************"});
+	try {
+	    var daycounter = 0;
+		var daystartDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack:daycounter, OffsetInMinutes:timeoffset});
+		var dayendDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack:daycounter-1, OffsetInMinutes:timeoffset});
+	    while (daystartDate >= yearStartDate){
+	        calculationBase = "day";
+	
+			if (daystartDate < yearEndDate) {
+		        me.CalculateSingleAreaAndSlot({
+		            CalculationBase: calculationBase /* STRING */,
+		            EndDate: dayendDate /* DATETIME */,
+		            StartDate: daystartDate /* DATETIME */,
+		            Machines: Machines /* STRING */,
+		            Area: Area /* STRING */
+		        });
+			}	
+	
+	        daycounter++;
+		    daystartDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack:daycounter, OffsetInMinutes:timeoffset});
+		    dayendDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack:daycounter-1, OffsetInMinutes:timeoffset});
+	    }
+	} catch(err) {
+		logger.error(me.name+" "+servicename+": error for "+Area+" calculationBase "+calculationBase);
+	}
+	
+	
+	me.WriteDebugLog({logText: servicename+" *********************************week*********************************************"});
+	try {
+	    var weekcounter = 0;
+		var dayOfWeek = Resources["KBThingWorxServerSystem"].GetUTCDayOfWeek();
+	    var daysToStartOfWeek = dayOfWeek+(7*weekcounter);
+	    var daysToEndOfWeek = 7-dayOfWeek-(weekcounter*7);
+		var weekstartDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack: daysToStartOfWeek, OffsetInMinutes: timeoffset});
+		var weekendDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack: -1*daysToEndOfWeek, OffsetInMinutes: timeoffset});
+	    while (weekstartDate >= yearStartDate){
+	        calculationBase = "week";
+	
+			if (weekstartDate < yearEndDate) {
+		        me.CalculateSingleAreaAndSlot({
+		            CalculationBase: calculationBase /* STRING */,
+		            EndDate: weekendDate /* DATETIME */,
+		            StartDate: weekstartDate /* DATETIME */,
+		            Machines: Machines /* STRING */,
+		            Area: Area /* STRING */
+		        });
+			}	
+	
+	        weekcounter++;
+		    daysToStartOfWeek = dayOfWeek+(7*weekcounter);
+		    daysToEndOfWeek = 7-dayOfWeek-(weekcounter*7);
+			weekstartDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack: daysToStartOfWeek, OffsetInMinutes: timeoffset});
+			weekendDate = Things["KBTimeHelperThing"].GetDayStart({DaysBack: -1*daysToEndOfWeek, OffsetInMinutes: timeoffset});
+	    }
+	} catch(err) {
+		logger.error(me.name+" "+servicename+": error for "+Area+" calculationBase "+calculationBase);
+	}
+	
+	me.WriteDebugLog({logText: servicename+" *********************************month*********************************************"});
+	try {
+	
+	    var monthcounter = 0;
+		var monthstartDate = Things["KBTimeHelperThing"].GetMonthStart({MonthsBack: monthcounter, OffsetInMinutes: timeoffset});
+		var monthendDate = Things["KBTimeHelperThing"].GetMonthStart({MonthsBack: monthcounter-1, OffsetInMinutes: timeoffset});
+	    while (monthstartDate >= yearStartDate){
+	        calculationBase = "month";
+	
+	
+			if (monthstartDate < yearEndDate) {
+		        me.CalculateSingleAreaAndSlot({
+		            CalculationBase: calculationBase /* STRING */,
+		            EndDate: monthendDate /* DATETIME */,
+		            StartDate: monthstartDate /* DATETIME */,
+		            Machines: Machines /* STRING */,
+		            Area: Area /* STRING */
+		        });
+			}	
+	
+	        monthcounter++;
+			monthstartDate = Things["KBTimeHelperThing"].GetMonthStart({MonthsBack: monthcounter, OffsetInMinutes: timeoffset});
+			monthendDate = Things["KBTimeHelperThing"].GetMonthStart({MonthsBack: monthcounter-1, OffsetInMinutes: timeoffset});
+		}
+	} catch(err) {
+		logger.error(me.name+" "+servicename+": error for "+Area+" calculationBase "+calculationBase);
+	}
+	
+	me.WriteDebugLog({logText: servicename+" *********************************year*********************************************"});
+	//Only current year is fully availabe!
+	if (Year==Resources["KBThingWorxServerSystem"].GetUTCYear()){										
+		try {
+		        calculationBase = "year";
+		        startDate = dateAddMinutes(yearStartDate,timeoffset);
+		        endDate = dateAddMinutes(yearEndDate,timeoffset);
+		
+		        me.CalculateSingleAreaAndSlot({
+		            CalculationBase: calculationBase /* STRING */,
+		            EndDate: endDate /* DATETIME */,
+		            StartDate: startDate /* DATETIME */,
+		            Machines: Machines /* STRING */,
+		            Area: Area /* STRING */
+		        });
+		} catch(err) {
+			logger.error(me.name+" "+servicename+": error for "+Area+" calculationBase "+calculationBase);
+		}
+	}
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="ReCalculateYearKPIs">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+var servicename = "ReCalculateYearKPIs";										
+										
+var result = "Currently not supported as data already partly pushed to snowflake!";
+
+if (Year==Resources["KBThingWorxServerSystem"].GetUTCYear() || Year+1==Resources["KBThingWorxServerSystem"].GetUTCYear()){										
+	result = "OK "+Year;
+	if (!me.IsCalculationRunningYearKPIs) {
+		me.IsCalculationRunningYearKPIs = true;
+	    try {
+			var currentDate = new Date();
+	        me.LastCaclulationStartYearKPIs = currentDate;
+	        
+			// result: INFOTABLE dataShape: "SearchResults"
+			var searchResult =  Resources["SearchFunctions"].SearchThings({
+				maxItems: 999999 /* NUMBER */,
+				searchExpression: undefined /* STRING */,
+				types: undefined /* JSON */,
+				thingTemplates: { "items": ["KBLocalMachineThingTemplate"] } /* JSON */,
+				identifierSearchExpression: undefined /* STRING */,
+				modelTags: undefined /* TAGS */,
+				thingShapes: undefined /* JSON */,
+				query: undefined /* QUERY */,
+				aspects: undefined /* JSON */,
+				excludedAspects: undefined /* JSON */,
+				networks: undefined /* JSON */,
+				maxSearchItems: undefined /* NUMBER */
+			});
+			
+			var machines = searchResult[0].thingResults;
+	
+	         
+	
+	        var tableLength = machines.rows.length;
+	        for (var x=0; x < tableLength; x++) {
+	            var machine = machines.rows[x];
+			    me.WriteDebugLog({logText: servicename+" Machine "+machine.name});
+	            //Your code here
+	            if (Things[machine.name].ImplementsShape({
+	                thingShapeName: "KBLocalMachineSmartKPIShape" /* THINGSHAPENAME */
+	            }) && Things[machine.name].isActive){
+	            	 me.WriteDebugLog({logText: servicename+" Machine "+machine.name});
+	                 me.CalculateSingleMachineForYearKPIs({
+	                    Machine: machine.name /* STRING */,
+		                    Year: Year
+	                });
+	            }
+	        }
+
+
+			// result: INFOTABLE dataShape: "SearchResults"
+			searchResult =  Resources["SearchFunctions"].SearchThings({
+				maxItems: 999999 /* NUMBER */,
+				searchExpression: undefined /* STRING */,
+				types: undefined /* JSON */,
+				thingTemplates: { "items": ["KBLocalAreaThingTemplate"] } /* JSON */,
+				identifierSearchExpression: undefined /* STRING */,
+				modelTags: undefined /* TAGS */,
+				thingShapes: undefined /* JSON */,
+				query: undefined /* QUERY */,
+				aspects: undefined /* JSON */,
+				excludedAspects: undefined /* JSON */,
+				networks: undefined /* JSON */,
+				maxSearchItems: undefined /* NUMBER */
+			});
+			
+			var areas = searchResult[0].thingResults;
+	
+	         
+	
+	        tableLength = areas.rows.length;
+	        for (var x=0; x < tableLength; x++) {
+	            var area = areas.rows[x];
+	            me.WriteDebugLog({logText: servicename+" Area "+area.name});
+	            //Your code here
+	            if (Things[area.name].ImplementsShape({
+	                thingShapeName: "KBLocalAreaSmartKPIShape" /* THINGSHAPENAME */
+	            }) && Things[area.name].isActive){
+					var machinesInArea = "";
+					var tableLengthMachines = Things[area.name].KBMachineThings.rows.length;
+					for (var xx=0; xx < tableLengthMachines; xx++) {
+					    var row = Things[area.name].KBMachineThings.rows[xx];
+			            if (Things[row.KBMachineThing].ImplementsShape({
+			                thingShapeName: "KBLocalMachineSmartKPIShape" /* THINGSHAPENAME */
+			            }) && Things[row.KBMachineThing].isActive){
+						    if (xx>0) {machinesInArea += ',';}
+						    machinesInArea += "'"+row.KBMachineThing+"'";
+						}
+					}
+					me.WriteDebugLog({logText: servicename+" Area "+area.name+" , Machines "+machinesInArea});
+	
+	
+	                me.CalculateSingleAreaForYearKPIs({
+	                    Area: area.name /* STRING */,
+	                    isArea: true,
+	                    Machines: machinesInArea,
+			                    Year: Year
+	                });
+	            }
+	        }
+
+			// result: INFOTABLE dataShape: "SearchResults"
+			searchResult =  Resources["SearchFunctions"].SearchThings({
+				maxItems: 999999 /* NUMBER */,
+				searchExpression: undefined /* STRING */,
+				types: undefined /* JSON */,
+				thingTemplates: { "items": ["KBLocalPlantThingTemplate"] } /* JSON */,
+				identifierSearchExpression: undefined /* STRING */,
+				modelTags: undefined /* TAGS */,
+				thingShapes: undefined /* JSON */,
+				query: undefined /* QUERY */,
+				aspects: undefined /* JSON */,
+				excludedAspects: undefined /* JSON */,
+				networks: undefined /* JSON */,
+				maxSearchItems: undefined /* NUMBER */
+			});
+			
+			var plants = searchResult[0].thingResults;
+	
+	        tableLength = plants.rows.length;
+	        for (var x=0; x < tableLength; x++) {
+	            var plant = plants.rows[x];
+	            me.WriteDebugLog({logText: servicename+" plant "+plant.name});
+	            //Your code here
+	            if (Things[plant.name].ImplementsShape({
+	                thingShapeName: "KBLocalPlantSmartKPIShape" /* THINGSHAPENAME */
+	            }) && Things[plant.name].isActive){
+					var machinesInPlant = "";
+			        var tableLengthMachines = machines.rows.length;
+			        for (var xx=0; xx < tableLengthMachines; xx++) {
+			            var machine = machines.rows[xx];
+			            me.WriteDebugLog({logText: servicename+" Machine "+machine.name});
+			            //Your code here
+			            if (Things[machine.name].ImplementsShape({
+			                thingShapeName: "KBLocalMachineSmartKPIShape" /* THINGSHAPENAME */
+			            }) && Things[machine.name].isActive && Things[machine.name].KBPlantThing == plant.name){
+						    if (xx>0) {machinesInPlant += ',';}
+						    machinesInPlant += "'"+machine.name+"'";
+			            }
+			        }
+					me.WriteDebugLog({logText: servicename+" plant "+plant.name+" , Machines "+machinesInPlant});
+	                me.CalculateSingleAreaForYearKPIs({
+	                    Area: plant.name /* STRING */,
+	                    isArea: false,
+	                    Machines: machinesInPlant,
+			                    Year: Year
+	                });
+	            }
+	        }
+
+		    me.LastCalculationEndYearKPIs = new Date();
+	    } catch(err) {
+	        logger.error(me.name+" "+servicename+": CalculateKPIs error "+err);	                
+			result = "Error "+Year+": "+err;
+	    }
+		me.IsCalculationRunningYearKPIs = false;
+	} else {
+		result = "Process is currently running, please try later again.";
+	}
+}
+me.CalculationResultYearKPIs = result;
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="setConfig">
+						<ConfigurationTables>
+							<ConfigurationTable description=""
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[      
+var servicename = "setConfig";										
+										
+										//Scheduler
+      // table: INFOTABLE dataShape: ""
+      var table =  me.GetConfigurationTable({
+          tableName: "Settings" /* STRING */
+      });
+
+          var resulttable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape({
+              infoTableName : "InfoTable",
+              dataShapeName : "KBSchedulerSettingDataShape"
+          });
+          // KBTimerSettingDataShape entry object
+          var newEntry = new Object();
+          newEntry.runAsUser = table[0].runAsUser; // USERNAME
+          newEntry.schedule = "0 0/5 * * * ?"; // NUMBER
+          newEntry.enabled = table[0].enabled; // BOOLEAN
+
+          resulttable.AddRow(newEntry);
+
+           me.SetConfigurationTable({
+              configurationTable: resulttable /* INFOTABLE */,
+              persistent: true /* BOOLEAN */,
+              tableName: "Settings" /* STRING */
+          });
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+				</ServiceImplementations>
+				<Subscriptions>
+					<Subscription description="" enabled="true"
+						eventName="ScheduledEvent" name="Event.ScheduledEvent" source=""
+						sourceProperty="" sourceType="Thing">
+						<ServiceImplementation description=""
+							handlerName="Script" name="Event.ScheduledEvent">
+							<ConfigurationTables>
+								<ConfigurationTable description=""
+									isMultiRow="false" name="Script" ordinal="0">
+									<DataShape>
+										<FieldDefinitions>
+											<FieldDefinition baseType="STRING"
+												description="code" name="code" ordinal="0" />
+										</FieldDefinitions>
+									</DataShape>
+									<Rows>
+										<Row>
+											<code><![CDATA[
+var servicename = "Event.ScheduledEvent";
+
+var date = new Date();
+
+me.WriteDebugLog({logText: servicename+" date:  "+date+" , me.doMonthlyCalculation "+me.doMonthlyCalculation});
+
+
+if (date.getDate() == 1){
+	if (me.doMonthlyCalculation){
+		me.doMonthlyCalculation = false;
+		me.WriteDebugLog({logText: servicename+" Start Monthly calculation..."});
+		me.ReCalculateYearKPIs({
+			Year: date.getFullYear() /* NUMBER */
+		});		
+	}
+} else {
+	me.doMonthlyCalculation = true;
+	me.CalculateActualKPIs_Retrospective();
+}
+
+me.CalculateActualKPIs_Current();
+
+]]></code>
+										</Row>
+									</Rows>
+								</ConfigurationTable>
+							</ConfigurationTables>
+						</ServiceImplementation>
+					</Subscription>
+				</Subscriptions>
+			</ThingShape>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations>
+			</AlertConfigurations>
+			<ImplementedShapes />
+			<ThingProperties>
+			</ThingProperties>
+		</Thing>
+	</Things>
+</Entities>

@@ -1,0 +1,994 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities build="b2319" majorVersion="8" minorVersion="4"
+	modelPersistenceProviderPackage="MssqlPersistenceProviderPackage"
+	revision="4" schemaVersion="1041" universal="">
+	<Things>
+		<Thing description="" documentationContent=""
+			effectiveThingPackage="SchedulerThing" enabled="true" homeMashup=""
+			identifier="" lastModifiedDate="2019-12-11T14:36:18.092+01:00"
+			name="KBMachineDataScheduler" projectName="" published="false"
+			tags="" thingTemplate="Scheduler" valueStream="">
+			<Owner name="adm-konasm" type="User" />
+			<avatar />
+			<DesignTimePermissions>
+				<Create />
+				<Read />
+				<Update />
+				<Delete />
+				<Metadata />
+			</DesignTimePermissions>
+			<RunTimePermissions />
+			<VisibilityPermissions>
+				<Visibility />
+			</VisibilityPermissions>
+			<ConfigurationTableDefinitions />
+			<ConfigurationTables>
+				<ConfigurationTable
+					description="General Settings" isMultiRow="false" name="Settings"
+					ordinal="0">
+					<DataShape>
+						<FieldDefinitions>
+							<FieldDefinition aspect.defaultValue="true"
+								baseType="BOOLEAN"
+								description="Automatically enable scheduler on startup"
+								name="enabled" ordinal="0" />
+							<FieldDefinition baseType="USERNAME"
+								description="User context in which to run event handlers"
+								name="runAsUser" ordinal="0" />
+							<FieldDefinition
+								aspect.defaultValue="0 0/1 * * * ?" baseType="SCHEDULE"
+								description="Execution Schedule (Cron String)" name="schedule"
+								ordinal="0" />
+						</FieldDefinitions>
+					</DataShape>
+					<Rows>
+						<Row>
+							<enabled>true</enabled>
+							<runAsUser><![CDATA[Administrator]]></runAsUser>
+							<schedule><![CDATA[0 0 1/12 * * ? *]]></schedule>
+						</Row>
+					</Rows>
+				</ConfigurationTable>
+			</ConfigurationTables>
+			<ThingShape>
+				<PropertyDefinitions />
+				<ServiceDefinitions>
+					<ServiceDefinition aspect.isAsync="true"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="ExportPropertiesToSmartKPIMachineDataDBTable">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="true"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="GetMachinesWithProcessFloatData">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="true"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="GetMachinesWithProcessData">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+					<ServiceDefinition aspect.isAsync="true"
+						category="" description="" isAllowOverride="false"
+						isLocalOnly="false" isOpen="false" isPrivate="false"
+						name="ExportPropertiesToSmartKPIMachineKeyValueDataDBTable">
+						<ResultType baseType="NOTHING" description=""
+							name="result" ordinal="0" />
+						<ParameterDefinitions />
+					</ServiceDefinition>
+				</ServiceDefinitions>
+				<EventDefinitions />
+				<ServiceMappings />
+				<ServiceImplementations>
+					<ServiceImplementation description=""
+						handlerName="Script" name="ExportPropertiesToSmartKPIMachineDataDBTable">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+if (location != "MUC") {
+	logger.debug("ExportPropertiesToSmartKPIMachineDataDBTable Start");
+	
+	var params = {
+		maxItems: 999999 /* NUMBER */,
+		nameMask: undefined /* STRING */,
+		query: undefined /* QUERY */,
+		thingTemplate: "KBLocalMachineThingTemplate" /* THINGTEMPLATENAME */,
+		tags: undefined /* TAGS */
+	};
+	
+	// result: INFOTABLE dataShape: RootEntityList
+	var things = Resources["SearchFunctions"].SearchThingsByTemplateWithPersistent(params);
+	
+	var tableLength = things.rows.length;
+	
+	logger.debug("ExportPropertiesToSmartKPIMachineDataDBTable Machines found: " + tableLength);
+	
+	// dateValue:DATETIME
+	var dateValue = new Date();
+	//dateValue.setMilliseconds(0);
+	
+	for (var x = 0; x < tableLength; x++) {
+		var row = things.rows[x];
+		//Your code here
+	    try {
+	        
+	
+            var params = {
+                Machine: row.name /* STRING */,
+                isMachineActive: Things[row.name].isActive /* BOOLEAN */
+            };
+
+            // result: NUMBER
+            var result = Things["KBKPILocalThingWorxDatabaseThing"].MergeMachine(params);
+
+	    } catch(err) {
+			logger.error("ExportPropertiesToSmartKPIMachineDataDBTable err: " + err);
+	    }
+	}
+	
+	logger.debug("ExportPropertiesToSmartKPIMachineDataDBTable End");
+}
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="GetMachinesWithProcessFloatData">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+logger.debug(me.name+" GetMachinesWithProcessFloatData: Start");
+
+										
+var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+if (location != "MUC") {
+    // result: INFOTABLE dataShape: "KBNameForMenuDataShape"
+    var data = Things["KBKPILocalThingWorxDatabaseThing"].GetMachinesWithProcessDataFloatFromDB();
+    var params = {
+        infoTableName : "InfoTable",
+        dataShapeName : "KBMachineKeyValueDataShape"
+    };
+
+	logger.debug(me.name+" GetMachinesWithProcessFloatData: GetMachinesWithProcessDataFloatFromDB "+data.getRowCount());
+
+    // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBMachineKeyValueDataShape)
+    var kvtable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+
+    for (var i = 0; i < data.getRowCount(); i++) {
+        var params = {
+            thingName: data.getRow(i).ThingName /* STRING */
+        };
+
+		logger.debug(me.name+" GetMachinesWithProcessFloatData: "+i+" of "+data.getRowCount()+" "+data.getRow(i).ThingName);
+
+		if (Resources["PTC.Factory.CommonUtilities"].DoesThingExists(params)){
+            try {
+                // KBMachineKeyValueDataShape entry object
+                var newEntry = new Object();
+                newEntry.DateTimeValue = undefined; // DATETIME
+                newEntry.TextValue = Things[data.getRow(i).ThingName].FullName; // STRING
+                newEntry.isTextValue = true; // BOOLEAN
+                newEntry.isFloatValue = false; // BOOLEAN
+                newEntry.FloatValue = 0; // NUMBER
+                newEntry.PropertySubKey1 = "undefined"; // STRING
+                newEntry.isDateTimeValue = false; // BOOLEAN
+                newEntry.Key = data.getRow(i).ThingName; // STRING - isPrimaryKey = true
+                newEntry.PropertySubKey2 = "undefined"; // STRING
+    
+    			try {
+	                if (newEntry.TextValue == null || newEntry.TextValue == "") {
+	                    newEntry.TextValue = newEntry.ThingName.split("KBMesKitDevice_").join("").split("MESKIT").join("");
+	                }
+	            } catch(err) {
+	                logger.warn("GetMachinesWithProcessDataFloat: split error for Thing " + data.getRow(i).ThingName + " - " + err);
+	            }
+    
+                kvtable.AddRow(newEntry);
+            } catch(err) {
+                logger.warn("GetMachinesWithProcessDataFloat: Error for Thing " + data.getRow(i).ThingName + " - " + err);
+            }
+        
+        } else {
+                var newEntry = new Object();
+                newEntry.DateTimeValue = undefined; // DATETIME
+                newEntry.TextValue = data.getRow(i).ThingName; // STRING
+                newEntry.isTextValue = true; // BOOLEAN
+                newEntry.isFloatValue = false; // BOOLEAN
+                newEntry.FloatValue = 0; // NUMBER
+                newEntry.PropertySubKey1 = "undefined"; // STRING
+                newEntry.isDateTimeValue = false; // BOOLEAN
+                newEntry.Key = data.getRow(i).ThingName; // STRING - isPrimaryKey = true
+                newEntry.PropertySubKey2 = "undefined"; // STRING
+                kvtable.AddRow(newEntry);
+        }
+
+
+        try {
+		    var params = {
+		        infoTableName : "InfoTable",
+		        dataShapeName : "KBMachineKeyValueDataShape"
+		    };
+	        // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBMachineKeyValueDataShape)
+	        var kvtable1 = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+	        var params = {
+	            Machine: data.getRow(i).ThingName /* STRING */
+	        };
+	        // result: INFOTABLE dataShape: KBNameForMenuDataShape
+	        var processdatapermachine = Things["KBKPILocalThingWorxDatabaseThing"].GetProcessDataFloatTypesPerMachineForVisualization(params);
+	        for (var ii = 0; ii < processdatapermachine.getRowCount(); ii++) {
+                var newEntry = new Object();
+                newEntry.DateTimeValue = undefined; // DATETIME
+                newEntry.TextValue = processdatapermachine.getRow(ii).DisplayName; // STRING
+                newEntry.isTextValue = true; // BOOLEAN
+                newEntry.isFloatValue = false; // BOOLEAN
+                newEntry.FloatValue = 0; // NUMBER
+                newEntry.PropertySubKey1 = "undefined"; // STRING
+                newEntry.isDateTimeValue = false; // BOOLEAN
+                newEntry.Key = processdatapermachine.getRow(ii).ProcesDataType+processdatapermachine.getRow(ii).ProcesDataType2; // STRING - isPrimaryKey = true
+                newEntry.PropertySubKey2 = "undefined"; // STRING
+                kvtable1.AddRow(newEntry);
+	        }
+	        var params = {
+	            updateDataIfMachineIsActive: true /* BOOLEAN */,
+	            MachineKeyValues: kvtable1 /* INFOTABLE */,
+	            Machine: "ProcessDataFloatPerMachine-"+data.getRow(i).ThingName /* STRING */,
+	            isMachineActive: true /* BOOLEAN */
+	        };
+	
+	        // result: INTEGER
+	        Things["KBKPILocalThingWorxDatabaseThing"].InsertOrUpdateMachineData(params);
+        } catch(err) {
+            logger.warn("GetProcessDataFloatTypesPerMachineForVisualization: Error for Thing " + data.getRow(i).ThingName + " - " + err);
+        }
+    }
+
+	logger.debug(me.name+" GetMachinesWithProcessFloatData: write MachinesWithProcessDataFloat "+data.getRowCount());
+
+    var params = {
+        updateDataIfMachineIsActive: true /* BOOLEAN */,
+        MachineKeyValues: kvtable /* INFOTABLE */,
+        Machine: "MachinesWithProcessDataFloat" /* STRING */,
+        isMachineActive: true /* BOOLEAN */
+    };
+
+    // result: INTEGER
+        Things["KBKPILocalThingWorxDatabaseThing"].InsertOrUpdateMachineData(params);
+
+}
+logger.debug(me.name+" GetMachinesWithProcessFloatData: End");
+
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="GetMachinesWithProcessData">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+if (location != "MUC") {
+    // result: INFOTABLE dataShape: "KBNameForMenuDataShape"
+    var data = Things["KBKPILocalThingWorxDatabaseThing"].GetMachinesWithProcessDataFromDB();
+    var params = {
+        infoTableName : "InfoTable",
+        dataShapeName : "KBMachineKeyValueDataShape"
+    };
+
+    // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBMachineKeyValueDataShape)
+    var kvtable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+
+    for (var i = 0; i < data.getRowCount(); i++) {
+		if (Things[data.getRow(i).ThingName]){
+            try {
+                // KBMachineKeyValueDataShape entry object
+                var newEntry = new Object();
+                newEntry.DateTimeValue = undefined; // DATETIME
+                newEntry.TextValue = Things[data.getRow(i).ThingName].FullName; // STRING
+                newEntry.isTextValue = true; // BOOLEAN
+                newEntry.isFloatValue = false; // BOOLEAN
+                newEntry.FloatValue = 0; // NUMBER
+                newEntry.PropertySubKey1 = "undefined"; // STRING
+                newEntry.isDateTimeValue = false; // BOOLEAN
+                newEntry.Key = data.getRow(i).ThingName; // STRING - isPrimaryKey = true
+                newEntry.PropertySubKey2 = "undefined"; // STRING
+    
+    
+                if (newEntry.TextValue == null || newEntry.TextValue == "") {
+                    newEntry.TextValue = newEntry.ThingName.split("KBMesKitDevice_").join("").split("MESKIT").join("");
+                }
+    
+                kvtable.AddRow(newEntry);
+            } catch(err) {
+                logger.warn("GetMachinesWithProcessData: Error for Thing " + data.getRow(i).ThingName + " - " + err);
+                var newEntry = new Object();
+                newEntry.DateTimeValue = undefined; // DATETIME
+                newEntry.TextValue = data.getRow(i).ThingName; // STRING
+                newEntry.isTextValue = true; // BOOLEAN
+                newEntry.isFloatValue = false; // BOOLEAN
+                newEntry.FloatValue = 0; // NUMBER
+                newEntry.PropertySubKey1 = "undefined"; // STRING
+                newEntry.isDateTimeValue = false; // BOOLEAN
+                newEntry.Key = data.getRow(i).ThingName; // STRING - isPrimaryKey = true
+                newEntry.PropertySubKey2 = "undefined"; // STRING
+                kvtable.AddRow(newEntry);
+            }
+        
+        try {
+		    var params = {
+		        infoTableName : "InfoTable",
+		        dataShapeName : "KBMachineKeyValueDataShape"
+		    };
+	        // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBMachineKeyValueDataShape)
+	        var kvtable1 = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+	        var params = {
+	            Machine: data.getRow(i).ThingName /* STRING */
+	        };
+	        // result: INFOTABLE dataShape: KBNameForMenuDataShape
+	        var processdatapermachine = Things["KBKPILocalThingWorxDatabaseThing"].GetProcessDataTypesPerMachineForVisualization(params);
+	        for (var ii = 0; ii < processdatapermachine.getRowCount(); ii++) {
+                var newEntry = new Object();
+                newEntry.DateTimeValue = undefined; // DATETIME
+                newEntry.TextValue = processdatapermachine.getRow(ii).DisplayName; // STRING
+                newEntry.isTextValue = true; // BOOLEAN
+                newEntry.isFloatValue = false; // BOOLEAN
+                newEntry.FloatValue = 0; // NUMBER
+                newEntry.PropertySubKey1 = "undefined"; // STRING
+                newEntry.isDateTimeValue = false; // BOOLEAN
+                newEntry.Key = processdatapermachine.getRow(ii).ProcesDataType+processdatapermachine.getRow(ii).ProcesDataType2; // STRING - isPrimaryKey = true
+                newEntry.PropertySubKey2 = "undefined"; // STRING
+                kvtable1.AddRow(newEntry);
+	        }
+	        var params = {
+	            updateDataIfMachineIsActive: true /* BOOLEAN */,
+	            MachineKeyValues: kvtable1 /* INFOTABLE */,
+	            Machine: "ProcessDataPerMachine-"+data.getRow(i).ThingName /* STRING */,
+	            isMachineActive: true /* BOOLEAN */
+	        };
+	
+	        // result: INTEGER
+	        Things["KBKPILocalThingWorxDatabaseThing"].InsertOrUpdateMachineData(params);
+        } catch(err) {
+            logger.warn("GetProcessDataFloatTypesPerMachineForVisualization: Error for Thing " + data.getRow(i).ThingName + " - " + err);
+        }
+        }
+    }
+
+
+    var params = {
+        updateDataIfMachineIsActive: true /* BOOLEAN */,
+        MachineKeyValues: kvtable /* INFOTABLE */,
+        Machine: "MachinesWithProcessData" /* STRING */,
+        isMachineActive: true /* BOOLEAN */
+    };
+
+    // result: INTEGER
+        Things["KBKPILocalThingWorxDatabaseThing"].InsertOrUpdateMachineData(params);
+
+}]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+					<ServiceImplementation description=""
+						handlerName="Script" name="ExportPropertiesToSmartKPIMachineKeyValueDataDBTable">
+						<ConfigurationTables>
+							<ConfigurationTable description="Script"
+								isMultiRow="false" name="Script" ordinal="0">
+								<DataShape>
+									<FieldDefinitions>
+										<FieldDefinition baseType="STRING"
+											description="code" name="code" ordinal="0" />
+									</FieldDefinitions>
+								</DataShape>
+								<Rows>
+									<Row>
+										<code><![CDATA[
+var params = {
+	maxItems: 999999 /* NUMBER */,
+	nameMask: undefined /* STRING */,
+	query: undefined /* QUERY */,
+	thingTemplate: "GenericThing" /* THINGTEMPLATENAME */,
+	tags: undefined /* TAGS */
+};
+
+// result: INFOTABLE dataShape: RootEntityList
+var things = Resources["SearchFunctions"].SearchThingsByTemplateWithPersistent(params);
+
+var thingstableLength = things.rows.length;
+
+for (var x = 0; x < thingstableLength; x++) {
+	var thingsrow = things.rows[x];
+	//Your code here
+
+	try {
+
+        logger.debug("ExportPropertiesToSmartKPIMachineKeyValueDataDBTable, Thing "+thingsrow.name);
+
+        // result: INFOTABLE
+        var properties = Things[thingsrow.name].GetPropertyValuesAsMultiRowTable();
+
+        var propertiestableLength = properties.rows.length;
+
+        var params = {
+            infoTableName : "InfoTable",
+            dataShapeName : "KBMachineKeyValueDataShape"
+        };
+
+        // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBMachineKeyValueDataShape)
+        var table = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+
+        for (var xx = 0; xx < propertiestableLength; xx++) {
+            var propertiesrow = properties.rows[xx];
+            //Your code here
+            
+            
+            var params = {
+                name: propertiesrow.name /* STRING */
+            };
+
+            // result: INFOTABLE dataShape: PropertyDefinition
+            var propertyDefinition = Things[thingsrow.name].GetPropertyDefinition(params);
+
+            if (propertyDefinition.baseType == "STRING" || propertyDefinition.baseType == "THINGNAME" || propertyDefinition.baseType == "THINGTEMPLATENAME") {
+                var params = {
+                    propertyName: propertiesrow.name /* STRING */
+                };
+
+                // result: STRING
+                var value = Things[thingsrow.name].GetStringPropertyValue(params);
+                logger.debug("ExportPropertiesToSmartKPIMachineKeyValueDataDBTable, Property "+propertiesrow.name + ", Type: "+propertyDefinition.baseType + ", Value: "+value);
+
+                if (value === null || value === undefined) {
+                    value = "";
+                    logger.debug("ExportPropertiesToSmartKPIMachineKeyValueDataDBTable, Property "+propertiesrow.name + ", Type: "+propertyDefinition.baseType + ", Value: "+value);
+                }
+                // KBMachineKeyValueDataShape entry object
+                var newEntry = new Object();
+                newEntry.DateTimeValue = undefined; // DATETIME
+                newEntry.TextValue = value; // STRING
+                newEntry.isTextValue = true; // BOOLEAN
+                newEntry.isFloatValue = false; // BOOLEAN
+                newEntry.FloatValue = 0; // NUMBER
+                newEntry.PropertySubKey1 = "GenericThing"; // STRING
+                newEntry.isDateTimeValue = false; // BOOLEAN
+                newEntry.Key = propertiesrow.name; // STRING - isPrimaryKey = true
+                newEntry.PropertySubKey2 = Things[thingsrow.name].thingTemplate; // STRING
+
+                table.AddRow(newEntry);
+            } else if (propertyDefinition.baseType == "NUMBER") {
+                // KBMachineKeyValueDataShape entry object
+                var params = {
+                    propertyName: propertiesrow.name /* STRING */
+                };
+
+                // result: STRING
+                var value = Things[thingsrow.name].GetNumberPropertyValue(params);
+                logger.debug("ExportPropertiesToSmartKPIMachineKeyValueDataDBTable, Property "+propertiesrow.name + ", Type: "+propertyDefinition.baseType + ", Value: "+value);
+                if (!isFinite(value)) {
+                    value = 0;
+		        	logger.debug("ExportPropertiesToSmartKPIMachineKeyValueDataDBTable, Property "+propertiesrow.name + ", Type: "+propertyDefinition.baseType + ", Value: "+value);
+                }
+                
+                var newEntry = new Object();
+                newEntry.DateTimeValue = undefined; // DATETIME
+                newEntry.TextValue = undefined; // STRING
+                newEntry.isTextValue = false; // BOOLEAN
+                newEntry.isFloatValue = true; // BOOLEAN
+                newEntry.FloatValue = value; // NUMBER
+                newEntry.PropertySubKey1 = "GenericThing"; // STRING
+                newEntry.isDateTimeValue = false; // BOOLEAN
+                newEntry.Key = propertiesrow.name; // STRING - isPrimaryKey = true
+                newEntry.PropertySubKey2 = Things[thingsrow.name].thingTemplate; // STRING
+
+                table.AddRow(newEntry);
+            } else if (propertyDefinition.baseType == "INTEGER") {
+                // KBMachineKeyValueDataShape entry object
+                var params = {
+                    propertyName: propertiesrow.name /* STRING */
+                };
+
+                // result: STRING
+                var value = Things[thingsrow.name].GetIntegerPropertyValue(params);
+                logger.debug("ExportPropertiesToSmartKPIMachineKeyValueDataDBTable, Property "+propertiesrow.name + ", Type: "+propertyDefinition.baseType + ", Value: "+value);
+                if (!isFinite(value)) {
+                    value = 0;
+		        	logger.debug("ExportPropertiesToSmartKPIMachineKeyValueDataDBTable, Property "+propertiesrow.name + ", Type: "+propertyDefinition.baseType + ", Value: "+value);
+                }
+                
+                var newEntry = new Object();
+                newEntry.DateTimeValue = undefined; // DATETIME
+                newEntry.TextValue = undefined; // STRING
+                newEntry.isTextValue = false; // BOOLEAN
+                newEntry.isFloatValue = true; // BOOLEAN
+                newEntry.FloatValue = value; // NUMBER
+                newEntry.PropertySubKey1 = "GenericThing"; // STRING
+                newEntry.isDateTimeValue = false; // BOOLEAN
+                newEntry.Key = propertiesrow.name; // STRING - isPrimaryKey = true
+                newEntry.PropertySubKey2 = Things[thingsrow.name].thingTemplate; // STRING
+
+                table.AddRow(newEntry);
+            } else if (propertyDefinition.baseType == "BOOLEAN") {
+                // KBMachineKeyValueDataShape entry object
+                var params = {
+                    propertyName: propertiesrow.name /* STRING */
+                };
+
+                // result: STRING
+                var thing_value = Things[thingsrow.name].GetBooleanPropertyValue(params);
+                var value = 0;
+                logger.debug("ExportPropertiesToSmartKPIMachineKeyValueDataDBTable, Property "+propertiesrow.name + ", Type: "+propertyDefinition.baseType + ", Value: "+value);
+                if (thing_value) {
+                    value = 1;
+		        	logger.debug("ExportPropertiesToSmartKPIMachineKeyValueDataDBTable, Property "+propertiesrow.name + ", Type: "+propertyDefinition.baseType + ", Value: "+value);
+                }
+                
+                var newEntry = new Object();
+                newEntry.DateTimeValue = undefined; // DATETIME
+                newEntry.TextValue = undefined; // STRING
+                newEntry.isTextValue = false; // BOOLEAN
+                newEntry.isFloatValue = true; // BOOLEAN
+                newEntry.FloatValue = value; // NUMBER
+                newEntry.PropertySubKey1 = "GenericThing"; // STRING
+                newEntry.isDateTimeValue = false; // BOOLEAN
+                newEntry.Key = propertiesrow.name; // STRING - isPrimaryKey = true
+                newEntry.PropertySubKey2 = Things[thingsrow.name].thingTemplate; // STRING
+
+                table.AddRow(newEntry);
+            } else if (propertyDefinition.baseType == "DATETIME") {
+                // KBMachineKeyValueDataShape entry object
+                var params = {
+                    propertyName: propertiesrow.name /* STRING */
+                };
+
+                // result: STRING
+                var value = Things[thingsrow.name].GetDateTimePropertyValue(params);
+                logger.debug("ExportPropertiesToSmartKPIMachineKeyValueDataDBTable, Property "+propertiesrow.name + ", Type: "+propertyDefinition.baseType + ", Value: "+value);
+                var newEntry = new Object();
+                newEntry.DateTimeValue = value; // DATETIME
+                newEntry.TextValue = undefined; // STRING
+                newEntry.isTextValue = false; // BOOLEAN
+                newEntry.isFloatValue = false; // BOOLEAN
+                newEntry.FloatValue = undefined; // NUMBER
+                newEntry.PropertySubKey1 = "GenericThing"; // STRING
+                newEntry.isDateTimeValue = true; // BOOLEAN
+                newEntry.Key = propertiesrow.name; // STRING - isPrimaryKey = true
+                newEntry.PropertySubKey2 = Things[thingsrow.name].thingTemplate; // STRING
+
+                table.AddRow(newEntry);
+            } else {
+                logger.debug("ExportPropertiesToSmartKPIMachineKeyValueDataDBTable, Property "+propertiesrow.name + ", Type: "+propertyDefinition.baseType + " not handled!");
+            }
+
+
+        }
+
+        var params = {
+            updateDataIfMachineIsActive: true /* BOOLEAN */,
+            MachineKeyValues: table /* INFOTABLE */,
+            Machine: thingsrow.name /* STRING */,
+            isMachineActive: Things[thingsrow.name].isActive /* BOOLEAN */
+        };
+
+        // result: INTEGER
+        var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+		if (location != "MUC") {
+	        Things["KBKPILocalThingWorxDatabaseThing"].InsertOrUpdateMachineData(params);
+	    } else {
+	        Things["KBKPIThingWorxDatabaseThing"].InsertOrUpdateMachineData(params);
+	    }
+    } catch(err) {
+		logger.error("Error ExportPropertiesToSmartKPIMachineKeyValueDataDBTable: " + err);
+    }
+    
+}
+
+
+
+// result: INFOTABLE dataShape: "LanguageDescription"
+var languages =  Things["KBAdministratorTranslationUtilityThing"].GetLocalizationTableNames();
+
+var languagesTableLength = languages.rows.length;
+
+for (var x=0; x < languagesTableLength; x++) {
+    var params = {
+        infoTableName : "InfoTable",
+        dataShapeName : "KBMachineKeyValueDataShape"
+    };
+
+    // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBMachineKeyValueDataShape)
+    var result = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+    var row = languages.rows[x];
+    //Your code here
+    // result: INFOTABLE dataShape: "LocalizationToken"
+	var tokens =  LocalizationTables[row.name].GetTokens();
+	var tokensTableLength = tokens.rows.length;
+    for (var xx=0; xx < tokensTableLength; xx++) {
+        var tokensrow = tokens.rows[xx];
+        //Your code here
+        // result: INFOTABLE dataShape: "LocalizationToken"
+
+      
+            // result: INTEGER
+                // KBMachineKeyValueDataShape entry object
+        var newEntry = new Object();
+        newEntry.TextValue = tokensrow.value; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.Key = tokensrow.name; // STRING [Primary Key]
+        newEntry.PropertySubKey1 = "LocalizationTables";
+        newEntry.PropertySubKey2 = "";
+
+		result.AddRow(newEntry);
+
+ 
+
+    }
+    Things["KBKPILocalThingWorxDatabaseThing"].InsertOrUpdateMachineData({
+        updateDataIfMachineIsActive: true /* BOOLEAN */,
+        MachineKeyValues: result /* INFOTABLE */,
+        Machine: row.name /* STRING */,
+        isMachineActive: true /* BOOLEAN */
+    });    
+    
+}
+
+var params = {
+    infoTableName : "InfoTable",
+    dataShapeName : "KBMachineKeyValueDataShape"
+};
+
+// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBMachineKeyValueDataShape)
+var result = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+//Your code here
+// result: INFOTABLE dataShape: "LocalizationToken"
+var tokens =  LocalizationTables["Default"].GetTokens();
+var tokensTableLength = tokens.rows.length;
+for (var xx=0; xx < tokensTableLength; xx++) {
+      var tokensrow = tokens.rows[xx];
+      //Your code here
+      // result: INFOTABLE dataShape: "LocalizationToken"
+
+    
+          // result: INTEGER
+              // KBMachineKeyValueDataShape entry object
+      var newEntry = new Object();
+      newEntry.TextValue = tokensrow.value; // STRING
+      newEntry.isTextValue = true; // BOOLEAN
+      newEntry.Key = tokensrow.name; // STRING [Primary Key]
+      newEntry.PropertySubKey1 = "LocalizationTables";
+      newEntry.PropertySubKey2 = "";
+
+	  result.AddRow(newEntry);
+
+
+
+}
+Things["KBKPILocalThingWorxDatabaseThing"].InsertOrUpdateMachineData({
+    updateDataIfMachineIsActive: true /* BOOLEAN */,
+    MachineKeyValues: result /* INFOTABLE */,
+    Machine: "DefaultLanguage" /* STRING */,
+    isMachineActive: true /* BOOLEAN */
+});    
+
+
+
+
+
+// result: INFOTABLE dataShape: "RootEntityList"
+var users =  Resources["EntityServices"].GetEntityList({
+	maxItems: 99999999 /* NUMBER */,
+	nameMask: undefined /* STRING */,
+	type: "User" /* STRING */,
+	tags: undefined /* TAGS */
+});
+
+var usersTableLength = users.rows.length;
+for (var x=0; x < usersTableLength; x++) {
+    var usersRow = users.rows[x];
+    //Your code here
+    
+	try {
+        var params = {
+            infoTableName : "InfoTable",
+            dataShapeName : "KBUserKeyValueDataShape"
+        };
+
+        // CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(KBMachineKeyValueDataShape)
+        var usertable = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = Users[usersRow.name].firstName; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "firstName"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = Users[usersRow.name].altEmailAddresses; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "altEmailAddresses"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = Users[usersRow.name].city; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "city"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = Users[usersRow.name].description; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "description"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = Users[usersRow.name].emailAddress; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "emailAddress"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = Users[usersRow.name].firstName; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "firstName"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = Users[usersRow.name].fullName; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "fullName"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = Users[usersRow.name].homePhone; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "homePhone"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+
+        var language = Users[usersRow.name].language;           
+        if (language === undefined || language === null || language === "") {
+            language = "Default";
+        }
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = language; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "language"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = Users[usersRow.name].lastName; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "lastName"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = Users[usersRow.name].mailingAddress; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "mailingAddress"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = Users[usersRow.name].middleName; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "middleName"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = Users[usersRow.name].mobilePhone; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "mobilePhone"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = Users[usersRow.name].name; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "name"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = Users[usersRow.name].title; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "title"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = Users[usersRow.name].workPhone; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "workPhone"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+
+        var newEntry = new Object();
+        newEntry.DateTimeValue = undefined; // DATETIME
+        newEntry.TextValue = Users[usersRow.name].zipCode; // STRING
+        newEntry.isTextValue = true; // BOOLEAN
+        newEntry.isFloatValue = false; // BOOLEAN
+        newEntry.FloatValue = 0; // NUMBER
+        newEntry.isDateTimeValue = false; // BOOLEAN
+        newEntry.Key = "zipCode"; // STRING - isPrimaryKey = true
+        usertable.AddRow(newEntry);
+    
+        var params = {
+            updateDataIfUserIsActive: true /* BOOLEAN */,
+            UserKeyValues: usertable /* INFOTABLE */,
+            isUserActive: true,
+            System: "Thingworx User",
+            User: usersRow.name
+        };
+        
+        // result: INTEGER
+        var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+		if (location != "MUC") {
+	        Things["KBKPILocalThingWorxDatabaseThing"].InsertOrUpdateUserData(params);
+	    } else {
+	        Things["KBKPIThingWorxDatabaseThing"].InsertOrUpdateUserData(params);
+	    }
+    } catch(err) {
+		logger.error("Error ExportPropertiesToSmartKPIMachineKeyValueDataDBTable UserProperties: " + err);
+    }
+
+}
+
+
+
+
+]]></code>
+									</Row>
+								</Rows>
+							</ConfigurationTable>
+						</ConfigurationTables>
+					</ServiceImplementation>
+				</ServiceImplementations>
+				<Subscriptions>
+					<Subscription description="" enabled="true"
+						eventName="ScheduledEvent" name="Event.ScheduledEvent" source=""
+						sourceProperty="" sourceType="Thing">
+						<ServiceImplementation description=""
+							handlerName="Script" name="Event.ScheduledEvent">
+							<ConfigurationTables>
+								<ConfigurationTable description=""
+									isMultiRow="false" name="Script" ordinal="0">
+									<DataShape>
+										<FieldDefinitions>
+											<FieldDefinition baseType="STRING"
+												description="code" name="code" ordinal="0" />
+										</FieldDefinitions>
+									</DataShape>
+									<Rows>
+										<Row>
+											<code><![CDATA[var location = Resources["KBThingWorxServerSystem"].GetLocationIdentifier();
+
+me.ExportPropertiesToSmartKPIMachineKeyValueDataDBTable();
+
+if (location != "MUC") {
+    me.GetMachinesWithProcessFloatData();
+    me.GetMachinesWithProcessData();
+}
+]]></code>
+										</Row>
+									</Rows>
+								</ConfigurationTable>
+							</ConfigurationTables>
+						</ServiceImplementation>
+					</Subscription>
+				</Subscriptions>
+			</ThingShape>
+			<PropertyBindings />
+			<RemotePropertyBindings />
+			<RemoteServiceBindings />
+			<RemoteEventBindings />
+			<AlertConfigurations />
+			<ImplementedShapes />
+			<ThingProperties />
+			<ConfigurationChanges>
+			</ConfigurationChanges>
+		</Thing>
+	</Things>
+</Entities>
