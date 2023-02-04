@@ -9,6 +9,7 @@ pool:
 steps:
 - checkout: self
   persistCredentials: true
+  clean: true
 
 - script: |
     git config --global user.email nitin.srivastava@knorr-bremse.com 
@@ -20,6 +21,5 @@ steps:
     ant -noinput -buildfile build-extension.xml
     git add $(Build.SourcesDirectory)\build\distributions\KBGlobalsmartKPI.zip
     git commit -m "deployment $(Build.BuildNumber)"
-    git pull DevOpsOrgPlayground1/KBGlobalSmartKPI
     git push --set-upstream origin temp
   displayName: 'Creating a TWX Extension and checkin'
