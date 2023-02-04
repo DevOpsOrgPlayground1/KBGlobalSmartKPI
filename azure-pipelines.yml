@@ -7,7 +7,7 @@ pool:
   vmImage: windows-latest
 
 steps:
-- checkout: self
+- checkout: none
   persistCredentials: true
 
 - script: |
@@ -16,6 +16,7 @@ steps:
   workingDirectory: $(System.DefaultWorkingDirectory)
 
 - script: |
+    git rm --cached KBGlobalSmartKPI
     git init
     git clone https://github.com/DevOpsOrgPlayground1/KBGlobalSmartKPI
     git checkout 
