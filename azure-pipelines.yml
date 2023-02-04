@@ -18,9 +18,13 @@ steps:
 - script: |
     git checkout -b master
     ant -noinput -buildfile build-extension.xml
-    git add $(Build.SourcesDirectory)\build\distributions\KBGlobalsmartKPI.zip
+    git add -A
+    echo "added extension zip"
     git commit -m "deployment $(Build.BuildNumber)"
+    echo "commited extension zip"
     git branch -vv
+    echo "list tracking branches"
     git ls-remote
+    echo "list remote branches"
     git push --set-upstream origin master
   displayName: 'Creating a TWX Extension and checkin'
