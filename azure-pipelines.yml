@@ -29,3 +29,9 @@ steps:
     echo "list remote branches"
     git push --set-upstream origin main
   displayName: 'Creating a TWX Extension and checkin'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
