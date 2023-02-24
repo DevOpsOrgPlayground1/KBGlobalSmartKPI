@@ -39,7 +39,12 @@ steps:
   inputs:
     pathToPublish: $(Build.ArtifactStagingDirectory)
     artifactName: BuildOutputs
-  
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: 'Add-Content -Path $env:windir\System32\drivers\etc\hosts -Value "10.249.84.36 hkgs7336.corp.knorr-bremse.com" -Force' 
+
 - task: CmdLine@2
   inputs:
       script: |
