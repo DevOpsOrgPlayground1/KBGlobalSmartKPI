@@ -16,7 +16,8 @@ steps:
   workingDirectory: $(System.DefaultWorkingDirectory)
 
 - script: |
-    git checkout -b main
+    git pull origin main
+    git checkout -b build-pipeline
     ant -noinput -buildfile build-extension.xml
     git add -A
     echo "added extension zip"
@@ -27,7 +28,7 @@ steps:
     echo "list tracking branches"
     git ls-remote
     echo "list remote branches"
-    git push --set-upstream origin main
+    git push --set-upstream origin build-pipeline
   displayName: 'Creating a TWX Extension and checkin'
 
 - task: CopyFiles@2
