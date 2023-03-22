@@ -49,10 +49,10 @@ stages:
 
 
 
-- stage: Database Testing
+- stage: Testing
 
   jobs:
-    - job: 'TestProceduresFunctions'
+    - job: 'DatabaseTesting'
       pool:
         name: ThingWorx
     
@@ -62,7 +62,7 @@ stages:
             filePath: '$(System.DefaultWorkingDirectory)/azure_dbTesting.ps1'
             arguments: '$(User) $(PW) $(server) twx_HKGS7336_ext'
           displayName: 'Run Tests on twx_HKGS7336_ext'
-          
+
 
 - stage: Deploy
 
