@@ -16,9 +16,11 @@ stages:
         persistCredentials: true
 
       - script: |
-        workingDirectory: $(System.DefaultWorkingDirectory)
           git config --global user.email nitin.srivastava@knorr-bremse.com 
           git config --global user.name "nitin-sriv"
+          workingDirectory: $(System.DefaultWorkingDirectory)
+
+      - script: |
           git pull origin main
           git checkout -b build-pipeline
           ant -noinput -buildfile build-extension.xml
