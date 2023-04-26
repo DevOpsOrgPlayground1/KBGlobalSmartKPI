@@ -14,9 +14,9 @@ steps:
   displayName: 'Run a one-line script'
 
 - script: |
-    echo open url 
-    echo See Start-Process -FilePath "<URL>"
 - task: PowerShell@2
   inputs:
-    filePath: 'Start-Process -FilePath "https://smartproductionlisdev.corp.knorr-bremse.com/"'
-  displayName: 'Run a multi-line script'
+    targetType: 'inline'
+    script: 'Start-Process -FilePath https://smartproductionlisdev.corp.knorr-bremse.com/'
+    echo open url 
+    echo See Start-Process -FilePath "<URL>"
