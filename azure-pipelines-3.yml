@@ -1,0 +1,86 @@
+# Starter pipeline
+
+trigger:
+  paths:
+    include:
+    - '/configfiles/testFile.*'
+
+variables:
+  - group: SQL external DB Test
+  - name: testFile
+    value: $(System.DefaultWorkingDirectory)/testing/database/testDB.sql
+
+
+stages:
+- stage: Build
+
+  jobs:
+    - job: 'CreateExtension'
+      pool:
+        name: ThingWorx
+    
+      steps:
+      - checkout: self
+        persistCredentials: true
+
+      - script: |
+          git config --global user.email nitin.srivastava@knorr-bremse.com 
+          git config --global user.name "nitin-sriv"
+        workingDirectory: $(System.DefaultWorkingDirectory)
+
+      - script: |
+          git pull origin main
+          git checkout -b build-pipeline
+          ant -noinput -buildfile build-extension.xml
+          git add -A
+          echo "added extension zip"
+          git status
+          git commit -m "deployment $(Build.BuildNumber)"
+          echo "commited extension zip"
+          git branch -vv
+          echo "list tracking branches"
+          git ls-remote
+          echo "list remote branches"
+          git push --set-upstream origin build-pipeline
+        displayName: 'Creating a TWX Extension and checkin'
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: 'build/distributions'
+          Contents: 'KBGlobalsmartKPI.zip'
+          TargetFolder: '$(Build.ArtifactStagingDirectory)'
+          
+      - task: PublishBuildArtifacts@1
+        inputs:
+          pathToPublish: $(Build.ArtifactStagingDirectory)
+          artifactName: BuildOutputs
+
+
+
+- stage: Test
+
+  jobs:
+    - job: 'DatabaseTesting'
+      pool:
+        name: ThingWorx
+    
+      steps:
+        - task: PowerShell@2
+          inputs:
+            filePath: '$(System.DefaultWorkingDirectory)/azure_dbTesting.ps1'
+            arguments: '$(User) $(PW) $(server) twx_HKGS7336_ext $(testFile)'
+          displayName: 'Run Tests on twx_HKGS7336_ext'
+
+
+- stage: Deploy
+
+  jobs:
+    - job: 'ImportExtension'
+      pool:
+        name: ThingWorx
+  
+      steps:
+      - task: CmdLine@2
+        inputs:
+            script: |
+              curl -X POST -F "file=build/distributions/KBGlobalsmartKPI.zip" -H "appKey:f456601d-c8b2-4a80-8497-f6ca91fd69bd" -H "Accept:application/json" -H "X-XSRF-TOKEN:TWX-XSRF-TOKEN-VALUE" -H "Content-Type:multipart/form-data" https://hkgs7336.corp.knorr-bremse.com/Thingworx/ExtensionPackageUploader
