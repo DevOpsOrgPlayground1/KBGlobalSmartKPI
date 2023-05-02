@@ -25,6 +25,7 @@ stages:
 
       - script: |
           git pull origin main
+          git branch -D build-pipeline
           git checkout -b build-pipeline
           ant -noinput -buildfile build-extension.xml
           git add -A
