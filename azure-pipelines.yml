@@ -13,12 +13,12 @@ stages:
     - job: 'GetService'
     
       pool:
-        vmImage: windows-latest
+        name: ThingWorx
     
       steps:
       - task: PowerShellOnTargetMachines@3
         inputs:
-          Machines: 'hkgs7336'
+          Machines: 'hkgs7336.corp.knorr-bremse.com'
           InlineScript: 'Write-Output "Hello World"'
 
       
