@@ -16,9 +16,10 @@ stages:
         name: ThingWorx
     
       steps:
-      - task: PowerShellOnTargetMachines@3
+      - task: PowerShell@2
         inputs:
-          Machines: 'hkgs7336.corp.knorr-bremse.com'
-          InlineScript: 'Write-Output "Hello World"'
-
-      
+          targetType: 'inline'
+          script: |
+            # Write your PowerShell commands here.
+            
+            Write-Host "Hello World"
